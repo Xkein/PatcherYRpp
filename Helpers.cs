@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Web.Caching;
+using DynamicPatcher;
 
 namespace PatcherYRpp
 {
@@ -100,6 +101,24 @@ namespace PatcherYRpp
             }
 
             return ret as T;
+        }
+
+        public static void PrintException(Exception e)
+        {
+            Logger.Log("exception info: ");
+            Logger.Log("Message: " + e.Message);
+            Logger.Log("Source: " + e.Source);
+            Logger.Log("TargetSite.Name: " + e.TargetSite.Name);
+            Logger.Log("Stacktrace: " + e.StackTrace);
+
+            if (e.InnerException != null)
+            {
+                PrintException(e.InnerException);
+            }
+            else
+            {
+                Logger.Log("");
+            }
         }
     }
 }
