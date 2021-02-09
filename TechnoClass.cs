@@ -24,6 +24,10 @@ namespace PatcherYRpp
 
         [FieldOffset(540)]
         public Pointer<HouseClass> Owner;
+
+        [FieldOffset(664)]
+        public byte berzerk;
+        public bool Berzerk { get => Convert.ToBoolean(berzerk); set => berzerk = Convert.ToByte(value); }
     }
 
 
