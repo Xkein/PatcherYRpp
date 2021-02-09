@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
-using System.Web.Caching;
 using DynamicPatcher;
+using System.Runtime.Caching;
 
 namespace PatcherYRpp
 {
@@ -84,7 +84,7 @@ namespace PatcherYRpp
         //    return ptr.Ref;
         }
 
-        static Cache VirtualFunctionCache = new Cache();
+        static MemoryCache VirtualFunctionCache = new MemoryCache("virtual functions");
         static public T GetVirtualFunction<T>(IntPtr pThis, int index) where T : Delegate
         {
             Pointer<Pointer<IntPtr>> pVfptr = pThis;
@@ -96,7 +96,11 @@ namespace PatcherYRpp
             var ret = VirtualFunctionCache.Get(key);
             if (ret == null)
             {
-                VirtualFunctionCache.Insert(key, Marshal.GetDelegateForFunctionPointer<T>(address));
+                var policy = new CacheItemPolicy
+                {
+                    SlidingExpiration = TimeSpan.FromSeconds(60.0)
+                };
+                VirtualFunctionCache.Set(key, Marshal.GetDelegateForFunctionPointer<T>(address), policy);
                 ret = VirtualFunctionCache.Get(key);
             }
 
@@ -105,7 +109,7 @@ namespace PatcherYRpp
 
         public static void PrintException(Exception e)
         {
-            Logger.Log("exception info: ");
+            Logger.Log("{0} info: ", e.GetType().FullName);
             Logger.Log("Message: " + e.Message);
             Logger.Log("Source: " + e.Source);
             Logger.Log("TargetSite.Name: " + e.TargetSite.Name);

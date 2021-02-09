@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Caching;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Caching;
 
 namespace PatcherYRpp
 {
@@ -49,7 +49,7 @@ namespace PatcherYRpp
             return ptr;
         }
 
-		static Cache cache = new Cache();
+		static MemoryCache cache = new MemoryCache("constructor parameters");
 		static Tuple<Type[], object[]> GetCache(int length)
         {
 			string key = length.ToString();
@@ -57,7 +57,11 @@ namespace PatcherYRpp
 
 			if (ret == null)
             {
-				cache.Insert(key, new Tuple<Type[], object[]>(new Type[length], new object[length]));
+				var policy = new CacheItemPolicy
+				{
+					SlidingExpiration = TimeSpan.FromSeconds(60.0)
+				};
+				cache.Set(key, new Tuple<Type[], object[]>(new Type[length], new object[length]), policy);
 				ret = cache.Get(key);
 			}
 			return ret as Tuple<Type[], object[]>;
