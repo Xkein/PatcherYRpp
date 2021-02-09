@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
     public struct ColorStruct
     {
         public ColorStruct(int r, int g, int b)
@@ -23,6 +24,7 @@ namespace PatcherYRpp
     }
 
     [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
     public struct CoordStruct
     {
         public CoordStruct(int x, int y, int z)
