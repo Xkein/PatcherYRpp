@@ -29,12 +29,4 @@ namespace PatcherYRpp
         public byte berzerk;
         public bool Berzerk { get => Convert.ToBoolean(berzerk); set => berzerk = Convert.ToByte(value); }
     }
-
-
-    [StructLayout(LayoutKind.Explicit, Size = 3576)]
-    public struct TechnoTypeClass
-    {
-        [FieldOffset(0)]
-        public AbstractTypeClass Base;
-    }
 }
