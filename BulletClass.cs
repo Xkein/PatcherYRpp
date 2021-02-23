@@ -22,6 +22,21 @@ namespace PatcherYRpp
         static public readonly IntPtr ArrayPointer = new IntPtr(0xA8ED40);
         static public ref DynamicVectorClass<Pointer<BulletClass>> Array { get => ref DynamicVectorClass<Pointer<BulletClass>>.GetDynamicVector(ArrayPointer); }
 
+        // 123 virtual function
+        public void SetTarget(Pointer<AbstractClass> pTarget)
+        {
+            this.Target = pTarget;
+        }
+
+        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
+        public delegate bool MoveToDelegate(ref BulletClass techno, ref CoordStruct where, ref BulletVelocity velocity);
+        public bool MoveTo(ref CoordStruct where, ref BulletVelocity velocity)
+        {
+            MoveToDelegate function = Helpers.GetVirtualFunction<MoveToDelegate>(Pointer<BulletClass>.AsPointer(ref this), 124);
+            return function(ref this, ref where, ref velocity);
+        }
+
+
         [FieldOffset(0)]
         public ObjectClass Base;
 
