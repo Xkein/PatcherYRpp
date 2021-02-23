@@ -21,4 +21,29 @@ namespace PatcherYRpp
         NoGreen = 0x4,
         NoBlue = 0x8
     };
+    public enum LandType
+    {
+        Clear = 0,
+        Road = 1,
+        Water = 2,
+        Rock = 3,
+        Wall = 4,
+        Tiberium = 5,
+        Beach = 6,
+        Rough = 7,
+        Ice = 8,
+        Railroad = 9,
+        Tunnel = 10,
+        Weeds = 11
+    };
+
+    public enum Layer
+    {
+        None = -1,
+        Underground = 0,
+        Surface = 1,
+        Ground = 2,
+        Air = 3,
+        Top = 4
+    };
 }

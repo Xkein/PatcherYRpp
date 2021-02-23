@@ -59,12 +59,14 @@
   <ItemGroup>
     <Compile Include="AbstractClass.cs" />
     <Compile Include="AbstractTypeClass.cs" />
+    <Compile Include="AnimClass.cs" />
     <Compile Include="AnimTypeClass.cs" />
     <Compile Include="ArrayClass.cs" />
     <Compile Include="BasicStructures.cs" />
     <Compile Include="BulletClass.cs" />
     <Compile Include="BulletTypeClass.cs" />
     <Compile Include="CCINIClass.cs" />
+    <Compile Include="ColorScheme.cs" />
     <Compile Include="GeneralDefinitions.cs" />
     <Compile Include="GeneralStructures.cs" />
     <Compile Include="Helpers.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="MapClass.cs" />
     <Compile Include="ObjectClass.cs" />
     <Compile Include="ObjectTypeClass.cs" />
+    <Compile Include="OverlayTypeClass.cs" />
     <Compile Include="ParticleSystemTypeClass.cs" />
     <Compile Include="TechnoClass.cs" />
     <Compile Include="TechnoTypeClass.cs" />

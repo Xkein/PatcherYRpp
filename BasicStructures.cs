@@ -238,5 +238,13 @@ namespace PatcherYRpp
         public short X;
         public short Y;
     }
+
+    //Random number range
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
+    public struct RandomStruct
+    {
+        public int Min, Max;
+    };
 }
 
