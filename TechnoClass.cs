@@ -13,11 +13,14 @@ namespace PatcherYRpp
         static public readonly IntPtr ArrayPointer = new IntPtr(0xA8EC78);
         static public ref DynamicVectorClass<Pointer<TechnoClass>> Array { get => ref DynamicVectorClass<Pointer<TechnoClass>>.GetDynamicVector(ArrayPointer); }
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate IntPtr GetTechnoTypeDelegate(ref TechnoClass techno);
-        static public GetTechnoTypeDelegate GetTechnoTypeDlg = Marshal.GetDelegateForFunctionPointer<GetTechnoTypeDelegate>(new IntPtr(0x6F3270));
-
-        public Pointer<TechnoTypeClass> Type  { get => GetTechnoTypeDlg(ref this); }
+        public unsafe Pointer<TechnoTypeClass> Type
+        {
+            get
+            {
+                var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr>)0x6F3270;
+                return func(ref this);
+            }
+        }
 
         [FieldOffset(0)]
         public ObjectClass Base;

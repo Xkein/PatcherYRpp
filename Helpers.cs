@@ -80,16 +80,14 @@ namespace PatcherYRpp
         public static TTo ForceConvert<TFrom, TTo>(TFrom obj)
         {
             return Unsafe.As<TFrom, TTo>(ref obj);
-        //    var ptr = new Pointer<TTo>(Pointer<TFrom>.AsPointer(ref obj));
-        //    return ptr.Ref;
+            //    var ptr = new Pointer<TTo>(Pointer<TFrom>.AsPointer(ref obj));
+            //    return ptr.Ref;
         }
 
         static MemoryCache VirtualFunctionCache = new MemoryCache("virtual functions");
         static public T GetVirtualFunction<T>(IntPtr pThis, int index) where T : Delegate
         {
-            Pointer<Pointer<IntPtr>> pVfptr = pThis;
-            Pointer<IntPtr> vfptr = pVfptr.Data;
-            IntPtr address = vfptr[index];
+            IntPtr address = GetVirtualFunctionPointer(pThis, index);
 
             string key = address.ToString();
 
@@ -105,6 +103,15 @@ namespace PatcherYRpp
             }
 
             return ret as T;
+        }
+
+        static public IntPtr GetVirtualFunctionPointer(IntPtr pThis, int index)
+        {
+            Pointer<Pointer<IntPtr>> pVfptr = pThis;
+            Pointer<IntPtr> vfptr = pVfptr.Data;
+            IntPtr address = vfptr[index];
+
+            return address;
         }
 
         public static void PrintException(Exception e)

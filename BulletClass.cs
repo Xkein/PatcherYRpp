@@ -28,12 +28,11 @@ namespace PatcherYRpp
             this.Target = pTarget;
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate bool MoveToDelegate(ref BulletClass techno, ref CoordStruct where, ref BulletVelocity velocity);
-        public bool MoveTo(ref CoordStruct where, ref BulletVelocity velocity)
+        public unsafe bool MoveTo(ref CoordStruct where, ref BulletVelocity velocity)
         {
-            MoveToDelegate function = Helpers.GetVirtualFunction<MoveToDelegate>(Pointer<BulletClass>.AsPointer(ref this), 124);
-            return function(ref this, ref where, ref velocity);
+            var func = (delegate* unmanaged[Thiscall]<ref BulletClass, ref CoordStruct, ref BulletVelocity, bool>)
+                Helpers.GetVirtualFunctionPointer(Pointer<BulletClass>.AsPointer(ref this), 124);
+            return func(ref this, ref where, ref velocity);
         }
 
 
@@ -54,7 +53,7 @@ namespace PatcherYRpp
         public BulletVelocity Velocity;
 
         [FieldOffset(268)]
-        Pointer<AbstractClass> Target;
+        public Pointer<AbstractClass> Target;
         [FieldOffset(272)]
         public int Speed;
 

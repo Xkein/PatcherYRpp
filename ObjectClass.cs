@@ -10,12 +10,10 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 172)]
     public struct ObjectClass
     {
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate IntPtr ThisCall_0(ref ObjectClass pThis);
-        public int GetHeight()
+        public unsafe int GetHeight()
         {
-            ThisCall_0 function = Helpers.GetVirtualFunction<ThisCall_0>(Pointer<ObjectClass>.AsPointer(ref this), 114);
-            return (int)function(ref this);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, int>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 114);
+            return func(ref this);
         }
 
         [FieldOffset(0)]

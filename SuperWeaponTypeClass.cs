@@ -10,7 +10,12 @@ namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Explicit, Size = 256)]
     public struct SuperWeaponTypeClass
-    {
+	{
+		static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E330);
+		static public ref DynamicVectorClass<Pointer<SuperWeaponTypeClass>> Array { get => ref DynamicVectorClass<Pointer<SuperWeaponTypeClass>>.GetDynamicVector(ArrayPointer); }
+
+		static public YRPP.ABSTRACTTYPE_ARRAY<SuperWeaponTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<SuperWeaponTypeClass>(ArrayPointer);
+
 		[FieldOffset(0)] public AbstractTypeClass Base;
 
 		[FieldOffset(152)] public int ArrayIndex;

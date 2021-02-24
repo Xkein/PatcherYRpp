@@ -20,23 +20,18 @@ namespace PatcherYRpp
 		// naked does not support inlining. the inline modifier here means that
 		// multiple definitions are allowed.
 
-		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-		delegate IntPtr AllocateFunction(uint size);
-		static AllocateFunction AllocateDlg = Marshal.GetDelegateForFunctionPointer<AllocateFunction>(new IntPtr(0x7C8E17));
-
 		// the game's operator new
-		public static IntPtr Allocate(uint size)
+		public static unsafe IntPtr Allocate(uint size)
 		{
-			return AllocateDlg(size);
+			var func = (delegate* unmanaged[Cdecl]<uint, IntPtr>)0x7C8E17;
+			return func(size);
 		}
 
-		[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-		delegate IntPtr DeallocateFunction(IntPtr mem);
-		static DeallocateFunction DeallocateDlg = Marshal.GetDelegateForFunctionPointer<DeallocateFunction>(new IntPtr(0x7C8B3D));
 		// the game's operator delete
-		public static void Deallocate(IntPtr mem)
+		public static unsafe void Deallocate(IntPtr mem)
 		{
-			DeallocateDlg(mem);
+			var func = (delegate* unmanaged[Cdecl]<IntPtr, void>)0x7C8B3D;
+			func(mem);
 		}
 
 		public static IntPtr AllocateChecked(uint size)

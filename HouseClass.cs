@@ -38,12 +38,4 @@ namespace PatcherYRpp
         [FieldOffset(596)]
         public DynamicVectorClass<Pointer<SuperClass>> Supers;
     }
-
-    [StructLayout(LayoutKind.Explicit, Size = 432)]
-    public struct HouseTypeClass
-    {
-        [FieldOffset(0)]
-        public AbstractTypeClass Base;
-
-    }
 }

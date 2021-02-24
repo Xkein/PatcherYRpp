@@ -14,21 +14,22 @@ namespace PatcherYRpp
         [FieldOffset(0)] public AbstractTypeClass Base;
         [FieldOffset(152)] public int AmbientDamage;
 		[FieldOffset(156)] public int Burst;
-		[FieldOffset(160)] public Pointer<BulletTypeClass> Projectile;
+        [FieldOffset(160)] public IntPtr projectile;
+		public Pointer<BulletTypeClass> Projectile { get => projectile; set => projectile = value; }
 		[FieldOffset(164)] public int Damage;
 		[FieldOffset(168)] public int Speed;
-		[FieldOffset(172)] public Pointer<WarheadTypeClass> Warhead;
-		[FieldOffset(176)] public int ROF;
+        [FieldOffset(172)] public Pointer<WarheadTypeClass> Warhead;
+        [FieldOffset(176)] public int ROF;
 		[FieldOffset(180)] public int Range; // int(256 * ini value)
 		[FieldOffset(184)] public int MinimumRange; // int(256 * ini value)
 		[FieldOffset(188)] public DynamicVectorClass<int> Report;       //sound indices
 		[FieldOffset(216)] public DynamicVectorClass<int> DownReport;   //sound indices
-		[FieldOffset(244)] public DynamicVectorClass<Pointer<AnimTypeClass>> Anim;
-		[FieldOffset(272)] public Pointer<AnimTypeClass> OccupantAnim;
-		[FieldOffset(276)] public Pointer<AnimTypeClass> AssaultAnim;
-		[FieldOffset(280)] public Pointer<AnimTypeClass> OpenToppedAnim;
-		[FieldOffset(284)] public Pointer<ParticleSystemTypeClass> AttachedParticleSystem;
-		[FieldOffset(288)] public ColorStruct LaserInnerColor;
+        [FieldOffset(244)] public DynamicVectorClass<Pointer<AnimTypeClass>> Anim;
+        [FieldOffset(272)] public Pointer<AnimTypeClass> OccupantAnim;
+        [FieldOffset(276)] public Pointer<AnimTypeClass> AssaultAnim;
+        [FieldOffset(280)] public Pointer<AnimTypeClass> OpenToppedAnim;
+        [FieldOffset(284)] public Pointer<ParticleSystemTypeClass> AttachedParticleSystem;
+        [FieldOffset(288)] public ColorStruct LaserInnerColor;
 		[FieldOffset(291)] public ColorStruct LaserOuterColor;
 		[FieldOffset(294)] public ColorStruct LaserOuterSpread;
 		[FieldOffset(297)] public byte UseFireParticles;

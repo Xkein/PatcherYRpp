@@ -10,12 +10,11 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 760)]
     public struct BulletTypeClass
     {
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate IntPtr CreateBulletDelegate(IntPtr Target, /*Pointer<TechnoClass> Owner @edx, */int Damage, IntPtr WH, int Speed, bool Bright);
-        static public CreateBulletDelegate CreateBulletDlg = Marshal.GetDelegateForFunctionPointer<CreateBulletDelegate>(new IntPtr(0x46B050));
-        public Pointer<BulletClass> CreateBullet(Pointer<AbstractClass> Target, Pointer<TechnoClass> Owner, int Damage, Pointer<WarheadTypeClass> WH, int Speed, bool Bright)
-        {
-            Pointer<BulletClass> ret = CreateBulletDlg(Target, Damage, WH, Speed, Bright);
+        public unsafe Pointer<BulletClass> CreateBullet(Pointer<AbstractClass> Target, Pointer<TechnoClass> Owner, int Damage, Pointer<WarheadTypeClass> WH, int Speed, bool Bright)
+		{
+			var func = (delegate* unmanaged[Thiscall]<IntPtr, /*Pointer<TechnoClass> @edx, */int, IntPtr, int , bool, IntPtr>)0x46B050;
+
+			Pointer<BulletClass> ret = func(Target, Damage, WH, Speed, Bright);
             ret.Ref.Owner = Owner;
             return ret;
         }

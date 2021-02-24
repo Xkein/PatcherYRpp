@@ -10,27 +10,24 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 128)]
     public struct SuperClass
     {
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void LaunchDelegate(ref SuperClass pThis, ref CellStruct cell, bool isPlayer);
-        static public LaunchDelegate LaunchDlg = Marshal.GetDelegateForFunctionPointer<LaunchDelegate>(new IntPtr(0x6CC390));
-        public void Launch(CellStruct cell, bool isPlayer)
+        public unsafe void Launch(CellStruct cell, bool isPlayer)
         {
-            LaunchDlg(ref this, ref cell, isPlayer);
+            var func = (delegate* unmanaged[Thiscall]<ref SuperClass, ref CellStruct, bool, void>)0x6CC390;
+            func(ref this, ref cell, isPlayer);
         }
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate bool CanFireDelegate(ref SuperClass pThis);
-        static public CanFireDelegate CanFireDlg = Marshal.GetDelegateForFunctionPointer<CanFireDelegate>(new IntPtr(0x6CC360));
-        public bool CanFire()
+        public unsafe bool CanFire()
         {
-            return CanFireDlg(ref this);
+            var func = (delegate* unmanaged[Thiscall]<ref SuperClass, bool>)0x6CC360;
+            return func(ref this);
         }
 
         [FieldOffset(0)] public AbstractClass Base;
 
         [FieldOffset(36)] public int CustomChargeTime;
         [FieldOffset(40)] public Pointer<SuperWeaponTypeClass> Type;
-        [FieldOffset(44)] public Pointer<HouseClass> Owner;
+        [FieldOffset(44)] public IntPtr owner;
+        public Pointer<HouseClass> Owner { get => owner; set => owner = value; }
         [FieldOffset(48)] public TimerStruct RechargeTimer;
 
         [FieldOffset(64)] public byte BlinkState;

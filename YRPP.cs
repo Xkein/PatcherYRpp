@@ -10,14 +10,39 @@ namespace PatcherYRpp
 {
     public class YRPP
     {
+        public class ABSTRACTTYPE_ARRAY<T>
+        {
+            Pointer<DynamicVectorClass<Pointer<T>>> Pointer;
+            ref DynamicVectorClass<Pointer<T>> Array { get => ref Pointer.Ref; }
+            public ABSTRACTTYPE_ARRAY(IntPtr pVector)
+            {
+                Pointer = pVector;
+            }
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate IntPtr ThisCall_0(IntPtr pThis);
+            public Pointer<T> Find(string ID)
+            {
+                int idx = FindIndex(ID);
+                if (idx >= 0)
+                {
+                    return Array.Get(idx);
+                }
 
-        static public ThisCall_0 GetTechnoType = Marshal.GetDelegateForFunctionPointer<ThisCall_0>(new IntPtr(0x6F3270));
+                return Pointer<T>.Zero;
+            }
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        public delegate void DestructorFunction(IntPtr pThis);
+            public int FindIndex(string ID)
+            {
+                for (int i = 0; i < Array.Count; i++)
+                {
+                    Pointer<AbstractTypeClass> pItem = Array[i].Convert<AbstractTypeClass>();
+                    if (pItem.Ref.GetID() == ID)
+                    {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+        }
 
         static YRPP()
         {

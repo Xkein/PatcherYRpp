@@ -73,6 +73,7 @@
     <Compile Include="GeneralStructures.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="HouseClass.cs" />
+    <Compile Include="HouseTypeClass.cs" />
     <Compile Include="LaserDrawClass.cs" />
     <Compile Include="MapClass.cs" />
     <Compile Include="ObjectClass.cs" />

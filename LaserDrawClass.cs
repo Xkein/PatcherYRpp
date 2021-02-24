@@ -11,20 +11,14 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 92)]
     public struct LaserDrawClass
     {
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        delegate IntPtr ConstructorFunction(ref LaserDrawClass pThis, CoordStruct source, CoordStruct target, int zAdjust, byte unknown,
-            ColorStruct innerColor, ColorStruct outerColor, ColorStruct outerSpread,
-            int duration, bool blinks, bool fades, float startIntensity, float endIntensity);
-
-        static ConstructorFunction ConstructorDlg = Marshal.GetDelegateForFunctionPointer<ConstructorFunction>(new IntPtr(0x54FE60));
-        static DestructorFunction DestructorDlg = Marshal.GetDelegateForFunctionPointer<DestructorFunction>(new IntPtr(0x54FFB0));
-
-        public static void Constructor(Pointer<LaserDrawClass> pThis, CoordStruct source, CoordStruct target, int zAdjust, byte unknown,
+        public static unsafe void Constructor(Pointer<LaserDrawClass> pThis, CoordStruct source, CoordStruct target, int zAdjust, byte unknown,
             ColorStruct innerColor, ColorStruct outerColor, ColorStruct outerSpread,
             int duration, bool blinks = false, bool fades = true,
             float startIntensity = 1.0f, float endIntensity = 0.0f)
         {
-            ConstructorDlg(ref pThis.Ref, source, target, zAdjust, unknown, innerColor, outerColor, outerSpread, duration, blinks, fades, startIntensity, endIntensity);
+            var func = (delegate* unmanaged[Thiscall]<ref LaserDrawClass, CoordStruct, CoordStruct, int, byte, 
+                ColorStruct, ColorStruct, ColorStruct,  int, bool, bool, float, float, void>)0x54FE60;
+            func(ref pThis.Ref, source, target, zAdjust, unknown, innerColor, outerColor, outerSpread, duration, blinks, fades, startIntensity, endIntensity);
         }
 
         public static void Constructor(Pointer<LaserDrawClass> pThis, CoordStruct source, CoordStruct target, ColorStruct innerColor,
@@ -33,9 +27,10 @@ namespace PatcherYRpp
             Constructor(pThis, source, target, 0, 1, innerColor, outerColor, outerSpread, duration);
         }
 
-        public void Destructor()
+        public unsafe void Destructor()
         {
-            DestructorDlg(Pointer<LaserDrawClass>.AsPointer(ref this));
+            var func = (delegate* unmanaged[Thiscall]<ref LaserDrawClass, void>)0x54FFB0;
+            func(ref this);
         }
 
         [FieldOffset(28)] public int Thickness; // only respected if IsHouseColor

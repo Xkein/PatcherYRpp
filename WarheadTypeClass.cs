@@ -13,31 +13,7 @@ namespace PatcherYRpp
         static public readonly IntPtr ArrayPointer = new IntPtr(0x8874C0);
         static public ref DynamicVectorClass<Pointer<WarheadTypeClass>> Array { get => ref DynamicVectorClass<Pointer<WarheadTypeClass>>.GetDynamicVector(ArrayPointer); }
 
-
-        static public Pointer<WarheadTypeClass> Find(string ID)
-        {
-            int idx = FindIndex(ID);
-            if (idx >= 0)
-            {
-                return Array.Get(idx);
-            }
-
-            return Pointer<WarheadTypeClass>.Zero;
-        }
-
-        static public int FindIndex(string ID)
-        {
-            ref var warheadArray = ref Array;
-            for (int i = 0; i < Array.Count; i++)
-            {
-                Pointer<WarheadTypeClass> pWH = warheadArray[i];
-                if (pWH.Ref.Base.GetID() == ID)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
+        static public YRPP.ABSTRACTTYPE_ARRAY<WarheadTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<WarheadTypeClass>(ArrayPointer);
 
         [FieldOffset(0)] public AbstractTypeClass Base;
         [FieldOffset(152)] public float Deform;
