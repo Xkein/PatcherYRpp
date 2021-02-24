@@ -12,7 +12,15 @@ namespace PatcherYRpp
 	public struct AbstractClass
 	{
 		[UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-		public delegate IntPtr GetCoordsDelegate(ref AbstractClass techno, IntPtr pCrd);
+		public delegate int GetArrayIndexDelegate(ref AbstractClass pThis);
+		public int GetArrayIndex()
+		{
+			GetArrayIndexDelegate function = Helpers.GetVirtualFunction<GetArrayIndexDelegate>(Pointer<AbstractClass>.AsPointer(ref this), 16);
+			return function(ref this);
+		}
+
+		[UnmanagedFunctionPointer(CallingConvention.ThisCall)]
+		public delegate IntPtr GetCoordsDelegate(ref AbstractClass pThis, IntPtr pCrd);
 		public CoordStruct GetCoords()
 		{
 			GetCoordsDelegate function = Helpers.GetVirtualFunction<GetCoordsDelegate>(Pointer<AbstractClass>.AsPointer(ref this), 18);

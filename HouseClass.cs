@@ -20,6 +20,23 @@ namespace PatcherYRpp
 
         [FieldOffset(52)]
         public Pointer<HouseTypeClass> Type;
+
+        Pointer<SuperClass> FindSuperWeapon(Pointer<SuperWeaponTypeClass> pType)
+        {
+            for (int i = 0; i < Supers.Count; i++)
+            {
+                var pItem = Supers[i];
+                if(pItem.Ref.Type == pType)
+                {
+                    return pItem;
+                }
+            }
+
+            return Pointer<SuperClass>.Zero;
+        }
+
+        [FieldOffset(596)]
+        public DynamicVectorClass<Pointer<SuperClass>> Supers;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 432)]

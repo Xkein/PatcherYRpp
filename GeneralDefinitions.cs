@@ -46,4 +46,29 @@ namespace PatcherYRpp
         Air = 3,
         Top = 4
     };
+
+    public enum ChargeDrainState
+    {
+        None = -1,
+        Charging = 0,
+        Ready = 1,
+        Draining = 2
+    };
+
+    public enum SuperWeaponType
+    {
+        Invalid = -1,
+        Nuke = 0,
+        IronCurtain = 1,
+        LightningStorm = 2,
+        ChronoSphere = 3,
+        ChronoWarp = 4,
+        ParaDrop = 5,
+        AmerParaDrop = 6,
+        PsychicDominator = 7,
+        SpyPlane = 8,
+        GeneticMutator = 9,
+        ForceShield = 10,
+        PsychicReveal = 11
+    };
 }
