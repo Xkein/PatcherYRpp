@@ -21,7 +21,7 @@ namespace PatcherYRpp
         [FieldOffset(52)]
         public Pointer<HouseTypeClass> Type;
 
-        Pointer<SuperClass> FindSuperWeapon(Pointer<SuperWeaponTypeClass> pType)
+        public Pointer<SuperClass> FindSuperWeapon(Pointer<SuperWeaponTypeClass> pType)
         {
             for (int i = 0; i < Supers.Count; i++)
             {

@@ -34,5 +34,16 @@ namespace PatcherYRpp
             var func = (delegate* managed<int, Pointer<WarheadTypeClass>, SpotlightFlags, bool, CoordStruct, void>)0x48A620;
             func(Damage, WH, CLDisableFlags, Force, coords);
         }
+
+
+        public static CoordStruct Cell2Coord(CellStruct cell, int z = 0)
+        {
+            return new CoordStruct(cell.X * 256 + 128, cell.Y * 256 + 128, z);
+        }
+
+        public static CellStruct Coord2Cell(CoordStruct crd)
+        {
+            return new CellStruct(crd.X / 256, crd.Y / 256);
+        }
     }
 }
