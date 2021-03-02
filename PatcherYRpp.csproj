@@ -82,6 +82,7 @@
     <Compile Include="ParticleSystemTypeClass.cs" />
     <Compile Include="SuperClass.cs" />
     <Compile Include="SuperWeaponTypeClass.cs" />
+    <Compile Include="SwizzleManagerClass.cs" />
     <Compile Include="TechnoClass.cs" />
     <Compile Include="TechnoTypeClass.cs" />
     <Compile Include="WarheadTypeClass.cs" />
