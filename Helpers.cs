@@ -47,6 +47,10 @@ namespace PatcherYRpp
         {
             return new Pointer<T>(Unsafe.AsPointer(ref obj));
         }
+        public static int TypeSize()
+        {
+            return Unsafe.SizeOf<T>();
+        }
 
         public static bool operator ==(Pointer<T> value1, Pointer<T> value2) => value1.Value == value2.Value;
         public static bool operator !=(Pointer<T> value1, Pointer<T> value2) => value1.Value != value2.Value;
