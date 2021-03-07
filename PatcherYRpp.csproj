@@ -85,6 +85,7 @@
     <Compile Include="SwizzleManagerClass.cs" />
     <Compile Include="TechnoClass.cs" />
     <Compile Include="TechnoTypeClass.cs" />
+    <Compile Include="Unsorted.cs" />
     <Compile Include="WarheadTypeClass.cs" />
     <Compile Include="WeaponTypeClass.cs" />
     <Compile Include="YRMemory.cs" />
