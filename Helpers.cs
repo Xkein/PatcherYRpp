@@ -120,7 +120,7 @@ namespace PatcherYRpp
 
         static public unsafe ref T GetUnmanagedRef<T>(IntPtr ptr, int offset = 0)
         {
-            return ref new Pointer<T>(ptr)[offset];
+            return ref ptr.Convert<T>()[offset];
         }
 
         static public unsafe Span<T> GetSpan<T>(IntPtr ptr, int length)
@@ -181,6 +181,11 @@ namespace PatcherYRpp
             {
                 Logger.Log("");
             }
+        }
+
+        public static Pointer<T> Convert<T>(this IntPtr ptr)
+        {
+            return new Pointer<T>(ptr);
         }
     }
 }
