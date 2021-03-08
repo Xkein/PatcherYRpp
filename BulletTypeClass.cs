@@ -9,13 +9,17 @@ namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Explicit, Size = 760)]
     public struct BulletTypeClass
-    {
-        public unsafe Pointer<BulletClass> CreateBullet(Pointer<AbstractClass> Target, Pointer<TechnoClass> Owner, int Damage, Pointer<WarheadTypeClass> WH, int Speed, bool Bright)
-		{
-			var func = (delegate* unmanaged[Thiscall]<IntPtr, /*Pointer<TechnoClass> @edx, */int, IntPtr, int , bool, IntPtr>)0x46B050;
+	{
+		static public readonly IntPtr ArrayPointer = new IntPtr(0xA83C80);
 
-			Pointer<BulletClass> ret = func(Target, Damage, WH, Speed, Bright);
-            ret.Ref.Owner = Owner;
+		static public YRPP.ABSTRACTTYPE_ARRAY<BulletTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<BulletTypeClass>(ArrayPointer);
+
+		public unsafe Pointer<BulletClass> CreateBullet(Pointer<AbstractClass> Target, Pointer<TechnoClass> Owner, int Damage, Pointer<WarheadTypeClass> WH, int Speed, bool Bright)
+		{
+			var func = (delegate* unmanaged[Thiscall]<ref BulletTypeClass, /*Pointer<AbstractClass> @edx, */IntPtr, int, IntPtr, int , bool, IntPtr>)0x46B050;
+
+			Pointer<BulletClass> ret = func(ref this, Owner, Damage, WH, Speed, Bright);
+            ret.Ref.Target = Target;
             return ret;
         }
 
