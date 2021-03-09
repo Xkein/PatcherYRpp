@@ -71,7 +71,10 @@
     <Compile Include="FileFormats\SHPStruct.cs" />
     <Compile Include="GeneralDefinitions.cs" />
     <Compile Include="GeneralStructures.cs" />
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\Cast.cs" />
+    <Compile Include="Helpers\Pointer.cs" />
+    <Compile Include="Helpers\PointerHandle.cs" />
     <Compile Include="HouseClass.cs" />
     <Compile Include="HouseTypeClass.cs" />
     <Compile Include="LaserDrawClass.cs" />

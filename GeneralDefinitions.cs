@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace PatcherYRpp
 {
+    public enum AbstractFlags
+    {
+        None = 0x0,
+        Techno = 0x1,
+        Object = 0x2,
+        Foot = 0x4
+    };
+
     public enum AbstractType
     {
         None = 0,
