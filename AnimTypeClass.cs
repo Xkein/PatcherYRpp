@@ -10,6 +10,10 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 888)]
     public struct AnimTypeClass
     {
+        static public readonly IntPtr ArrayPointer = new IntPtr(0x8B4150);
+
+        static public YRPP.ABSTRACTTYPE_ARRAY<AnimTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<AnimTypeClass>(ArrayPointer);
+
         [FieldOffset(0)] public ObjectTypeClass Base;
 
         [FieldOffset(660)] public int ArrayIndex;

@@ -113,6 +113,56 @@ namespace PatcherYRpp
         public int Duration;
     }
 
+
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
+    public struct ProgressTimer
+    {
+        public ProgressTimer(int duration)
+        {
+            this.Value = 0;
+            this.hasChanged = 0;
+            this.Step = 1;
+
+            this.Timer = new RepeatableTimerStruct(duration);
+        }
+
+        public void Start(int duration)
+        {
+            this.Timer.Start(duration);
+        }
+
+        public void Start(int duration, int step)
+        {
+            this.Step = step;
+            this.Start(duration);
+        }
+
+        // returns whether the value changed.
+        public bool Update()
+        {
+            if (this.Timer.Base.GetTimeLeft() != 0 || this.Timer.Duration == 0)
+            {
+                // timer is still running or hasn't been set yet.
+                this.HasChanged = false;
+            }
+            else
+            {
+                // timer expired. move one step forward.
+                this.Value += this.Step;
+                this.HasChanged = true;
+                this.Timer.Restart();
+            }
+
+            return this.HasChanged;
+        }
+
+        public int Value; // the current value
+        private byte hasChanged; // if the timer expired this frame and the value changed
+        public bool HasChanged { get => Convert.ToBoolean(hasChanged); set => hasChanged = Convert.ToByte(value); }
+        public RepeatableTimerStruct Timer;
+        public int Step; // added to value every time the timer expires
+    }
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct DirStruct

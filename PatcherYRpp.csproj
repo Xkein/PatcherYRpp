@@ -59,16 +59,21 @@
   <ItemGroup>
     <Compile Include="AbstractClass.cs" />
     <Compile Include="AbstractTypeClass.cs" />
+    <Compile Include="AircraftClass.cs" />
     <Compile Include="AnimClass.cs" />
     <Compile Include="AnimTypeClass.cs" />
     <Compile Include="ArrayClass.cs" />
     <Compile Include="BasicStructures.cs" />
+    <Compile Include="BounceClass.cs" />
+    <Compile Include="BuildingClass.cs" />
     <Compile Include="BuildingTypeClass.cs" />
     <Compile Include="BulletClass.cs" />
     <Compile Include="BulletTypeClass.cs" />
     <Compile Include="CCINIClass.cs" />
+    <Compile Include="CellClass.cs" />
     <Compile Include="ColorScheme.cs" />
     <Compile Include="FileFormats\SHPStruct.cs" />
+    <Compile Include="FootClass.cs" />
     <Compile Include="GeneralDefinitions.cs" />
     <Compile Include="GeneralStructures.cs" />
     <Compile Include="Helpers\Helpers.cs" />
@@ -77,6 +82,7 @@
     <Compile Include="Helpers\PointerHandle.cs" />
     <Compile Include="HouseClass.cs" />
     <Compile Include="HouseTypeClass.cs" />
+    <Compile Include="InfantryClass.cs" />
     <Compile Include="LaserDrawClass.cs" />
     <Compile Include="MapClass.cs" />
     <Compile Include="ObjectClass.cs" />
@@ -86,8 +92,12 @@
     <Compile Include="SuperClass.cs" />
     <Compile Include="SuperWeaponTypeClass.cs" />
     <Compile Include="SwizzleManagerClass.cs" />
+    <Compile Include="TagClass.cs" />
     <Compile Include="TechnoClass.cs" />
     <Compile Include="TechnoTypeClass.cs" />
+    <Compile Include="TerrainClass.cs" />
+    <Compile Include="TerrainTypeClass.cs" />
+    <Compile Include="UnitClass.cs" />
     <Compile Include="Unsorted.cs" />
     <Compile Include="WarheadTypeClass.cs" />
     <Compile Include="WeaponTypeClass.cs" />

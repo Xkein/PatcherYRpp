@@ -28,6 +28,7 @@ namespace PatcherYRpp
         [FieldOffset(40)] public Pointer<SuperWeaponTypeClass> Type;
         [FieldOffset(44)] public IntPtr owner;
         public Pointer<HouseClass> Owner { get => owner; set => owner = value; }
+
         [FieldOffset(48)] public TimerStruct RechargeTimer;
 
         [FieldOffset(64)] public byte BlinkState;
@@ -39,7 +40,8 @@ namespace PatcherYRpp
 
         [FieldOffset(98)] public CellStruct ChronoMapCoords;  // 0x62
 
-        [FieldOffset(104)] public Pointer<AnimClass> Animation;                // 0x68
+        [FieldOffset(104)] private IntPtr animation;                // 0x68
+        public Pointer<AnimClass> Animation { get => animation; set => animation = value; }
         [FieldOffset(108)] public byte AnimationGotInvalid;
         [FieldOffset(109)] public byte Granted;
         [FieldOffset(110)] public byte OneTime; // remove this SW when it has been fired once

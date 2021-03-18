@@ -99,6 +99,26 @@ namespace PatcherYRpp
         Nullified = 2
     };
 
+    public enum Direction
+    {
+        N = 0x0,
+        North = 0x0,
+        NE = 0x1,
+        NorthEast = 0x1,
+        E = 0x2,
+        East = 0x2,
+        SE = 0x3,
+        SouthEast = 0x3,
+        S = 0x4,
+        South = 0x4,
+        SW = 0x5,
+        SouthWest = 0x5,
+        W = 0x6,
+        West = 0x6,
+        NW = 0x7,
+        NorthWest = 0x7,
+    };
+
     public enum SpotlightFlags
     {
         None = 0x0,
@@ -156,5 +176,30 @@ namespace PatcherYRpp
         GeneticMutator = 9,
         ForceShield = 10,
         PsychicReveal = 11
+    };
+
+    public enum BlitterFlags
+    {
+        None = 0x0,
+        Darken = 0x1,
+        TransLucent25 = 0x2,
+        TransLucent50 = 0x4,
+        TransLucent75 = 0x6,
+        Warp = 0x8,
+        ZRemap = 0x10,
+        Plain = 0x20,
+        bf_040 = 0x40,
+        bf_080 = 0x80,
+        MultiPass = 0x100,
+        Centered = 0x200,
+        bf_400 = 0x400,
+        Alpha = 0x800,
+        bf_1000 = 0x1000,
+        Flat = 0x2000,
+        ZRead = 0x3000,
+        ZReadWrite = 0x4000,
+        bf_8000 = 0x8000,
+        Zero = 0x10000,
+        Nonzero = 0x20000
     };
 }

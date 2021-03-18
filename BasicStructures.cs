@@ -129,9 +129,9 @@ namespace PatcherYRpp
         public static BulletVelocity operator *(BulletVelocity a, double r)
         {
             return new BulletVelocity(
-                 (int)(a.X * r),
-                 (int)(a.Y * r),
-                 (int)(a.Z * r));
+                 (double)(a.X * r),
+                 (double)(a.Y * r),
+                 (double)(a.Z * r));
         }
 
         public static double operator *(BulletVelocity a, BulletVelocity b)
@@ -246,5 +246,165 @@ namespace PatcherYRpp
     {
         public int Min, Max;
     };
+
+
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
+    public struct SingleVector3D
+    {
+        public SingleVector3D(float x, float y, float z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
+
+        public static SingleVector3D operator -(SingleVector3D a)
+        {
+            return new SingleVector3D(-a.X, -a.Y, -a.Z);
+        }
+        public static SingleVector3D operator +(SingleVector3D a, SingleVector3D b)
+        {
+            return new SingleVector3D(
+                 a.X + b.X,
+                 a.Y + b.Y,
+                 a.Z + b.Z);
+        }
+        public static SingleVector3D operator -(SingleVector3D a, SingleVector3D b)
+        {
+            return new SingleVector3D(
+                 a.X - b.X,
+                 a.Y - b.Y,
+                 a.Z - b.Z);
+        }
+        public static SingleVector3D operator *(SingleVector3D a, double r)
+        {
+            return new SingleVector3D(
+                 (float)(a.X * r),
+                 (float)(a.Y * r),
+                 (float)(a.Z * r));
+        }
+
+        public static double operator *(SingleVector3D a, SingleVector3D b)
+        {
+            return a.X * b.X
+                 + a.Y * b.Y
+                 + a.Z * b.Z;
+        }
+        //magnitude
+        public double Magnitude()
+        {
+            return Math.Sqrt(MagnitudeSquared());
+        }
+        //magnitude squared
+        public double MagnitudeSquared()
+        {
+            return this * this;
+        }
+
+        public double DistanceFrom(SingleVector3D other)
+        {
+            return (other - this).Magnitude();
+        }
+
+        public static bool operator ==(SingleVector3D a, SingleVector3D b)
+        {
+            return a.X == b.X && a.Y == b.Y && a.Z == b.Z;
+        }
+        public static bool operator !=(SingleVector3D a, SingleVector3D b) => !(a == b);
+
+        public override bool Equals(object obj) => this == (SingleVector3D)obj;
+        public override int GetHashCode() => base.GetHashCode();
+
+        public float X;
+        public float Y;
+        public float Z;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
+    public struct Quaternion
+    {
+        public Quaternion(float x, float y, float z, float w)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+            W = w;
+        }
+
+        public float X;
+        public float Y;
+        public float Z;
+        public float W;
+    };
+
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
+    public struct Point2D
+    {
+        public Point2D(int x, int y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public static Point2D operator -(Point2D a)
+        {
+            return new Point2D(-a.X, -a.Y);
+        }
+        public static Point2D operator +(Point2D a, Point2D b)
+        {
+            return new Point2D(
+                 a.X + b.X,
+                 a.Y + b.Y);
+        }
+        public static Point2D operator -(Point2D a, Point2D b)
+        {
+            return new Point2D(
+                 a.X - b.X,
+                 a.Y - b.Y);
+        }
+        public static Point2D operator *(Point2D a, double r)
+        {
+            return new Point2D(
+                 (int)(a.X * r),
+                 (int)(a.Y * r));
+        }
+
+        public static double operator *(Point2D a, Point2D b)
+        {
+            return a.X * b.X
+                 + a.Y * b.Y;
+        }
+        //magnitude
+        public double Magnitude()
+        {
+            return Math.Sqrt(MagnitudeSquared());
+        }
+        //magnitude squared
+        public double MagnitudeSquared()
+        {
+            return this * this;
+
+        }
+
+        public double DistanceFrom(Point2D other)
+        {
+            return (other - this).Magnitude();
+        }
+
+        public static bool operator ==(Point2D a, Point2D b)
+        {
+            return a.X == b.X && a.Y == b.Y;
+        }
+        public static bool operator !=(Point2D a, Point2D b) => !(a == b);
+
+        public override bool Equals(object obj) => this == (Point2D)obj;
+        public override int GetHashCode() => base.GetHashCode();
+
+        public int X;
+        public int Y;
+    }
 }
 

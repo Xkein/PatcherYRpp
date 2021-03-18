@@ -11,6 +11,30 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 4468)]
     public struct MapClass
     {
+        public const int MaxCells = 0x40000;
+
+        public bool TryGetCellAt(CellStruct MapCoords, out Pointer<CellClass> pCell)
+        {
+            int idx = GetCellIndex(MapCoords);
+            if (idx >= 0 && idx < MaxCells)
+            {
+                pCell = Cells[idx];
+                return true;
+            }
+
+            pCell = Pointer<CellClass>.Zero;
+            return false;
+        }
+        public bool TryGetCellAt(CoordStruct Crd, out Pointer<CellClass> pCell)
+        {
+            CellStruct cell = CellClass.Coord2Cell(Crd);
+            return this.TryGetCellAt(cell, out pCell);
+        }
+        public static int GetCellIndex(CellStruct MapCoords)
+        {
+            return (MapCoords.Y << 9) + MapCoords.X;
+        }
+
         // no fast call. unmanaged call will lead to StackOverflowException.
         //[UnmanagedFunctionPointer(CallingConvention.FastCall)]
         //public delegate DamageAreaResult DamageAreaFunction(in CoordStruct Coords, int Damage, /*Pointer<TechnoClass>*/IntPtr SourceObject,
@@ -46,5 +70,9 @@ namespace PatcherYRpp
         {
             return new CellStruct(crd.X / 256, crd.Y / 256);
         }
+
+        [FieldOffset(312)] public DynamicVectorClass<Pointer<CellClass>> Cells;
+
+        [FieldOffset(4444)] public DynamicVectorClass<CellStruct> TaggedCells;
     }
 }
