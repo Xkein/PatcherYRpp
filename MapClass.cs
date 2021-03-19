@@ -11,6 +11,9 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 4468)]
     public struct MapClass
     {
+        private static IntPtr instance = new IntPtr(0x87F7E8);
+        static public ref MapClass Instance { get => ref instance.Convert<MapClass>().Ref; }
+
         public const int MaxCells = 0x40000;
 
         public bool TryGetCellAt(CellStruct MapCoords, out Pointer<CellClass> pCell)
