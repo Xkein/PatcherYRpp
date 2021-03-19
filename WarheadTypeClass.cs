@@ -11,7 +11,6 @@ namespace PatcherYRpp
     public struct WarheadTypeClass
     {
         static public readonly IntPtr ArrayPointer = new IntPtr(0x8874C0);
-        static public ref DynamicVectorClass<Pointer<WarheadTypeClass>> Array { get => ref DynamicVectorClass<Pointer<WarheadTypeClass>>.GetDynamicVector(ArrayPointer); }
 
         static public YRPP.ABSTRACTTYPE_ARRAY<WarheadTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<WarheadTypeClass>(ArrayPointer);
 

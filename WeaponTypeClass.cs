@@ -9,14 +9,18 @@ namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Explicit, Size = 352)]
     public struct WeaponTypeClass
-    {
+	{
+		static public readonly IntPtr ArrayPointer = new IntPtr(0x887568);
 
-        [FieldOffset(0)] public AbstractTypeClass Base;
+		static public YRPP.ABSTRACTTYPE_ARRAY<WeaponTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<WeaponTypeClass>(ArrayPointer);
+
+		[FieldOffset(0)] public AbstractTypeClass Base;
         [FieldOffset(152)] public int AmbientDamage;
 		[FieldOffset(156)] public int Burst;
         [FieldOffset(160)] public IntPtr projectile;
 		public Pointer<BulletTypeClass> Projectile { get => projectile; set => projectile = value; }
-		[FieldOffset(164)] public int Damage;
+
+        [FieldOffset(164)] public int Damage;
 		[FieldOffset(168)] public int Speed;
         [FieldOffset(172)] public Pointer<WarheadTypeClass> Warhead;
         [FieldOffset(176)] public int ROF;
@@ -38,7 +42,8 @@ namespace PatcherYRpp
 		[FieldOffset(300)] public byte DistributedWeaponFire;
 		[FieldOffset(301)] public byte IsRailgun;
 		[FieldOffset(302)] public byte Lobber;
-		[FieldOffset(303)] public byte Bright;
+        [FieldOffset(303)] private byte bright;
+		public bool Bright { get => Convert.ToBoolean(bright); set => bright = Convert.ToByte(value); }
 		[FieldOffset(304)] public byte IsSonic;
 		[FieldOffset(305)] public byte Spawner;
 		[FieldOffset(306)] public byte LimboLaunch;
