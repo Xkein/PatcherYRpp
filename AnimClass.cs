@@ -29,6 +29,10 @@ namespace PatcherYRpp
             this.Unpaused = true;
         }
 
+        public static void Constructor(Pointer<AnimClass> pThis, Pointer<AnimTypeClass> pAnimType, CoordStruct Location)
+        {
+            Constructor(pThis, pAnimType, Location, 0);
+        }
         public static unsafe void Constructor(Pointer<AnimClass> pThis, Pointer<AnimTypeClass> pAnimType, CoordStruct Location, int LoopDelay = 0, 
             int LoopCount = 1, uint flags = 0x600, int ForceZAdjust = 0, bool reverse = false)
         {
