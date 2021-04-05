@@ -76,6 +76,7 @@
     <Compile Include="FootClass.cs" />
     <Compile Include="GeneralDefinitions.cs" />
     <Compile Include="GeneralStructures.cs" />
+    <Compile Include="Helpers\Enumerators.cs" />
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\Cast.cs" />
     <Compile Include="Helpers\Pointer.cs" />
