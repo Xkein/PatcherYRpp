@@ -3,7 +3,7 @@
 
 [![license](https://www.gnu.org/graphics/gplv3-or-later.png)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-Pointer
+[Pointer](Helpers/Pointer.cs) & [PointerHandle](Helpers/PointerHandle.cs)
 ============
 It is suggested that use Pointer<T> to replace T*.
 
@@ -39,9 +39,30 @@ public struct YourClass
       func(ref this);
   }
 
+  // YR's class DVC
+  static public readonly IntPtr ArrayPointer = new IntPtr(DVC_address);
+  static public ref DynamicVectorClass<Pointer<TechnoClass>> Array { get => ref DynamicVectorClass<Pointer<TechnoClass>>.GetDynamicVector(ArrayPointer); }
+
+  // for xxxTypeClass
+	static public YRPP.ABSTRACTTYPE_ARRAY<YourClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<YourClass>(ArrayPointer);
+
   // your member
-  [FieldOffset(member_offset)] public TMember member;
+  [FieldOffset(member_offset)] public TMember Member;
+
+  // *REMARK*
+  // If you meet 'bool' type, you should write as 'byte' as below.
+  [FieldOffset(member_offset)] public byte member;
+  public bool Member { get => Convert.ToBoolean(member); set => member = Convert.ToByte(value); }
+  
+  // *REMARK*
+  // If you meet 'T[N]' type, you should write it as below.
+  // Then you can access Member[i] as normal array.
+  [FieldOffset(member_offset)] public T array_first;
+  public Pointer<T> Member => Pointer<T>.AsPointer(ref array_first);
+
 }
 
 ```
+
+In general, you can not write any [Non-Blittable Types](http://msdn.microsoft.com/en-us/library/75dwhxf7.aspx) in struct, or you will get many strange problem.
 
