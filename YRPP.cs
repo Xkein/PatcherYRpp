@@ -12,8 +12,9 @@ namespace PatcherYRpp
     {
         public class ABSTRACTTYPE_ARRAY<T>
         {
-            Pointer<DynamicVectorClass<Pointer<T>>> Pointer;
-            ref DynamicVectorClass<Pointer<T>> Array { get => ref Pointer.Ref; }
+            public Pointer<DynamicVectorClass<Pointer<T>>> Pointer;
+            public ref DynamicVectorClass<Pointer<T>> Array { get => ref Pointer.Ref; }
+
             public ABSTRACTTYPE_ARRAY(IntPtr pVector)
             {
                 Pointer = pVector;

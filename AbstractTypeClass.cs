@@ -10,21 +10,18 @@ namespace PatcherYRpp
 	[StructLayout(LayoutKind.Explicit, Size = 152, Pack = 1)]
 	public struct AbstractTypeClass
 	{
+		static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E968);
+
+		static public YRPP.ABSTRACTTYPE_ARRAY<AbstractTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<AbstractTypeClass>(ArrayPointer);
+
+		public unsafe bool LoadFromINI(Pointer<CCINIClass> pINI)
+		{
+			var func = (delegate* unmanaged[Thiscall]<ref AbstractTypeClass, IntPtr, byte>)Helpers.GetVirtualFunctionPointer(Pointer<AbstractTypeClass>.AsPointer(ref this), 25);
+			return Convert.ToBoolean(func(ref this, pINI));
+		}
+
 		[FieldOffset(0)]
 		public AbstractClass Base;
-
-		//[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x18)]
-		//[FieldOffset(36)] public string ID;
-
-		// offset 60 is ok, but it is 61
-		//[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x20)]
-		//[FieldOffset(61)] public string UINameLabel;
-
-		//[MarshalAs(UnmanagedType.LPWStr)]
-		//[FieldOffset(96)] public string UIName;
-
-		//[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 0x31)]
-		//[FieldOffset(100)] public string Name;
 
 		[FieldOffset(36)] public byte ID_first;
 		public string GetID() => Marshal.PtrToStringAnsi(Pointer<byte>.AsPointer(ref ID_first));
