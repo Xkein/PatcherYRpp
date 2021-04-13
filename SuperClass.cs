@@ -18,8 +18,8 @@ namespace PatcherYRpp
 
         public unsafe bool CanFire()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref SuperClass, bool>)0x6CC360;
-            return func(ref this);
+            var func = (delegate* unmanaged[Thiscall]<ref SuperClass, byte>)0x6CC360;
+            return Convert.ToBoolean(func(ref this));
         }
 
         [FieldOffset(0)] public AbstractClass Base;

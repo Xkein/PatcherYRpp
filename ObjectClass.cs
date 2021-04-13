@@ -12,13 +12,13 @@ namespace PatcherYRpp
     {
         public unsafe bool Remove()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, bool>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 53);
-            return func(ref this);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, byte>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 53);
+            return Convert.ToBoolean(func(ref this));
         }
         public unsafe bool Put(CoordStruct coord, Direction faceDir)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, Direction, bool>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 54);
-            return func(ref this, ref coord, faceDir);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, Direction, byte>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 54);
+            return Convert.ToBoolean(func(ref this, ref coord, faceDir));
         }
 
         public unsafe void SetLocation(CoordStruct coord)
