@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -89,6 +89,18 @@ namespace PatcherYRpp
 			constructor.Invoke(null, paramList);
 
 			return ptr;
+		}
+
+		public static void Delete<T>(Pointer<T> ptr)
+		{
+			if(ptr.IsNull == false)
+			{
+				Type type = typeof(T);
+				MethodInfo destructor = type.GetMethod("Destructor", new Type[] { typeof(Pointer<T>) });
+
+				destructor.Invoke(null, new object[] { ptr });
+				Deallocate(ptr);
+			}
 		}
 	}
 

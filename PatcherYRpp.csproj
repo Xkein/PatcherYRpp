@@ -69,6 +69,7 @@
     <Compile Include="BuildingTypeClass.cs" />
     <Compile Include="BulletClass.cs" />
     <Compile Include="BulletTypeClass.cs" />
+    <Compile Include="CCFileClass.cs" />
     <Compile Include="CCINIClass.cs" />
     <Compile Include="CellClass.cs" />
     <Compile Include="ColorScheme.cs" />
