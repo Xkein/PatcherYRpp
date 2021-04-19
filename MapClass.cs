@@ -63,6 +63,19 @@ namespace PatcherYRpp
         //    func(Damage, WH, CLDisableFlags, Force, coords);
         //}
 
+        public static unsafe DamageAreaResult DamageArea(CoordStruct Coords, int Damage, Pointer<TechnoClass> SourceObject,
+           Pointer<WarheadTypeClass> WH, bool AffectsTiberium, Pointer<HouseClass> SourceHouse)
+        {
+           var func = (delegate* unmanaged[Thiscall]<int, in CoordStruct, int, IntPtr, IntPtr, bool, IntPtr, DamageAreaResult>)Helpers.FastCallTransferStation;
+           return func(0x489280, in Coords, Damage, SourceObject, WH, AffectsTiberium, SourceHouse);
+        }
+        
+        public static unsafe void FlashbangWarheadAt(int Damage, Pointer<WarheadTypeClass> WH, CoordStruct coords, bool Force = false, SpotlightFlags CLDisableFlags = SpotlightFlags.None)
+        {
+           var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, CoordStruct, bool, SpotlightFlags, void>)Helpers.FastCallTransferStation;
+           func(0x48A620, Damage, WH, coords, Force, CLDisableFlags);
+        }
+
 
         public static CoordStruct Cell2Coord(CellStruct cell, int z = 0)
         {
