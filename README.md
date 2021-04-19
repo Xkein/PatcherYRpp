@@ -39,6 +39,14 @@ public struct YourClass
       func(ref this);
   }
 
+  // *REMARK*
+  // If you meet 'fastcall' function, you should use Helpers.FastCallTransferStation as below.
+  public static unsafe void function(int para)
+  {
+     var func = (delegate* unmanaged[Thiscall]<int, int, void>)Helpers.FastCallTransferStation;
+     func(function_address, para);
+  }
+
   // YR's class DVC
   static public readonly IntPtr ArrayPointer = new IntPtr(DVC_address);
   static public ref DynamicVectorClass<Pointer<TechnoClass>> Array { get => ref DynamicVectorClass<Pointer<TechnoClass>>.GetDynamicVector(ArrayPointer); }
@@ -60,6 +68,13 @@ public struct YourClass
   [FieldOffset(member_offset)] public T array_first;
   public Pointer<T> Member => Pointer<T>.AsPointer(ref array_first);
 
+  // *REMARK*
+  // you should avoid "Circular Reference" as below
+  // which may cause Circular Reference - T1->T2->T3->T1
+  [FieldOffset(member_offset)] public GenericClass<T1> gT1;
+  // the solution is use property
+  [FieldOffset(member_offset)] public byte gT1;
+  public ref GenericClass<T1> GT1 => Pointer<GenericClass<T1>>.AsPointer(ref gT1).Ref;
 }
 
 ```
