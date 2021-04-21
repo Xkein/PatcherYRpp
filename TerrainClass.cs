@@ -15,7 +15,7 @@ namespace PatcherYRpp
 
         [FieldOffset(172)] public ProgressTimer Animation;
         [FieldOffset(200)] public Pointer<TerrainTypeClass> Type;
-        [FieldOffset(204)] public byte IsBurning; // this terrain object has been ignited
-        [FieldOffset(205)] public byte TimeToDie; // finish the animation and uninit
+        [FieldOffset(204)] public Bool IsBurning; // this terrain object has been ignited
+        [FieldOffset(205)] public Bool TimeToDie; // finish the animation and uninit
     }
 }

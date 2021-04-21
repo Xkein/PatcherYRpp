@@ -32,16 +32,16 @@ namespace PatcherYRpp
 		[FieldOffset(200)] public Pointer<BuildingTypeClass> AuxBuilding;
 		[FieldOffset(204)] public byte SidebarImageFile_first;
 		public string GetSidebarImageFile() => Marshal.PtrToStringAnsi(Pointer<byte>.AsPointer(ref SidebarImageFile_first));
-		[FieldOffset(229)] public bool UseChargeDrain;
-		[FieldOffset(230)] public bool IsPowered;
-		[FieldOffset(231)] public bool DisableableFromShell;
+		[FieldOffset(229)] public Bool UseChargeDrain;
+		[FieldOffset(230)] public Bool IsPowered;
+		[FieldOffset(231)] public Bool DisableableFromShell;
 		[FieldOffset(232)] public int FlashSidebarTabFrames;
-		[FieldOffset(236)] public bool AIDefendAgainst;
-		[FieldOffset(237)] public bool PreClick;
-		[FieldOffset(238)] public bool PostClick;
+		[FieldOffset(236)] public Bool AIDefendAgainst;
+		[FieldOffset(237)] public Bool PreClick;
+		[FieldOffset(238)] public Bool PostClick;
 		[FieldOffset(240)] public int PreDependent;
-		[FieldOffset(244)] public bool ShowTimer;
-		[FieldOffset(245)] public bool ManualControl;
+		[FieldOffset(244)] public Bool ShowTimer;
+		[FieldOffset(245)] public Bool ManualControl;
 		[FieldOffset(248)] public float Range;
 		[FieldOffset(252)] public int LineMultiplier;
 	}

@@ -65,34 +65,34 @@ namespace PatcherYRpp
         [FieldOffset(840)] public int ZAdjust;
         [FieldOffset(844)] public int MakeInfantry;
         [FieldOffset(848)] public int RunningFrames;
-        [FieldOffset(852)] public byte IsFlamingGuy;
-        [FieldOffset(853)] public byte IsVeins;
-        [FieldOffset(854)] public byte IsMeteor;
-        [FieldOffset(855)] public byte TiberiumChainReaction;
-        [FieldOffset(856)] public byte IsTiberium;
-        [FieldOffset(857)] public byte HideIfNoOre;
-        [FieldOffset(858)] public byte Bouncer;
-        [FieldOffset(859)] public byte Tiled;
-        [FieldOffset(860)] public byte ShouldUseCellDrawer;
-        [FieldOffset(861)] public byte UseNormalLight;
-        [FieldOffset(862)] public byte DemandLoad; // not loaded from ini anymore
-        [FieldOffset(863)] public byte FreeLoad;  // not loaded from ini anymore
-        [FieldOffset(864)] public byte IsAnimatedTiberium;
-        [FieldOffset(865)] public byte AltPalette;
-        [FieldOffset(866)] public byte Normalized;
+        [FieldOffset(852)] public bool IsFlamingGuy;
+        [FieldOffset(853)] public bool IsVeins;
+        [FieldOffset(854)] public bool IsMeteor;
+        [FieldOffset(855)] public bool TiberiumChainReaction;
+        [FieldOffset(856)] public bool IsTiberium;
+        [FieldOffset(857)] public bool HideIfNoOre;
+        [FieldOffset(858)] public bool Bouncer;
+        [FieldOffset(859)] public bool Tiled;
+        [FieldOffset(860)] public bool ShouldUseCellDrawer;
+        [FieldOffset(861)] public bool UseNormalLight;
+        [FieldOffset(862)] public bool DemandLoad; // not loaded from ini anymore
+        [FieldOffset(863)] public bool FreeLoad;  // not loaded from ini anymore
+        [FieldOffset(864)] public bool IsAnimatedTiberium;
+        [FieldOffset(865)] public bool AltPalette;
+        [FieldOffset(866)] public bool Normalized;
         [FieldOffset(868)] public Layer Layer;
-        [FieldOffset(872)] public byte DoubleThick;
-        [FieldOffset(873)] public byte Flat;
-        [FieldOffset(874)] public byte Translucent;
-        [FieldOffset(875)] public byte Scorch;
-        [FieldOffset(876)] public byte Flamer;
-        [FieldOffset(877)] public byte Crater;
-        [FieldOffset(878)] public byte ForceBigCraters;
-        [FieldOffset(879)] public byte Sticky;
-        [FieldOffset(880)] public byte PingPong;
-        [FieldOffset(881)] public byte Reverse;
-        [FieldOffset(882)] public byte Shadow;
-        [FieldOffset(883)] public byte PsiWarning;
-        [FieldOffset(884)] public byte ShouldFogRemove;
+        [FieldOffset(872)] public bool DoubleThick;
+        [FieldOffset(873)] public bool Flat;
+        [FieldOffset(874)] public bool Translucent;
+        [FieldOffset(875)] public bool Scorch;
+        [FieldOffset(876)] public bool Flamer;
+        [FieldOffset(877)] public bool Crater;
+        [FieldOffset(878)] public bool ForceBigCraters;
+        [FieldOffset(879)] public bool Sticky;
+        [FieldOffset(880)] public bool PingPong;
+        [FieldOffset(881)] public bool Reverse;
+        [FieldOffset(882)] public bool Shadow;
+        [FieldOffset(883)] public bool PsiWarning;
+        [FieldOffset(884)] public bool ShouldFogRemove;
     }
 }

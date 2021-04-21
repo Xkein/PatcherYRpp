@@ -121,7 +121,7 @@ namespace PatcherYRpp
         public ProgressTimer(int duration)
         {
             this.Value = 0;
-            this.hasChanged = 0;
+            this.HasChanged = false;
             this.Step = 1;
 
             this.Timer = new RepeatableTimerStruct(duration);
@@ -158,8 +158,7 @@ namespace PatcherYRpp
         }
 
         public int Value; // the current value
-        private byte hasChanged; // if the timer expired this frame and the value changed
-        public bool HasChanged { get => Convert.ToBoolean(hasChanged); set => hasChanged = Convert.ToByte(value); }
+        public Bool HasChanged; // if the timer expired this frame and the value changed
         public RepeatableTimerStruct Timer;
         public int Step; // added to value every time the timer expires
     }

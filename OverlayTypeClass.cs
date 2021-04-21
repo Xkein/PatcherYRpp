@@ -17,20 +17,20 @@ namespace PatcherYRpp
 		[FieldOffset(668)] public Pointer<AnimTypeClass> CellAnim;
 		[FieldOffset(672)] public int DamageLevels;
 		[FieldOffset(676)] public int Strength;
-		[FieldOffset(680)] public byte Wall;
-		[FieldOffset(681)] public byte Tiberium;
-		[FieldOffset(682)] public byte Crate;
-		[FieldOffset(683)] public byte CrateTrigger;
-		[FieldOffset(684)] public byte NoUseTileLandType;
-		[FieldOffset(685)] public byte IsVeinholeMonster;
-		[FieldOffset(686)] public byte IsVeins;
-		[FieldOffset(687)] public byte ImageLoaded;   //not INI
-		[FieldOffset(688)] public byte Explodes;
-		[FieldOffset(689)] public byte ChainReaction;
-		[FieldOffset(690)] public byte Overrides;
-		[FieldOffset(691)] public byte DrawFlat;
-		[FieldOffset(692)] public byte IsRubble;
-		[FieldOffset(693)] public byte IsARock;
+		[FieldOffset(680)] public Bool Wall;
+		[FieldOffset(681)] public Bool Tiberium;
+		[FieldOffset(682)] public Bool Crate;
+		[FieldOffset(683)] public Bool CrateTrigger;
+		[FieldOffset(684)] public Bool NoUseTileLandType;
+		[FieldOffset(685)] public Bool IsVeinholeMonster;
+		[FieldOffset(686)] public Bool IsVeins;
+		[FieldOffset(687)] public Bool ImageLoaded;   //not INI
+		[FieldOffset(688)] public Bool Explodes;
+		[FieldOffset(689)] public Bool ChainReaction;
+		[FieldOffset(690)] public Bool Overrides;
+		[FieldOffset(691)] public Bool DrawFlat;
+		[FieldOffset(692)] public Bool IsRubble;
+		[FieldOffset(693)] public Bool IsARock;
 		[FieldOffset(694)] public ColorStruct RadarColor;
 	}
 }

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace PatcherYRpp
 {
+    [StructLayout(LayoutKind.Sequential)]
     public struct Bool : IComparable, IConvertible, IComparable<Bool>, IEquatable<Bool>
     {
         byte _Value;

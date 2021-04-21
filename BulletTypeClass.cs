@@ -26,35 +26,35 @@ namespace PatcherYRpp
         [FieldOffset(0)]
         public ObjectTypeClass Base;
 
-		[FieldOffset(660)] public byte Airburst;
-		[FieldOffset(661)] public byte Floater;
-		[FieldOffset(662)] public byte SubjectToCliffs;
-		[FieldOffset(663)] public byte SubjectToElevation;
-		[FieldOffset(664)] public byte SubjectToWalls;
-		[FieldOffset(665)] public byte VeryHigh;
-		[FieldOffset(666)] public byte Shadow;
-		[FieldOffset(667)] public byte Arcing;
-		[FieldOffset(668)] public byte Dropping;
-		[FieldOffset(669)] public byte Level;
-		[FieldOffset(670)] public byte Inviso;
-		[FieldOffset(671)] public byte Proximity;
-		[FieldOffset(672)] public byte Ranged;
-		[FieldOffset(673)] public byte NoRotate; // actually has opposite meaning of Rotates. false means Rotates=yes.
-		[FieldOffset(674)] public byte Inaccurate;
-		[FieldOffset(675)] public byte FlakScatter;
-		[FieldOffset(676)] public byte AA;
-		[FieldOffset(677)] public byte AG;
-		[FieldOffset(678)] public byte Degenerates;
-		[FieldOffset(679)] public byte Bouncy;
-		[FieldOffset(680)] public byte AnimPalette;
-		[FieldOffset(681)] public byte FirersPalette;
+		[FieldOffset(660)] public Bool Airburst;
+		[FieldOffset(661)] public Bool Floater;
+		[FieldOffset(662)] public Bool SubjectToCliffs;
+		[FieldOffset(663)] public Bool SubjectToElevation;
+		[FieldOffset(664)] public Bool SubjectToWalls;
+		[FieldOffset(665)] public Bool VeryHigh;
+		[FieldOffset(666)] public Bool Shadow;
+		[FieldOffset(667)] public Bool Arcing;
+		[FieldOffset(668)] public Bool Dropping;
+		[FieldOffset(669)] public Bool Level;
+		[FieldOffset(670)] public Bool Inviso;
+		[FieldOffset(671)] public Bool Proximity;
+		[FieldOffset(672)] public Bool Ranged;
+		[FieldOffset(673)] public Bool NoRotate; // actually has opposite meaning of Rotates. false means Rotates=yes.
+		[FieldOffset(674)] public Bool Inaccurate;
+		[FieldOffset(675)] public Bool FlakScatter;
+		[FieldOffset(676)] public Bool AA;
+		[FieldOffset(677)] public Bool AG;
+		[FieldOffset(678)] public Bool Degenerates;
+		[FieldOffset(679)] public Bool Bouncy;
+		[FieldOffset(680)] public Bool AnimPalette;
+		[FieldOffset(681)] public Bool FirersPalette;
 
 		[FieldOffset(684)] public int Cluster;
 		[FieldOffset(688)] public Pointer<WeaponTypeClass> AirburstWeapon;
 		[FieldOffset(692)] public Pointer<WeaponTypeClass> ShrapnelWeapon;
 		[FieldOffset(696)] public int ShrapnelCount;
 		[FieldOffset(700)] public int DetonationAltitude;
-		[FieldOffset(704)] public byte Vertical;
+		[FieldOffset(704)] public Bool Vertical;
 
 		[FieldOffset(712)] public double Elasticity;
 		[FieldOffset(720)] public int Acceleration;
@@ -64,12 +64,12 @@ namespace PatcherYRpp
 		[FieldOffset(736)] public int CourseLockDuration;
 		[FieldOffset(740)] public int SpawnDelay;
 		[FieldOffset(744)] public int ScaledSpawnDelay;
-		[FieldOffset(748)] public byte Scalable;
+		[FieldOffset(748)] public Bool Scalable;
 
 		[FieldOffset(752)] public int Arm;
 		[FieldOffset(756)] public byte AnimLow;	 // not bool
 		[FieldOffset(757)] public byte AnimHigh; // not bool
 		[FieldOffset(758)] public byte AnimRate; // not bool
-		[FieldOffset(759)] public byte Flat;
+		[FieldOffset(759)] public Bool Flat;
 	}
 }

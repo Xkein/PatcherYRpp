@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Caching;
 using System.Runtime.InteropServices;
@@ -43,6 +44,20 @@ namespace PatcherYRpp
 			}
             return ptr;
         }
+
+		class ConstructorCache
+        {
+            public ConstructorCache(Type[] paramTypes, object[] paramList, Expression expression)
+            {
+                ParamTypes = paramTypes;
+                ParamList = paramList;
+                Expression = expression;
+            }
+
+            public Type[] ParamTypes { get; set; }
+			public object[] ParamList { get; set; }
+			public Expression Expression { get; set; }
+		}
 
 		static MemoryCache cache = new MemoryCache("constructor parameters");
 		static Tuple<Type[], object[]> GetCache(int length)

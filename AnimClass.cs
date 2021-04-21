@@ -58,18 +58,16 @@ namespace PatcherYRpp
 		[FieldOffset(260)] public int YSortAdjust; // same as YSortAdjust from Type
 		[FieldOffset(264)] public CoordStruct FlamingGuyCoords; // the destination the anim tries to reach
 		[FieldOffset(276)] public int FlamingGuyRetries; // number of failed attemts to reach water. the random destination generator stops if >= 7
-		[FieldOffset(280)] public byte IsBuildingAnim; // whether this anim will invalidate on buildings, and whether it's tintable
-		[FieldOffset(281)] public byte UnderTemporal; // temporal'd building's active anims
-        [FieldOffset(282)] private byte paused; // if paused, does not advance anim, does not deliver damage
-        public bool Paused { get => Convert.ToBoolean(paused); set => paused = Convert.ToByte(value); }
-        [FieldOffset(283)] private byte unpaused; // set when unpaused
-        public bool Unpaused { get => Convert.ToBoolean(unpaused); set => unpaused = Convert.ToByte(value); }
+		[FieldOffset(280)] public bool IsBuildingAnim; // whether this anim will invalidate on buildings, and whether it's tintable
+		[FieldOffset(281)] public bool UnderTemporal; // temporal'd building's active anims
+        [FieldOffset(282)] public Bool Paused; // if paused, does not advance anim, does not deliver damage
+        [FieldOffset(283)] public Bool Unpaused; // set when unpaused
         [FieldOffset(284)] public int PausedAnimFrame; // the animation value when paused
-		[FieldOffset(288)] public byte Reverse; // anim is forced to be played from end to start
+		[FieldOffset(288)] public bool Reverse; // anim is forced to be played from end to start
 
 		[FieldOffset(296)] public BounceClass Bounce;
 		[FieldOffset(376)] public byte TranslucencyLevel; // on a scale of 1 - 100
-		[FieldOffset(377)] public byte TimeToDie; // or something to that effect, set just before UnInit
+		[FieldOffset(377)] public bool TimeToDie; // or something to that effect, set just before UnInit
         [FieldOffset(380)] private IntPtr attachedBullet;
         public Pointer<BulletClass> AttachedBullet { get => attachedBullet; set => attachedBullet = value; }
 
@@ -77,17 +75,17 @@ namespace PatcherYRpp
 		[FieldOffset(388)] public int LoopDelay; // randomized value, depending on RandomLoopDelay
 		[FieldOffset(392)] public double Damage; // defaults to 1.0 , added to Type->Damage in some cases
 		[FieldOffset(400)] public BlitterFlags AnimFlags; // argument that's 0x600 most of the time
-		[FieldOffset(404)] public byte HasExtras; // enables IsMeteor and Bouncer special behavior (AnimExtras)
+		[FieldOffset(404)] public bool HasExtras; // enables IsMeteor and Bouncer special behavior (AnimExtras)
 		[FieldOffset(405)] public byte RemainingIterations; // defaulted to deleteAfterIterations, when reaches zero, UnInit() is called
 		[FieldOffset(406)] public byte unknown_196;
 		[FieldOffset(407)] public byte unknown_197;
-		[FieldOffset(408)] public byte IsPlaying;
-		[FieldOffset(409)] public byte IsFogged;
-		[FieldOffset(410)] public byte FlamingGuyExpire; // finish animation and remove
-		[FieldOffset(411)] public byte UnableToContinue; // set when something prevents the anim from going on: cell occupied, veins destoyed or unit gone, ...
-		[FieldOffset(412)] public byte SkipProcessOnce; // set in constructor, cleared during Update. skips damage, veins, tiberium chain reaction and animation progress
-		[FieldOffset(413)] public byte Invisible; // don't draw, but Update state anyway
-		[FieldOffset(414)] public byte PowerOff; // powered animation has no power
+		[FieldOffset(408)] public bool IsPlaying;
+		[FieldOffset(409)] public bool IsFogged;
+		[FieldOffset(410)] public bool FlamingGuyExpire; // finish animation and remove
+		[FieldOffset(411)] public bool UnableToContinue; // set when something prevents the anim from going on: cell occupied, veins destoyed or unit gone, ...
+		[FieldOffset(412)] public bool SkipProcessOnce; // set in constructor, cleared during Update. skips damage, veins, tiberium chain reaction and animation progress
+		[FieldOffset(413)] public bool Invisible; // don't draw, but Update state anyway
+		[FieldOffset(414)] public bool PowerOff; // powered animation has no power
 
         //[FieldOffset(416)] public AudioController Audio3;
         //[FieldOffset(436)] public AudioController Audio4;

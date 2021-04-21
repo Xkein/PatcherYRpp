@@ -27,8 +27,8 @@ namespace PatcherYRpp
         private IntPtr Vfptr;
         public IntPtr Items;
         public int Capacity;
-        public bool IsInitialized;
-        public bool IsAllocated;
+        public Bool IsInitialized;
+        public Bool IsAllocated;
         public int Count;
         public int CapacityIncrement;
     }

@@ -20,11 +20,11 @@ namespace PatcherYRpp
 		[FieldOffset(676)] public float AnimationProbability;
 		[FieldOffset(680)] public int TemperateOccupationBits;
 		[FieldOffset(684)] public int SnowOccupationBits;
-		[FieldOffset(688)] public byte WaterBound;
-		[FieldOffset(689)] public byte SpawnsTiberium;
-		[FieldOffset(690)] public byte IsFlammable;
-		[FieldOffset(691)] public byte IsAnimated;
-		[FieldOffset(692)] public byte IsVeinhole;
+		[FieldOffset(688)] public Bool WaterBound;
+		[FieldOffset(689)] public Bool SpawnsTiberium;
+		[FieldOffset(690)] public Bool IsFlammable;
+		[FieldOffset(691)] public Bool IsAnimated;
+		[FieldOffset(692)] public Bool IsVeinhole;
 		[FieldOffset(696)] public Pointer<CellStruct> FoundationData;
 	}
 }

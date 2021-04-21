@@ -34,11 +34,8 @@ namespace PatcherYRpp
         }
 
         [FieldOffset(28)] public int Thickness; // only respected if IsHouseColor
-        [FieldOffset(32)] public byte isHouseColor;
-        public bool IsHouseColor { get => Convert.ToBoolean(isHouseColor); set => isHouseColor = Convert.ToByte(value); }
-        [FieldOffset(33)] public byte isSupported; // this changes the values for InnerColor (false: halve, true: double), HouseColor only
-        public bool IsSupported { get => Convert.ToBoolean(isSupported); set => isSupported = Convert.ToByte(value); }
-
+        [FieldOffset(32)] public Bool IsHouseColor;
+        [FieldOffset(33)] public Bool IsSupported; // this changes the values for InnerColor (false: halve, true: double), HouseColor only
 
         [FieldOffset(65)] public ColorStruct InnerColor;
         [FieldOffset(68)] public ColorStruct OuterColor;

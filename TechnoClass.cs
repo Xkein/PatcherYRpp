@@ -27,8 +27,7 @@ namespace PatcherYRpp
         [FieldOffset(540)] private IntPtr owner;
         public Pointer<HouseClass> Owner { get => owner; set => owner = value; }
 
-        [FieldOffset(664)] public byte berzerk;
-        public bool Berzerk { get => Convert.ToBoolean(berzerk); set => berzerk = Convert.ToByte(value); }
+        [FieldOffset(664)] public Bool Berzerk;
 
         [FieldOffset(692)] public Pointer<AbstractClass> Target; //if attacking
         [FieldOffset(696)] public Pointer<AbstractClass> LastTarget;
