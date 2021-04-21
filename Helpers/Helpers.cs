@@ -65,28 +65,5 @@ namespace PatcherYRpp
         {
             return new Pointer<T>(ptr);
         }
-
-        private static MemoryHandle fastCallHandle;
-        public static IntPtr FastCallTransferStation
-        {
-            get
-            {
-                if (fastCallHandle == null)
-                {
-                    byte[] this2fastcall = {
-                        0x8B, 0x54, 0xE4, 0x08, //MOV EDX, [ESP + 8]
-                        0x58, // POP EAX
-                        0x89, 0x44, 0xE4, 0x04, // MOV [ESP + 4], EAX
-                        0x89, 0xC8, // MOV EAX, ECX
-                        0x59, // POP ECX
-                        0xFF, 0xE0 // JMP EAX
-                     };
-                    fastCallHandle = new MemoryHandle(this2fastcall.Length);
-                    MemoryHelper.Write(fastCallHandle.Memory, this2fastcall, this2fastcall.Length);
-                }
-
-                return (IntPtr)fastCallHandle.Memory;
-            }
-        }
     }
 }

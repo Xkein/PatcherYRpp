@@ -40,10 +40,10 @@ public struct YourClass
   }
 
   // *REMARK*
-  // If you meet 'fastcall' function, you should use Helpers.FastCallTransferStation as below.
+  // If you meet 'fastcall' function, you should use ASM.FastCallTransferStation as below.
   public static unsafe void function(int para)
   {
-     var func = (delegate* unmanaged[Thiscall]<int, int, void>)Helpers.FastCallTransferStation;
+     var func = (delegate* unmanaged[Thiscall]<int, int, void>)ASM.FastCallTransferStation;
      func(function_address, para);
   }
 

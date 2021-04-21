@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using DynamicPatcher;
 
 namespace PatcherYRpp
 {
@@ -47,14 +48,6 @@ namespace PatcherYRpp
 
         static YRPP()
         {
-            Type type = typeof(YRPP);
-            MethodInfo method = type.GetMethod("JMP");
         }
-
-        static public void JMP(int address)
-        {
-            return;
-        }
-
     }
 }

@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using DynamicPatcher;
 
 namespace PatcherYRpp
 {
@@ -66,13 +67,13 @@ namespace PatcherYRpp
         public static unsafe DamageAreaResult DamageArea(CoordStruct Coords, int Damage, Pointer<TechnoClass> SourceObject,
            Pointer<WarheadTypeClass> WH, bool AffectsTiberium, Pointer<HouseClass> SourceHouse)
         {
-           var func = (delegate* unmanaged[Thiscall]<int, in CoordStruct, int, IntPtr, IntPtr, bool, IntPtr, DamageAreaResult>)Helpers.FastCallTransferStation;
+           var func = (delegate* unmanaged[Thiscall]<int, in CoordStruct, int, IntPtr, IntPtr, bool, IntPtr, DamageAreaResult>)ASM.FastCallTransferStation;
            return func(0x489280, in Coords, Damage, SourceObject, WH, AffectsTiberium, SourceHouse);
         }
         
         public static unsafe void FlashbangWarheadAt(int Damage, Pointer<WarheadTypeClass> WH, CoordStruct coords, bool Force = false, SpotlightFlags CLDisableFlags = SpotlightFlags.None)
         {
-           var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, CoordStruct, bool, SpotlightFlags, void>)Helpers.FastCallTransferStation;
+           var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, CoordStruct, bool, SpotlightFlags, void>)ASM.FastCallTransferStation;
            func(0x48A620, Damage, WH, coords, Force, CLDisableFlags);
         }
 
