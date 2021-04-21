@@ -61,6 +61,9 @@ public struct YourClass
   // If you meet 'bool' type, you should write as 'byte' as below.
   [FieldOffset(member_offset)] public byte member;
   public bool Member { get => Convert.ToBoolean(member); set => member = Convert.ToByte(value); }
+  // or use simple version
+  [FieldOffset(member_offset)] public Bool member;
+
   
   // *REMARK*
   // If you meet 'T[N]' type, you should write it as below.
