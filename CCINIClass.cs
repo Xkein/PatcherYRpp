@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -24,11 +24,6 @@ namespace PatcherYRpp
         public static Pointer<CCINIClass> INI_AI { get => pINI_AI; set => pINI_AI = value; }
         public static Pointer<CCINIClass> INI_Art { get => pINI_Art; set => pINI_Art = value; }
 
-        [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
-        delegate int ReadStringFunction(ref CCINIClass pThis, [MarshalAs(UnmanagedType.LPStr)]string pSection,
-            [MarshalAs(UnmanagedType.LPStr)] string pKey, [MarshalAs(UnmanagedType.LPStr)] string pDefault, byte[] buffer, int bufferSize);
-        static ReadStringFunction ReadStringDlg = Marshal.GetDelegateForFunctionPointer<ReadStringFunction>(new IntPtr(0x528A10));
-
         //Parses an INI file from a CCFile
         public unsafe Pointer<CCINIClass> ReadCCFile(Pointer<CCFileClass> pCCFile, byte bUnk = 0, int iUnk = 0)
         {
@@ -36,9 +31,26 @@ namespace PatcherYRpp
             return func(ref this, pCCFile, bUnk, iUnk);
         }
 
-        public int ReadString(string section, string key, string def, byte[] buffer, int bufferSize)
+        public unsafe void Reset()
         {
-            return ReadStringDlg(ref this, section, key, def, buffer, bufferSize);
+            var func = (delegate* unmanaged[Thiscall]<ref CCINIClass, void>)0x526B00;
+            func(ref this);
+        }
+        public unsafe int GetKeyCount(AnsiString section)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CCINIClass, IntPtr, int>)0x526960;
+            return func(ref this, section);
+        }
+        public unsafe AnsiString GetKeyName(AnsiString section, int keyIndex)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CCINIClass, IntPtr, int, IntPtr>)0x526CC0;
+            return new AnsiString(func(ref this, section, keyIndex));
+        }
+
+        public unsafe int ReadString(AnsiString section, AnsiString key, AnsiString def, byte[] buffer, int bufferSize)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CCINIClass, IntPtr, IntPtr, IntPtr, byte[], int, int>)0x528A10;
+            return func(ref this, section, key, def, buffer, bufferSize);
         }
 
         public static unsafe void Constructor(Pointer<CCINIClass> pThis)
