@@ -93,6 +93,7 @@
     <Compile Include="ObjectTypeClass.cs" />
     <Compile Include="OverlayTypeClass.cs" />
     <Compile Include="ParticleSystemTypeClass.cs" />
+    <Compile Include="ScenarioClass.cs" />
     <Compile Include="SuperClass.cs" />
     <Compile Include="SuperWeaponTypeClass.cs" />
     <Compile Include="SwizzleManagerClass.cs" />
