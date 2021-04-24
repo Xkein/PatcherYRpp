@@ -17,7 +17,7 @@ namespace PatcherYRpp
             float startIntensity = 1.0f, float endIntensity = 0.0f)
         {
             var func = (delegate* unmanaged[Thiscall]<ref LaserDrawClass, CoordStruct, CoordStruct, int, byte, 
-                ColorStruct, ColorStruct, ColorStruct,  int, bool, bool, float, float, void>)0x54FE60;
+                ColorStruct, ColorStruct, ColorStruct,  int, Bool, Bool, float, float, void>)0x54FE60;
             func(ref pThis.Ref, source, target, zAdjust, unknown, innerColor, outerColor, outerSpread, duration, blinks, fades, startIntensity, endIntensity);
         }
 

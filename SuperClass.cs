@@ -12,7 +12,7 @@ namespace PatcherYRpp
     {
         public unsafe void Launch(CellStruct cell, bool isPlayer)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref SuperClass, ref CellStruct, bool, void>)0x6CC390;
+            var func = (delegate* unmanaged[Thiscall]<ref SuperClass, ref CellStruct, Bool, void>)0x6CC390;
             func(ref this, ref cell, isPlayer);
         }
 

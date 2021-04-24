@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -37,7 +37,7 @@ namespace PatcherYRpp
             int LoopCount = 1, uint flags = 0x600, int ForceZAdjust = 0, bool reverse = false)
         {
             var func = (delegate* unmanaged[Thiscall]<ref AnimClass, IntPtr, ref CoordStruct, int,
-                int, uint, int, bool, void>)0x421EA0;
+                int, uint, int, Bool, void>)0x421EA0;
             func(ref pThis.Ref, pAnimType, ref Location, LoopDelay, LoopCount, flags, ForceZAdjust, reverse);
         }
 

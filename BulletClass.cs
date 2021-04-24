@@ -37,7 +37,7 @@ namespace PatcherYRpp
 
         public unsafe void Fire(bool destroy = false)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref BulletClass, bool, void>)0x468D80;
+            var func = (delegate* unmanaged[Thiscall]<ref BulletClass, Bool, void>)0x468D80;
             func(ref this, destroy);
         }
 

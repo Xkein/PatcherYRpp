@@ -13,13 +13,13 @@ namespace PatcherYRpp
         // get content objects
         public unsafe Pointer<TechnoClass> FindTechnoNearestTo(Point2D offsetPixel, bool alt, Pointer<TechnoClass> pExcludeThis)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, ref Point2D, bool, IntPtr, IntPtr>)0x47C3D0;
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, ref Point2D, Bool, IntPtr, IntPtr>)0x47C3D0;
             return func(ref this, ref offsetPixel, alt, pExcludeThis);
         }
 
         public unsafe Pointer<ObjectClass> FindObjectOfType(AbstractType abs, bool alt)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, AbstractType, bool, IntPtr>)0x47C4D0;
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, AbstractType, Bool, IntPtr>)0x47C4D0;
             return func(ref this, abs, alt);
         }
 
@@ -31,25 +31,25 @@ namespace PatcherYRpp
 
         public unsafe Pointer<UnitClass> GetUnit(bool alt)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, bool, IntPtr>)0x47EBA0;
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, Bool, IntPtr>)0x47EBA0;
             return func(ref this, alt);
         }
 
         public unsafe Pointer<InfantryClass> GetInfantry(bool alt)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, bool, IntPtr>)0x47EC40;
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, Bool, IntPtr>)0x47EC40;
             return func(ref this, alt);
         }
 
         public unsafe Pointer<AircraftClass> GetAircraft(bool alt)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, bool, IntPtr>)0x47EBF0;
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, Bool, IntPtr>)0x47EBF0;
             return func(ref this, alt);
         }
 
         public unsafe Pointer<TerrainClass> GetTerrain(bool alt)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, bool, IntPtr>)0x47C550;
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, Bool, IntPtr>)0x47C550;
             return func(ref this, alt);
         }
 
@@ -59,7 +59,7 @@ namespace PatcherYRpp
          */
         public unsafe Pointer<ObjectClass> GetSomeObject(CoordStruct coords, bool alt)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, ref CoordStruct, bool, IntPtr>)0x47C5A0;
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, ref CoordStruct, Bool, IntPtr>)0x47C5A0;
             return func(ref this, ref coords, alt);
         }
 
