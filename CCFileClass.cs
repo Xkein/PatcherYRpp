@@ -10,12 +10,21 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 108)]
     public struct CCFileClass
     {
+        public unsafe AnsiString GetFileName()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, IntPtr>)Helpers.GetVirtualFunctionPointer(Pointer<CCFileClass>.AsPointer(ref this), 1);
+            return func(ref this);
+        }
+        public unsafe bool Exists(bool writeShared = false)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, Bool, Bool>)Helpers.GetVirtualFunctionPointer(Pointer<CCFileClass>.AsPointer(ref this), 5);
+            return func(ref this, writeShared);
+        }
+
         public static unsafe void Constructor(Pointer<CCFileClass> pThis, string fileName)
         {
             var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, IntPtr, void>)0x4739F0;
-            IntPtr hGlobal = Marshal.StringToHGlobalAnsi(fileName);
-            func(ref pThis.Ref, hGlobal);
-            //Marshal.FreeHGlobal(hGlobal);
+            func(ref pThis.Ref, new AnsiString(fileName));
         }
 
         public static unsafe void Destructor(Pointer<CCFileClass> pThis)
@@ -23,5 +32,14 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, void>)Helpers.GetVirtualFunctionPointer(pThis, 0);
             func(ref pThis.Ref);
         }
+
+
+        [FieldOffset(12)] public int FilePointer;
+        [FieldOffset(16)] public int FileSize;
+
+        [FieldOffset(24)] public IntPtr fileName;
+        public AnsiString FileName => fileName;
+
+        [FieldOffset(32)] public Bool FileNameAllocated;
     }
 }

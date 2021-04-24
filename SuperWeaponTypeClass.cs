@@ -31,7 +31,7 @@ namespace PatcherYRpp
 		[FieldOffset(196)] public int StartSound;
 		[FieldOffset(200)] public Pointer<BuildingTypeClass> AuxBuilding;
 		[FieldOffset(204)] public byte SidebarImageFile_first;
-		public string GetSidebarImageFile() => Marshal.PtrToStringAnsi(Pointer<byte>.AsPointer(ref SidebarImageFile_first));
+		public AnsiString GetSidebarImageFile() => Pointer<byte>.AsPointer(ref SidebarImageFile_first);
 		[FieldOffset(229)] public Bool UseChargeDrain;
 		[FieldOffset(230)] public Bool IsPowered;
 		[FieldOffset(231)] public Bool DisableableFromShell;

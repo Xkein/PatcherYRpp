@@ -11,19 +11,34 @@ namespace PatcherYRpp
     public class AnsiString : CriticalFinalizerObject, IDisposable
     {
         IntPtr hGlobal;
+        bool allocated;
 
         public AnsiString(string str)
         {
             hGlobal = Marshal.StringToHGlobalAnsi(str);
+            allocated = true;
         }
-        public AnsiString(IntPtr buffer) : this(Marshal.PtrToStringAnsi(buffer))
+        public AnsiString(IntPtr buffer, bool allocate = false)
         {
+            if (allocate)
+            {
+                hGlobal = Marshal.StringToHGlobalAnsi(Marshal.PtrToStringAnsi(buffer));
+            }
+            else
+            {
+                hGlobal = buffer;
+            }
+            allocated = allocate;
         }
 
         public static implicit operator IntPtr(AnsiString ansiStr) => ansiStr.hGlobal;
         public static implicit operator string(AnsiString ansiStr) => Marshal.PtrToStringAnsi(ansiStr.hGlobal);
 
         public static implicit operator AnsiString(string str) => new AnsiString(str);
+        public static implicit operator AnsiString(IntPtr ptr) => new AnsiString(ptr);
+        public static implicit operator AnsiString(Pointer<byte> ptr) => new AnsiString(ptr);
+        
+        public override string ToString() => this;
 
         private bool disposedValue;
         protected virtual void Dispose(bool disposing)
@@ -34,7 +49,7 @@ namespace PatcherYRpp
                 {
                 }
 
-                if (hGlobal != IntPtr.Zero)
+                if (hGlobal != IntPtr.Zero && allocated)
                 {
                     Marshal.FreeHGlobal(hGlobal);
                 }

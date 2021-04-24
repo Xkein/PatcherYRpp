@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -52,7 +52,7 @@ namespace PatcherYRpp
 		//[FieldOffset(212)] public Pointer<LightConvertClass> LightConvert;     //Palette?
 		[FieldOffset(216)] public int LightConvertIndex; // assert( (*ColorScheme::Array)[this->LightConvertIndex] == this->LightConvert ;
 		[FieldOffset(220)] public byte PaletteName_first; // filename set for destroy anims
-		public string GetPaletteName() => Marshal.PtrToStringAnsi(Pointer<byte>.AsPointer(ref PaletteName_first));
+		public AnsiString GetPaletteName() => Pointer<byte>.AsPointer(ref PaletteName_first);
 		[FieldOffset(252)] public int TintColor;
 		[FieldOffset(256)] public int ZAdjust;
 		[FieldOffset(260)] public int YSortAdjust; // same as YSortAdjust from Type

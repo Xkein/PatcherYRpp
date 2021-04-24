@@ -24,11 +24,11 @@ namespace PatcherYRpp
 		public AbstractClass Base;
 
 		[FieldOffset(36)] public byte ID_first;
-		public string GetID() => Marshal.PtrToStringAnsi(Pointer<byte>.AsPointer(ref ID_first));
+		public AnsiString GetID() => Pointer<byte>.AsPointer(ref ID_first);
 
 		[FieldOffset(61)] public byte UINameLabel_first;
 		[FieldOffset(96)] public IntPtr UIName;
-		public string GetUIName() => Marshal.PtrToStringUni(UIName);
+		public AnsiString GetUIName() => UIName;
 
 		[FieldOffset(100)] public byte Name_first;
 	}

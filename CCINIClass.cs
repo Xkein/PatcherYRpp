@@ -44,7 +44,7 @@ namespace PatcherYRpp
         public unsafe AnsiString GetKeyName(AnsiString section, int keyIndex)
         {
             var func = (delegate* unmanaged[Thiscall]<ref CCINIClass, IntPtr, int, IntPtr>)0x526CC0;
-            return new AnsiString(func(ref this, section, keyIndex));
+            return func(ref this, section, keyIndex);
         }
 
         public unsafe int ReadString(AnsiString section, AnsiString key, AnsiString def, byte[] buffer, int bufferSize)
@@ -67,9 +67,8 @@ namespace PatcherYRpp
             func(ref pThis.Ref);
         }
 
-        [FieldOffset(0)]
-        public INIClass Base;
+        [FieldOffset(0)] public INIClass Base;
 
-        [FieldOffset(64)] Bool Digested;
+        [FieldOffset(64)] public Bool Digested;
     }
 }
