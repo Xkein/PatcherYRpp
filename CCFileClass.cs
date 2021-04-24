@@ -29,8 +29,8 @@ namespace PatcherYRpp
 
         public static unsafe void Destructor(Pointer<CCFileClass> pThis)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, void>)Helpers.GetVirtualFunctionPointer(pThis, 0);
-            func(ref pThis.Ref);
+            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, Bool, void>)Helpers.GetVirtualFunctionPointer(pThis, 0);
+            func(ref pThis.Ref, false);
         }
 
 

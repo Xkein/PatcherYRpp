@@ -63,8 +63,8 @@ namespace PatcherYRpp
 
         public static unsafe void Destructor(Pointer<CCINIClass> pThis)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CCINIClass, void>)Helpers.GetVirtualFunctionPointer(pThis, 0);
-            func(ref pThis.Ref);
+            var func = (delegate* unmanaged[Thiscall]<ref CCINIClass, Bool, void>)Helpers.GetVirtualFunctionPointer(pThis, 0);
+            func(ref pThis.Ref, false);
         }
 
         [FieldOffset(0)] public INIClass Base;
