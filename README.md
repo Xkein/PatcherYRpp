@@ -77,7 +77,15 @@ public struct YourClass
   [FieldOffset(member_offset)] public GenericClass<T1> gT1;
   // the solution is use property
   [FieldOffset(member_offset)] public byte gT1;
-  public ref GenericClass<T1> GT1 => Pointer<GenericClass<T1>>.AsPointer(ref gT1).Ref;
+  public ref GenericClass<T1> Member => Pointer<GenericClass<T1>>.AsPointer(ref gT1).Ref;
+  
+  // *REMARK*
+  // If you meet string member, you should write it as below.
+  [FieldOffset(member_offset)] public byte str_first;
+  public AnsiStringPointer Member => Pointer<byte>.AsPointer(ref str_first);
+  // for unicode
+  [FieldOffset(member_offset)] public char str_first;
+  public UniStringPointer Member => Pointer<char>.AsPointer(ref str_first);
 }
 
 ```

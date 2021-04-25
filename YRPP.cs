@@ -37,7 +37,7 @@ namespace PatcherYRpp
                 for (int i = 0; i < Array.Count; i++)
                 {
                     Pointer<AbstractTypeClass> pItem = Array[i].Convert<AbstractTypeClass>();
-                    if (pItem.Ref.GetID() == ID)
+                    if (pItem.Ref.ID == ID)
                     {
                         return i;
                     }

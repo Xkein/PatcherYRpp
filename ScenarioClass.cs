@@ -11,7 +11,7 @@ namespace PatcherYRpp
     public struct Variable
     {
         [FieldOffset(0)] public byte Name_first;
-        public AnsiString Name => Pointer<byte>.AsPointer(ref Name_first);
+        public AnsiStringPointer Name => Pointer<byte>.AsPointer(ref Name_first);
         [FieldOffset(40)] public byte Value;
     };
 
@@ -23,7 +23,7 @@ namespace PatcherYRpp
 
 
         [FieldOffset(4700)] public byte FileName_first;
-        public AnsiString GetFileName() => Pointer<byte>.AsPointer(ref FileName_first);
+        public AnsiStringPointer FileName => Pointer<byte>.AsPointer(ref FileName_first);
 
         [FieldOffset(7304)] public Variable GlobalVariables_first;
         public Pointer<Variable> GlobalVariables => Pointer<Variable>.AsPointer(ref GlobalVariables_first);
