@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -55,6 +55,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractClass.cs" />
@@ -73,6 +77,7 @@
     <Compile Include="CCINIClass.cs" />
     <Compile Include="CellClass.cs" />
     <Compile Include="ColorScheme.cs" />
+    <Compile Include="Dependencies\IDirectDrawSurface.cs" />
     <Compile Include="Drawing.cs" />
     <Compile Include="FileFormats\SHPStruct.cs" />
     <Compile Include="FootClass.cs" />
