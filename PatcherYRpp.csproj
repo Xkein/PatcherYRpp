@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -73,6 +73,7 @@
     <Compile Include="CCINIClass.cs" />
     <Compile Include="CellClass.cs" />
     <Compile Include="ColorScheme.cs" />
+    <Compile Include="Drawing.cs" />
     <Compile Include="FileFormats\SHPStruct.cs" />
     <Compile Include="FootClass.cs" />
     <Compile Include="GeneralDefinitions.cs" />
@@ -96,7 +97,9 @@
     <Compile Include="ScenarioClass.cs" />
     <Compile Include="SuperClass.cs" />
     <Compile Include="SuperWeaponTypeClass.cs" />
+    <Compile Include="Surface.cs" />
     <Compile Include="SwizzleManagerClass.cs" />
+    <Compile Include="TacticalClass.cs" />
     <Compile Include="TagClass.cs" />
     <Compile Include="TechnoClass.cs" />
     <Compile Include="TechnoTypeClass.cs" />
@@ -110,7 +113,6 @@
     <Compile Include="YRPP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
