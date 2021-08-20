@@ -12,14 +12,12 @@ namespace PatcherYRpp
     {
         public unsafe bool SpawnAtMapCoords(CellStruct mapCoords, Pointer<HouseClass> pOwner)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectTypeClass, ref CellStruct, IntPtr, Bool>)
-                Helpers.GetVirtualFunctionPointer(Pointer<ObjectTypeClass>.AsPointer(ref this), 32);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectTypeClass, ref CellStruct, IntPtr, Bool>)this.GetVirtualFunctionPointer(32);
             return func(ref this, ref mapCoords, pOwner);
         }
         public unsafe Pointer<ObjectClass> CreateObject(Pointer<HouseClass> pOwner)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectTypeClass, IntPtr, IntPtr>)
-                Helpers.GetVirtualFunctionPointer(Pointer<ObjectTypeClass>.AsPointer(ref this), 35);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectTypeClass, IntPtr, IntPtr>)this.GetVirtualFunctionPointer(35);
             return func(ref this, pOwner);
         }
 

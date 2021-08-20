@@ -30,8 +30,7 @@ namespace PatcherYRpp
 
         public unsafe bool MoveTo(CoordStruct where, BulletVelocity velocity)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref BulletClass, ref CoordStruct, ref BulletVelocity, Bool>)
-                Helpers.GetVirtualFunctionPointer(Pointer<BulletClass>.AsPointer(ref this), 124);
+            var func = (delegate* unmanaged[Thiscall]<ref BulletClass, ref CoordStruct, ref BulletVelocity, Bool>)this.GetVirtualFunctionPointer(124);
             return func(ref this, ref where, ref velocity);
         }
 

@@ -12,12 +12,12 @@ namespace PatcherYRpp
     {
         public unsafe AnsiString GetFileName()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, IntPtr>)Helpers.GetVirtualFunctionPointer(Pointer<CCFileClass>.AsPointer(ref this), 1);
+            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, IntPtr>)this.GetVirtualFunctionPointer(1);
             return func(ref this);
         }
         public unsafe bool Exists(bool writeShared = false)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, Bool, Bool>)Helpers.GetVirtualFunctionPointer(Pointer<CCFileClass>.AsPointer(ref this), 5);
+            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, Bool, Bool>)this.GetVirtualFunctionPointer(5);
             return func(ref this, writeShared);
         }
 

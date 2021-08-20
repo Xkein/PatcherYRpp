@@ -12,19 +12,19 @@ namespace PatcherYRpp
     {
         public unsafe AbstractType WhatAmI()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref AbstractClass, AbstractType>)Helpers.GetVirtualFunctionPointer(Pointer<AbstractClass>.AsPointer(ref this), 11);
+            var func = (delegate* unmanaged[Thiscall]<ref AbstractClass, AbstractType>)this.GetVirtualFunctionPointer(11);
             return func(ref this);
         }
 
         public unsafe int GetArrayIndex()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref AbstractClass, int>)Helpers.GetVirtualFunctionPointer(Pointer<AbstractClass>.AsPointer(ref this), 16);
+            var func = (delegate* unmanaged[Thiscall]<ref AbstractClass, int>)this.GetVirtualFunctionPointer(16);
             return func(ref this);
         }
 
         public unsafe CoordStruct GetCoords()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref AbstractClass, IntPtr, IntPtr>)Helpers.GetVirtualFunctionPointer(Pointer<AbstractClass>.AsPointer(ref this), 18);
+            var func = (delegate* unmanaged[Thiscall]<ref AbstractClass, IntPtr, IntPtr>)this.GetVirtualFunctionPointer(18);
 
             CoordStruct ret = default;
             func(ref this, Pointer<CoordStruct>.AsPointer(ref ret));

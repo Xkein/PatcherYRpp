@@ -14,12 +14,12 @@ namespace PatcherYRpp
     public static class Helpers
     {
 
-        static public unsafe ref T GetUnmanagedRef<T>(IntPtr ptr, int offset = 0)
+        public static unsafe ref T GetUnmanagedRef<T>(IntPtr ptr, int offset = 0)
         {
             return ref ptr.Convert<T>()[offset];
         }
 
-        static public unsafe Span<T> GetSpan<T>(IntPtr ptr, int length)
+        public static unsafe Span<T> GetSpan<T>(IntPtr ptr, int length)
         {
             return new Span<T>(ptr.ToPointer(), length);
         }
@@ -32,7 +32,7 @@ namespace PatcherYRpp
         }
 
         static MemoryCache VirtualFunctionCache = new MemoryCache("virtual functions");
-        static public T GetVirtualFunction<T>(IntPtr pThis, int index) where T : Delegate
+        public static T GetVirtualFunction<T>(IntPtr pThis, int index) where T : Delegate
         {
             IntPtr address = GetVirtualFunctionPointer(pThis, index);
 
@@ -52,7 +52,7 @@ namespace PatcherYRpp
             return ret as T;
         }
 
-        static public IntPtr GetVirtualFunctionPointer(IntPtr pThis, int index)
+        public static IntPtr GetVirtualFunctionPointer(IntPtr pThis, int index)
         {
             Pointer<Pointer<IntPtr>> pVfptr = pThis;
             Pointer<IntPtr> vfptr = pVfptr.Data;
@@ -60,10 +60,23 @@ namespace PatcherYRpp
 
             return address;
         }
+        public static IntPtr GetVirtualFunctionPointer<T>(Pointer<T> pThis, int index)
+        {
+            return GetVirtualFunctionPointer((IntPtr)pThis, index);
+        }
+        public static IntPtr GetVirtualFunctionPointer<T>(this T pThis, int index)
+        {
+            return GetVirtualFunctionPointer(Pointer<T>.AsPointer(ref pThis), index);
+        }
 
         public static Pointer<T> Convert<T>(this IntPtr ptr)
         {
             return new Pointer<T>(ptr);
+        }
+
+        public static unsafe void Copy(IntPtr from, IntPtr to, int byteCount)
+        {
+            Unsafe.CopyBlock(to.ToPointer(), from.ToPointer(), (uint)byteCount);
         }
     }
 }

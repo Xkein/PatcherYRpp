@@ -114,22 +114,19 @@ namespace PatcherYRpp
 
         public unsafe int SelectWeapon(Pointer<AbstractClass> pTarget)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)
-                Helpers.GetVirtualFunctionPointer(Pointer<TechnoClass>.AsPointer(ref this), 185);
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)this.GetVirtualFunctionPointer(185);
             return func(ref this, pTarget);
         }
 
         public unsafe int GetROF(int idxWeapon)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, int>)
-                Helpers.GetVirtualFunctionPointer(Pointer<TechnoClass>.AsPointer(ref this), 198);
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, int>)this.GetVirtualFunctionPointer(198);
             return func(ref this, idxWeapon);
         }
 
         public unsafe Pointer<WeaponStruct> GetWeapon(int idxWeapon)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, IntPtr>)
-                Helpers.GetVirtualFunctionPointer(Pointer<TechnoClass>.AsPointer(ref this), 254);
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, IntPtr>)this.GetVirtualFunctionPointer(254);
             return func(ref this, idxWeapon);
         }
 

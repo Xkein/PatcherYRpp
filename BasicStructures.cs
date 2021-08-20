@@ -406,5 +406,76 @@ namespace PatcherYRpp
         public int X;
         public int Y;
     }
+
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
+    public struct RectangleStruct
+    {
+        public RectangleStruct(int x, int y, int z, int w)
+        {
+            X = x;
+            Y = y;
+            Width = z;
+            Height = w;
+        }
+
+        public static RectangleStruct operator -(RectangleStruct a)
+        {
+            return new RectangleStruct(-a.X, -a.Y, -a.Width, -a.Height);
+        }
+        public static RectangleStruct operator +(RectangleStruct a, RectangleStruct b)
+        {
+            return new RectangleStruct(
+                 a.X + b.X,
+                 a.Y + b.Y,
+                 a.Width + b.Width,
+                 a.Height + b.Height);
+        }
+        public static RectangleStruct operator -(RectangleStruct a, RectangleStruct b)
+        {
+            return new RectangleStruct(
+                 a.X - b.X,
+                 a.Y - b.Y,
+                 a.Width - b.Width,
+                 a.Height - b.Height);
+        }
+        public static RectangleStruct operator *(RectangleStruct a, double r)
+        {
+            return new RectangleStruct(
+                 (int)(a.X * r),
+                 (int)(a.Y * r),
+                 (int)(a.Width * r),
+                 (int)(a.Height * r));
+        }
+        public static RectangleStruct operator /(RectangleStruct a, double r)
+        {
+            return new RectangleStruct(
+                 (int)(a.X / r),
+                 (int)(a.Y / r),
+                 (int)(a.Width / r),
+                 (int)(a.Height / r));
+        }
+
+        public static double operator *(RectangleStruct a, RectangleStruct b)
+        {
+            return a.X * b.X
+                 + a.Y * b.Y
+                 + a.Width * b.Width
+                 + a.Height * b.Height;
+        }
+        public static bool operator ==(RectangleStruct a, RectangleStruct b)
+        {
+            return a.X == b.X && a.Y == b.Y && a.Width == b.Width && a.Height == b.Height;
+        }
+        public static bool operator !=(RectangleStruct a, RectangleStruct b) => !(a == b);
+
+        public override bool Equals(object obj) => this == (RectangleStruct)obj;
+        public override int GetHashCode() => base.GetHashCode();
+
+        public int X;
+        public int Y;
+        public int Width;
+        public int Height;
+    }
 }
 

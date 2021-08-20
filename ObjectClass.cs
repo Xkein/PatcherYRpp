@@ -12,24 +12,24 @@ namespace PatcherYRpp
     {
         public unsafe bool Remove()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, Bool>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 53);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, Bool>)this.GetVirtualFunctionPointer(53);
             return func(ref this);
         }
         public unsafe bool Put(CoordStruct coord, Direction faceDir)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, Direction, Bool>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 54);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, Direction, Bool>)this.GetVirtualFunctionPointer(54);
             return func(ref this, ref coord, faceDir);
         }
 
         public unsafe void SetLocation(CoordStruct coord)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, void>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 109);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, void>)this.GetVirtualFunctionPointer(109);
             func(ref this, ref coord);
         }
 
         public unsafe int GetHeight()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, int>)Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 114);
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, int>)this.GetVirtualFunctionPointer(114);
             return func(ref this);
         }
 

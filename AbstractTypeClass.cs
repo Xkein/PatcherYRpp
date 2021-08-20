@@ -16,7 +16,7 @@ namespace PatcherYRpp
 
 		public unsafe bool LoadFromINI(Pointer<CCINIClass> pINI)
 		{
-			var func = (delegate* unmanaged[Thiscall]<ref AbstractTypeClass, IntPtr, Bool>)Helpers.GetVirtualFunctionPointer(Pointer<AbstractTypeClass>.AsPointer(ref this), 25);
+			var func = (delegate* unmanaged[Thiscall]<ref AbstractTypeClass, IntPtr, Bool>)this.GetVirtualFunctionPointer(25);
 			return func(ref this, pINI);
 		}
 
