@@ -1,11 +1,11 @@
-﻿using System;
+﻿using DynamicPatcher;
+using PatcherYRpp.FileFormats;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-
-using DDSURFACEDESC2 = System.Int32;
 
 namespace PatcherYRpp
 {
@@ -143,6 +143,31 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref Surface, int>)this.GetVirtualFunctionPointer(32);
             return func(ref this);
+        }
+
+        public unsafe void DrawSHP(Pointer<SHPStruct> pSHP, int nFrame, Pointer<ConvertClass> pPalette, int X, int Y)
+        {
+            DrawSHP(pSHP, nFrame, pPalette, new Point2D(X, Y));
+        }
+        public unsafe void DrawSHP(Pointer<SHPStruct> pSHP, int nFrame, Pointer<ConvertClass> pPalette, Point2D point)
+        {
+            RectangleStruct rect = this.GetRect();
+            DrawSHP(pPalette, pSHP, nFrame, point, rect,
+                BlitterFlags.Warp | BlitterFlags.Plain | BlitterFlags.bf_040 | BlitterFlags.bf_080 | BlitterFlags.MultiPass | BlitterFlags.Centered,
+                0, 0, 0, 0, 0, IntPtr.Zero, 0, 0, 0);
+        }
+        public static unsafe void DrawSHP(Pointer<ConvertClass> Palette, Pointer<SHPStruct> SHP, int frameIdx,
+            Point2D pos, RectangleStruct boundingRect, BlitterFlags flags, uint arg7,
+            int arg8, uint arg9, uint argA, int TintColor, Pointer<SHPStruct> BUILDINGZ_SHA, uint argD, int ZS_X, int ZS_Y)
+        {
+            DrawSHP(Palette, SHP, frameIdx, Pointer<Point2D>.AsPointer(ref pos), Pointer<RectangleStruct>.AsPointer(ref boundingRect), flags, arg7, arg8, arg9, argA, TintColor, BUILDINGZ_SHA, argD, ZS_X, ZS_Y);
+        }
+        public static unsafe void DrawSHP(Pointer<ConvertClass> Palette, Pointer<SHPStruct> SHP, int frameIdx,
+            Pointer<Point2D> pos, Pointer<RectangleStruct> boundingRect, BlitterFlags flags, uint arg7,
+            int arg8, uint arg9, uint argA, int TintColor, Pointer<SHPStruct> BUILDINGZ_SHA, uint argD, int ZS_X, int ZS_Y)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, IntPtr, int, IntPtr, IntPtr, BlitterFlags, uint, int, uint, uint, int, IntPtr, uint, int, int, void>)ASM.FastCallTransferStation;
+            func(0x4AED70, Palette, SHP, frameIdx, pos, boundingRect, flags, arg7, arg8, arg9, argA, TintColor, BUILDINGZ_SHA, argD, ZS_X, ZS_Y);
         }
 
 

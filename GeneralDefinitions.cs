@@ -178,6 +178,7 @@ namespace PatcherYRpp
         PsychicReveal = 11
     };
 
+    [Flags]
     public enum BlitterFlags
     {
         None = 0x0,

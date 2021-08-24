@@ -77,7 +77,8 @@
     <Compile Include="CCINIClass.cs" />
     <Compile Include="CellClass.cs" />
     <Compile Include="ColorScheme.cs" />
-    <Compile Include="Dependencies\IDirectDrawSurface.cs" />
+    <Compile Include="ConvertClass.cs" />
+    <Compile Include="Dependencies\DirectDraw.cs" />
     <Compile Include="Drawing.cs" />
     <Compile Include="FileFormats\SHPStruct.cs" />
     <Compile Include="FootClass.cs" />
