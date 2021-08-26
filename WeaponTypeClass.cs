@@ -12,7 +12,7 @@ namespace PatcherYRpp
 	{
 		static public readonly IntPtr ArrayPointer = new IntPtr(0x887568);
 
-		static public YRPP.ABSTRACTTYPE_ARRAY<WeaponTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<WeaponTypeClass>(ArrayPointer);
+		static public YRPP.GLOBAL_DVC_ARRAY<WeaponTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<WeaponTypeClass>(ArrayPointer);
 
 		[FieldOffset(0)] public AbstractTypeClass Base;
         [FieldOffset(152)] public int AmbientDamage;

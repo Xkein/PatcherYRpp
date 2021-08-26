@@ -12,7 +12,7 @@ namespace PatcherYRpp
 	{
 		static public readonly IntPtr ArrayPointer = new IntPtr(0xA83C80);
 
-		static public YRPP.ABSTRACTTYPE_ARRAY<BulletTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<BulletTypeClass>(ArrayPointer);
+		static public YRPP.GLOBAL_DVC_ARRAY<BulletTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<BulletTypeClass>(ArrayPointer);
 
 		public unsafe Pointer<BulletClass> CreateBullet(Pointer<AbstractClass> Target, Pointer<TechnoClass> Owner, int Damage, Pointer<WarheadTypeClass> WH, int Speed, bool Bright)
 		{

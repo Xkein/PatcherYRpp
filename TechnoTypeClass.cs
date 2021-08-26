@@ -24,7 +24,7 @@ namespace PatcherYRpp
     {
         static public readonly IntPtr ArrayPointer = new IntPtr(0xA8EB00);
 
-        static public YRPP.ABSTRACTTYPE_ARRAY<TechnoTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<TechnoTypeClass>(ArrayPointer);
+        static public YRPP.GLOBAL_DVC_ARRAY<TechnoTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<TechnoTypeClass>(ArrayPointer);
 
         [FieldOffset(0)]
         public ObjectTypeClass Base;

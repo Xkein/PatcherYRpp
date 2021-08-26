@@ -13,7 +13,7 @@ namespace PatcherYRpp
 	{
 		static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E330);
 
-		static public YRPP.ABSTRACTTYPE_ARRAY<SuperWeaponTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<SuperWeaponTypeClass>(ArrayPointer);
+		static public YRPP.GLOBAL_DVC_ARRAY<SuperWeaponTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<SuperWeaponTypeClass>(ArrayPointer);
 
 		[FieldOffset(0)] public AbstractTypeClass Base;
 
@@ -26,7 +26,7 @@ namespace PatcherYRpp
 		[FieldOffset(176)] public int RechargeTime; //in frames
 		[FieldOffset(180)] public SuperWeaponType Type;
 		[FieldOffset(184)] public Pointer<SHPStruct> SidebarImage;
-		[FieldOffset(188)] public Action Action;
+		[FieldOffset(188)] public int Action;
 		[FieldOffset(192)] public int SpecialSound;
 		[FieldOffset(196)] public int StartSound;
 		[FieldOffset(200)] public Pointer<BuildingTypeClass> AuxBuilding;

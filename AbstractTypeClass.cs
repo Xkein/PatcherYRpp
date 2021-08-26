@@ -12,7 +12,7 @@ namespace PatcherYRpp
 	{
 		static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E968);
 
-		static public YRPP.ABSTRACTTYPE_ARRAY<AbstractTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<AbstractTypeClass>(ArrayPointer);
+		static public YRPP.GLOBAL_DVC_ARRAY<AbstractTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<AbstractTypeClass>(ArrayPointer);
 
 		public unsafe bool LoadFromINI(Pointer<CCINIClass> pINI)
 		{

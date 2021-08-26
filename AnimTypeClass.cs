@@ -12,7 +12,7 @@ namespace PatcherYRpp
     {
         static public readonly IntPtr ArrayPointer = new IntPtr(0x8B4150);
 
-        static public YRPP.ABSTRACTTYPE_ARRAY<AnimTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.ABSTRACTTYPE_ARRAY<AnimTypeClass>(ArrayPointer);
+        static public YRPP.GLOBAL_DVC_ARRAY<AnimTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<AnimTypeClass>(ArrayPointer);
 
         [FieldOffset(0)] public ObjectTypeClass Base;
 
