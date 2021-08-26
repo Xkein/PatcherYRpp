@@ -28,7 +28,7 @@ namespace PatcherYRpp
         public static Pointer<Surface> Current { get => ((Pointer<Pointer<Surface>>)ppCurrent).Data; set => ((Pointer<Pointer<Surface>>)ppCurrent).Ref = value; }
         public static Pointer<Surface> Composite { get => ((Pointer<Pointer<Surface>>)ppComposite).Data; set => ((Pointer<Pointer<Surface>>)ppComposite).Ref = value; }
 
-        private static IntPtr pViewBound = new IntPtr(0x886FA0u);
+        private static IntPtr pViewBound = new IntPtr(0x886FA0);
         public static ref RectangleStruct ViewBound => ref pViewBound.Convert<RectangleStruct>().Ref;
 
         public unsafe bool BlitWhole(Pointer<Surface> pSrc, bool unk1, bool unk2)
@@ -117,6 +117,8 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref Surface, Bool>)this.GetVirtualFunctionPointer(24);
             return func(ref this);
         }
+
+
         public unsafe int GetBytesPerPixel()
         {
             var func = (delegate* unmanaged[Thiscall]<ref Surface, int>)this.GetVirtualFunctionPointer(28);
@@ -152,22 +154,20 @@ namespace PatcherYRpp
         public unsafe void DrawSHP(Pointer<SHPStruct> pSHP, int nFrame, Pointer<ConvertClass> pPalette, Point2D point)
         {
             RectangleStruct rect = this.GetRect();
-            DrawSHP(pPalette, pSHP, nFrame, point, rect,
-                BlitterFlags.Warp | BlitterFlags.Plain | BlitterFlags.bf_040 | BlitterFlags.bf_080 | BlitterFlags.MultiPass | BlitterFlags.Centered,
-                0, 0, 0, 0, 0, IntPtr.Zero, 0, 0, 0);
+            DrawSHP(pPalette, pSHP, nFrame, point, rect, BlitterFlags.None, 0, 0, 0, 0x3E8, 0, IntPtr.Zero, 0, 0, 0);
         }
-        public static unsafe void DrawSHP(Pointer<ConvertClass> Palette, Pointer<SHPStruct> SHP, int frameIdx,
+        public unsafe void DrawSHP(Pointer<ConvertClass> Palette, Pointer<SHPStruct> SHP, int frameIdx,
             Point2D pos, RectangleStruct boundingRect, BlitterFlags flags, uint arg7,
-            int arg8, uint arg9, uint argA, int TintColor, Pointer<SHPStruct> BUILDINGZ_SHA, uint argD, int ZS_X, int ZS_Y)
+            int zAdjust, uint arg9, uint bright, int TintColor, Pointer<SHPStruct> BUILDINGZ_SHA, uint argD, int ZS_X, int ZS_Y)
         {
-            DrawSHP(Palette, SHP, frameIdx, Pointer<Point2D>.AsPointer(ref pos), Pointer<RectangleStruct>.AsPointer(ref boundingRect), flags, arg7, arg8, arg9, argA, TintColor, BUILDINGZ_SHA, argD, ZS_X, ZS_Y);
+            DrawSHP(Palette, SHP, frameIdx, Pointer<Point2D>.AsPointer(ref pos), Pointer<RectangleStruct>.AsPointer(ref boundingRect), flags, arg7, zAdjust, arg9, bright, TintColor, BUILDINGZ_SHA, argD, ZS_X, ZS_Y);
         }
-        public static unsafe void DrawSHP(Pointer<ConvertClass> Palette, Pointer<SHPStruct> SHP, int frameIdx,
+        public unsafe void DrawSHP(Pointer<ConvertClass> Palette, Pointer<SHPStruct> SHP, int frameIdx,
             Pointer<Point2D> pos, Pointer<RectangleStruct> boundingRect, BlitterFlags flags, uint arg7,
-            int arg8, uint arg9, uint argA, int TintColor, Pointer<SHPStruct> BUILDINGZ_SHA, uint argD, int ZS_X, int ZS_Y)
+            int zAdjust, uint arg9, uint bright, int TintColor, Pointer<SHPStruct> BUILDINGZ_SHA, uint argD, int ZS_X, int ZS_Y)
         {
-            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, IntPtr, int, IntPtr, IntPtr, BlitterFlags, uint, int, uint, uint, int, IntPtr, uint, int, int, void>)ASM.FastCallTransferStation;
-            func(0x4AED70, Palette, SHP, frameIdx, pos, boundingRect, flags, arg7, arg8, arg9, argA, TintColor, BUILDINGZ_SHA, argD, ZS_X, ZS_Y);
+            var func = (delegate* unmanaged[Thiscall]<int, ref Surface, IntPtr, IntPtr, int, IntPtr, IntPtr, BlitterFlags, uint, int, uint, uint, int, IntPtr, uint, int, int, void>)ASM.FastCallTransferStation;
+            func(0x4AED70, ref this, Palette, SHP, frameIdx, pos, boundingRect, flags, arg7, zAdjust, arg9, bright, TintColor, BUILDINGZ_SHA, argD, ZS_X, ZS_Y);
         }
 
 
@@ -182,7 +182,7 @@ namespace PatcherYRpp
         [FieldOffset(25)] public Bool VRAMmed;                     /*| BSurface->*/
         [FieldOffset(26)] public byte unknown_1A;                  /*| BSurface->*/
         [FieldOffset(27)] public byte unknown_1B;                  /*| BSurface->*/
-        [FieldOffset(28)] public Pointer<IDirectDrawSurface> Surf; /*| BSurface->*/ [FieldOffset(24)] public Bool BufferAllocated;
+        [FieldOffset(28)] public Pointer<IDirectDrawSurface> Surf; /*| BSurface->*/ [FieldOffset(28)] public Bool BufferAllocated;
         [FieldOffset(32)] public Pointer<DDSURFACEDESC2> SurfDesc; /*| BSurface->*/
     }
 
