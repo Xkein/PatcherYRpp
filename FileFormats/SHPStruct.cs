@@ -33,15 +33,15 @@ namespace PatcherYRpp.FileFormats
         public unsafe RectangleStruct GetFrameBounds(int idxFrame)
         {
             RectangleStruct tmp = default;
-            var func = (delegate* unmanaged[Thiscall]<ref SHPStruct, ref RectangleStruct, IntPtr>)0x69E7E0;
-            func(ref this, ref tmp);
+            var func = (delegate* unmanaged[Thiscall]<ref SHPStruct, ref RectangleStruct, int, IntPtr>)0x69E7E0;
+            func(ref this, ref tmp, idxFrame);
             return tmp;
         }
         public unsafe ColorStruct GetColor(int idxFrame)
         {
             ColorStruct tmp = default;
-            var func = (delegate* unmanaged[Thiscall]<ref SHPStruct, ref ColorStruct, IntPtr>)0x69E860;
-            func(ref this, ref tmp);
+            var func = (delegate* unmanaged[Thiscall]<ref SHPStruct, ref ColorStruct, int, IntPtr>)0x69E860;
+            func(ref this, ref tmp, idxFrame);
             return tmp;
         }
         public unsafe Pointer<byte> GetPixels(int idxFrame)

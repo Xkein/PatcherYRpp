@@ -34,6 +34,13 @@ namespace PatcherYRpp
         }
 
 
+        public unsafe IntPtr ReadWholeFile()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CCFileClass, IntPtr>)0x4A3890;
+            return func(ref this);
+        }
+
+
         [FieldOffset(12)] public int FilePointer;
         [FieldOffset(16)] public int FileSize;
 

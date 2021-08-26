@@ -68,6 +68,7 @@
     <Compile Include="AnimTypeClass.cs" />
     <Compile Include="ArrayClass.cs" />
     <Compile Include="BasicStructures.cs" />
+    <Compile Include="Blitters.cs" />
     <Compile Include="BounceClass.cs" />
     <Compile Include="BuildingClass.cs" />
     <Compile Include="BuildingTypeClass.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Dependencies\DirectDraw.cs" />
     <Compile Include="Drawing.cs" />
     <Compile Include="FileFormats\SHPStruct.cs" />
+    <Compile Include="FileSystem.cs" />
     <Compile Include="FootClass.cs" />
     <Compile Include="GeneralDefinitions.cs" />
     <Compile Include="GeneralStructures.cs" />

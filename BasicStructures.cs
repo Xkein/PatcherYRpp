@@ -477,5 +477,23 @@ namespace PatcherYRpp
         public int Width;
         public int Height;
     }
+
+    [StructLayout(LayoutKind.Explicit, Size = 828)]
+    public struct BytePalette
+    {
+        public const int EntriesCount = 256;
+        [FieldOffset(0)] public ColorStruct Entries_first;
+        public Pointer<ColorStruct> Entries => Pointer<ColorStruct>.AsPointer(ref Entries_first);
+    }
+
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct TintStruct
+    {
+        int Red;
+        int Green;
+        int Blue;
+    };
+
 }
 
