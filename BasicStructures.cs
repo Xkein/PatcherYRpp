@@ -258,6 +258,12 @@ namespace PatcherYRpp
             Y = y;
             Z = z;
         }
+        public SingleVector3D(double x, double y, double z)
+        {
+            X = (float)x;
+            Y = (float)y;
+            Z = (float)z;
+        }
 
         public static SingleVector3D operator -(SingleVector3D a)
         {

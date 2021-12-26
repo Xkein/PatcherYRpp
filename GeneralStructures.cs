@@ -317,12 +317,12 @@ namespace PatcherYRpp
             this.turn_rate(rot);
         }
 
-        short turn_rate()
+        public short turn_rate()
         {
             return this.ROT.value();
         }
 
-        void turn_rate(short value)
+        public void turn_rate(short value)
         {
             if (value > 127)
             {
@@ -332,17 +332,17 @@ namespace PatcherYRpp
             this.ROT.SetValue(value, 8);
         }
 
-        bool in_motion()
+        public bool in_motion()
         {
             return this.turn_rate() > 0 && this.Timer.GetTimeLeft() != 0;
         }
 
-        DirStruct target()
+        public DirStruct target()
         {
             return this.Value;
         }
 
-        DirStruct current()
+        public DirStruct current()
         {
             var ret = this.Value;
 
@@ -361,7 +361,7 @@ namespace PatcherYRpp
             return ret;
         }
 
-        bool set(DirStruct value)
+        public bool set(DirStruct value)
         {
             bool ret = (this.current() != value);
 
@@ -376,7 +376,7 @@ namespace PatcherYRpp
             return ret;
         }
 
-        bool turn(DirStruct value)
+        public bool turn(DirStruct value)
         {
             if (this.Value == value)
             {
@@ -394,12 +394,12 @@ namespace PatcherYRpp
             return true;
         }
 
-        short difference()
+        public short difference()
         {
             return (short)(this.Value.value() - this.Initial.value());
         }
 
-        int num_steps()
+        public int num_steps()
         {
             return Math.Abs(this.difference()) / this.turn_rate();
         }

@@ -51,12 +51,12 @@ namespace PatcherYRpp
             return func(ref this);
         }
 
-        double Elasticity; // speed multiplier when bouncing off the ground
-        double Gravity; // subtracted from the Z coords every frame
-        double MaxVelocity; // 0.0 disables check
-        SingleVector3D Coords; // position with precision
-        SingleVector3D Velocity; // speed components
-        Quaternion CurrentAngle; // quaternion for drawing
-        Quaternion AngularVelocity; // second quaternion as per-frame delta
+        public double Elasticity; // speed multiplier when bouncing off the ground
+        public double Gravity; // subtracted from the Z coords every frame
+        public double MaxVelocity; // 0.0 disables check
+        public SingleVector3D Coords; // position with precision
+        public SingleVector3D Velocity; // speed components
+        public Quaternion CurrentAngle; // quaternion for drawing
+        public Quaternion AngularVelocity; // second quaternion as per-frame delta
     }
 }
