@@ -19,15 +19,15 @@ namespace PatcherYRpp
 
         public bool TryGetCellAt(CellStruct MapCoords, out Pointer<CellClass> pCell)
         {
+            pCell = Pointer<CellClass>.Zero;
+
             int idx = GetCellIndex(MapCoords);
             if (idx >= 0 && idx < MaxCells)
             {
                 pCell = Cells[idx];
-                return true;
             }
 
-            pCell = Pointer<CellClass>.Zero;
-            return false;
+            return pCell != Pointer<CellClass>.Zero;
         }
         public bool TryGetCellAt(CoordStruct Crd, out Pointer<CellClass> pCell)
         {
