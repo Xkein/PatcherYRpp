@@ -9,7 +9,7 @@ using DynamicPatcher;
 
 namespace PatcherYRpp
 {
-    public class YRPP
+    public static class YRPP
     {
         public class GLOBAL_DVC_ARRAY<T>
         {
@@ -34,16 +34,28 @@ namespace PatcherYRpp
 
             public int FindIndex(string ID)
             {
-                for (int i = 0; i < Array.Count; i++)
+                int i = 0;
+                foreach (var ptr in Array)
                 {
-                    Pointer<AbstractTypeClass> pItem = Array[i].Convert<AbstractTypeClass>();
+                    Pointer<AbstractTypeClass> pItem = ptr.Convert<AbstractTypeClass>();
                     if (pItem.Ref.ID == ID)
                     {
                         return i;
                     }
+
+                    i++;
                 }
                 return -1;
             }
+        }
+
+        public static Pointer<T>[] Finds<T>(this GLOBAL_DVC_ARRAY<T> dvc, IEnumerable<string> ts)
+        {
+            return ts.Select(id => dvc.Find(id)).ToArray();
+        }
+        public static int[] FindIndexes<T>(this GLOBAL_DVC_ARRAY<T> dvc, IEnumerable<string> ts)
+        {
+            return ts.Select(id => dvc.FindIndex(id)).ToArray();
         }
 
         static YRPP()
