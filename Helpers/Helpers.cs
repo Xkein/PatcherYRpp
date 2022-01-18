@@ -13,17 +13,19 @@ namespace PatcherYRpp
 {
     public static class Helpers
     {
-
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe ref T GetUnmanagedRef<T>(IntPtr ptr, int offset = 0)
         {
             return ref ptr.Convert<T>()[offset];
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe Span<T> GetSpan<T>(IntPtr ptr, int length)
         {
             return new Span<T>(ptr.ToPointer(), length);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static TTo ForceConvert<TFrom, TTo>(TFrom obj)
         {
             return Unsafe.As<TFrom, TTo>(ref obj);
@@ -52,6 +54,7 @@ namespace PatcherYRpp
             return ret as T;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr GetVirtualFunctionPointer(IntPtr pThis, int index)
         {
             Pointer<Pointer<IntPtr>> pVfptr = pThis;
@@ -60,20 +63,26 @@ namespace PatcherYRpp
 
             return address;
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr GetVirtualFunctionPointer<T>(Pointer<T> pThis, int index)
         {
             return GetVirtualFunctionPointer((IntPtr)pThis, index);
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static IntPtr GetVirtualFunctionPointer<T>(this T pThis, int index)
         {
             return GetVirtualFunctionPointer(Pointer<T>.AsPointer(ref pThis), index);
         }
 
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Pointer<T> Convert<T>(this IntPtr ptr)
         {
             return new Pointer<T>(ptr);
         }
 
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe void Copy(IntPtr from, IntPtr to, int byteCount)
         {
             Unsafe.CopyBlock(to.ToPointer(), from.ToPointer(), (uint)byteCount);
