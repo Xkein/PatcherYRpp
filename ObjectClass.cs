@@ -10,6 +10,27 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 172)]
     public struct ObjectClass
     {
+        static public readonly IntPtr CurrentObjectsPointer = new IntPtr(0xA8ECB8);
+        static public ref DynamicVectorClass<Pointer<ObjectClass>> CurrentObjects { get => ref DynamicVectorClass<Pointer<ObjectClass>>.GetDynamicVector(CurrentObjectsPointer); }
+
+        static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E360);
+        static public ref DynamicVectorClass<Pointer<ObjectClass>> Array { get => ref DynamicVectorClass<Pointer<ObjectClass>>.GetDynamicVector(ArrayPointer); }
+
+
+        static public readonly IntPtr ObjectsInLayersPointer = new IntPtr(0x8A0360);
+
+        public unsafe Pointer<TechnoTypeClass> GetTechnoType()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr>)this.GetVirtualFunctionPointer(33);
+            return func(ref this);
+        }
+
+        public unsafe Pointer<ObjectTypeClass> GetObjectType()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr>)this.GetVirtualFunctionPointer(34);
+            return func(ref this);
+        }
+
         public unsafe bool Remove()
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, Bool>)this.GetVirtualFunctionPointer(53);
