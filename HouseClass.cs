@@ -55,6 +55,18 @@ namespace PatcherYRpp
             return func(GetThis(), pAbstract);
         }
 
+        public unsafe void TakeMoney(int amount)
+        {
+            var func = (delegate* unmanaged[Thiscall]<IntPtr, int, void>)0x4F9790;
+            func(GetThis(), amount);
+        }
+        public unsafe void GiveMoney(int amount)
+        {
+            var func = (delegate* unmanaged[Thiscall]<IntPtr, int, void>)0x4F9950;
+            func(GetThis(), amount);
+        }
+
+
         [FieldOffset(48)] public int ArrayIndex;
 
         [FieldOffset(52)] public Pointer<HouseTypeClass> Type;
