@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -64,6 +64,7 @@
     <Compile Include="AbstractClass.cs" />
     <Compile Include="AbstractTypeClass.cs" />
     <Compile Include="AircraftClass.cs" />
+    <Compile Include="AircraftTypeClass.cs" />
     <Compile Include="AnimClass.cs" />
     <Compile Include="AnimTypeClass.cs" />
     <Compile Include="ArrayClass.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="CCFileClass.cs" />
     <Compile Include="CCINIClass.cs" />
     <Compile Include="CellClass.cs" />
+    <Compile Include="Checksummer.cs" />
     <Compile Include="ColorScheme.cs" />
     <Compile Include="ConvertClass.cs" />
     <Compile Include="Dependencies\DirectDraw.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="HouseClass.cs" />
     <Compile Include="HouseTypeClass.cs" />
     <Compile Include="InfantryClass.cs" />
+    <Compile Include="InfantryTypeClass.cs" />
     <Compile Include="LaserDrawClass.cs" />
     <Compile Include="MapClass.cs" />
     <Compile Include="ObjectClass.cs" />
@@ -113,6 +116,7 @@
     <Compile Include="TerrainClass.cs" />
     <Compile Include="TerrainTypeClass.cs" />
     <Compile Include="UnitClass.cs" />
+    <Compile Include="UnitTypeClass.cs" />
     <Compile Include="Unsorted.cs" />
     <Compile Include="WarheadTypeClass.cs" />
     <Compile Include="WeaponTypeClass.cs" />
