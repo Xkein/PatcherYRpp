@@ -98,7 +98,9 @@
     <Compile Include="HouseTypeClass.cs" />
     <Compile Include="InfantryClass.cs" />
     <Compile Include="InfantryTypeClass.cs" />
+    <Compile Include="Interfaces.cs" />
     <Compile Include="LaserDrawClass.cs" />
+    <Compile Include="LocomotionClass.cs" />
     <Compile Include="MapClass.cs" />
     <Compile Include="ObjectClass.cs" />
     <Compile Include="ObjectTypeClass.cs" />

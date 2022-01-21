@@ -496,10 +496,28 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Sequential)]
     public struct TintStruct
     {
-        int Red;
-        int Green;
-        int Blue;
+        public int Red;
+        public int Green;
+        public int Blue;
     };
 
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Matrix3D
+    {
+
+
+        public float _00;
+        public float _01;
+        public float _02;
+        public float _03;
+        public float _10;
+        public float _11;
+        public float _12;
+        public float _13;
+        public float _20;
+        public float _21;
+        public float _22;
+        public float _23;
+    }
 }
 

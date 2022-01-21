@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace PatcherYRpp
 {
+    [Flags]
     public enum AbstractFlags
     {
         None = 0x0,
@@ -202,5 +203,74 @@ namespace PatcherYRpp
         bf_8000 = 0x8000,
         Zero = 0x10000,
         Nonzero = 0x20000
+    };
+
+    public enum VisualType
+    {
+        Normal = 0,
+        Indistinct = 1,
+        Darken = 2,
+        Shadowy = 3,
+        Ripple = 4,
+        Hidden = 5
+    };
+
+    public enum Move
+    {
+        OK = 0,
+        Cloak = 1,
+        MovingBlock = 2,
+        ClosedGate = 3,
+        FriendlyDestroyable = 4,
+        Destroyable = 5,
+        Temp = 6,
+        No = 7
+    };
+
+    public enum ZGradient
+    {
+        None = -1,
+        Ground = 0,
+        Deg45 = 1,
+        Deg90 = 2,
+        Deg135 = 3
+    };
+
+    // this is how game's enums are to be defined from now on
+    public enum FireError
+    {
+        NONE = -1, // no valid value
+        OK = 0, // no problem, can fire
+        AMMO = 1, // no ammo
+        FACING = 2, // bad facing
+        REARM = 3, // still reloading
+        ROTATING = 4, // busy rotating
+        ILLEGAL = 5, // can't fire
+        CANT = 6, // I'm sorry Dave, I can't do that
+        MOVING = 7, // moving, can't fire
+        RANGE = 8, // out of range
+        CLOAKED = 9, // need to decloak
+        BUSY = 10, // busy, please hold
+        MUST_DEPLOY = 11 // deploy first!
+    };
+    public enum Rank
+    {
+        Invalid = -1,
+        Elite = 0,
+        Veteran = 1,
+        Rookie = 2
+    };
+
+    public enum SpeedType
+    {
+        None = -1,
+        Foot = 0,
+        Track = 1,
+        Wheel = 2,
+        Hover = 3,
+        Winged = 4,
+        Float = 5,
+        Amphibious = 6,
+        FloatBeach = 7
     };
 }
