@@ -78,16 +78,6 @@ namespace PatcherYRpp
         }
 
 
-        public static CoordStruct Cell2Coord(CellStruct cell, int z = 0)
-        {
-            return new CoordStruct(cell.X * 256 + 128, cell.Y * 256 + 128, z);
-        }
-
-        public static CellStruct Coord2Cell(CoordStruct crd)
-        {
-            return new CellStruct(crd.X / 256, crd.Y / 256);
-        }
-
         [FieldOffset(312)] public DynamicVectorClass<Pointer<CellClass>> Cells;
 
         [FieldOffset(4444)] public DynamicVectorClass<CellStruct> TaggedCells;
