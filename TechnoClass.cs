@@ -8,6 +8,92 @@ using System.Threading.Tasks;
 namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Sequential)]
+    public struct VeterancyStruct
+    {
+        VeterancyStruct(double value) : this()
+        {
+            this.Add(value);
+        }
+
+        void Add(int ownerCost, int victimCost)
+        {
+            this.Add(victimCost / (ownerCost * RulesClass.Instance.VeteranRatio));
+        }
+
+        void Add(double value)
+        {
+            var val = this.Veterancy + value;
+
+            if (val > RulesClass.Instance.VeteranCap)
+            {
+                val = RulesClass.Instance.VeteranCap;
+            }
+
+            this.Veterancy = (float)val;
+        }
+
+        Rank GetRemainingLevel()
+        {
+            if (this.Veterancy >= 2.0f)
+            {
+                return Rank.Elite;
+            }
+
+            if (this.Veterancy >= 1.0f)
+            {
+                return Rank.Veteran;
+            }
+
+            return Rank.Rookie;
+        }
+
+        bool IsNegative()
+        {
+            return this.Veterancy < 0.0f;
+        }
+
+        bool IsRookie()
+        {
+            return this.Veterancy >= 0.0f && this.Veterancy < 1.0f;
+
+        }
+
+        bool IsVeteran()
+        {
+            return this.Veterancy >= 1.0f && this.Veterancy < 2.0f;
+
+        }
+
+        bool IsElite()
+        {
+            return this.Veterancy >= 2.0f;
+
+        }
+
+        void Reset()
+        {
+            this.Veterancy = 0.0f;
+        }
+
+        void SetRookie(bool notReally = true)
+        {
+            this.Veterancy = notReally ? -0.25f : 0.0f;
+        }
+
+        void SetVeteran(bool yesReally = true)
+        {
+            this.Veterancy = yesReally ? 1.0f : 0.0f;
+        }
+
+        void SetElite(bool yesReally = true)
+        {
+            this.Veterancy = yesReally ? 2.0f : 0.0f;
+        }
+
+        public float Veterancy;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct PassengersClass
     {
         public int NumPassengers;
@@ -136,11 +222,17 @@ namespace PatcherYRpp
         [FieldOffset(240)] public FlashData Flashing;
         [FieldOffset(248)] public ProgressTimer Animation; // how the unit animates
         [FieldOffset(276)] public PassengersClass Passengers;
+        [FieldOffset(284)] public IntPtr transporter; // eg Disk . PowerPlant, this points to PowerPlant
+        public Pointer<TechnoClass> Transporter { get => transporter; set => transporter = value; }
 
-        [FieldOffset(460)] public IntPtr drainTarget; // eg Disk -> PowerPlant, this points to PowerPlant
+        [FieldOffset(336)] public VeterancyStruct Veterancy;
+
+        [FieldOffset(460)] public IntPtr drainTarget; // eg Disk . PowerPlant, this points to PowerPlant
         public Pointer<TechnoClass> DrainTarget { get => drainTarget; set => drainTarget = value; }
-        [FieldOffset(464)] public IntPtr drainingMe; // eg Disk -> PowerPlant, this points to Disk
+
+        [FieldOffset(464)] public IntPtr drainingMe; // eg Disk . PowerPlant, this points to Disk
         public Pointer<TechnoClass> DrainingMe { get => drainingMe; set => drainingMe = value; }
+
         [FieldOffset(468)] public IntPtr drainAnim;
         public Pointer<AnimClass> DrainAnim { get => drainAnim; set => drainAnim = value; }
 
@@ -160,5 +252,38 @@ namespace PatcherYRpp
         [FieldOffset(904)] public FacingStruct Facing;
         [FieldOffset(928)] public FacingStruct TurretFacing;
         [FieldOffset(952)] public int CurrentBurstIndex;
+
+        [FieldOffset(972)] public Bool CountedAsOwned; // is this techno contained in OwningPlayer.Owned... counts?
+        [FieldOffset(973)] public Bool IsSinking;
+        [FieldOffset(974)] public Bool WasSinkingAlready; // if(IsSinking && !WasSinkingAlready) { play SinkingSound; WasSinkingAlready = 1; }
+
+        [FieldOffset(977)] public Bool HasBeenAttacked; // ReceiveDamage when not HouseClass_IsAlly
+        [FieldOffset(978)] public Bool Cloakable;
+        [FieldOffset(979)] public Bool IsPrimaryFactory; // doubleclicking a warfac/barracks sets it as primary
+        [FieldOffset(980)] public Bool Spawned;
+        [FieldOffset(981)] public Bool IsInPlayfield;
+
+
+        [FieldOffset(1050)] public Bool IsHumanControlled;
+        [FieldOffset(1051)] public Bool DiscoveredByPlayer;
+        [FieldOffset(1052)] public Bool DiscoveredByComputer;
+
+        [FieldOffset(1056)] public byte SightIncrease;
+
+        [FieldOffset(1059)] public Bool IsRadarTracked;
+        [FieldOffset(1060)] public Bool IsOnCarryall;
+        [FieldOffset(1061)] public Bool IsCrashing;
+        [FieldOffset(1062)] public Bool WasCrashingAlready;
+        [FieldOffset(1063)] public Bool IsBeingManipulated;
+
+        [FieldOffset(1088)] public DynamicVectorClass<int> CurrentTargetThreatValues;
+        [FieldOffset(1112)] public DynamicVectorClass<Pointer<AbstractClass>> CurrentTargets;
+
+        // if DistributedFire=yes, this is used to determine which possible targets should be ignored in the latest threat scan
+        [FieldOffset(1136)] public DynamicVectorClass<Pointer<AbstractClass>> AttackedTargets;
+
+
+        [FieldOffset(1304)] public Pointer<ObjectTypeClass> Disguise;
+        [FieldOffset(1308)] public Pointer<HouseClass> DisguisedAsHouse;
     }
 }
