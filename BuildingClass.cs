@@ -10,8 +10,14 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 1824)]
     public struct BuildingClass
     {
-        [FieldOffset(0)]
-        public TechnoClass Base;
+
+
+
+        [FieldOffset(0)] public TechnoClass Base;
+
+        [FieldOffset(1312)] public Pointer<BuildingTypeClass> Type;
+
+        [FieldOffset(1757)] public Bool unknown_bool_6DD;
 
     }
 }
