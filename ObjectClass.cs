@@ -42,6 +42,24 @@ namespace PatcherYRpp
             return func(ref this, ref coord, faceDir);
         }
 
+        public unsafe void UnInit()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, void>)this.GetVirtualFunctionPointer(62);
+            func(ref this);
+        }
+
+        public unsafe void Scatter(CoordStruct crd, bool ignoreMission, bool ignoreDestination)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, Bool, Bool, void>)this.GetVirtualFunctionPointer(93);
+            func(ref this, ref crd, ignoreMission, ignoreDestination);
+        }
+
+        public unsafe bool DiscoveredBy(Pointer<HouseClass> pHouse)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr, Bool>)this.GetVirtualFunctionPointer(102);
+            return func(ref this, pHouse);
+        }
+
         public unsafe void SetLocation(CoordStruct coord)
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, void>)this.GetVirtualFunctionPointer(109);
@@ -53,6 +71,7 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, int>)this.GetVirtualFunctionPointer(114);
             return func(ref this);
         }
+
 
         [FieldOffset(0)]
         public AbstractClass Base;

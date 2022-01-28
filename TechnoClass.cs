@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -197,10 +197,20 @@ namespace PatcherYRpp
             }
         }
 
+        public unsafe bool CanReachLocation(CoordStruct destCoords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref CoordStruct, Bool>)this.GetVirtualFunctionPointer(179);
+            return func(ref this, ref destCoords);
+        }
 
         public unsafe int SelectWeapon(Pointer<AbstractClass> pTarget)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)this.GetVirtualFunctionPointer(185);
+            return func(ref this, pTarget);
+        }
+        public unsafe int SelectNavalTargeting(Pointer<AbstractClass> pTarget)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)this.GetVirtualFunctionPointer(186);
             return func(ref this, pTarget);
         }
 
@@ -209,15 +219,164 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, int>)this.GetVirtualFunctionPointer(198);
             return func(ref this, idxWeapon);
         }
+        public unsafe int GetGuardRange(int dwUnk)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, int>)this.GetVirtualFunctionPointer(199);
+            return func(ref this, dwUnk);
+        }
 
+        public unsafe int DecreaseAmmo()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int>)this.GetVirtualFunctionPointer(228);
+            return func(ref this);
+        }
+        public unsafe void AddPassenger(Pointer<FootClass> pPassenger)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)this.GetVirtualFunctionPointer(229);
+            func(ref this, pPassenger);
+        }
+
+        public unsafe bool IsCloseEnough(Pointer<AbstractClass> pTarget, int idxWeapon)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, Bool>)this.GetVirtualFunctionPointer(234);
+            return func(ref this, pTarget, idxWeapon);
+        }
+        public unsafe bool IsCloseEnoughToAttack(Pointer<AbstractClass> pTarget)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool>)this.GetVirtualFunctionPointer(235);
+            return func(ref this, pTarget);
+        }
+        public unsafe bool IsCloseEnoughToAttackCoords(CoordStruct coords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref CoordStruct, Bool>)this.GetVirtualFunctionPointer(236);
+            return func(ref this, ref coords);
+        }
+
+        public unsafe bool Destroyed(Pointer<ObjectClass> pKiller)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool>)this.GetVirtualFunctionPointer(238);
+            return func(ref this, pKiller);
+        }
+        public unsafe FireError GetFireErrorWithoutRange(Pointer<AbstractClass> pTarget, int nWeaponIndex)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, FireError>)this.GetVirtualFunctionPointer(239);
+            return func(ref this, pTarget, nWeaponIndex);
+        }
+        public unsafe FireError GetFireError(Pointer<AbstractClass> pTarget, int nWeaponIndex, bool ignoreRange)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, Bool, FireError>)this.GetVirtualFunctionPointer(240);
+            return func(ref this, pTarget, nWeaponIndex, ignoreRange);
+        }
+        public unsafe Pointer<TechnoClass> SelectAutoTarget(TargetFlags TargetFlags, CoordStruct TargetCoord, bool OnlyTargetHouseEnemy)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, TargetFlags, ref CoordStruct, Bool, IntPtr>)this.GetVirtualFunctionPointer(241);
+            return func(ref this, TargetFlags, ref TargetCoord, OnlyTargetHouseEnemy);
+        }
+        public unsafe void SetTarget(Pointer<AbstractClass> pTarget)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)this.GetVirtualFunctionPointer(242);
+            func(ref this, pTarget);
+        }
+        public unsafe Pointer<BulletClass> Fire(Pointer<AbstractClass> pTarget, int nWeaponIndex)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, IntPtr>)this.GetVirtualFunctionPointer(243);
+            return func(ref this, pTarget, nWeaponIndex);
+        }
+        public unsafe void Guard()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)this.GetVirtualFunctionPointer(244);
+            func(ref this);
+        }
+        public unsafe bool SetOwningHouse(Pointer<HouseClass> pHouse, bool announce = true)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool, Bool>)this.GetVirtualFunctionPointer(245);
+            return func(ref this, pHouse, announce);
+        }
+
+        public unsafe bool Crash(Pointer<ObjectClass> pKiller)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool>)this.GetVirtualFunctionPointer(247);
+            return func(ref this, pKiller);
+        }
+
+        public unsafe Pointer<WeaponStruct> GetDeployWeapon()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr>)this.GetVirtualFunctionPointer(252);
+            return func(ref this);
+        }
+        public unsafe Pointer<WeaponStruct> GetTurretWeapon()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr>)this.GetVirtualFunctionPointer(253);
+            return func(ref this);
+        }
         public unsafe Pointer<WeaponStruct> GetWeapon(int idxWeapon)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, IntPtr>)this.GetVirtualFunctionPointer(254);
             return func(ref this, idxWeapon);
         }
+        public unsafe bool HasTurret()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(255);
+            return func(ref this);
+        }
+        public unsafe bool CanOccupyFire()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(256);
+            return func(ref this);
+        }
+        public unsafe int GetOccupyRangeBonus()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int>)this.GetVirtualFunctionPointer(257);
+            return func(ref this);
+        }
+        public unsafe int GetOccupantCount()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int>)this.GetVirtualFunctionPointer(258);
+            return func(ref this);
+        }
+
+        public unsafe CoordStruct GetTargetCoords()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, out CoordStruct, Bool>)this.GetVirtualFunctionPointer(267);
+            func(ref this, out CoordStruct tmp);
+            return tmp;
+        }
+
+        public unsafe void SetDestination(Pointer<AbstractClass> pDest, bool bUnk = true)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool, void>)this.GetVirtualFunctionPointer(288);
+            func(ref this, pDest, bUnk);
+        }
+
+        public unsafe bool CanAttackOnTheMove()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(304);
+            return func(ref this);
+        }
+
+
+        public unsafe void SetTargetForPassengers(Pointer<AbstractClass> pTarget)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)0x710550;
+            func(ref this, pTarget);
+        }
+
+        public unsafe Pointer<HouseClass> GetOriginalOwner()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr>)0x70F820;
+            return func(ref this);
+        }
+
+        public unsafe int GetDistanceToTarget(Pointer<AbstractClass> pTarget)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)0x5F6360;
+            return func(ref this, pTarget);
+        }
+
 
         [FieldOffset(0)] public ObjectClass Base;
-
+        [FieldOffset(0)] public MissionClass BaseMission;
+        [FieldOffset(0)] public RadioClass BaseRadio;
 
         [FieldOffset(240)] public FlashData Flashing;
         [FieldOffset(248)] public ProgressTimer Animation; // how the unit animates
@@ -282,6 +441,7 @@ namespace PatcherYRpp
         // if DistributedFire=yes, this is used to determine which possible targets should be ignored in the latest threat scan
         [FieldOffset(1136)] public DynamicVectorClass<Pointer<AbstractClass>> AttackedTargets;
 
+        [FieldOffset(1292)] public Bool ShouldLoseTargetNow;
 
         [FieldOffset(1304)] public Pointer<ObjectTypeClass> Disguise;
         [FieldOffset(1308)] public Pointer<HouseClass> DisguisedAsHouse;
