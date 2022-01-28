@@ -52,5 +52,29 @@ namespace PatcherYRpp
         {
             return pTechno.Convert<AbstractClass>().CastToFoot(out pFoot);
         }
+
+        public static bool CastIf<To>(this Pointer<AbstractClass> pAbstract, AbstractType type, out Pointer<To> ptr)
+        {
+            if (pAbstract.Ref.WhatAmI() == type)
+            {
+                ptr = pAbstract.Convert<To>();
+                return true;
+            }
+
+            ptr = Pointer<To>.Zero;
+            return false;
+        }
+        public static bool CastIf<To>(this Pointer<ObjectClass> pObject, AbstractType type, out Pointer<To> ptr)
+        {
+            return CastIf(pObject.Convert<AbstractClass>(), type, out ptr);
+        }
+        public static bool CastIf<To>(this Pointer<TechnoClass> pTechno, AbstractType type, out Pointer<To> ptr)
+        {
+            return CastIf(pTechno.Convert<AbstractClass>(), type, out ptr);
+        }
+        public static bool CastIf<To>(this Pointer<FootClass> pFoot, AbstractType type, out Pointer<To> ptr)
+        {
+            return CastIf(pFoot.Convert<AbstractClass>(), type, out ptr);
+        }
     }
 }
