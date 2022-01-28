@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DynamicPatcher;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -21,7 +22,7 @@ namespace PatcherYRpp
 
         // HouseClass is too large that clr could not process. so we user Pointer instead.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private Pointer<HouseClass> GetThis() => Pointer<HouseClass>.AsPointer(ref this);
+        private Pointer<HouseClass> GetThis() => this.GetThisPointer();
 
         public Pointer<SuperClass> FindSuperWeapon(Pointer<SuperWeaponTypeClass> pType)
         {
@@ -131,11 +132,40 @@ namespace PatcherYRpp
             return FindBySideName("Civilian");
         }
 
+        public unsafe bool ControlledByHuman()
+        {
+            var func = (delegate* unmanaged[Thiscall]<IntPtr, Bool>)0x50B730;
+            return func(GetThis());
+        }
+
+        // Target ought to be Object, I imagine, but cell doesn't work then
+        public unsafe void SendSpyPlanes(int AircraftTypeIdx, int AircraftAmount, Mission SetMission, Pointer<AbstractClass> Target, Pointer<ObjectClass> Destination)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, ref HouseClass, int, int, Mission, IntPtr, IntPtr, void>)ASM.FastCallTransferStation;
+            func(0x65EAB0, ref this, AircraftTypeIdx, AircraftAmount, SetMission, Target, Destination);
+        }
+
+        public unsafe Edge GetCurrentEdge()
+        {
+            var func = (delegate* unmanaged[Thiscall]<IntPtr, Edge>)0x50DA80;
+            return func(GetThis());
+        }
+        public unsafe Edge GetStartingEdge()
+        {
+            var edge = this.StartingEdge;
+            if (edge < Edge.North || edge > Edge.West)
+                edge = this.GetCurrentEdge();
+            return edge;
+        }
 
         [FieldOffset(48)] public int ArrayIndex;
 
         [FieldOffset(52)] public Pointer<HouseTypeClass> Type;
 
+        [FieldOffset(480)] public Edge StartingEdge;
+
         [FieldOffset(596)] public DynamicVectorClass<Pointer<SuperClass>> Supers;
+
+        [FieldOffset(22396)] public Edge Edge;
     }
 }
