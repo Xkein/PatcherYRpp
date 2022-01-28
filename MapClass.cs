@@ -67,14 +67,32 @@ namespace PatcherYRpp
         public static unsafe DamageAreaResult DamageArea(CoordStruct Coords, int Damage, Pointer<TechnoClass> SourceObject,
            Pointer<WarheadTypeClass> WH, bool AffectsTiberium, Pointer<HouseClass> SourceHouse)
         {
-           var func = (delegate* unmanaged[Thiscall]<int, in CoordStruct, int, IntPtr, IntPtr, Bool, IntPtr, DamageAreaResult>)ASM.FastCallTransferStation;
-           return func(0x489280, in Coords, Damage, SourceObject, WH, AffectsTiberium, SourceHouse);
+            var func = (delegate* unmanaged[Thiscall]<int, in CoordStruct, int, IntPtr, IntPtr, Bool, IntPtr, DamageAreaResult>)ASM.FastCallTransferStation;
+            return func(0x489280, in Coords, Damage, SourceObject, WH, AffectsTiberium, SourceHouse);
         }
-        
+
         public static unsafe void FlashbangWarheadAt(int Damage, Pointer<WarheadTypeClass> WH, CoordStruct coords, bool Force = false, SpotlightFlags CLDisableFlags = SpotlightFlags.None)
         {
-           var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, CoordStruct, Bool, SpotlightFlags, void>)ASM.FastCallTransferStation;
-           func(0x48A620, Damage, WH, coords, Force, CLDisableFlags);
+            var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, CoordStruct, Bool, SpotlightFlags, void>)ASM.FastCallTransferStation;
+            func(0x48A620, Damage, WH, coords, Force, CLDisableFlags);
+        }
+
+        public unsafe CellStruct PickCellOnEdge(Edge Edge, CellStruct CurrentLocation, CellStruct Fallback,
+            SpeedType SpeedType, bool ValidateReachability, MovementZone MovZone)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, out CellStruct, Edge, ref CellStruct, ref CellStruct, SpeedType, Bool, MovementZone, IntPtr>)0x4AA440;
+            func(ref this, out CellStruct tmp, Edge, ref CurrentLocation, ref Fallback, SpeedType, ValidateReachability, MovZone);
+            return tmp;
+        }
+
+        public unsafe CellStruct Pathfinding_Find(CellStruct position, SpeedType SpeedType, int a5,
+            MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY,
+            bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge,
+            CellStruct closeTo, bool a15, bool buildable)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, out CellStruct, ref CellStruct, SpeedType, int, MovementZone, Bool, int, int, Bool, Bool, Bool, Bool, ref CellStruct, Bool, Bool, IntPtr>)0x56DC20;
+            func(ref this, out CellStruct outBuffer, ref position, SpeedType, a5, MovementZone, alt, SpaceSizeX, SpaceSizeY, disallowOverlay, a11, requireBurrowable, allowBridge, ref closeTo, a15, buildable);
+            return outBuffer;
         }
 
 
