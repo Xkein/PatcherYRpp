@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -400,6 +400,16 @@ namespace PatcherYRpp
 
         [FieldOffset(664)] public Bool Berzerk;
 
+        // unless source is Pushy=
+        // abs_Infantry source links with abs_Unit target and vice versa - can't attack others until current target flips
+        // no checking whether source is Infantry, but no update for other types either
+        // old Brute hack
+        [FieldOffset(680)] public IntPtr directRockerLinkedUnit;
+        public Pointer<FootClass> DirectRockerLinkedUnit { get => DirectRockerLinkedUnit; set => DirectRockerLinkedUnit = value; }
+        [FieldOffset(684)] public IntPtr locomotorTarget; // mag->LocoTarget = victim
+        public Pointer<FootClass> LocomotorTarget { get => LocomotorTarget; set => LocomotorTarget = value; }
+        [FieldOffset(688)] public IntPtr locomotorSource; // victim->LocoSource = mag
+        public Pointer<FootClass> LocomotorSource { get => LocomotorSource; set => LocomotorSource = value; }
         [FieldOffset(692)] public Pointer<AbstractClass> Target; //if attacking
         [FieldOffset(696)] public Pointer<AbstractClass> LastTarget;
 

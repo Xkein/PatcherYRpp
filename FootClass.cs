@@ -14,7 +14,7 @@ namespace PatcherYRpp
 
 
         [FieldOffset(1652)] public IntPtr locomotor;
-        public ILocomotion Locomotor => Marshal.GetObjectForIUnknown(locomotor) as ILocomotion;
+        public ILocomotion Locomotor { get => Marshal.GetObjectForIUnknown(locomotor) as ILocomotion; set => locomotor = Marshal.GetIUnknownForObject(value); }
 
     }
 }

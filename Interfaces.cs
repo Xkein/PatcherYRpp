@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.OLE.Interop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -16,14 +17,14 @@ namespace PatcherYRpp
 	{
 		HRESULT Link_To_Object(IntPtr pointer); //Links object to locomotor.
 		Bool Is_Moving();   //Sees if object is moving.
-		Pointer<CoordStruct> Destination(Pointer<CoordStruct> pcoord);  //Fetches destination coordinate.
-		Pointer<CoordStruct> Head_To_Coord(Pointer<CoordStruct> pcoord); // Fetches immediate (next cell) destination coordinate.
+		IntPtr Destination(IntPtr pcoord);  //Fetches destination coordinate.
+		IntPtr Head_To_Coord(IntPtr pcoord); // Fetches immediate (next cell) destination coordinate.
 		Move Can_Enter_Cell(CellStruct cell); //Determine if specific cell can be entered.
 		Bool Is_To_Have_Shadow();   //Should object cast a shadow?
-		Pointer<Matrix3D> Draw_Matrix(Pointer<Matrix3D> pMatrix, Pointer<int> key); //Fetch voxel draw matrix.
-		Pointer<Matrix3D> Shadow_Matrix(Pointer<Matrix3D> pMatrix, Pointer<int> key);   //Fetch shadow draw matrix.
-		Pointer<Point2D> Draw_Point(Pointer<Point2D> pPoint);   //Draw point center location.
-		Pointer<Point2D> Shadow_Point(Pointer<Point2D> pPoint); //Shadow draw point center location.
+		IntPtr Draw_Matrix(IntPtr pMatrix, IntPtr pKey); //Fetch voxel draw matrix.
+		IntPtr Shadow_Matrix(IntPtr pMatrix, IntPtr pKey);   //Fetch shadow draw matrix.
+		IntPtr Draw_Point(IntPtr pPoint);   //Draw point center location.
+		IntPtr Shadow_Point(IntPtr pPoint); //Shadow draw point center location.
 		VisualType Visual_Character(VARIANT_BOOL unused);   //Visual character for drawing.
 		int Z_Adjust(); //Z adjust control value.
 		ZGradient Z_Gradient(); //Z gradient control value.
@@ -61,5 +62,32 @@ namespace PatcherYRpp
 		int Get_Track_Number(); //Queries internal variables
 		int Get_Track_Index();  //Queries internal variables
 		int Get_Speed_Accum();  //Queries internal variables
+	}
+
+	public static class ILocomotionHelpers
+    {
+		public static CoordStruct Destination(this ILocomotion locomotion)
+        {
+			CoordStruct tmp = default;
+			locomotion.Destination(tmp.GetThisPointer());
+			return tmp;
+        }
+		public static CoordStruct Head_To_Coord(this ILocomotion locomotion)
+		{
+			CoordStruct tmp = default;
+			locomotion.Head_To_Coord(tmp.GetThisPointer());
+			return tmp;
+		}
+	}
+
+    [Guid("92FEA800-A184-11D1-B70A-00A024DDAFD1")]
+	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+	public interface IPiggyback
+	{
+		HRESULT Begin_Piggyback(ILocomotion locomotion);	//Piggybacks a locomotor onto this one.
+		HRESULT End_Piggyback(out ILocomotion locomotion);	//End piggyback process and restore locomotor interface pointer.
+		bool Is_Ok_To_End();	//Is it ok to end the piggyback process?
+		HRESULT Piggyback_CLSID(out Guid classid);	//Fetches piggybacked locomotor class ID.
+		bool Is_Piggybacking();	//Is it currently piggy backing another locomotor?
 	}
 }
