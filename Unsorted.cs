@@ -18,6 +18,9 @@ namespace PatcherYRpp
 
         public const int CellSize = 256;
 
+        public static int IKnowWhatImDoing { get => iKnowWhatImDoing.Convert<int>().Data; set => iKnowWhatImDoing.Convert<int>().Ref = value; }
+        private static IntPtr iKnowWhatImDoing = new IntPtr(0xA8E7AC); // you should not change it
+
         public static unsafe bool HasDirtyArea()
         {
             var func = (delegate* unmanaged[Stdcall]<Bool>)0x53BAE0;
