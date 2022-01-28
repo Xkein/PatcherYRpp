@@ -273,4 +273,187 @@ namespace PatcherYRpp
         Amphibious = 6,
         FloatBeach = 7
     };
+
+    public enum MovementZone
+    {
+        None = -1,
+        Normal = 0,
+        Crusher = 1,
+        Destroyer = 2,
+        AmphibiousDestroyer = 3,
+        AmphibiousCrusher = 4,
+        Amphibious = 5,
+        Subterrannean = 6,
+        Infantry = 7,
+        InfantryDestroyer = 8,
+        Fly = 9,
+        Water = 10,
+        WaterBeach = 11,
+        CrusherAll = 12
+    };
+
+    public enum Mission
+    {
+        None = -1,
+        Sleep = 0,
+        Attack = 1,
+        Move = 2,
+        QMove = 3,
+        Retreat = 4,
+        Guard = 5,
+        Sticky = 6,
+        Enter = 7,
+        Capture = 8,
+        Eaten = 9,
+        Harvest = 10,
+        Area_Guard = 11,
+        Return = 12,
+        Stop = 13,
+        Ambush = 14,
+        Hunt = 15,
+        Unload = 16,
+        Sabotage = 17,
+        Construction = 18,
+        Selling = 19,
+        Repair = 20,
+        Rescue = 21,
+        Missile = 22,
+        Harmless = 23,
+        Open = 24,
+        Patrol = 25,
+        ParadropApproach = 26,
+        ParadropOverfly = 27,
+        Wait = 28,
+        AttackMove = 29,
+        SpyplaneApproach = 30,
+        SpyplaneOverfly = 31
+    };
+
+    [Flags]
+    public enum TargetFlags
+    {
+        None = 0x0,
+        unknown_1 = 0x1,
+        unknown_2 = 0x2,
+        Air = 0x4,
+        Infantry = 0x8,
+        Vehicles = 0x10,
+        Buildings = 0x20,
+        Economy = 0x40,
+        Ships = 0x80, // from RA1
+        Neutral = 0x100, // from RA1
+        Capture = 0x200,
+        Fakes = 0x400, // from RA1
+        Power = 0x800,
+        Factories = 0x1000,
+        BaseDefense = 0x2000,
+        Friendlies = 0x4000,
+        Occupiable = 0x8000,
+        TechCapture = 0x10000
+    };
+
+    public enum RadioCommand
+    {
+        AnswerInvalid = 0, // static (no message)
+        AnswerPositive = 1, // Roger.
+        RequestLink = 2, // Come in.
+        NotifyUnlink = 3, // Over and out.
+        RequestPickUp = 4,// "Please pick me up."
+        RequestAttach = 5,// "Attach to transport."
+        RequestDelivery = 6,// "I've got a delivery for you."
+        NotifyBeginLoad = 7, // I'm performing load/unload maneuver. Be careful.
+        NotifyUnloaded = 8, // I'm clear.
+        RequestUnload = 9, // You are clear to unload. Driving away now.
+        AnswerNegative = 10, // Am unable to comply.
+        RequestBeginProduction = 11, // I'm starting construction now... act busy.
+        RequestEndProduction = 12, // I've finished construction. You are free.
+        RequestRedraw = 13, // We bumped, redraw yourself please.
+        RequestLoading = 14, // I'm trying to load up now.
+        AnswerLoading = 14, // Loading up now.
+        QueryCanEnter = 15, // May I become a passenger?
+        QueryCanUnload = 16, // Are you ready to receive shipment?
+        QueryWantEnter = 17, // Are you trying to become a passenger?
+        RequestMoveTo = 18, // Move to location X.
+        QueryMoving = 19, // Do you need to move?
+        AnswerAwaiting = 20, // All right already. Now what?
+        RequestCompleteEnter = 21, // I'm a passenger now.
+        RequestDockRefinery = 22, // Backup into refinery now.
+        AnswerLeave = 23, // Run away!
+        NotifyLeave = 23, // Running away.
+        RequestTether = 24, // Tether established.
+        RequestUntether = 25, // Tether broken.
+        RequestAlternativeTether = 26, // Alternative tether established.
+        RequestAlternativeUntether = 27, // Alternative tether broken.
+        RequestRepair = 28, // Repair one step.
+        QueryReadiness = 29, // Are you prepared to fight?
+        RequestAttack = 30, // Attack this target please.
+        RequestReload = 31, // Reload one step.
+        AnswerBlocked = 32, // Circumstances prevent success.
+        QueryDone = 33, // All done with the request?
+        AnswerDone = 33, // All done with the request.
+        QueryNeedRepair = 34, // Do you need service depot work?
+        QueryOnBuilding = 35, // Are you located on top of me?
+        QueryCanTote = 36, // Want ride
+    };
+
+    public enum NetworkEvents
+    {
+        Empty = 0x0,
+        PowerOn = 0x1,
+        PowerOff = 0x2,
+        Ally = 0x3,
+        MegaMission = 0x4,
+        MegaMissionF = 0x5,
+        Idle = 0x6,
+        Scatter = 0x7,
+        Destruct = 0x8,
+        Deploy = 0x9,
+        Detonate = 0xA,
+        Place = 0xB,
+        Options = 0xC,
+        GameSpeed = 0xD,
+        Produce = 0xE,
+        Suspend = 0xF,
+        Abandon = 0x10,
+        Primary = 0x11,
+        SpecialPlace = 0x12,
+        Exit = 0x13,
+        Animation = 0x14,
+        Repair = 0x15,
+        Sell = 0x16,
+        SellCell = 0x17,
+        Special = 0x18,
+        FrameSync = 0x19,
+        Message = 0x1A,
+        ResponseTime = 0x1B,
+        FrameInfo = 0x1C,
+        SaveGame = 0x1D,
+        Archive = 0x1E,
+        AddPlayer = 0x1F,
+        Timing = 0x20,
+        ProcessTime = 0x21,
+        PageUser = 0x22,
+        RemovePlayer = 0x23,
+        LatencyFudge = 0x24,
+        MegaFrameInfo = 0x25,
+        PacketTiming = 0x26,
+        AboutToExit = 0x27,
+        FallbackHost = 0x28,
+        AddressChange = 0x29,
+        PlanConnect = 0x2A,
+        PlanCommit = 0x2B,
+        PlanNodeDelete = 0x2C,
+        AllCheer = 0x2D,
+        AbandonAll = 0x2E
+    };
+
+    public enum Edge
+    {
+        None = -1,
+        North = 0,
+        East = 1,
+        South = 2,
+        West = 3,
+        Air = 4
+    };
 }
