@@ -102,10 +102,12 @@
     <Compile Include="LaserDrawClass.cs" />
     <Compile Include="LocomotionClass.cs" />
     <Compile Include="MapClass.cs" />
+    <Compile Include="MissionClass.cs" />
     <Compile Include="ObjectClass.cs" />
     <Compile Include="ObjectTypeClass.cs" />
     <Compile Include="OverlayTypeClass.cs" />
     <Compile Include="ParticleSystemTypeClass.cs" />
+    <Compile Include="RadioClass.cs" />
     <Compile Include="RulesClass.cs" />
     <Compile Include="ScenarioClass.cs" />
     <Compile Include="SideClass.cs" />
