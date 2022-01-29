@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DynamicPatcher;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -91,8 +92,19 @@ namespace PatcherYRpp
             func(ref this);
         }
 
+
+        public unsafe void AnnounceExpiredPointer(bool removed = true)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, ref AbstractClass, Bool, void>)ASM.FastCallTransferStation;
+            func(0x7258D0, ref this, removed);
+        }
+
         [FieldOffset(0)] public IntPtr Vfptr;
 
+        [FieldOffset(16)] public int UniqueID;
         [FieldOffset(20)] public AbstractFlags AbstractFlags;
+        [FieldOffset(24)] public int unknown_18;
+        [FieldOffset(28)] public int RefCount;
+        [FieldOffset(32)] public Bool Dirty;
     }
 }
