@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 namespace PatcherYRpp
 {
@@ -11,19 +12,25 @@ namespace PatcherYRpp
     public struct Bool : IComparable, IConvertible, IComparable<Bool>, IEquatable<Bool>
     {
         byte _Value;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Bool(byte val)
         {
             _Value = val;
         }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Bool(bool val)
         {
             _Value = Convert.ToByte(val);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool ToBoolean() => Convert.ToBoolean(this._Value);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator Bool(bool val) => new Bool(val);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator Bool(byte val) => new Bool(val);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator bool(Bool val) => val.ToBoolean();
 
         public static bool Parse(string value) => bool.Parse(value);
