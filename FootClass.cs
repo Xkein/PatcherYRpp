@@ -13,8 +13,8 @@ namespace PatcherYRpp
         [FieldOffset(0)] public TechnoClass Base;
 
 
-        [FieldOffset(1652)] public IntPtr locomotor;
-        public ILocomotion Locomotor { get => Marshal.GetObjectForIUnknown(locomotor) as ILocomotion; set => locomotor = Marshal.GetIUnknownForObject(value); }
+        [FieldOffset(1652)] public COMPtr<ILocomotion> locomotor;
+        public ILocomotion Locomotor { get => locomotor.Object; set => locomotor.Object = value; }
 
     }
 }
