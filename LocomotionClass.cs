@@ -37,11 +37,18 @@ namespace PatcherYRpp
             NewLoco.Link_To_Object(pFoot);
 
             // get piggy interface and piggy original
-            IPiggyback Piggy = NewLoco as IPiggyback;
-            Piggy.Begin_Piggyback(Original);
+            if (NewLoco is IPiggyback Piggy)
+            {
+                Piggy.Begin_Piggyback(Original);
+            }
 
             // replace the current locomotor
             pFoot.Ref.Locomotor = NewLoco;
+        }
+
+        public static void ChangeLocomotorTo<TLocomotion>(Pointer<FootClass> pFoot)
+        {
+            ChangeLocomotorTo(pFoot, typeof(TLocomotion).GUID);
         }
 
         public Guid GetClassID()
