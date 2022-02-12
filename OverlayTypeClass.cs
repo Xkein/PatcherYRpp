@@ -11,6 +11,7 @@ namespace PatcherYRpp
     public struct OverlayTypeClass
     {
         [FieldOffset(0)] public ObjectTypeClass Base;
+		[FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
 		[FieldOffset(660)] public int ArrayIndex;
 		[FieldOffset(664)] public LandType LandType;

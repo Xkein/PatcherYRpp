@@ -73,8 +73,7 @@ namespace PatcherYRpp
         }
 
 
-        [FieldOffset(0)]
-        public AbstractClass Base;
+        [FieldOffset(0)] public AbstractClass Base;
 
         [FieldOffset(44)] public int FallRate; //how fast is it falling down? only works if FallingDown is set below, and actually positive numbers will move the thing UPWARDS
         [FieldOffset(48)] private IntPtr nextObject;    //Next Object in the same cell or transport. This is a linked list of Objects.

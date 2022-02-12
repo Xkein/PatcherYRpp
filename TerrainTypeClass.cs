@@ -10,8 +10,8 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 700)]
     public struct TerrainTypeClass
     {
-        [FieldOffset(0)]
-        public ObjectTypeClass Base;
+        [FieldOffset(0)] public ObjectTypeClass Base;
+		[FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
 		[FieldOffset(660)] public int ArrayIndex;
 		[FieldOffset(664)] public int Foundation;

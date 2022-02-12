@@ -10,8 +10,12 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 2280)]
     public struct UnitClass
     {
-        [FieldOffset(0)]
-        public FootClass Base;
+        [FieldOffset(0)] public FootClass Base;
+        [FieldOffset(0)] public TechnoClass BaseTechno;
+        [FieldOffset(0)] public RadioClass BaseRadio;
+        [FieldOffset(0)] public MissionClass BaseMission;
+        [FieldOffset(0)] public ObjectClass BaseObject;
+        [FieldOffset(0)] public AbstractClass BaseAbstract;
 
     }
 }

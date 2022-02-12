@@ -14,6 +14,10 @@ namespace PatcherYRpp
 
 
         [FieldOffset(0)] public TechnoClass Base;
+        [FieldOffset(0)] public RadioClass BaseRadio;
+        [FieldOffset(0)] public MissionClass BaseMission;
+        [FieldOffset(0)] public ObjectClass BaseObject;
+        [FieldOffset(0)] public AbstractClass BaseAbstract;
 
         [FieldOffset(1312)] public Pointer<BuildingTypeClass> Type;
 

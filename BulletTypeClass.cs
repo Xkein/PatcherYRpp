@@ -23,8 +23,8 @@ namespace PatcherYRpp
             return ret;
         }
 
-        [FieldOffset(0)]
-        public ObjectTypeClass Base;
+        [FieldOffset(0)] public ObjectTypeClass Base;
+		[FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
 		[FieldOffset(660)] public Bool Airburst;
 		[FieldOffset(661)] public Bool Floater;

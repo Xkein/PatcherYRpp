@@ -11,6 +11,7 @@ namespace PatcherYRpp
     public struct ParticleSystemTypeClass
     {
         [FieldOffset(0)] public ObjectTypeClass Base;
+        [FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
     }
 }

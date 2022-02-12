@@ -159,6 +159,7 @@ namespace PatcherYRpp
         }
 
         [FieldOffset(0)] public ObjectClass Base;
+        [FieldOffset(0)] public AbstractClass BaseAbstract;
 
     }
 }

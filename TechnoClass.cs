@@ -374,9 +374,10 @@ namespace PatcherYRpp
         }
 
 
-        [FieldOffset(0)] public ObjectClass Base;
-        [FieldOffset(0)] public MissionClass BaseMission;
         [FieldOffset(0)] public RadioClass BaseRadio;
+        [FieldOffset(0)] public MissionClass BaseMission;
+        [FieldOffset(0)] public ObjectClass Base;
+        [FieldOffset(0)] public AbstractClass BaseAbstract;
 
         [FieldOffset(240)] public FlashData Flashing;
         [FieldOffset(248)] public ProgressTimer Animation; // how the unit animates

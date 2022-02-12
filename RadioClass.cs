@@ -34,6 +34,8 @@ namespace PatcherYRpp
 
 
         [FieldOffset(0)] public MissionClass Base;
+        [FieldOffset(0)] public ObjectClass BaseObject;
+        [FieldOffset(0)] public AbstractClass BaseAbstract;
 
 
     }
