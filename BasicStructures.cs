@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PatcherYRpp
 {
+    [DebuggerDisplay("RGB={R}, {G}, {B}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct ColorStruct
@@ -23,6 +25,7 @@ namespace PatcherYRpp
         public byte B;
     }
 
+    [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct CoordStruct
@@ -97,6 +100,7 @@ namespace PatcherYRpp
         public int Z;
     }
 
+    [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct BulletVelocity
@@ -171,6 +175,7 @@ namespace PatcherYRpp
         public double Z;
     }
 
+    [DebuggerDisplay("XY={X}, {Y}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct CellStruct
@@ -248,6 +253,7 @@ namespace PatcherYRpp
     };
 
 
+    [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct SingleVector3D
@@ -345,6 +351,7 @@ namespace PatcherYRpp
         public float W;
     };
 
+    [DebuggerDisplay("XY={X}, {Y}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct Point2D
@@ -413,6 +420,7 @@ namespace PatcherYRpp
         public int Y;
     }
 
+    [DebuggerDisplay("XYZW={X}, {Y}, {Width}, {Height}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct RectangleStruct

@@ -162,6 +162,7 @@ namespace PatcherYRpp
         public RepeatableTimerStruct Timer;
         public int Step; // added to value every time the timer expires
     }
+
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct DirStruct
