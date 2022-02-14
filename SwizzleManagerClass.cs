@@ -78,4 +78,16 @@ namespace PatcherYRpp
         [FieldOffset(28)]
         public DynamicVectorClass<SwizzlePointerClass> Swizzles_New;
     }
+
+    public static class SwizzleManagerHelpers
+    {
+        public static void Swizzle<T>(this SwizzleManagerClass @this, ref T obj)
+        {
+            SwizzleManagerClass.Instance.Swizzle(Pointer<T>.AsPointer(ref obj).Convert<IntPtr>());
+        }
+        public static void Here_I_Am<T>(this SwizzleManagerClass @this, Pointer<T> oldPtr, ref T obj)
+        {
+            SwizzleManagerClass.Instance.Here_I_Am((int)oldPtr, Pointer<T>.AsPointer(ref obj).Convert<IntPtr>());
+        }
+    }
 }

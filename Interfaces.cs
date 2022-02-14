@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.OLE.Interop;
+using Microsoft.VisualStudio.OLE.Interop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -137,5 +137,36 @@ namespace PatcherYRpp
 		void Piggyback_CLSID(out Guid classid); //Fetches piggybacked locomotor class ID.
 		[PreserveSig]
 		bool Is_Piggybacking();	//Is it currently piggy backing another locomotor?
+	}
+
+	public static class IStreamHelpers
+	{
+		public static uint Write(this IStream stream, byte[] buffer)
+		{
+			uint written = 0;
+			stream.Write(buffer, buffer.Length, Pointer<uint>.AsPointer(ref written));
+			return written;
+		}
+		public static uint Write<T>(this IStream stream, T obj)
+		{
+			var ptr = Pointer<T>.AsPointer(ref obj);
+			byte[] buffer = new byte[Pointer<T>.TypeSize()];
+			Marshal.Copy(ptr, buffer, 0, buffer.Length);
+			return stream.Write(buffer);
+		}
+		public static uint Read(this IStream stream, byte[] buffer)
+		{
+			uint written = 0;
+			stream.Read(buffer, buffer.Length, Pointer<uint>.AsPointer(ref written));
+			return written;
+		}
+		public static uint Read<T>(this IStream stream, ref T obj)
+		{
+			var ptr = Pointer<T>.AsPointer(ref obj);
+			byte[] buffer = new byte[Pointer<T>.TypeSize()];
+			uint written = stream.Read(buffer);
+			Marshal.Copy(buffer, 0, ptr, buffer.Length);
+			return written;
+		}
 	}
 }
