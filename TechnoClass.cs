@@ -292,7 +292,11 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool, Bool>)this.GetVirtualFunctionPointer(245);
             return func(ref this, pHouse, announce);
         }
-
+        public unsafe void UpdateRockingState(CoordStruct rockingCoord, float rockerValue, bool halfEffect)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref CoordStruct, float, Bool, void>)this.GetVirtualFunctionPointer(246);
+            func(ref this, ref rockingCoord, rockerValue, halfEffect);
+        }
         public unsafe bool Crash(Pointer<ObjectClass> pKiller)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool>)this.GetVirtualFunctionPointer(247);
@@ -406,15 +410,26 @@ namespace PatcherYRpp
         // no checking whether source is Infantry, but no update for other types either
         // old Brute hack
         [FieldOffset(680)] public IntPtr directRockerLinkedUnit;
-        public Pointer<FootClass> DirectRockerLinkedUnit { get => DirectRockerLinkedUnit; set => DirectRockerLinkedUnit = value; }
+        public Pointer<FootClass> DirectRockerLinkedUnit { get => directRockerLinkedUnit; set => directRockerLinkedUnit = value; }
         [FieldOffset(684)] public IntPtr locomotorTarget; // mag->LocoTarget = victim
-        public Pointer<FootClass> LocomotorTarget { get => LocomotorTarget; set => LocomotorTarget = value; }
+        public Pointer<FootClass> LocomotorTarget { get => locomotorTarget; set => locomotorTarget = value; }
         [FieldOffset(688)] public IntPtr locomotorSource; // victim->LocoSource = mag
-        public Pointer<FootClass> LocomotorSource { get => LocomotorSource; set => LocomotorSource = value; }
+        public Pointer<FootClass> LocomotorSource { get => locomotorSource; set => locomotorSource = value; }
         [FieldOffset(692)] public Pointer<AbstractClass> Target; //if attacking
         [FieldOffset(696)] public Pointer<AbstractClass> LastTarget;
 
         [FieldOffset(764)] public int Ammo;
+
+        // rocking effect
+        [FieldOffset(808)] public float AngleRotatedSideways;
+        [FieldOffset(812)] public float AngleRotatedForwards;
+
+        // set these and leave the previous two alone!
+        // if these are set, the unit will roll up to pi/4, by this step each frame, and balance back
+        [FieldOffset(816)] public float RockingSidewaysPerFrame; // left to right - positive pushes left side up
+        [FieldOffset(820)] public float RockingForwardsPerFrame; // back to front - positive pushes ass up
+
+        [FieldOffset(824)] public int HijackerInfantryType; // mutant hijacker
 
         [FieldOffset(828)] public OwnedTiberiumStruct Tiberium;
 
