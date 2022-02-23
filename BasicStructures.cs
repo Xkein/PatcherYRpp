@@ -81,7 +81,7 @@ namespace PatcherYRpp
 
         }
 
-        public  double DistanceFrom(CoordStruct other)
+        public double DistanceFrom(CoordStruct other)
         {
             return (other - this).Magnitude();
         }
@@ -94,6 +94,11 @@ namespace PatcherYRpp
 
         public override bool Equals(object obj) => this == (CoordStruct)obj;
         public override int GetHashCode() => base.GetHashCode();
+
+        public override string ToString()
+        {
+            return $"({X}, {Y}, {Z})";
+        }
 
         public int X;
         public int Y;
@@ -335,15 +340,18 @@ namespace PatcherYRpp
 
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct Quaternion
+    public struct Quaternion_
     {
-        public Quaternion(float x, float y, float z, float w)
+        public Quaternion_(float x, float y, float z, float w)
         {
             X = x;
             Y = y;
             Z = z;
             W = w;
         }
+
+        public static implicit operator System.Numerics.Quaternion(Quaternion_ q) => new System.Numerics.Quaternion(q.X,q.Y,q.Z,q.W);
+        public static implicit operator Quaternion_(System.Numerics.Quaternion q) => new Quaternion_(q.X, q.Y, q.Z, q.W);
 
         public float X;
         public float Y;

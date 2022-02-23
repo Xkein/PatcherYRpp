@@ -56,7 +56,7 @@ namespace PatcherYRpp
         public double MaxVelocity; // 0.0 disables check
         public SingleVector3D Coords; // position with precision
         public SingleVector3D Velocity; // speed components
-        public Quaternion CurrentAngle; // quaternion for drawing
-        public Quaternion AngularVelocity; // second quaternion as per-frame delta
+        public Quaternion_ CurrentAngle; // quaternion for drawing
+        public Quaternion_ AngularVelocity; // second quaternion as per-frame delta
     }
 }
