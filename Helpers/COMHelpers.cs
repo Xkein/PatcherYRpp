@@ -36,14 +36,18 @@ namespace PatcherYRpp
 
         public TObject Object
         {
-            get => (TObject)Marshal.GetObjectForIUnknown(_IUnknown);
+            get => QueryInterface<TObject>();
             set
             {
-                if (_IUnknown != IntPtr.Zero)
-                    Marshal.Release(_IUnknown);
+                Release();
                 _IUnknown = Marshal.GetIUnknownForObject(value);
-                Marshal.QueryInterface(_IUnknown, ref Guid, out _IUnknown);
+                _IUnknown = COMHelpers.QueryInterface(_IUnknown, Guid);
             }
+        }
+        public TObject Interface
+        {
+            get => Object;
+            set => Object = value;
         }
 
         public IntPtr IUnknown
@@ -52,10 +56,36 @@ namespace PatcherYRpp
             set => _IUnknown = value;
         }
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static implicit operator TInterface(COMPtr<TInterface> ptr) => ptr.Interface;
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static implicit operator COMPtr<TInterface>(TInterface iUnknown) => new COMPtr<TInterface>(iUnknown);
+        public IntPtr QueryInterfacePtr<TQueryObject>()
+        {
+            return COMHelpers.QueryInterface<TQueryObject>(_IUnknown);
+        }
+
+        public TQueryObject QueryInterface<TQueryObject>()
+        {
+            return (TQueryObject)Marshal.GetObjectForIUnknown(_IUnknown);
+        }
+
+        public void Release()
+        {
+            if (_IUnknown != IntPtr.Zero)
+                Marshal.Release(_IUnknown);
+            _IUnknown = IntPtr.Zero;
+        }
+
+        public void CreateInstance()
+        {
+            CreateInstance(Guid);
+        }
+        public void CreateInstance(Guid clsid)
+        {
+            Object = COMHelpers.CreateInstance<TObject>(clsid);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator IntPtr(COMPtr<TObject> ptr) => ptr.IUnknown;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator COMPtr<TObject>(IntPtr iUnknown) => new COMPtr<TObject>(iUnknown);
 
         private IntPtr _IUnknown;
     }
@@ -66,6 +96,21 @@ namespace PatcherYRpp
         {
             Type type = Type.GetTypeFromCLSID(clsid);
             return (TObject)Activator.CreateInstance(type);
+        }
+        public static TObject CreateInstance<TObject>()
+        {
+            return CreateInstance<TObject>(typeof(TObject).GUID);
+        }
+        public static IntPtr QueryInterface(IntPtr pUnk, Guid iid)
+        {
+            int hResult = Marshal.QueryInterface(pUnk, ref iid, out IntPtr ppv);
+            if (hResult != 0)
+                throw new COMException($"QueryInterface({pUnk}, {iid}) fail! HRESULT={hResult}", hResult);
+            return ppv;
+        }
+        public static IntPtr QueryInterface<TObject>(IntPtr pUnk)
+        {
+            return QueryInterface(pUnk, typeof(TObject).GUID);
         }
 
         public static COMPtr<TObject> GetCOMPtr<TObject>(this TObject obj)
