@@ -87,5 +87,10 @@ namespace PatcherYRpp
         {
             return CastIf(pFoot.Convert<AbstractClass>(), type, out ptr);
         }
+
+        public static bool CastToCell(this Pointer<AbstractClass> pAbstract, out Pointer<CellClass> pCell)
+        {
+            return pAbstract.CastIf(AbstractType.Cell, out pCell);
+        }
     }
 }
