@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PatcherYRpp
 {
-    [System.Diagnostics.DebuggerDisplay("Value={Value}")]
+    [DebuggerDisplay("Value={Value}")]
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct Pointer<T>
     {
@@ -58,6 +59,11 @@ namespace PatcherYRpp
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get => this == Zero;
+        }
+        public bool IsNotNull
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => this != Zero;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
