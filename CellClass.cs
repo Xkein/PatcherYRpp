@@ -176,6 +176,16 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref CellClass, void>)0x486E70;
             func(ref this);
         }
+        public unsafe void AddContent(Pointer<ObjectClass> pContent, bool onBridge)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, Bool, void>)0x47E8A0;
+            func(ref this, pContent, onBridge);
+        }
+        public unsafe void RemoveContent(Pointer<ObjectClass> pContent, bool onBridge)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, Bool, void>)0x47EA90;
+            func(ref this, pContent, onBridge);
+        }
 
         [FieldOffset(0)]
         public AbstractClass Base;

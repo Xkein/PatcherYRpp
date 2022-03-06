@@ -93,11 +93,28 @@ namespace PatcherYRpp
         DiskLaser = 73
     };
 
+    public enum DamageState
+    {
+        Unaffected = 0,
+        Unchanged = 1,
+        NowYellow = 2,
+        NowRed = 3,
+        NowDead = 4,
+        PostMortem = 5
+    };
+
     public enum DamageAreaResult
     {
         Hit = 0,
         Missed = 1,
         Nullified = 2
+    };
+
+    public enum KickOutResult
+    {
+        Failed = 0,
+        Busy = 1,
+        Succeeded = 2
     };
 
     public enum Direction
@@ -152,6 +169,14 @@ namespace PatcherYRpp
         Ground = 2,
         Air = 3,
         Top = 4
+    };
+
+    public enum PlacementType
+    {
+        Remove = 0,
+        Put = 1,
+        Redraw = 2,
+        AddContent = 3
     };
 
     public enum ChargeDrainState
