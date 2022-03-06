@@ -58,12 +58,12 @@ namespace PatcherYRpp
 
         public IntPtr QueryInterfacePtr<TQueryObject>()
         {
-            return COMHelpers.QueryInterface<TQueryObject>(_IUnknown);
+            return _IUnknown == IntPtr.Zero ? IntPtr.Zero : COMHelpers.QueryInterface<TQueryObject>(_IUnknown);
         }
 
         public TQueryObject QueryInterface<TQueryObject>()
         {
-            return (TQueryObject)Marshal.GetObjectForIUnknown(_IUnknown);
+            return _IUnknown == IntPtr.Zero ? default : (TQueryObject)Marshal.GetObjectForIUnknown(_IUnknown);
         }
 
         public void Release()
