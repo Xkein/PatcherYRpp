@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.OLE.Interop;
+﻿using Microsoft.VisualStudio.OLE.Interop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 using HRESULT = System.UInt32;
 using VARIANT_BOOL = System.Int16;
+using IStream = System.Runtime.InteropServices.ComTypes.IStream;
 
 namespace PatcherYRpp
 {
 	[Guid("070F3290-9841-11D1-B709-00A024DDAFD1")]
-	[ComVisible(true), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+	[ComVisible(true), ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 	public interface ILocomotion
 	{
 		void Link_To_Object(IntPtr pointer); //Links object to locomotor.
@@ -35,7 +36,7 @@ namespace PatcherYRpp
 		[PreserveSig]
 		IntPtr Shadow_Point(IntPtr pPoint); //Shadow draw point center location.
 		[PreserveSig]
-		VisualType Visual_Character(VARIANT_BOOL unused);   //Visual character for drawing.
+		VisualType Visual_Character([MarshalAs(UnmanagedType.VariantBool)] bool unused);   //Visual character for drawing.
 		[PreserveSig]
 		int Z_Adjust(); //Z adjust control value.
 		[PreserveSig]
@@ -127,7 +128,7 @@ namespace PatcherYRpp
 	}
 
 	[Guid("92FEA800-A184-11D1-B70A-00A024DDAFD1")]
-	[ComVisible(true), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+	[ComVisible(true), ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 	public interface IPiggyback
 	{
 		void Begin_Piggyback(ILocomotion locomotion);   //Piggybacks a locomotor onto this one.

@@ -83,5 +83,20 @@ namespace PatcherYRpp
         {
             return locomotion.ToLocomotionClass().Convert<TLocomotionClass>();
         }
+
+        public static void Load(this IPersistStream persistStream, System.Runtime.InteropServices.ComTypes.IStream stream)
+        {
+            persistStream.Load(stream as IStream);
+        }
+        public static void Save(this IPersistStream persistStream, System.Runtime.InteropServices.ComTypes.IStream stream, int fClearDirty)
+        {
+            persistStream.Save(stream as IStream, fClearDirty);
+        }
+        public static int SaveSize(this IPersistStream persistStream)
+        {
+            var tmp = new ULARGE_INTEGER[1];
+            persistStream.GetSizeMax(tmp);
+            return (int)tmp[0].QuadPart;
+        }
     }
 }
