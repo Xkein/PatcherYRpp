@@ -61,6 +61,21 @@ namespace PatcherYRpp
             return _IUnknown == IntPtr.Zero ? IntPtr.Zero : COMHelpers.QueryInterface<TQueryObject>(_IUnknown);
         }
 
+        public IntPtr QueryInterfacePtr(Guid iid)
+        {
+            if (_IUnknown == IntPtr.Zero)
+                return IntPtr.Zero;
+
+            try
+            {
+                return COMHelpers.QueryInterface(_IUnknown, iid);
+            }
+            catch (COMException)
+            {
+                return IntPtr.Zero;
+            }
+        }
+
         public TQueryObject QueryInterface<TQueryObject>()
         {
             return _IUnknown == IntPtr.Zero ? default : (TQueryObject)Marshal.GetObjectForIUnknown(_IUnknown);
@@ -105,7 +120,8 @@ namespace PatcherYRpp
         {
             int hResult = Marshal.QueryInterface(pUnk, ref iid, out IntPtr ppv);
             if (hResult != 0)
-                throw new COMException($"QueryInterface({pUnk}, {iid}) fail! HRESULT={hResult}", hResult);
+                throw new COMException(
+                    $"QueryInterface({pUnk}, {iid}) fail! HR={hResult}, Message:{Marshal.GetExceptionForHR(hResult).Message}", hResult);
             return ppv;
         }
         public static IntPtr QueryInterface<TObject>(IntPtr pUnk)
