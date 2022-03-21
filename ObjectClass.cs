@@ -31,6 +31,13 @@ namespace PatcherYRpp
             return func(ref this);
         }
 
+        public unsafe CoordStruct GetFLH(int idxWeapon, CoordStruct BaseCoords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, out CoordStruct, int, CoordStruct, IntPtr>)this.GetVirtualFunctionPointer(44);
+            func(ref this, out CoordStruct result, idxWeapon, BaseCoords);
+            return result;
+        }
+
         public unsafe bool Remove()
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, Bool>)this.GetVirtualFunctionPointer(53);
