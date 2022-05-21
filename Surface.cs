@@ -195,7 +195,6 @@ namespace PatcherYRpp
             func(ref pThis.Ref, Width, Height, BackBuffer, Force3D);
         }
 
-
         public static unsafe void Destructor(Pointer<DSurface> pThis)
         {
             var func = (delegate* unmanaged[Thiscall]<ref DSurface, void>)Helpers.GetVirtualFunctionPointer(pThis, 0);
@@ -203,6 +202,64 @@ namespace PatcherYRpp
         }
 
         [FieldOffset(0)] public Surface Base;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    public struct XSurface
+    {
+        public static unsafe void Constructor(Pointer<XSurface> pThis, int Width, int Height)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref XSurface, int, int, IntPtr>)0x4AEC60;
+            func(ref pThis.Ref, Width, Height);
+        }
+
+        public static unsafe void Destructor(Pointer<XSurface> pThis)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref XSurface, void>)Helpers.GetVirtualFunctionPointer(pThis, 0);
+            func(ref pThis.Ref);
+        }
+
+        [FieldOffset(0)] public Surface Base;
+    }
+
+    [StructLayout(LayoutKind.Explicit, Size = 36)]
+    public struct BSurface
+    {
+        public static unsafe void Constructor(Pointer<BSurface> pThis, int width, int height)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref BSurface, int, int, IntPtr>)0x4AEC60;
+            func(ref pThis.Ref, width, height);
+            pThis.Ref.BaseSurface.Vfptr = 0x7E2070;
+
+            pThis.Ref.BaseSurface.LockLevel = 0;
+        }
+
+        public static unsafe void Destructor(Pointer<BSurface> pThis)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref BSurface, void>)Helpers.GetVirtualFunctionPointer(pThis, 0);
+            func(ref pThis.Ref);
+        }
+
+        public void Allocate(int bytesPerPixel)
+        {
+            int bufferSize = 2 * BaseSurface.Width * BaseSurface.Height;
+            BaseSurface.Buffer = Marshal.AllocHGlobal(bufferSize);
+            BaseSurface.BufferSize = bufferSize;
+            BaseSurface.BytesPerPixel = bytesPerPixel;
+            BaseSurface.BufferAllocated = true;
+        }
+
+        public void Deallocate()
+        {
+            Marshal.FreeHGlobal(BaseSurface.Buffer);
+            BaseSurface.Buffer = Pointer<byte>.Zero;
+            BaseSurface.BufferSize = 0;
+            BaseSurface.BytesPerPixel = 0;
+            BaseSurface.BufferAllocated = false;
+        }
+
+        [FieldOffset(0)] public XSurface Base;
+        [FieldOffset(0)] public Surface BaseSurface;
     }
 }
 
