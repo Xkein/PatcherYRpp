@@ -125,6 +125,7 @@
     <Compile Include="RadioClass.cs" />
     <Compile Include="RulesClass.cs" />
     <Compile Include="ScenarioClass.cs" />
+    <Compile Include="SessionClass.cs" />
     <Compile Include="SideClass.cs" />
     <Compile Include="SuperClass.cs" />
     <Compile Include="SuperWeaponTypeClass.cs" />

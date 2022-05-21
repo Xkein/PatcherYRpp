@@ -481,4 +481,14 @@ namespace PatcherYRpp
         West = 3,
         Air = 4
     };
+
+    public enum GameMode
+    {
+        Campaign = 0x0,
+        Modem = 0x1,		// modem game
+        NullModem = 0x2,	// NULL-modem
+        LAN = 0x3,
+        Internet = 0x4,
+        Skirmish = 0x5,
+    };
 }
