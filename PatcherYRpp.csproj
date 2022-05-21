@@ -98,6 +98,7 @@
     <Compile Include="GameOptionsClass.cs" />
     <Compile Include="GeneralDefinitions.cs" />
     <Compile Include="GeneralStructures.cs" />
+    <Compile Include="GenericList.cs" />
     <Compile Include="Helpers\Bool.cs" />
     <Compile Include="Helpers\COMHelpers.cs" />
     <Compile Include="Helpers\Helpers.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="LocomotionClass.cs" />
     <Compile Include="MapClass.cs" />
     <Compile Include="MissionClass.cs" />
+    <Compile Include="MixFileClass.cs" />
     <Compile Include="MPGameModeClass.cs" />
     <Compile Include="MPTeams.cs" />
     <Compile Include="ObjectClass.cs" />
