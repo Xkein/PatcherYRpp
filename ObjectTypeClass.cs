@@ -21,7 +21,12 @@ namespace PatcherYRpp
             return func(ref this, pOwner);
         }
 
-        [FieldOffset(0)]
-        public AbstractTypeClass Base;
+        [FieldOffset(0)] public AbstractTypeClass Base;
+
+        [FieldOffset(504)] public byte ImageFile_first;
+        public AnsiStringPointer ImageFile => Pointer<byte>.AsPointer(ref ImageFile_first);
+        [FieldOffset(531)] public byte AlphaImageFile_first;
+        public AnsiStringPointer AlphaImageFile => Pointer<byte>.AsPointer(ref AlphaImageFile_first);
+
     }
 }

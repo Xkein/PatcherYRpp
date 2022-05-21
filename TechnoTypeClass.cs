@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using PatcherYRpp.FileFormats;
 
 namespace PatcherYRpp
 {
@@ -69,8 +70,8 @@ namespace PatcherYRpp
         }
 
 
-        [FieldOffset(0)]
-        public ObjectTypeClass Base;
+        [FieldOffset(0)] public ObjectTypeClass Base;
+        [FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
         [FieldOffset(844)] public Guid Locomotor;
 
@@ -78,7 +79,16 @@ namespace PatcherYRpp
 
         [FieldOffset(1660)] public SpeedType SpeedType;
 
+        [FieldOffset(1750)] public byte CameoFile_first;
+        public AnsiStringPointer CameoFile => Pointer<byte>.AsPointer(ref CameoFile_first);
 
+        [FieldOffset(1776)] public Pointer<SHPStruct> Cameo;
+        [FieldOffset(1780)] public Bool CameoAllocated;
+        [FieldOffset(1801)] public byte AltCameoFile_first;
+        public AnsiStringPointer AltCameoFile => Pointer<byte>.AsPointer(ref AltCameoFile_first);
+
+        [FieldOffset(1808)] public Pointer<SHPStruct> AltCameo;
+        [FieldOffset(1812)] public Bool AltCameoAllocated;
 
         [FieldOffset(2200)] public WeaponStruct Weapon_first;
         public Pointer<WeaponStruct> Weapon => Pointer<WeaponStruct>.AsPointer(ref Weapon_first);

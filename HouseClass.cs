@@ -164,6 +164,8 @@ namespace PatcherYRpp
 
         [FieldOffset(480)] public Edge StartingEdge;
 
+        [FieldOffset(508)] public Bool RecheckTechTree;
+
         [FieldOffset(596)] public DynamicVectorClass<Pointer<SuperClass>> Supers;
 
         [FieldOffset(22396)] public Edge Edge;
