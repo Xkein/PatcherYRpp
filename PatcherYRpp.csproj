@@ -106,6 +106,7 @@
     <Compile Include="Helpers\Pointer.cs" />
     <Compile Include="Helpers\PointerHandle.cs" />
     <Compile Include="Helpers\String.cs" />
+    <Compile Include="Helpers\YRClassHandle.cs" />
     <Compile Include="HouseClass.cs" />
     <Compile Include="HouseTypeClass.cs" />
     <Compile Include="InfantryClass.cs" />
