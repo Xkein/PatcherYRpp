@@ -113,7 +113,7 @@ namespace PatcherYRpp
 				Type type = typeof(T);
 				MethodInfo destructor = type.GetMethod("Destructor", new Type[] { typeof(Pointer<T>) });
 
-				destructor.Invoke(null, new object[] { ptr });
+				destructor?.Invoke(null, new object[] { ptr });
 				Deallocate(ptr);
 			}
 		}
