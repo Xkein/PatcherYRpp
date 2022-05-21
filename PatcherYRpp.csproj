@@ -114,6 +114,8 @@
     <Compile Include="LocomotionClass.cs" />
     <Compile Include="MapClass.cs" />
     <Compile Include="MissionClass.cs" />
+    <Compile Include="MPGameModeClass.cs" />
+    <Compile Include="MPTeams.cs" />
     <Compile Include="ObjectClass.cs" />
     <Compile Include="ObjectTypeClass.cs" />
     <Compile Include="OverlayTypeClass.cs" />
