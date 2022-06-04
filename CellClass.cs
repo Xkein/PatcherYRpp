@@ -132,6 +132,19 @@ namespace PatcherYRpp
             return func(ref this, amount);
         }
 
+        public unsafe int GetFloorHeight(Point2D subCoords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, ref Point2D, int>)0x47B3A0;
+            return func(ref this, ref subCoords);
+        }
+
+        public unsafe CoordStruct GetCenterCoords()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, out CoordStruct, IntPtr>)0x480A30;
+            func(ref this, out CoordStruct centerCoords);
+            return centerCoords;
+        }
+
 
         public bool ContainsBridge()
         {
@@ -175,6 +188,17 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref CellClass, void>)0x486E70;
             func(ref this);
+        }
+        public unsafe CoordStruct FindInfantrySubposition(CoordStruct coords, bool ignoreContents, bool alt, bool useCellCoords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, out CoordStruct, ref CoordStruct, Bool, Bool, Bool, void>)0x481180;
+            func(ref this, out CoordStruct subPosition, ref coords, ignoreContents, alt, useCellCoords);
+            return subPosition;
+        }
+        public unsafe bool TryAssignJumpjet(Pointer<FootClass> pObject)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, Bool>)0x487D70;
+            return func(ref this, pObject);
         }
         public unsafe void AddContent(Pointer<ObjectClass> pContent, bool onBridge)
         {
