@@ -21,6 +21,9 @@ namespace PatcherYRpp
         public static int IKnowWhatImDoing { get => iKnowWhatImDoing.Convert<int>().Data; set => iKnowWhatImDoing.Convert<int>().Ref = value; }
         private static IntPtr iKnowWhatImDoing = new IntPtr(0xA8E7AC); // you should not change it
 
+        public static int CurrentSWType { get => currentSWType.Convert<int>().Data; set => currentSWType.Convert<int>().Ref = value; }
+        private static IntPtr currentSWType = new IntPtr(0x8809A0);
+
         public static unsafe bool HasDirtyArea()
         {
             var func = (delegate* unmanaged[Stdcall]<Bool>)0x53BAE0;
