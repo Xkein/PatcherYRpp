@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace PatcherYRpp
 {
+    public interface IOwnAbstractType
+    {
+        Pointer<AbstractTypeClass> AbstractType { get; }
+	}
+    public interface IOwnAbstractType<T> : IOwnAbstractType
+	{
+        Pointer<T> OwnType { get; }
+	}
+
 	[StructLayout(LayoutKind.Explicit, Size = 152, Pack = 1)]
 	public struct AbstractTypeClass
 	{

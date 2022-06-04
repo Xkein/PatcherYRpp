@@ -17,10 +17,13 @@ namespace PatcherYRpp
     };
 
     [StructLayout(LayoutKind.Explicit, Size = 352)]
-    public struct BulletClass
+    public struct BulletClass : IOwnAbstractType<BulletTypeClass>
     {
         static public readonly IntPtr ArrayPointer = new IntPtr(0xA8ED40);
         static public ref DynamicVectorClass<Pointer<BulletClass>> Array { get => ref DynamicVectorClass<Pointer<BulletClass>>.GetDynamicVector(ArrayPointer); }
+
+        Pointer<BulletTypeClass> IOwnAbstractType<BulletTypeClass>.OwnType => Type;
+        Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
 
         // 123 virtual function
         public void SetTarget(Pointer<AbstractClass> pTarget)

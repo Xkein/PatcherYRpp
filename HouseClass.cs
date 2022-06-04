@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Explicit, Size = 90296)]
-    public struct HouseClass
+    public struct HouseClass : IOwnAbstractType<HouseTypeClass>
     {
         static public readonly IntPtr ArrayPointer = new IntPtr(0xA80228);
         static public ref DynamicVectorClass<Pointer<HouseClass>> Array { get => ref DynamicVectorClass<Pointer<HouseClass>>.GetDynamicVector(ArrayPointer); }
@@ -19,6 +19,11 @@ namespace PatcherYRpp
         private static IntPtr player = new IntPtr(0xA83D4C);
         public static Pointer<HouseClass> Observer { get => observer.Convert<Pointer<HouseClass>>().Data; set => observer.Convert<Pointer<HouseClass>>().Ref = value; }
         private static IntPtr observer = new IntPtr(0xAC1198);
+
+
+        Pointer<HouseTypeClass> IOwnAbstractType<HouseTypeClass>.OwnType => Type;
+        Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
+
 
         // HouseClass is too large that clr could not process. so we user Pointer instead.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Explicit, Size = 1824)]
-    public struct BuildingClass
+    public struct BuildingClass : IOwnAbstractType<BuildingTypeClass>
     {
-
+        Pointer<BuildingTypeClass> IOwnAbstractType<BuildingTypeClass>.OwnType => Type;
+        Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
 
 
         [FieldOffset(0)] public TechnoClass Base;

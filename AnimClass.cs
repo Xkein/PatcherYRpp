@@ -8,8 +8,12 @@ using System.Threading.Tasks;
 namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Explicit, Size = 456)]
-    public struct AnimClass
+    public struct AnimClass : IOwnAbstractType<AnimTypeClass>
     {
+        Pointer<AnimTypeClass> IOwnAbstractType<AnimTypeClass>.OwnType => Type;
+        Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
+
+
         public unsafe void SetOwnerObject(Pointer<ObjectClass> pOwner)
         {
             var func = (delegate* unmanaged[Thiscall]<ref AnimClass, IntPtr, void>)0x424B50;

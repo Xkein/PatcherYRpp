@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -8,8 +8,11 @@ using System.Threading.Tasks;
 namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Explicit, Size = 128)]
-    public struct SuperClass
+    public struct SuperClass : IOwnAbstractType<SuperWeaponTypeClass>
     {
+        Pointer<SuperWeaponTypeClass> IOwnAbstractType<SuperWeaponTypeClass>.OwnType => Type;
+        Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
+
         // invoked when sabotaged or SuperWeaponReset(Map) executed
         public unsafe void Reset()
         {

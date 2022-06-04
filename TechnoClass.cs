@@ -183,7 +183,7 @@ namespace PatcherYRpp
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 1312)]
-    public struct TechnoClass
+    public struct TechnoClass : IOwnAbstractType<TechnoTypeClass>
     {
         static public readonly IntPtr ArrayPointer = new IntPtr(0xA8EC78);
         static public ref DynamicVectorClass<Pointer<TechnoClass>> Array { get => ref DynamicVectorClass<Pointer<TechnoClass>>.GetDynamicVector(ArrayPointer); }
@@ -196,6 +196,9 @@ namespace PatcherYRpp
                 return func(ref this);
             }
         }
+
+        Pointer<TechnoTypeClass> IOwnAbstractType<TechnoTypeClass>.OwnType => Type;
+        Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
 
         public unsafe bool CanReachLocation(CoordStruct destCoords)
         {
@@ -415,6 +418,7 @@ namespace PatcherYRpp
         public Pointer<FootClass> LocomotorTarget { get => locomotorTarget; set => locomotorTarget = value; }
         [FieldOffset(688)] public IntPtr locomotorSource; // victim->LocoSource = mag
         public Pointer<FootClass> LocomotorSource { get => locomotorSource; set => locomotorSource = value; }
+
         [FieldOffset(692)] public Pointer<AbstractClass> Target; //if attacking
         [FieldOffset(696)] public Pointer<AbstractClass> LastTarget;
 
