@@ -22,7 +22,7 @@ namespace PatcherYRpp
                 (a.pAnything == b.pAnything);
         }
         public static bool operator !=(SwizzlePointerClass a, SwizzlePointerClass b) => !(a == b);
-        public override bool Equals(object obj) => this == (SwizzlePointerClass)obj;
+        public override bool Equals(object obj) => obj is SwizzlePointerClass other && this == other;
         public override int GetHashCode() => base.GetHashCode();
     };
 

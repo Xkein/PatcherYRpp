@@ -92,7 +92,7 @@ namespace PatcherYRpp
         }
         public static bool operator !=(CoordStruct a, CoordStruct b) => !(a == b);
 
-        public override bool Equals(object obj) => this == (CoordStruct)obj;
+        public override bool Equals(object obj) => obj is CoordStruct other && this == other;
         public override int GetHashCode() => base.GetHashCode();
 
         public override string ToString()
@@ -172,7 +172,7 @@ namespace PatcherYRpp
         }
         public static bool operator !=(BulletVelocity a, BulletVelocity b) => !(a == b);
 
-        public override bool Equals(object obj) => this == (BulletVelocity)obj;
+        public override bool Equals(object obj) => obj is BulletVelocity other && this == other;
         public override int GetHashCode() => base.GetHashCode();
 
         public double X;
@@ -242,7 +242,7 @@ namespace PatcherYRpp
         }
         public static bool operator !=(CellStruct a, CellStruct b) => !(a == b);
 
-        public override bool Equals(object obj) => this == (CellStruct)obj;
+        public override bool Equals(object obj) => obj is CellStruct other && this == other;
         public override int GetHashCode() => base.GetHashCode();
 
         public short X;
@@ -330,7 +330,7 @@ namespace PatcherYRpp
         }
         public static bool operator !=(SingleVector3D a, SingleVector3D b) => !(a == b);
 
-        public override bool Equals(object obj) => this == (SingleVector3D)obj;
+        public override bool Equals(object obj) => obj is SingleVector3D other && this == other;
         public override int GetHashCode() => base.GetHashCode();
 
         public float X;
@@ -421,7 +421,7 @@ namespace PatcherYRpp
         }
         public static bool operator !=(Point2D a, Point2D b) => !(a == b);
 
-        public override bool Equals(object obj) => this == (Point2D)obj;
+        public override bool Equals(object obj) => obj is Point2D other && this == other;
         public override int GetHashCode() => base.GetHashCode();
 
         public int X;
@@ -491,7 +491,7 @@ namespace PatcherYRpp
         }
         public static bool operator !=(RectangleStruct a, RectangleStruct b) => !(a == b);
 
-        public override bool Equals(object obj) => this == (RectangleStruct)obj;
+        public override bool Equals(object obj) => obj is RectangleStruct other && this == other;
         public override int GetHashCode() => base.GetHashCode();
 
         public int X;

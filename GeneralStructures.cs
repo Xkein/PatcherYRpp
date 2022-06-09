@@ -301,7 +301,7 @@ namespace PatcherYRpp
             return a.Value == b.Value;
         }
         public static bool operator !=(DirStruct a, DirStruct b) => !(a == b);
-        public override bool Equals(object obj) => this == (DirStruct)obj;
+        public override bool Equals(object obj) => obj is DirStruct other && this == other;
         public override int GetHashCode() => Value.GetHashCode();
 
         public short Value;
