@@ -13,6 +13,13 @@ namespace PatcherYRpp
         Pointer<SuperWeaponTypeClass> IOwnAbstractType<SuperWeaponTypeClass>.OwnType => Type;
         Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
 
+        public static readonly IntPtr ArrayPointer = new IntPtr(0xA83CB8);
+        public static ref DynamicVectorClass<Pointer<SuperClass>> Array => ref DynamicVectorClass<Pointer<SuperClass>>.GetDynamicVector(ArrayPointer);
+
+        public static readonly IntPtr ShowTimersPointer = new IntPtr(0xA83D50);
+        public static ref DynamicVectorClass<Pointer<SuperClass>> ShowTimers => ref DynamicVectorClass<Pointer<SuperClass>>.GetDynamicVector(ArrayPointer);
+
+
         // invoked when sabotaged or SuperWeaponReset(Map) executed
         public unsafe void Reset()
         {
