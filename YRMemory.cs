@@ -78,43 +78,65 @@ namespace PatcherYRpp
 		}
 
 		delegate T ConstructorFunction<T>(ref T @this, params object[] list);
-		public static Pointer<T> Create<T>(params object[] list)
-		{
-			Pointer<T> ptr = AllocateChecked((uint)Marshal.SizeOf<T>());
 
-			Type type = typeof(T);
+        public static Pointer<T> Create<T>(params object[] list)
+        {
+            Pointer<T> ptr = AllocateChecked((uint)Marshal.SizeOf<T>());
 
-			int paramCount = list.Length + 1;
-
-			var tuple = GetCache(paramCount);
-			Type[] paramTypes = tuple.Item1;
-			object[] paramList = tuple.Item2;
-
-			paramTypes[0] = ptr.GetType();
-            for (int i = 0; i < list.Length; i++)
+            if (ptr.IsNull)
             {
-				paramTypes[i + 1] = list[i].GetType();
-			}
+                throw new NullReferenceException("memory allocated by YR is nullptr");
+            }
 
-			paramList[0] = ptr;
-			list.CopyTo(paramList, 1);
+            try
+            {
+                Type type = typeof(T);
 
-			MethodInfo constructor = type.GetMethod("Constructor", paramTypes);
+                int paramCount = list.Length + 1;
 
-			constructor.Invoke(null, paramList);
+                var tuple = GetCache(paramCount);
+                Type[] paramTypes = tuple.Item1;
+                object[] paramList = tuple.Item2;
 
-			return ptr;
-		}
+                paramTypes[0] = ptr.GetType();
+                for (int i = 0; i < list.Length; i++)
+                {
+                    paramTypes[i + 1] = list[i].GetType();
+                }
 
-		public static void Delete<T>(Pointer<T> ptr)
+                paramList[0] = ptr;
+                list.CopyTo(paramList, 1);
+
+                MethodInfo constructor = type.GetMethod("Constructor", paramTypes);
+
+                constructor.Invoke(null, paramList);
+
+                return ptr;
+            }
+            catch (Exception)
+            {
+                Deallocate(ptr);
+                throw;
+            }
+        }
+
+        public static void Delete<T>(Pointer<T> ptr)
 		{
-			if(ptr.IsNull == false)
+			if(ptr.IsNotNull)
 			{
-				Type type = typeof(T);
-				MethodInfo destructor = type.GetMethod("Destructor", new Type[] { typeof(Pointer<T>) });
+                try
+				{
+					Type type = typeof(T);
+                    MethodInfo destructor = type.GetMethod("Destructor", new Type[] { typeof(Pointer<T>) });
 
-				destructor?.Invoke(null, new object[] { ptr });
-				Deallocate(ptr);
+                    destructor?.Invoke(null, new object[] { ptr });
+                    Deallocate(ptr);
+				}
+                catch (Exception)
+				{
+					Deallocate(ptr);
+					throw;
+                }
 			}
 		}
 	}
