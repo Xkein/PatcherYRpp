@@ -17,16 +17,16 @@ namespace PatcherYRpp
 
         void Add(int ownerCost, int victimCost)
         {
-            this.Add(victimCost / (ownerCost * RulesClass.Instance.VeteranRatio));
+            this.Add(victimCost / (ownerCost * RulesClass.Instance.Ref.VeteranRatio));
         }
 
         void Add(double value)
         {
             var val = this.Veterancy + value;
 
-            if (val > RulesClass.Instance.VeteranCap)
+            if (val > RulesClass.Instance.Ref.VeteranCap)
             {
-                val = RulesClass.Instance.VeteranCap;
+                val = RulesClass.Instance.Ref.VeteranCap;
             }
 
             this.Veterancy = (float)val;
@@ -47,45 +47,45 @@ namespace PatcherYRpp
             return Rank.Rookie;
         }
 
-        bool IsNegative()
+        public bool IsNegative()
         {
             return this.Veterancy < 0.0f;
         }
 
-        bool IsRookie()
+        public bool IsRookie()
         {
             return this.Veterancy >= 0.0f && this.Veterancy < 1.0f;
 
         }
 
-        bool IsVeteran()
+        public bool IsVeteran()
         {
             return this.Veterancy >= 1.0f && this.Veterancy < 2.0f;
 
         }
 
-        bool IsElite()
+        public bool IsElite()
         {
             return this.Veterancy >= 2.0f;
 
         }
 
-        void Reset()
+        public void Reset()
         {
             this.Veterancy = 0.0f;
         }
 
-        void SetRookie(bool notReally = true)
+        public void SetRookie(bool notReally = true)
         {
             this.Veterancy = notReally ? -0.25f : 0.0f;
         }
 
-        void SetVeteran(bool yesReally = true)
+        public void SetVeteran(bool yesReally = true)
         {
             this.Veterancy = yesReally ? 1.0f : 0.0f;
         }
 
-        void SetElite(bool yesReally = true)
+        public void SetElite(bool yesReally = true)
         {
             this.Veterancy = yesReally ? 2.0f : 0.0f;
         }
@@ -386,13 +386,61 @@ namespace PatcherYRpp
         [FieldOffset(0)] public ObjectClass Base;
         [FieldOffset(0)] public AbstractClass BaseAbstract;
 
+
+   
+
+
+
+
         [FieldOffset(240)] public FlashData Flashing;
-        [FieldOffset(248)] public ProgressTimer Animation; // how the unit animates
+
+        [FieldOffset(248)] public ProgressTimer Animtaion;
+
         [FieldOffset(276)] public PassengersClass Passengers;
-        [FieldOffset(284)] public IntPtr transporter; // eg Disk . PowerPlant, this points to PowerPlant
+
+        [FieldOffset(284)] public IntPtr transporter; // unit carrying me
         public Pointer<TechnoClass> Transporter { get => transporter; set => transporter = value; }
 
+        [FieldOffset(292)] public int CurrentTurretNumber; // for IFV/gattling/charge turrets
+
+        [FieldOffset(308)] public Bool InAir;
+
+        [FieldOffset(312)] public int CurrentWeaponNumber; // for IFV/gattling
+
+        [FieldOffset(316)] public Rank CurrentRanking; // only used for promotion detection
+
+        [FieldOffset(320)] public int CurrentGattlingStage;
+
+        [FieldOffset(324)] public int GattlingValue; // sum of RateUps and RateDowns
+
         [FieldOffset(336)] public VeterancyStruct Veterancy;
+
+        [FieldOffset(344)] public double ArmorMultiplier;
+
+        [FieldOffset(352)] public double FirepowerMultiplier;
+
+        [FieldOffset(360)] public TimerStruct IdleActionTimer;
+
+        [FieldOffset(372)] public TimerStruct RadarFlashTimer;
+
+        [FieldOffset(384)] public TimerStruct TargetingTimer; //Duration = 45 on init!
+
+        [FieldOffset(396)] public TimerStruct IronCurtainTimer;
+
+        [FieldOffset(408)] public TimerStruct IronTintTimer; // how often to alternate the effect color
+
+        [FieldOffset(420)] public int IronTintStage;
+
+        [FieldOffset(424)] public TimerStruct AirstrikeTimer;
+
+        [FieldOffset(436)] public TimerStruct AirstrikeTintTimer; // tracks alternation of the effect color
+
+        [FieldOffset(448)] public int AirstrikeTintStage;
+
+        [FieldOffset(452)] public int ForceShielded; //0 or 1, NOT a bool - is this under ForceShield as opposed to IC?
+        public bool IsForceShilded { get => ForceShielded != 0; }
+
+        [FieldOffset(456)] public Bool Deactivated; //Robot Tanks without power for instance
 
         [FieldOffset(460)] public IntPtr drainTarget; // eg Disk . PowerPlant, this points to PowerPlant
         public Pointer<TechnoClass> DrainTarget { get => drainTarget; set => drainTarget = value; }
@@ -403,34 +451,95 @@ namespace PatcherYRpp
         [FieldOffset(468)] public IntPtr drainAnim;
         public Pointer<AnimClass> DrainAnim { get => drainAnim; set => drainAnim = value; }
 
-        [FieldOffset(540)] public IntPtr owner;
+        [FieldOffset(480)] public TimerStruct InfantryBlinkTimer; // Rules->InfantryBlinkDisguiseTime , detects mirage firing per description
+
+        [FieldOffset(492)] public TimerStruct DisguiseBlinkTimer; // disguise disruption timer
+
+        [FieldOffset(508)] public TimerStruct ReloadTimer;
+
+        [FieldOffset(532)] public int Group;
+
+        [FieldOffset(536)] public IntPtr focus;
+        public Pointer<AbstractClass> Focus { get => focus; set => focus = value; }
+
+        [FieldOffset(540)] private IntPtr owner;
         public Pointer<HouseClass> Owner { get => owner; set => owner = value; }
 
-        [FieldOffset(664)] public Bool Berzerk;
+        //[FieldOffset(544)] public CloakStates CloakStates;
 
+        [FieldOffset(548)] public ProgressTimer CloakProgress; // phase from [opaque] -> [fading] -> [transparent] , [General]CloakingStages= long
+
+        [FieldOffset(576)] public TimerStruct CloakDelayTimer; // delay before cloaking again
+
+        [FieldOffset(588)] public float WarpFactor; // don't ask! set to 0 in CTOR, never modified, only used as ((this->Fetch_ID) + this->WarpFactor) % 400 for something in cloak ripple
+
+        [FieldOffset(624)] public Bool BeingWarpedOut; // is being warped by CLEG
+
+        [FieldOffset(625)] public Bool WarpingOut; // phasing in after chrono-jump
+
+        [FieldOffset(628)] public IntPtr temporalImUsing; // CLEG attacking Power Plant : CLEG's this
+        public Pointer<TemporalClass> TemporalImUsing { get => temporalImUsing; set => temporalImUsing = value; }
+
+        [FieldOffset(632)] public IntPtr temporalTargetingMe; // CLEG attacking Power Plant : PowerPlant's this
+        public Pointer<TemporalClass> TemporalTargetingMe { get => temporalTargetingMe; set => temporalTargetingMe = value; }
+
+        [FieldOffset(636)] public Bool IsImmobilized; // by chrono aftereffects
+
+        [FieldOffset(644)] public int ChronoLockRemaining; // countdown after chronosphere warps things around
+
+        [FieldOffset(648)] public CoordStruct ChronoDestCoords; // teleport loco and chsphere set this
+
+        [FieldOffset(664)] public Bool Berzerk;
         // unless source is Pushy=
         // abs_Infantry source links with abs_Unit target and vice versa - can't attack others until current target flips
         // no checking whether source is Infantry, but no update for other types either
         // old Brute hack
         [FieldOffset(680)] public IntPtr directRockerLinkedUnit;
         public Pointer<FootClass> DirectRockerLinkedUnit { get => directRockerLinkedUnit; set => directRockerLinkedUnit = value; }
+
         [FieldOffset(684)] public IntPtr locomotorTarget; // mag->LocoTarget = victim
         public Pointer<FootClass> LocomotorTarget { get => locomotorTarget; set => locomotorTarget = value; }
+
         [FieldOffset(688)] public IntPtr locomotorSource; // victim->LocoSource = mag
         public Pointer<FootClass> LocomotorSource { get => locomotorSource; set => locomotorSource = value; }
 
-        [FieldOffset(692)] public Pointer<AbstractClass> Target; //if attacking
+        [FieldOffset(692)] public Pointer<AbstractClass> Target;
+
         [FieldOffset(696)] public Pointer<AbstractClass> LastTarget;
+
+
+
+
+
+
+
+        [FieldOffset(720)] public IntPtr spawnManager;
+        public Pointer<SpawnManagerClass> SpawnManager { get => spawnManager; set => spawnManager = value; }
+
+        [FieldOffset(724)] public IntPtr spawnOwner;
+        public Pointer<TechnoClass> SpawnOwner { get => spawnOwner; set => spawnOwner = value; }
+
+        [FieldOffset(728)] public IntPtr slaveManager;
+        public Pointer<SlaveManagerClass> SlaveManager { get => slaveManager; set => slaveManager = value; }
+
+
+        [FieldOffset(732)] public IntPtr slaveOwner;
+        public Pointer<TechnoClass> SlaveOwner { get => slaveOwner; set => slaveOwner = value; }
+
+
+        [FieldOffset(744)] public float PitchAngle; // not exactly, and it doesn't affect the drawing, only internal state of a dropship
 
         [FieldOffset(764)] public int Ammo;
 
         // rocking effect
-        [FieldOffset(808)] public float AngleRotatedSideways;
-        [FieldOffset(812)] public float AngleRotatedForwards;
+        [FieldOffset(808)] public float AngleRotatedSideways; // in this frame, in radians - if abs() exceeds pi/2, it dies
+
+        [FieldOffset(812)] public float AngleRotatedForwards; // same
 
         // set these and leave the previous two alone!
         // if these are set, the unit will roll up to pi/4, by this step each frame, and balance back
         [FieldOffset(816)] public float RockingSidewaysPerFrame; // left to right - positive pushes left side up
+
         [FieldOffset(820)] public float RockingForwardsPerFrame; // back to front - positive pushes ass up
 
         [FieldOffset(824)] public int HijackerInfantryType; // mutant hijacker
@@ -438,42 +547,104 @@ namespace PatcherYRpp
         [FieldOffset(828)] public OwnedTiberiumStruct Tiberium;
 
         [FieldOffset(880)] public FacingStruct BarrelFacing;
+
         [FieldOffset(904)] public FacingStruct Facing;
+
         [FieldOffset(928)] public FacingStruct TurretFacing;
+
         [FieldOffset(952)] public int CurrentBurstIndex;
 
-        [FieldOffset(972)] public Bool CountedAsOwned; // is this techno contained in OwningPlayer.Owned... counts?
+        [FieldOffset(956)] public TimerStruct TargetLaserTimer;
+
+        [FieldOffset(970)] public short Shipsink_3CA;
+
         [FieldOffset(973)] public Bool IsSinking;
+
         [FieldOffset(974)] public Bool WasSinkingAlready; // if(IsSinking && !WasSinkingAlready) { play SinkingSound; WasSinkingAlready = 1; }
 
         [FieldOffset(977)] public Bool HasBeenAttacked; // ReceiveDamage when not HouseClass_IsAlly
+
         [FieldOffset(978)] public Bool Cloakable;
+
         [FieldOffset(979)] public Bool IsPrimaryFactory; // doubleclicking a warfac/barracks sets it as primary
+
         [FieldOffset(980)] public Bool Spawned;
+
         [FieldOffset(981)] public Bool IsInPlayfield;
 
-
         [FieldOffset(1050)] public Bool IsHumanControlled;
+
         [FieldOffset(1051)] public Bool DiscoveredByPlayer;
+
         [FieldOffset(1052)] public Bool DiscoveredByComputer;
 
         [FieldOffset(1056)] public byte SightIncrease;
 
         [FieldOffset(1059)] public Bool IsRadarTracked;
+
         [FieldOffset(1060)] public Bool IsOnCarryall;
+
         [FieldOffset(1061)] public Bool IsCrashing;
+
         [FieldOffset(1062)] public Bool WasCrashingAlready;
+
         [FieldOffset(1063)] public Bool IsBeingManipulated;
 
+        [FieldOffset(1064)] public IntPtr beingManipulatedBy;
+        public Pointer<TechnoClass> BeingManipulatedBy { get => beingManipulatedBy; set => beingManipulatedBy = value; }
+
+        [FieldOffset(1068)] public IntPtr chronoWarpedByHouse;
+        public Pointer<HouseClass> ChronoWarpedByHouse { get => chronoWarpedByHouse; set => chronoWarpedByHouse = value; }
+
+        [FieldOffset(1073)] public Bool IsMouseHovering;
+
         [FieldOffset(1088)] public DynamicVectorClass<int> CurrentTargetThreatValues;
+
         [FieldOffset(1112)] public DynamicVectorClass<Pointer<AbstractClass>> CurrentTargets;
 
         // if DistributedFire=yes, this is used to determine which possible targets should be ignored in the latest threat scan
         [FieldOffset(1136)] public DynamicVectorClass<Pointer<AbstractClass>> AttackedTargets;
 
-        [FieldOffset(1292)] public Bool ShouldLoseTargetNow;
+        [FieldOffset(1184)] public Bool TurretFacingChanging;
 
-        [FieldOffset(1304)] public Pointer<ObjectTypeClass> Disguise;
-        [FieldOffset(1308)] public Pointer<HouseClass> DisguisedAsHouse;
+        [FieldOffset(1284)] public int EMPLockRemaining;
+
+        [FieldOffset(1288)] public int ThreatPosed;
+
+        [FieldOffset(1292)] public int ShouldLoseTargetNow;
+
+        [FieldOffset(1304)] public IntPtr disguise;
+        public Pointer<ObjectTypeClass> Disguise { get => disguise; set => disguise = value; }
+
+        [FieldOffset(1308)] public IntPtr disguisedAsHouse;
+        public Pointer<HouseClass> DisguisedAsHouse { get => disguisedAsHouse; set => disguisedAsHouse = value; }
+
+
+        public FacingStruct GetTurretFacing()
+        {
+            FacingStruct facing = new FacingStruct();
+            GetTurretFacing(ref facing);
+            return facing;
+        }
+
+        public FacingStruct GetRealFacing()
+        {
+            FacingStruct facing = new FacingStruct();
+            GetRealFacing(ref facing);
+            return facing;
+        }
+
+        public unsafe Pointer<FacingStruct> GetTurretFacing(ref FacingStruct facing)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref FacingStruct, IntPtr>)this.GetVirtualFunctionPointer(170);
+            return func(ref this, ref facing);
+        }
+
+        public unsafe Pointer<FacingStruct> GetRealFacing(ref FacingStruct facing)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref FacingStruct, IntPtr>)this.GetVirtualFunctionPointer(194);
+            return func(ref this, ref facing);
+        }
+
     }
 }

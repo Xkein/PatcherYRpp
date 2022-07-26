@@ -28,5 +28,46 @@ namespace PatcherYRpp
         [FieldOffset(531)] public byte AlphaImageFile_first;
         public AnsiStringPointer AlphaImageFile => Pointer<byte>.AsPointer(ref AlphaImageFile_first);
 
+
+        public unsafe void Dimension2(Pointer<CoordStruct> pDest)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectTypeClass, IntPtr, void>)
+                this.GetVirtualFunctionPointer(31);
+            func(ref this, pDest);
+        }
+
+        public unsafe CoordStruct Dimension2()
+        {
+            CoordStruct ret = default;
+            Dimension2(Pointer<CoordStruct>.AsPointer(ref ret));
+            return ret;
+        }
+
+
+
+        public unsafe int GetActualCost(Pointer<HouseClass> pOwner)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectTypeClass, IntPtr, int>)
+                this.GetVirtualFunctionPointer(33);
+            return func(ref this, pOwner);
+        }
+        
+
+
+        [FieldOffset(156)] public Armor Armor;
+
+        [FieldOffset(160)] public int Strength;
+
+        [FieldOffset(168)] public Bool ImageAllocated;
+
+        [FieldOffset(488)] public Bool NoSpawnAlt;
+
+        [FieldOffset(560)] public Bool Selectable;
+
+        [FieldOffset(562)] public Bool Insignificant;
+
+        [FieldOffset(563)] public Bool Immune;
+
+
     }
 }

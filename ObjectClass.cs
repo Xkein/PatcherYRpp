@@ -152,11 +152,22 @@ namespace PatcherYRpp
             func(ref this);
         }
 
+        public unsafe bool IsIronCurtained()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, Bool>)this.GetVirtualFunctionPointer(88);
+            return func(ref this);
+        }
+
         public unsafe DamageState ReceiveDamage(Pointer<int> pDamage, int DistanceFromEpicenter, Pointer<WarheadTypeClass> pWH,
             Pointer<ObjectClass> pAttacker, bool IgnoreDefenses, bool PreventPassengerEscape, Pointer<HouseClass> pAttackingHouse)
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr, int, IntPtr, IntPtr, Bool, Bool, IntPtr, DamageState>)this.GetVirtualFunctionPointer(91);
             return func(ref this, pDamage, DistanceFromEpicenter, pWH, pAttacker, IgnoreDefenses, PreventPassengerEscape, pAttackingHouse);
+        }
+
+        public unsafe DamageState TakeDamage(int damage, Pointer<WarheadTypeClass> pWH, bool crewed)
+        {
+            return ReceiveDamage(Pointer<int>.AsPointer(ref damage),0, pWH, Pointer<ObjectClass>.Zero,true,!crewed, Pointer<HouseClass>.Zero);
         }
 
         public unsafe void Scatter(CoordStruct crd, bool ignoreMission, bool ignoreDestination)
@@ -175,6 +186,12 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, void>)this.GetVirtualFunctionPointer(109);
             func(ref this, ref coord);
+        }
+
+        public unsafe Pointer<CellClass> GetCell()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr>)this.GetVirtualFunctionPointer(111);
+            return func(ref this);
         }
 
         public unsafe int GetHeight()

@@ -34,9 +34,28 @@ namespace PatcherYRpp
             CellStruct cell = CellClass.Coord2Cell(Crd);
             return this.TryGetCellAt(cell, out pCell);
         }
+
+        public unsafe Pointer<CellClass> GetCellAt(CoordStruct pCoords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, ref CoordStruct, IntPtr>)0x565730;
+            return func(ref this, ref pCoords);
+        }
+
         public static int GetCellIndex(CellStruct MapCoords)
         {
             return (MapCoords.Y << 9) + MapCoords.X;
+        }
+        public static unsafe Pointer<CoordStruct> GetRandomCoordsNear(ref CoordStruct outBuffer, CoordStruct coords, int distance, bool center)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, ref CoordStruct, ref CoordStruct, int, Bool, IntPtr>)ASM.FastCallTransferStation;
+            return func(0x49F420, ref outBuffer, ref coords, distance, center);
+        }
+        // gets a coordinate in a random direction a fixed distance in leptons away from coords
+        public static unsafe CoordStruct GetRandomCoordsNear(ref CoordStruct coords, int distance, bool center)
+        {
+            CoordStruct outBuffer = default;
+            GetRandomCoordsNear(ref outBuffer, coords, distance, center);
+            return outBuffer;
         }
 
         // no fast call. unmanaged call will lead to StackOverflowException.
@@ -95,6 +114,11 @@ namespace PatcherYRpp
             return outBuffer;
         }
 
+        public static unsafe int GetTotalDamage(int Damage, Pointer<WarheadTypeClass> WH, Armor armor, int distance)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, Armor, int, int>)ASM.FastCallTransferStation;
+            return func(0x489180, Damage, WH, armor, distance);
+        }
 
         [FieldOffset(312)] public DynamicVectorClass<Pointer<CellClass>> Cells;
 
