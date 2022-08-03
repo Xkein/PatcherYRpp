@@ -11,8 +11,19 @@ namespace PatcherYRpp
     [DebuggerDisplay("RGB={R}, {G}, {B}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct ColorStruct
+#pragma warning disable CS0659 // 类型重写 Object.Equals(object o)，但不重写 Object.GetHashCode()
+#pragma warning disable CS0661 // 类型定义运算符 == 或运算符 !=，但不重写 Object.GetHashCode()
+    public struct ColorStruct : IEquatable<ColorStruct>
+#pragma warning restore CS0661 // 类型定义运算符 == 或运算符 !=，但不重写 Object.GetHashCode()
+#pragma warning restore CS0659 // 类型重写 Object.Equals(object o)，但不重写 Object.GetHashCode()
     {
+
+        public static ColorStruct Red = new ColorStruct(0xFC, 0x00, 0x00);
+        public static ColorStruct Green = new ColorStruct(0x00, 0xFC, 0x00);
+        public static ColorStruct Blue = new ColorStruct(0x00, 0x00, 0xFC);
+        public static ColorStruct White = new ColorStruct(0xFC, 0xFC, 0xFC);
+        public static ColorStruct Black = new ColorStruct(0x03, 0x03, 0x03);
+
         public ColorStruct(int r, int g, int b)
         {
             R = (byte)r;
@@ -23,12 +34,23 @@ namespace PatcherYRpp
         public byte R;
         public byte G;
         public byte B;
+
+        public static bool operator ==(ColorStruct a, ColorStruct b)
+        {
+            return a.R == b.R && a.G == b.G && a.B == b.B;
+        }
+
+        public static bool operator !=(ColorStruct a, ColorStruct b) => !(a == b);
+
+        public bool Equals(ColorStruct other) => this == other;
+
+        public override bool Equals(object obj) => obj is ColorStruct other && this == other;
     }
 
     [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct CoordStruct
+    public struct CoordStruct : IEquatable<CoordStruct>
     {
         public CoordStruct(int x, int y, int z)
         {
@@ -100,6 +122,8 @@ namespace PatcherYRpp
             return $"({X}, {Y}, {Z})";
         }
 
+        public bool Equals(CoordStruct other) => this == other;
+
         public int X;
         public int Y;
         public int Z;
@@ -108,7 +132,7 @@ namespace PatcherYRpp
     [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct BulletVelocity
+    public struct BulletVelocity : IEquatable<BulletVelocity>
     {
         public BulletVelocity(double x, double y, double z)
         {
@@ -173,7 +197,11 @@ namespace PatcherYRpp
         public static bool operator !=(BulletVelocity a, BulletVelocity b) => !(a == b);
 
         public override bool Equals(object obj) => obj is BulletVelocity other && this == other;
+
+
         public override int GetHashCode() => base.GetHashCode();
+
+        public bool Equals(BulletVelocity other) => this == other;
 
         public double X;
         public double Y;
@@ -183,7 +211,7 @@ namespace PatcherYRpp
     [DebuggerDisplay("XY={X}, {Y}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct CellStruct
+    public struct CellStruct : IEquatable<CellStruct>
     {
         public CellStruct(int x, int y)
         {
@@ -244,6 +272,8 @@ namespace PatcherYRpp
 
         public override bool Equals(object obj) => obj is CellStruct other && this == other;
         public override int GetHashCode() => base.GetHashCode();
+
+        bool IEquatable<CellStruct>.Equals(CellStruct other) => this == other;
 
         public short X;
         public short Y;
@@ -362,7 +392,7 @@ namespace PatcherYRpp
     [DebuggerDisplay("XY={X}, {Y}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct Point2D
+    public struct Point2D : IEquatable<Point2D>
     {
         public Point2D(int x, int y)
         {
@@ -423,6 +453,8 @@ namespace PatcherYRpp
 
         public override bool Equals(object obj) => obj is Point2D other && this == other;
         public override int GetHashCode() => base.GetHashCode();
+
+        bool IEquatable<Point2D>.Equals(Point2D other) => this == other;
 
         public int X;
         public int Y;

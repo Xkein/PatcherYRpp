@@ -10,10 +10,16 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 3600)]
     public struct AircraftTypeClass
     {
-        public static readonly IntPtr ArrayPointer = new IntPtr(0xA8B218);
+        private static readonly IntPtr ArrayPointer = new IntPtr(0xA8B218);
 
         public static YRPP.GLOBAL_DVC_ARRAY<AircraftTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<AircraftTypeClass>(ArrayPointer);
 
+
+        public unsafe Pointer<AircraftClass> CreateObject(Pointer<HouseClass> pOwner)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref AircraftTypeClass, IntPtr, IntPtr>)this.GetVirtualFunctionPointer(35);
+            return func(ref this, pOwner).Convert<AircraftClass>();
+        }
 
         [FieldOffset(0)] public TechnoTypeClass Base;
         [FieldOffset(0)] public ObjectTypeClass BaseObjectType;

@@ -20,6 +20,12 @@ namespace PatcherYRpp
             func(ref this, pOwner);
         }
 
+        public unsafe void DetachFromObject(Pointer<ObjectClass> pTarget,bool detachFromAll)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref AnimClass, IntPtr,Bool, void>)0x425150;
+            func(ref this, pTarget, detachFromAll);
+        }
+
         public void Pause()
         {
             this.Paused = true;
@@ -53,9 +59,8 @@ namespace PatcherYRpp
         [FieldOffset(200)] public Pointer<AnimTypeClass> Type;
         [FieldOffset(204)] public Pointer<ObjectClass> OwnerObject;
 
-		//[FieldOffset(212)] public Pointer<LightConvertClass> LightConvert;     //Palette?
 		[FieldOffset(216)] public int LightConvertIndex; // assert( (*ColorScheme::Array)[this->LightConvertIndex] == this->LightConvert ;
-		[FieldOffset(220)] public byte PaletteName_first; // filename set for destroy anims
+		[FieldOffset(220)] private byte PaletteName_first; // filename set for destroy anims
 		public AnsiStringPointer PaletteName => Pointer<byte>.AsPointer(ref PaletteName_first);
 		[FieldOffset(252)] public int TintColor;
 		[FieldOffset(256)] public int ZAdjust;
@@ -81,8 +86,8 @@ namespace PatcherYRpp
 		[FieldOffset(400)] public BlitterFlags AnimFlags; // argument that's 0x600 most of the time
 		[FieldOffset(404)] public Bool HasExtras; // enables IsMeteor and Bouncer special behavior (AnimExtras)
 		[FieldOffset(405)] public byte RemainingIterations; // defaulted to deleteAfterIterations, when reaches zero, UnInit() is called
-		[FieldOffset(406)] public byte unknown_196;
-		[FieldOffset(407)] public byte unknown_197;
+		[FieldOffset(406)] private byte unknown_196;
+		[FieldOffset(407)] private byte unknown_197;
 		[FieldOffset(408)] public Bool IsPlaying;
 		[FieldOffset(409)] public Bool IsFogged;
 		[FieldOffset(410)] public Bool FlamingGuyExpire; // finish animation and remove
@@ -90,8 +95,5 @@ namespace PatcherYRpp
 		[FieldOffset(412)] public Bool SkipProcessOnce; // set in constructor, cleared during Update. skips damage, veins, tiberium chain reaction and animation progress
 		[FieldOffset(413)] public Bool Invisible; // don't draw, but Update state anyway
 		[FieldOffset(414)] public Bool PowerOff; // powered animation has no power
-
-        //[FieldOffset(416)] public AudioController Audio3;
-        //[FieldOffset(436)] public AudioController Audio4;
     }
 }

@@ -151,11 +151,37 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, void>)this.GetVirtualFunctionPointer(84);
             func(ref this);
         }
+        public unsafe void IronCurtain(int duration, Pointer<HouseClass> pHouse, bool forceShield)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, int, IntPtr, Bool, void>)
+                this.GetVirtualFunctionPointer(85);
+            func(ref this, duration, pHouse, forceShield);
+        }
+
+        public unsafe void StopAirstrikeTimer()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, void>)
+                this.GetVirtualFunctionPointer(86);
+            func(ref this);
+        }
+
+        public unsafe void StartAirstrikeTimer(int duration)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, int, void>)
+                this.GetVirtualFunctionPointer(87);
+            func(ref this, duration);
+        }
 
         public unsafe bool IsIronCurtained()
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, Bool>)this.GetVirtualFunctionPointer(88);
             return func(ref this);
+        }
+        public unsafe int GetWeaponRange(int idxWeapon)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, int, int>)
+                this.GetVirtualFunctionPointer(90);
+            return func(ref this, idxWeapon);
         }
 
         public unsafe DamageState ReceiveDamage(Pointer<int> pDamage, int DistanceFromEpicenter, Pointer<WarheadTypeClass> pWH,

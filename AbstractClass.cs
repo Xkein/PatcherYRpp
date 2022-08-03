@@ -11,7 +11,7 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 36)]
     public struct AbstractClass
     {
-        static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E360);
+        static private readonly IntPtr ArrayPointer = new IntPtr(0xA8E360);
         static public ref DynamicVectorClass<Pointer<ObjectClass>> Array { get => ref DynamicVectorClass<Pointer<ObjectClass>>.GetDynamicVector(ArrayPointer); }
 
         public unsafe void Init()
@@ -103,7 +103,7 @@ namespace PatcherYRpp
 
         [FieldOffset(16)] public int UniqueID;
         [FieldOffset(20)] public AbstractFlags AbstractFlags;
-        [FieldOffset(24)] public int unknown_18;
+        //[FieldOffset(24)] public int unknown_18;
         [FieldOffset(28)] public int RefCount;
         [FieldOffset(32)] public Bool Dirty;
     }

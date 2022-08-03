@@ -185,8 +185,8 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 1312)]
     public struct TechnoClass : IOwnAbstractType<TechnoTypeClass>
     {
-        static public readonly IntPtr ArrayPointer = new IntPtr(0xA8EC78);
-        static public ref DynamicVectorClass<Pointer<TechnoClass>> Array { get => ref DynamicVectorClass<Pointer<TechnoClass>>.GetDynamicVector(ArrayPointer); }
+        public static readonly IntPtr ArrayPointer = new IntPtr(0xA8EC78);
+        public static ref DynamicVectorClass<Pointer<TechnoClass>> Array { get => ref DynamicVectorClass<Pointer<TechnoClass>>.GetDynamicVector(ArrayPointer); }
 
         public unsafe Pointer<TechnoTypeClass> Type
         {
@@ -206,6 +206,12 @@ namespace PatcherYRpp
             return func(ref this, ref destCoords);
         }
 
+        public unsafe bool IsVoxel()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, byte>)this.GetVirtualFunctionPointer(166);
+            return Convert.ToBoolean(func(ref this));
+        }
+
         public unsafe int SelectWeapon(Pointer<AbstractClass> pTarget)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)this.GetVirtualFunctionPointer(185);
@@ -215,6 +221,18 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)this.GetVirtualFunctionPointer(186);
             return func(ref this, pTarget);
+        }
+
+        public unsafe int GetZAdjustment()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int>)this.GetVirtualFunctionPointer(187);
+            return func(ref this);
+        }
+
+        public unsafe int GetZGradient()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int>)this.GetVirtualFunctionPointer(188);
+            return func(ref this);
         }
 
         public unsafe int GetROF(int idxWeapon)
@@ -227,6 +245,47 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, int>)this.GetVirtualFunctionPointer(199);
             return func(ref this, dwUnk);
         }
+        public unsafe bool IsEngineer()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(204);
+            return func(ref this);
+        }
+        public unsafe bool EnterGrinder()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(207);
+            return func(ref this);
+        }
+
+        public unsafe bool EnterBioReactor()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(208);
+            return func(ref this);
+        }
+
+        public unsafe bool EnterTankBunker()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(209);
+            return func(ref this);
+        }
+
+        public unsafe bool EnterBattleBunker()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(210);
+            return func(ref this);
+        }
+
+        public unsafe bool GarrisonStructure()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(211);
+            return func(ref this);
+        }
+
+        public unsafe bool IsPowerOnline()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(212);
+            return func(ref this);
+        }
+
 
         public unsafe int DecreaseAmmo()
         {
@@ -280,6 +339,7 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)this.GetVirtualFunctionPointer(242);
             func(ref this, pTarget);
         }
+
         public unsafe Pointer<BulletClass> Fire(Pointer<AbstractClass> pTarget, int nWeaponIndex)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, IntPtr>)this.GetVirtualFunctionPointer(243);
@@ -378,6 +438,64 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)0x5F6360;
             return func(ref this, pTarget);
+        }
+
+
+        public FacingStruct GetTurretFacing()
+        {
+            FacingStruct facing = new FacingStruct();
+            GetTurretFacing(ref facing);
+            return facing;
+        }
+
+        public FacingStruct GetRealFacing()
+        {
+            FacingStruct facing = new FacingStruct();
+            GetRealFacing(ref facing);
+            return facing;
+        }
+
+        public unsafe Pointer<FacingStruct> GetTurretFacing(ref FacingStruct facing)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref FacingStruct, IntPtr>)this.GetVirtualFunctionPointer(170);
+            return func(ref this, ref facing);
+        }
+
+        public unsafe Pointer<FacingStruct> GetRealFacing(ref FacingStruct facing)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref FacingStruct, IntPtr>)this.GetVirtualFunctionPointer(194);
+            return func(ref this, ref facing);
+        }
+
+
+        public unsafe bool HasAbility(Ability ability)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Ability, Bool>)0x70D0D0;
+            return func(ref this, ability);
+        }
+
+        public unsafe bool IsMindControlled()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)0x7105E0;
+            return func(ref this);
+        }
+
+        public unsafe void DrawALinkTo(CoordStruct from, CoordStruct to, ColorStruct color)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, CoordStruct, CoordStruct, ColorStruct, void>)0x704E40;
+            func(ref this, from, to, color);
+        }
+
+        public unsafe Pointer<LaserDrawClass> CreateLaser(Pointer<AbstractClass> pTarget, int weaponIndex, Pointer<WeaponTypeClass> pWeapon, CoordStruct sourceCoord)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, IntPtr, ref CoordStruct, IntPtr>)0x6FD210;
+            return func(ref this, pTarget, weaponIndex, pWeapon, ref sourceCoord);
+        }
+
+        public unsafe Pointer<EBolt> Electric_Zap(Pointer<AbstractClass> pTarget, Pointer<WeaponTypeClass> pWeapon, CoordStruct sourceCoord)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, IntPtr, ref CoordStruct, IntPtr>)0x6FD460;
+            return func(ref this, pTarget, pWeapon, ref sourceCoord);
         }
 
 
@@ -619,32 +737,6 @@ namespace PatcherYRpp
         [FieldOffset(1308)] public IntPtr disguisedAsHouse;
         public Pointer<HouseClass> DisguisedAsHouse { get => disguisedAsHouse; set => disguisedAsHouse = value; }
 
-
-        public FacingStruct GetTurretFacing()
-        {
-            FacingStruct facing = new FacingStruct();
-            GetTurretFacing(ref facing);
-            return facing;
-        }
-
-        public FacingStruct GetRealFacing()
-        {
-            FacingStruct facing = new FacingStruct();
-            GetRealFacing(ref facing);
-            return facing;
-        }
-
-        public unsafe Pointer<FacingStruct> GetTurretFacing(ref FacingStruct facing)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref FacingStruct, IntPtr>)this.GetVirtualFunctionPointer(170);
-            return func(ref this, ref facing);
-        }
-
-        public unsafe Pointer<FacingStruct> GetRealFacing(ref FacingStruct facing)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref FacingStruct, IntPtr>)this.GetVirtualFunctionPointer(194);
-            return func(ref this, ref facing);
-        }
 
     }
 }

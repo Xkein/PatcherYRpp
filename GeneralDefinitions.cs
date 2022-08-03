@@ -245,6 +245,64 @@ namespace PatcherYRpp
         Nonzero = 0x20000
     };
 
+    public enum Ability
+    {
+        Faster = 0,
+        Stronger = 1,
+        Firepower = 2,
+        Scatter = 3,
+        ROF = 4,
+        Sight = 5,
+        Cloak = 6,
+        TiberiumProof = 7,
+        VeinProof = 8,
+        SelfHeal = 9,
+        Explodes = 10,
+        RadarInvisible = 11,
+        Sensors = 12,
+        Fearless = 13,
+        C4 = 14,
+        TiberiumHeal = 15,
+        GuardArea = 16,
+        Crusher = 17
+    }
+
+    [Flags]
+    public enum TextPrintType
+    {
+        LASTPOINT = 0, //*
+        LASTSHADOW = 0, //*
+        Point6 = 0x1, //*
+        Point8 = 0x2,
+        Point3 = 0x3, //*
+        Led = 0x4, //*
+        Vcr = 0x5, //*
+        Point6Grad = 0x6,
+        Map = 0x7, //*
+        Metal12 = 0x8,
+        Efnt = 0x9, //*
+        Type = 0xA, //*
+        Score = 0xB, //*
+        Fonts = 0xF, //*
+        NoShadow = 0x10,
+        DropShadow = 0x20,
+        FullShadow = 0x40,
+        LightShadow = 0x80,
+        Center = 0x100,
+        Right = 0x200,
+        MediumColor = 0x1000,
+        BrightColor = 0x2000,
+        UseGradPal = 0x4000,
+        UnknownColor = 0x8000,
+        GradAll = 0xF000,
+    }
+    public enum RadBeamType
+    {
+        Temporal = 0x0,
+        RadBeam = 0x1,
+        Eruption = 0x2 // this sets the beam color to MagnaBeamColor! There probably was no reason for that whatsoever.
+    }
+
     public enum VisualType
     {
         Normal = 0,

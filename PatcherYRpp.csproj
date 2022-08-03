@@ -91,6 +91,7 @@
     <Compile Include="ConvertClass.cs" />
     <Compile Include="Dependencies\DirectDraw.cs" />
     <Compile Include="Drawing.cs" />
+    <Compile Include="EBolt.cs" />
     <Compile Include="FileFormats\SHPStruct.cs" />
     <Compile Include="FileSystem.cs" />
     <Compile Include="FlyLocomotionClass.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="ObjectTypeClass.cs" />
     <Compile Include="OverlayTypeClass.cs" />
     <Compile Include="ParticleSystemTypeClass.cs" />
+    <Compile Include="RadBeam.cs" />
     <Compile Include="RadioClass.cs" />
     <Compile Include="RulesClass.cs" />
     <Compile Include="ScenarioClass.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="UnitClass.cs" />
     <Compile Include="UnitTypeClass.cs" />
     <Compile Include="Unsorted.cs" />
+    <Compile Include="VocClass.cs" />
     <Compile Include="WarheadTypeClass.cs" />
     <Compile Include="WeaponTypeClass.cs" />
     <Compile Include="YRMemory.cs" />

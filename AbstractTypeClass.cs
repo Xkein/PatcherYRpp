@@ -19,7 +19,7 @@ namespace PatcherYRpp
 	[StructLayout(LayoutKind.Explicit, Size = 152, Pack = 1)]
 	public struct AbstractTypeClass
 	{
-		static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E968);
+		static private readonly IntPtr ArrayPointer = new IntPtr(0xA8E968);
 
 		static public YRPP.GLOBAL_DVC_ARRAY<AbstractTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<AbstractTypeClass>(ArrayPointer);
 
@@ -32,12 +32,12 @@ namespace PatcherYRpp
 		[FieldOffset(0)]
 		public AbstractClass Base;
 
-		[FieldOffset(36)] public byte ID_first;
+		[FieldOffset(36)] private byte ID_first;
 		public AnsiStringPointer ID => Pointer<byte>.AsPointer(ref ID_first);
 
-		[FieldOffset(61)] public byte UINameLabel_first;
+		[FieldOffset(61)] private byte UINameLabel_first;
 		[FieldOffset(96)] public UniStringPointer UIName;
 
-		[FieldOffset(100)] public byte Name_first;
+		[FieldOffset(100)] private byte Name_first;
 	}
 }

@@ -29,5 +29,19 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Stdcall]<Bool>)0x53BAE0;
             return func();
         }
+
+
+        public static class Names
+        {
+            public readonly static AnsiStringPointer RULESMD = new IntPtr(0x826260);
+
+            public readonly static AnsiStringPointer ARTMD = new IntPtr(0x826254);
+
+            public readonly static AnsiStringPointer AIMD = new IntPtr(0x82621C);
+
+            public readonly static AnsiStringPointer RA2MD = new IntPtr(0x826444);
+
+        }
+
     }
 }
