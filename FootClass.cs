@@ -18,7 +18,15 @@ namespace PatcherYRpp
 
 
         [FieldOffset(1652)] public COMPtr<ILocomotion> locomotor;
-        public ILocomotion Locomotor { get => locomotor.Object; set => locomotor.Object = value; }
 
+        public ILocomotion Locomotor
+        {
+            get => locomotor.Object;
+            set
+            {
+                locomotor.Release();
+                locomotor.Object = value;
+            }
+        }
     }
 }

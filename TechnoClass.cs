@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -17,16 +17,16 @@ namespace PatcherYRpp
 
         void Add(int ownerCost, int victimCost)
         {
-            this.Add(victimCost / (ownerCost * RulesClass.Instance.VeteranRatio));
+            this.Add(victimCost / (ownerCost * RulesClass.Instance.Ref.VeteranRatio));
         }
 
         void Add(double value)
         {
             var val = this.Veterancy + value;
 
-            if (val > RulesClass.Instance.VeteranCap)
+            if (val > RulesClass.Instance.Ref.VeteranCap)
             {
-                val = RulesClass.Instance.VeteranCap;
+                val = RulesClass.Instance.Ref.VeteranCap;
             }
 
             this.Veterancy = (float)val;
