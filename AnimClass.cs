@@ -10,6 +10,9 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 456)]
     public struct AnimClass : IOwnAbstractType<AnimTypeClass>
     {
+        public static readonly IntPtr ArrayPointer = new IntPtr(0xA8E9A8);
+        public static ref DynamicVectorClass<Pointer<AnimClass>> Array => ref DynamicVectorClass<Pointer<AnimClass>>.GetDynamicVector(ArrayPointer);
+
         Pointer<AnimTypeClass> IOwnAbstractType<AnimTypeClass>.OwnType => Type;
         Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
 

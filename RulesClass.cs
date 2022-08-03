@@ -27,9 +27,8 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 6336)]
     public struct RulesClass
     {
-        private static IntPtr instance = new IntPtr(0x8871E0);
-        public static ref Pointer<RulesClass> Instance  => ref instance.Convert<Pointer<RulesClass>>().Ref; 
-        
+        private static IntPtr ppInstance = new IntPtr(0x8871E0);
+        public static ref Pointer<RulesClass> Instance => ref ppInstance.Convert<Pointer<RulesClass>>().Ref;
         // call this instead of Init for the later files (gamemode, map)
         // reads the generic/list sections like [VehicleTypes] from pINI
         // doesn't actually load [MTNK] or other list contents' sections
