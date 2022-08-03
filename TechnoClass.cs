@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -362,6 +362,19 @@ namespace PatcherYRpp
         }
 
 
+        public unsafe bool IsMindControlled()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)0x7105E0;
+            return func(ref this);
+        }
+
+        public unsafe bool CanBePermMindControlled()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)0x53C450;
+            return func(ref this);
+        }
+
+
         public unsafe void SetTargetForPassengers(Pointer<AbstractClass> pTarget)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)0x710550;
@@ -421,6 +434,16 @@ namespace PatcherYRpp
 
         [FieldOffset(692)] public Pointer<AbstractClass> Target; //if attacking
         [FieldOffset(696)] public Pointer<AbstractClass> LastTarget;
+        [FieldOffset(700)] public IntPtr captureManager;
+        public Pointer<CaptureManagerClass> CaptureManager { get => captureManager; set => captureManager = value; }
+        [FieldOffset(704)] public IntPtr mindControlledBy;
+        public Pointer<TechnoClass> MindControlledBy { get => mindControlledBy; set => mindControlledBy = value; }
+        [FieldOffset(708)] public Bool MindControlledByAUnit;
+
+        [FieldOffset(712)] public IntPtr mindControlRingAnim;
+        public Pointer<AnimClass> MindControlRingAnim { get => mindControlRingAnim; set => mindControlRingAnim = value; }
+        [FieldOffset(716)] public IntPtr mindControlledByHouse;
+        public Pointer<AnimClass> MindControlledByHouse { get => mindControlledByHouse; set => mindControlledByHouse = value; }
 
         [FieldOffset(764)] public int Ammo;
 
