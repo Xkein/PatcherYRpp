@@ -73,6 +73,12 @@ namespace PatcherYRpp
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public IntPtr RawOffset(int offset)
+        {
+            return new IntPtr((int)Value + offset);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Pointer<T> AsPointer(ref T obj)
         {
             return new Pointer<T>(Unsafe.AsPointer(ref obj));
