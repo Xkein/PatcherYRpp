@@ -487,11 +487,6 @@ namespace PatcherYRpp
             return func(ref this, ability);
         }
 
-        public unsafe bool IsMindControlled()
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)0x7105E0;
-            return func(ref this);
-        }
 
         public unsafe void DrawALinkTo(CoordStruct from, CoordStruct to, ColorStruct color)
         {
@@ -505,6 +500,7 @@ namespace PatcherYRpp
             return func(ref this, pTarget, weaponIndex, pWeapon, ref sourceCoord);
         }
 
+        [Obsolete("这个weapon就是看是不是用alternatecolor的，本质上和直接画一样")]
         public unsafe Pointer<EBolt> Electric_Zap(Pointer<AbstractClass> pTarget, Pointer<WeaponTypeClass> pWeapon, CoordStruct sourceCoord)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, IntPtr, ref CoordStruct, IntPtr>)0x6FD460;
@@ -760,6 +756,6 @@ namespace PatcherYRpp
         [FieldOffset(1308)] public IntPtr disguisedAsHouse;
         public Pointer<HouseClass> DisguisedAsHouse { get => disguisedAsHouse; set => disguisedAsHouse = value; }
 
-
+        [FieldOffset(340)] public readonly IntPtr align_154;
     }
 }

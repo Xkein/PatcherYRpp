@@ -27,7 +27,7 @@ namespace PatcherYRpp
             return Helpers.GetSpan<T>(Items, Count);
         }
 
-
+        //偷懒是不是
         public unsafe bool OperatorEqual(Pointer<DynamicVectorClass<T>> pOther)
         {
             var func = (delegate* unmanaged[Thiscall]<IntPtr, IntPtr, Bool>)this.GetVirtualFunctionPointer(1);
@@ -130,5 +130,24 @@ namespace PatcherYRpp
         public Bool IsAllocated;
         public int Count;
         public int CapacityIncrement;
+    }
+
+
+    [StructLayout(LayoutKind.Explicit,Size =20)]
+    public struct CounterClass 
+    {
+        [FieldOffset(0)] private IntPtr Vfptr;
+        [FieldOffset(4)] private IntPtr Items;
+        [FieldOffset(8)] private int capacity;
+        [FieldOffset(12)] private Bool isInitialized;
+        [FieldOffset(13)] private Bool isAllocated;
+        [FieldOffset(16)] private int total;
+        public ref int this[int index] { get => ref Get(index); }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public ref int Get(int index) => ref Helpers.GetUnmanagedRef<int>(Items, index);
+        public int GetItemCount(int index)
+        {
+            return index < capacity ? this[index] : 0;
+        }   
     }
 }

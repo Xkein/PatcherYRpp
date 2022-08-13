@@ -35,6 +35,8 @@ namespace PatcherYRpp
         [FieldOffset(0)] public TechnoTypeClass Base;
         [FieldOffset(0)] public ObjectTypeClass BaseObjectType;
         [FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
+        [FieldOffset(3576)] public int ArrayIndex;
+        
 
         [FieldOffset(3744)] private IntPtr freeUnit;
         public Pointer<UnitTypeClass> FreeUnit => freeUnit.Convert<UnitTypeClass>();
@@ -59,9 +61,28 @@ namespace PatcherYRpp
         [FieldOffset(5497)] public Bool Unsellable;
         [FieldOffset(5825)] public Bool Hospital;
         [FieldOffset(5835)] public Bool Helipad;
+        [FieldOffset(5872)] public int SuperWeapon;
+        [FieldOffset(5876)] public int SuperWeapon2;
         [FieldOffset(5889)] public Bool InvisibleInGame;
         [FieldOffset(5891)] public Bool PlaceAnywhere;
         [FieldOffset(6016)] public int NumberOfDocks;
+
+
+        public bool HasSuperWeapon()
+        {
+            return SuperWeapon != -1 || SuperWeapon2 != -1;
+        }
+
+        public bool HasSuperWeapon(int index)
+        {
+            return SuperWeapon == index || SuperWeapon2 == index;
+        }
+        //李在干神魔
+        [FieldOffset(0xE24)] public readonly IntPtr AresBldTypeExt;
+    }
+
+    public struct AresBuildingTypeExtData
+    {
 
     }
 }

@@ -552,8 +552,6 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Sequential)]
     public struct Matrix3D
     {
-
-
         public float _00;
         public float _01;
         public float _02;

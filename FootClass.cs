@@ -25,21 +25,20 @@ namespace PatcherYRpp
             return func(ref this, Pointer<CoordStruct>.AsPointer(ref where));
         }
 
-
         public unsafe bool StopDrive()
         {
             var func = (delegate* unmanaged[Thiscall]<ref FootClass, bool>)this.GetVirtualFunctionPointer(320);
             return func(ref this);
         }
 
-        
-        public unsafe bool ChronoWarpTo(CoordStruct where)
+        [Obsolete("日你妈的空气墙")]
+        private unsafe bool ChronoWarp2(CoordStruct where)
         {
             var func = (delegate* unmanaged[Thiscall]<ref FootClass, CoordStruct, Bool>)this.GetVirtualFunctionPointer(322);
             return func(ref this, where);
         }
-        
-        public unsafe bool ChronoWarp2Unknown(CoordStruct pos)
+        [Obsolete("日你妈的空气墙")]
+        private unsafe bool ChronoWarp2Unknown(CoordStruct pos)
         {
             var func= (delegate* unmanaged[Thiscall]<ref FootClass, CoordStruct, Bool>)0x4DF7F0;
             return func(ref this, pos);

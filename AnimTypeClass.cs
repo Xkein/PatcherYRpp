@@ -29,7 +29,7 @@ namespace PatcherYRpp
         [FieldOffset(700)] public int LoopEnd;
         [FieldOffset(704)] public int End;
         [FieldOffset(708)] public int LoopCount;
-        [FieldOffset(712)] public IntPtr next;
+        [FieldOffset(712)] private IntPtr next;
         public Pointer<AnimTypeClass> Next { get => next; set => next = value; }
         [FieldOffset(716)] public int SpawnsParticle; // index of that ParticleTypeClass
         [FieldOffset(720)] public int NumParticles;
@@ -38,26 +38,26 @@ namespace PatcherYRpp
         [FieldOffset(732)] public RandomStruct RandomLoopDelay;
         [FieldOffset(740)] public RandomStruct RandomRate;
         [FieldOffset(748)] public int Translucency;
-        [FieldOffset(752)] public IntPtr spawns;
+        [FieldOffset(752)] private IntPtr spawns;
         public Pointer<AnimTypeClass> Spawns { get => spawns; set => spawns = value; }
         [FieldOffset(756)] public int SpawnCount;
         [FieldOffset(760)] public int Report;     //VocClass index
         [FieldOffset(764)] public int StopSound;      //VocClass index
-        [FieldOffset(768)] public IntPtr bounceAnim;
+        [FieldOffset(768)] private IntPtr bounceAnim;
         public Pointer<AnimTypeClass> BounceAnim { get => bounceAnim; set => bounceAnim = value; }
-        [FieldOffset(772)] public IntPtr expireAnim;
+        [FieldOffset(772)] private IntPtr expireAnim;
         public Pointer<AnimTypeClass> ExpireAnim { get => expireAnim; set => expireAnim = value; }
-        [FieldOffset(776)] public IntPtr trailerAnim;
+        [FieldOffset(776)] private IntPtr trailerAnim;
         public Pointer<AnimTypeClass> TrailerAnim { get => trailerAnim; set => trailerAnim = value; }
         [FieldOffset(780)] public int TrailerSeperation;  //MISTYPE BY WESTWOOD!
         [FieldOffset(784)] public double Elasticity;
         [FieldOffset(792)] public double MinZVel;
         [FieldOffset(800)] public double unknown_double_320;
         [FieldOffset(808)] public double MaxXYVel;
-        [FieldOffset(816)] public IntPtr warhead;
+        [FieldOffset(816)] private IntPtr warhead;
         public Pointer<WarheadTypeClass> Warhead { get => warhead; set => warhead = value; }
         [FieldOffset(820)] public int DamageRadius;
-        [FieldOffset(824)] public IntPtr tiberiumSpawnType;
+        [FieldOffset(824)] private IntPtr tiberiumSpawnType;
         public Pointer<OverlayTypeClass> TiberiumSpawnType { get => tiberiumSpawnType; set => tiberiumSpawnType = value; }
         [FieldOffset(828)] public int TiberiumSpreadRadius;
         [FieldOffset(832)] public int YSortAdjust;

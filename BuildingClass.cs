@@ -51,7 +51,16 @@ namespace PatcherYRpp
 
         //[FieldOffset(1316)] public Pointer<FactoryClass> Factory;
 
-        
+        [FieldOffset(1516)] private IntPtr upgrade0;
+        [FieldOffset(1520)] private IntPtr upgrade1;
+        [FieldOffset(1524)] private IntPtr upgrade2;
+        public Pointer<BuildingTypeClass>[] Upgrades
+        {
+            get => new Pointer<BuildingTypeClass>[3]
+            {
+                upgrade0.Convert<BuildingTypeClass>(),upgrade1.Convert<BuildingTypeClass>(),upgrade2.Convert<BuildingTypeClass>()
+            };
+        }
 
         [FieldOffset(1632)] public Bool HasPower;
 
@@ -68,6 +77,7 @@ namespace PatcherYRpp
             set => unknown_bool_6DD = value; 
         }
         [FieldOffset(1758)] public Bool NeedsRepairs;
+        [FieldOffset(1759)] public Bool C4Applied;
         [FieldOffset(1760)] public Bool NoCrew;
 
         [FieldOffset(1763)] public Bool HasBeenCaptured;
@@ -77,9 +87,16 @@ namespace PatcherYRpp
         [FieldOffset(1768)] public Bool IsBeingRepaired;
 
 
-
-
-
-
+        public bool HasSuperWeapon(int index)
+        {
+            if (Type.Ref.HasSuperWeapon(index))
+                return true;
+            foreach(var pType in Upgrades)
+            {
+                if (pType.IsNotNull && pType.Ref.HasSuperWeapon(index))
+                    return true;
+            }
+            return false;
+        }
     }
 }
