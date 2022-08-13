@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace PatcherYRpp
 {
 	// provides access to the game's operator new and operator delete.
-	public class YRMemory
+	public static partial class YRMemory
 	{
 		// both functions are naked, which means neither prolog nor epilog are
 		// generated for them. thus, a simple jump suffices to redirect to the
@@ -45,7 +45,12 @@ namespace PatcherYRpp
             return ptr;
         }
 
-		class ConstructorCache
+        public static Pointer<T> Allocate<T>()
+        {
+            return AllocateChecked((uint)Marshal.SizeOf<T>());
+        }
+
+        class ConstructorCache
         {
             public ConstructorCache(Type[] paramTypes, object[] paramList, Expression expression)
             {
@@ -79,14 +84,16 @@ namespace PatcherYRpp
 
 		delegate T ConstructorFunction<T>(ref T @this, params object[] list);
 
+        /// <summary>
+        /// reflectly create a yr's class
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        /// <exception cref="NullReferenceException"></exception>
         public static Pointer<T> Create<T>(params object[] list)
         {
-            Pointer<T> ptr = AllocateChecked((uint)Marshal.SizeOf<T>());
-
-            if (ptr.IsNull)
-            {
-                throw new NullReferenceException("memory allocated by YR is nullptr");
-            }
+            Pointer<T> ptr = Allocate<T>();
 
             try
             {
@@ -120,24 +127,45 @@ namespace PatcherYRpp
             }
         }
 
+        static MemoryCache dtorCache = new MemoryCache("DTOR cache");
+
         public static void Delete<T>(Pointer<T> ptr)
 		{
-			if(ptr.IsNotNull)
-			{
+            if (ptr.IsNotNull)
+            {
                 try
-				{
-					Type type = typeof(T);
-                    MethodInfo destructor = type.GetMethod("Destructor", new Type[] { typeof(Pointer<T>) });
+                {
+                    Type type = typeof(T);
+                    var dtor = dtorCache[type.FullName] as Action<Pointer<T>>;
+                    if (dtor == null)
+                    {
+                        var parameterExpressions = new List<ParameterExpression>() { Expression.Parameter(typeof(Pointer<T>), "t") };
 
-                    destructor?.Invoke(null, new object[] { ptr });
+                        MethodInfo destructor = type.GetMethod("Destructor", new Type[] { typeof(Pointer<T>) });
+                        MethodCallExpression dtorExpression = Expression.Call(destructor, parameterExpressions);
+                        var expression = Expression.Lambda<Action<Pointer<T>>>(dtorExpression, parameterExpressions);
+                        var lambda = expression.Compile();
+
+                        var policy = new CacheItemPolicy
+                        {
+                            // TOCHECK: if there is no memory leak, expire after 60s
+                            SlidingExpiration = ObjectCache.NoSlidingExpiration
+                        };
+                        dtorCache.Set(typeof(T).Name, lambda, policy);
+
+                        dtor = lambda;
+                    }
+
+                    dtor(ptr);
+
                     Deallocate(ptr);
-				}
-                catch (Exception)
-				{
-					Deallocate(ptr);
-					throw;
                 }
-			}
+                catch (Exception)
+                {
+                    Deallocate(ptr);
+                    throw;
+                }
+            }
 		}
 	}
 

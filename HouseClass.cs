@@ -166,8 +166,8 @@ namespace PatcherYRpp
         // Target ought to be Object, I imagine, but cell doesn't work then
         public unsafe void SendSpyPlanes(int AircraftTypeIdx, int AircraftAmount, Mission SetMission, Pointer<AbstractClass> Target, Pointer<ObjectClass> Destination)
         {
-            var func = (delegate* unmanaged[Thiscall]<int, ref HouseClass, int, int, Mission, IntPtr, IntPtr, void>)ASM.FastCallTransferStation;
-            func(0x65EAB0, ref this, AircraftTypeIdx, AircraftAmount, SetMission, Target, Destination);
+            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, int, int, Mission, IntPtr, IntPtr, void>)ASM.FastCallTransferStation;
+            func(0x65EAB0, GetThis(), AircraftTypeIdx, AircraftAmount, SetMission, Target, Destination);
         }
 
         public unsafe Edge GetCurrentEdge()
@@ -182,7 +182,6 @@ namespace PatcherYRpp
                 edge = this.GetCurrentEdge();
             return edge;
         }
-
 
         [FieldOffset(48)] public int ArrayIndex;
 
