@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PatcherYRpp
 {
-    public class YRClassHandle<T> : CriticalFinalizerObject, IDisposable
+    public partial class YRClassHandle<T> : CriticalFinalizerObject, IDisposable
     {
         public YRClassHandle(params object[] list)
         {

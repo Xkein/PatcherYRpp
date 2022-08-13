@@ -146,6 +146,11 @@
     <Compile Include="WarheadTypeClass.cs" />
     <Compile Include="WeaponTypeClass.cs" />
     <Compile Include="YRMemory.cs" />
+    <Compile Include="YRMemory.Instantiator.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>YRMemory.Instantiator.tt</DependentUpon>
+    </Compile>
     <Compile Include="YRPP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -153,6 +158,15 @@
     <None Include="app.config" />
     <None Include="LICENSE" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="YRMemory.Instantiator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>YRMemory.Instantiator.g.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
