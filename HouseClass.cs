@@ -96,6 +96,13 @@ namespace PatcherYRpp
                 return true;
             }else return false;
         }
+
+        public unsafe void RemoveTracking(Pointer<TechnoClass> pTracked)
+        {
+            var func = (delegate* unmanaged[Thiscall]<IntPtr, IntPtr, void>)0x4FF550;
+            func(GetThis(), pTracked);
+        }
+
         public static unsafe Pointer<HouseClass> FindByCountryIndex(int houseType)
         {
             var func = (delegate* unmanaged[Thiscall]<int, IntPtr>)0x502D30;

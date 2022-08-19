@@ -644,12 +644,6 @@ namespace PatcherYRpp
         [FieldOffset(716)] public IntPtr mindControlledByHouse;
         public Pointer<AnimClass> MindControlledByHouse { get => mindControlledByHouse; set => mindControlledByHouse = value; }
 
-
-
-
-
-
-
         [FieldOffset(720)] public IntPtr spawnManager;
         public Pointer<SpawnManagerClass> SpawnManager { get => spawnManager; set => spawnManager = value; }
 
@@ -750,6 +744,9 @@ namespace PatcherYRpp
 
         [FieldOffset(1292)] public int ShouldLoseTargetNow;
 
+        [FieldOffset(1300)] private IntPtr planningToken;
+        public Pointer<PlanningTokenClass> PlanningToken => planningToken.Convert<PlanningTokenClass>();
+
         [FieldOffset(1304)] public IntPtr disguise;
         public Pointer<ObjectTypeClass> Disguise { get => disguise; set => disguise = value; }
 
@@ -757,5 +754,23 @@ namespace PatcherYRpp
         public Pointer<HouseClass> DisguisedAsHouse { get => disguisedAsHouse; set => disguisedAsHouse = value; }
 
         [FieldOffset(340)] public readonly IntPtr align_154;
+    }
+    [StructLayout(LayoutKind.Explicit,Size =0x9C)]
+    public struct PlanningTokenClass
+    {
+        [FieldOffset(0)] public Pointer<TechnoClass> OwnerUnit;
+        [FieldOffset(0x4)] public DynamicVectorClass<Pointer<PlanningNode>> PlanningNodes;
+        [FieldOffset(0x8C)] public int unknown8c;
+        [FieldOffset(0x90)] public int ClosedLoopNodeCount;
+        [FieldOffset(0x94)] public int StepsToClosedLoop;
+        public bool IsClosedLoop => StepsToClosedLoop >= 0;
+    }
+
+    [StructLayout(LayoutKind.Explicit,Size =0x18)]
+    public struct PlanningNode
+    {
+        [FieldOffset(4)] private IntPtr unknown4;
+        public Pointer<Pointer<TechnoClass>> UnknownArr => unknown4.Convert<Pointer<TechnoClass>>();
+        [FieldOffset(0x10)] public int unknown10;
     }
 }
