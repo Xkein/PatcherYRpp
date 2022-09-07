@@ -5,11 +5,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Microsoft.VisualStudio.OLE.Interop;
 
 using HRESULT = System.UInt32;
 using WORD = System.UInt16;
 using DWORD = System.UInt32;
 using LONG = System.UInt32;
+using Rect = Microsoft.VisualStudio.OLE.Interop.RECT;
 
 namespace PatcherYRpp
 {
@@ -155,7 +157,7 @@ namespace PatcherYRpp
         HRESULT GetSurfaceDesc(IntPtr lpDDSurfaceDesc);
         HRESULT Initialize(IntPtr lpDD, IntPtr lpDDSurfaceDesc);
         HRESULT IsLost();
-        HRESULT Lock(Pointer<Rect> lpDestRect, IntPtr lpDDSurfaceDesc, uint dwFlags, IntPtr hEvent);
+        HRESULT Lock(Pointer<RECT> lpDestRect, IntPtr lpDDSurfaceDesc, uint dwFlags, IntPtr hEvent);
         HRESULT ReleaseDC(IntPtr hDC);
         HRESULT Restore();
         HRESULT SetClipper(IntPtr lpDirectDrawClipper);
