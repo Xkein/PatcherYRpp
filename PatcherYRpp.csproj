@@ -102,6 +102,11 @@
     <Compile Include="GenericList.cs" />
     <Compile Include="Helpers\Bool.cs" />
     <Compile Include="Helpers\COMHelpers.cs" />
+    <Compile Include="Helpers\CompileTimeCheck.g.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CompileTimeCheck.tt</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Helpers.cs" />
     <Compile Include="Helpers\Cast.cs" />
     <Compile Include="Helpers\Pointer.cs" />
@@ -156,6 +161,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Helpers\CompileTimeCheck.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CompileTimeCheck.g.cs</LastGenOutput>
+    </None>
     <None Include="LICENSE" />
     <None Include="README.md" />
   </ItemGroup>
