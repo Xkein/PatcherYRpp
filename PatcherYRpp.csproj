@@ -115,6 +115,7 @@
     <Compile Include="InfantryClass.cs" />
     <Compile Include="InfantryTypeClass.cs" />
     <Compile Include="Interfaces.cs" />
+    <Compile Include="JumpjetLocomotionClass.cs" />
     <Compile Include="LaserDrawClass.cs" />
     <Compile Include="LocomotionClass.cs" />
     <Compile Include="MapClass.cs" />

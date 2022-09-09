@@ -12,7 +12,7 @@ namespace PatcherYRpp
         private static IntPtr pCurrentFrame = new IntPtr(0xA8ED84); // you should not change it
 
         // The height in the middle of a cell with a slope of 30 degrees
-        public const int LevelHeight = 104;//89DE70
+        public const int LevelHeight = 104;//89DE70 //0xAC13C8
         public const int BridgeLevels = 4;
         public const int BridgeHeight = LevelHeight * BridgeLevels;//ABC5DC
 
