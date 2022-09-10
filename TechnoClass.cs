@@ -393,6 +393,12 @@ namespace PatcherYRpp
             return func(ref this, pTarget);
         }
 
+        public unsafe void EnteredOpenTopped(Pointer<TechnoClass> pWho)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)0x710470;
+            func(ref this, pWho);
+        }
+
 
         [FieldOffset(0)] public RadioClass BaseRadio;
         [FieldOffset(0)] public MissionClass BaseMission;

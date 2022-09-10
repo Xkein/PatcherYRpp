@@ -15,6 +15,21 @@ namespace PatcherYRpp
         Foot = 0x4
     };
 
+    public enum Armor
+    {
+        None = 0,
+        Flak = 1,
+        Plate = 2,
+        Light = 3,
+        Medium = 4,
+        Heavy = 5,
+        Wood = 6,
+        Steel = 7,
+        Concrete = 8,
+        Special_1 = 9,
+        Special_2 = 10
+    }
+
     public enum AbstractType
     {
         None = 0,
