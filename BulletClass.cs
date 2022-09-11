@@ -49,6 +49,13 @@ namespace PatcherYRpp
             func(ref this, ref coords);
         }
 
+        public void DetonateAndUnInit(CoordStruct coords)
+        {
+            Detonate(coords);
+            Base.UnInit();
+        }
+
+
         public unsafe void LoseTarget()
         {
             var func = (delegate* unmanaged[Thiscall]<ref BulletClass, void>)0x468430;

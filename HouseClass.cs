@@ -64,6 +64,18 @@ namespace PatcherYRpp
             return func(GetThis(), pAbstract);
         }
 
+        public unsafe Bool ControlledByHuman()
+        {
+            Bool result = CurrentPlayer;
+            return result;
+        }
+        public unsafe Bool ControlledByPlayer()
+        {
+            Bool result = CurrentPlayer || PlayerControl;
+            return result;
+        }
+
+
         public unsafe void TakeMoney(int amount)
         {
             var func = (delegate* unmanaged[Thiscall]<IntPtr, int, void>)0x4F9790;
@@ -75,6 +87,17 @@ namespace PatcherYRpp
             func(GetThis(), amount);
         }
 
+        public void TransactMoney(int amount)
+        {
+            if (amount > 0)
+            {
+                GiveMoney(amount);
+            }
+            else
+            {
+                TakeMoney(-amount);
+            }
+        }
 
         public static unsafe Pointer<HouseClass> FindByCountryIndex(int houseType)
         {
@@ -137,11 +160,7 @@ namespace PatcherYRpp
             return FindBySideName("Civilian");
         }
 
-        public unsafe bool ControlledByHuman()
-        {
-            var func = (delegate* unmanaged[Thiscall]<IntPtr, Bool>)0x50B730;
-            return func(GetThis());
-        }
+      
 
         // Target ought to be Object, I imagine, but cell doesn't work then
         public unsafe void SendSpyPlanes(int AircraftTypeIdx, int AircraftAmount, Mission SetMission, Pointer<AbstractClass> Target, Pointer<ObjectClass> Destination)
@@ -173,11 +192,83 @@ namespace PatcherYRpp
 
         [FieldOffset(52)] public Pointer<HouseTypeClass> Type;
 
+
+        [FieldOffset(80)] public byte conyards;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> ConYards => ref Pointer<byte>.AsPointer(ref conyards).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(104)] public byte buildings;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> Buildings => ref Pointer<byte>.AsPointer(ref buildings).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(128)] public byte unitRepairStations;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> UnitRepairStations => ref Pointer<byte>.AsPointer(ref unitRepairStations).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(152)] public byte grinders;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> Grinders => ref Pointer<byte>.AsPointer(ref grinders).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(176)] public byte absorbers;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> Absorbers => ref Pointer<byte>.AsPointer(ref absorbers).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(200)] public byte bunkers;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> Bunkers => ref Pointer<byte>.AsPointer(ref bunkers).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(224)] public byte occupiables;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> Occupiables => ref Pointer<byte>.AsPointer(ref occupiables).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(248)] public byte cloningVats;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> CloningVats => ref Pointer<byte>.AsPointer(ref cloningVats).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(272)] public byte secretLabs;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> SecretLabs => ref Pointer<byte>.AsPointer(ref secretLabs).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(296)] public byte psychicDetectionBuildings;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> PsychicDetectionBuildings => ref Pointer<byte>.AsPointer(ref psychicDetectionBuildings).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(320)] public byte factoryPlants;
+        public ref DynamicVectorClass<Pointer<BuildingClass>> FactoryPlants => ref Pointer<byte>.AsPointer(ref factoryPlants).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
+
+        [FieldOffset(392)] public double FirepowerMultiplier;
+
+        [FieldOffset(400)] public double GroundspeedMultiplier;
+
+        [FieldOffset(408)] public double AirspeedMultiplier;
+
+        [FieldOffset(416)] public double ArmorMultiplier;
+
+        [FieldOffset(424)] public double ROFMultiplier;
+
+        [FieldOffset(432)] public double CostMultiplier;
+
+        [FieldOffset(440)] public double BuildTimeMultiplier;
+
         [FieldOffset(480)] public Edge StartingEdge;
+
+        [FieldOffset(492)] public Bool CurrentPlayer;
+
+        [FieldOffset(493)] public Bool PlayerControl;
+
+        [FieldOffset(501)] public Bool Defeated;
+
+        [FieldOffset(502)] public Bool IsGameOver;
+
+        [FieldOffset(503)] public Bool IsWinner;
+
+        [FieldOffset(504)] public Bool IsLoser;
 
         [FieldOffset(508)] public Bool RecheckTechTree;
 
         [FieldOffset(596)] public DynamicVectorClass<Pointer<SuperClass>> Supers;
+
+        [FieldOffset(21556)]
+        public int TotalKilledUnits;
+        [FieldOffset(21640)]
+        public int TotalKilledBuildings;
+        [FieldOffset(21736)]
+        public int SiloMoney;
+
+
+        [FieldOffset(22265)] public ColorStruct Color;
+
+        [FieldOffset(22268)] public ColorStruct LaserColor;
 
         [FieldOffset(22396)] public Edge Edge;
     }
