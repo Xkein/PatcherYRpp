@@ -47,45 +47,45 @@ namespace PatcherYRpp
             return Rank.Rookie;
         }
 
-        bool IsNegative()
+        public bool IsNegative()
         {
             return this.Veterancy < 0.0f;
         }
 
-        bool IsRookie()
+        public bool IsRookie()
         {
             return this.Veterancy >= 0.0f && this.Veterancy < 1.0f;
 
         }
 
-        bool IsVeteran()
+        public bool IsVeteran()
         {
             return this.Veterancy >= 1.0f && this.Veterancy < 2.0f;
 
         }
 
-        bool IsElite()
+        public bool IsElite()
         {
             return this.Veterancy >= 2.0f;
 
         }
 
-        void Reset()
+        public void Reset()
         {
             this.Veterancy = 0.0f;
         }
 
-        void SetRookie(bool notReally = true)
+        public void SetRookie(bool notReally = true)
         {
             this.Veterancy = notReally ? -0.25f : 0.0f;
         }
 
-        void SetVeteran(bool yesReally = true)
+        public void SetVeteran(bool yesReally = true)
         {
             this.Veterancy = yesReally ? 1.0f : 0.0f;
         }
 
-        void SetElite(bool yesReally = true)
+        public void SetElite(bool yesReally = true)
         {
             this.Veterancy = yesReally ? 2.0f : 0.0f;
         }
@@ -285,6 +285,20 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, IntPtr>)this.GetVirtualFunctionPointer(243);
             return func(ref this, pTarget, nWeaponIndex);
         }
+
+        /// <summary>
+        /// Fire Directly not use virtual function   by ststl
+        /// </summary>
+        /// <param name="pTarget"></param>
+        /// <param name="idxWeapon"></param>
+        /// <returns></returns>
+        public unsafe Pointer<BulletClass> Fire_NotVirtual(Pointer<AbstractClass> pTarget, int idxWeapon)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, IntPtr>)0x6FDD50;
+            return func(ref this, pTarget, idxWeapon);
+        }
+
+
         public unsafe void Guard()
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)this.GetVirtualFunctionPointer(244);
@@ -393,6 +407,12 @@ namespace PatcherYRpp
             return func(ref this, pTarget);
         }
 
+        public unsafe void EnteredOpenTopped(Pointer<TechnoClass> pWho)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)0x710470;
+            func(ref this, pWho);
+        }
+
 
         [FieldOffset(0)] public RadioClass BaseRadio;
         [FieldOffset(0)] public MissionClass BaseMission;
@@ -439,11 +459,14 @@ namespace PatcherYRpp
         [FieldOffset(704)] public IntPtr mindControlledBy;
         public Pointer<TechnoClass> MindControlledBy { get => mindControlledBy; set => mindControlledBy = value; }
         [FieldOffset(708)] public Bool MindControlledByAUnit;
-
         [FieldOffset(712)] public IntPtr mindControlRingAnim;
         public Pointer<AnimClass> MindControlRingAnim { get => mindControlRingAnim; set => mindControlRingAnim = value; }
         [FieldOffset(716)] public IntPtr mindControlledByHouse;
         public Pointer<AnimClass> MindControlledByHouse { get => mindControlledByHouse; set => mindControlledByHouse = value; }
+        [FieldOffset(720)] public IntPtr spawnManager;
+        public Pointer<SpawnManagerClass> SpawnManager { get => spawnManager; set => spawnManager = value; }
+        [FieldOffset(724)] public IntPtr spawnOwner;
+        public Pointer<TechnoClass> SpawnOwner { get => spawnOwner; set => spawnOwner = value; }
 
         [FieldOffset(764)] public int Ammo;
 

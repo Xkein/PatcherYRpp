@@ -17,5 +17,8 @@ namespace PatcherYRpp
         [FieldOffset(0)] public ObjectClass BaseObject;
         [FieldOffset(0)] public AbstractClass BaseAbstract;
 
+        [FieldOffset(1728)] public Pointer<InfantryTypeClass> Type;
+
+
     }
 }

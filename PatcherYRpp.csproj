@@ -122,6 +122,7 @@
     <Compile Include="LaserDrawClass.cs" />
     <Compile Include="LocomotionClass.cs" />
     <Compile Include="MapClass.cs" />
+    <Compile Include="MessageListClass.cs" />
     <Compile Include="MissionClass.cs" />
     <Compile Include="MixFileClass.cs" />
     <Compile Include="MPGameModeClass.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="ScenarioClass.cs" />
     <Compile Include="SessionClass.cs" />
     <Compile Include="SideClass.cs" />
+    <Compile Include="SpawnManagerClass.cs" />
     <Compile Include="SuperClass.cs" />
     <Compile Include="SuperWeaponTypeClass.cs" />
     <Compile Include="Surface.cs" />

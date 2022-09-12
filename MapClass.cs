@@ -64,6 +64,12 @@ namespace PatcherYRpp
         //    func(Damage, WH, CLDisableFlags, Force, coords);
         //}
 
+        public static unsafe int GetTotalDamage(int Damage, Pointer<WarheadTypeClass> WH, Armor armor, int distance)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, Armor, int, int>)ASM.FastCallTransferStation;
+            return func(0x489180, Damage, WH, armor, distance);
+        }
+
         public static unsafe DamageAreaResult DamageArea(CoordStruct Coords, int Damage, Pointer<TechnoClass> SourceObject,
            Pointer<WarheadTypeClass> WH, bool AffectsTiberium, Pointer<HouseClass> SourceHouse)
         {
@@ -94,6 +100,7 @@ namespace PatcherYRpp
             func(ref this, out CellStruct outBuffer, ref position, SpeedType, a5, MovementZone, alt, SpaceSizeX, SpaceSizeY, disallowOverlay, a11, requireBurrowable, allowBridge, ref closeTo, a15, buildable);
             return outBuffer;
         }
+
 
 
         [FieldOffset(312)] public DynamicVectorClass<Pointer<CellClass>> Cells;
