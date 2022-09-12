@@ -64,14 +64,14 @@ namespace PatcherYRpp
             return func(GetThis(), pAbstract);
         }
 
-        public unsafe Bool ControlledByHuman()
+        public unsafe bool ControlledByHuman()
         {
-            Bool result = CurrentPlayer;
+            bool result = CurrentPlayer;
             return result;
         }
-        public unsafe Bool ControlledByPlayer()
+        public unsafe bool ControlledByPlayer()
         {
-            Bool result = CurrentPlayer || PlayerControl;
+            bool result = CurrentPlayer || PlayerControl;
             return result;
         }
 
@@ -227,44 +227,28 @@ namespace PatcherYRpp
         public ref DynamicVectorClass<Pointer<BuildingClass>> FactoryPlants => ref Pointer<byte>.AsPointer(ref factoryPlants).Convert<DynamicVectorClass<Pointer<BuildingClass>>>().Ref;
 
         [FieldOffset(392)] public double FirepowerMultiplier;
-
         [FieldOffset(400)] public double GroundspeedMultiplier;
-
         [FieldOffset(408)] public double AirspeedMultiplier;
-
         [FieldOffset(416)] public double ArmorMultiplier;
-
         [FieldOffset(424)] public double ROFMultiplier;
-
         [FieldOffset(432)] public double CostMultiplier;
-
         [FieldOffset(440)] public double BuildTimeMultiplier;
-
         [FieldOffset(480)] public Edge StartingEdge;
-
         [FieldOffset(492)] public Bool CurrentPlayer;
-
         [FieldOffset(493)] public Bool PlayerControl;
-
         [FieldOffset(501)] public Bool Defeated;
-
         [FieldOffset(502)] public Bool IsGameOver;
-
         [FieldOffset(503)] public Bool IsWinner;
-
         [FieldOffset(504)] public Bool IsLoser;
-
         [FieldOffset(508)] public Bool RecheckTechTree;
-
         [FieldOffset(596)] public DynamicVectorClass<Pointer<SuperClass>> Supers;
 
-        [FieldOffset(21556)]
-        public int TotalKilledUnits;
-        [FieldOffset(21640)]
-        public int TotalKilledBuildings;
-        [FieldOffset(21736)]
-        public int SiloMoney;
 
+        [FieldOffset(21556)]public int TotalKilledUnits;
+
+        [FieldOffset(21640)] public int TotalKilledBuildings;
+
+        [FieldOffset(21736)] public int SiloMoney;
 
         [FieldOffset(22265)] public ColorStruct Color;
 

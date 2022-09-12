@@ -459,15 +459,12 @@ namespace PatcherYRpp
         [FieldOffset(704)] public IntPtr mindControlledBy;
         public Pointer<TechnoClass> MindControlledBy { get => mindControlledBy; set => mindControlledBy = value; }
         [FieldOffset(708)] public Bool MindControlledByAUnit;
-
         [FieldOffset(712)] public IntPtr mindControlRingAnim;
         public Pointer<AnimClass> MindControlRingAnim { get => mindControlRingAnim; set => mindControlRingAnim = value; }
         [FieldOffset(716)] public IntPtr mindControlledByHouse;
         public Pointer<AnimClass> MindControlledByHouse { get => mindControlledByHouse; set => mindControlledByHouse = value; }
-
         [FieldOffset(720)] public IntPtr spawnManager;
         public Pointer<SpawnManagerClass> SpawnManager { get => spawnManager; set => spawnManager = value; }
-
         [FieldOffset(724)] public IntPtr spawnOwner;
         public Pointer<TechnoClass> SpawnOwner { get => spawnOwner; set => spawnOwner = value; }
 

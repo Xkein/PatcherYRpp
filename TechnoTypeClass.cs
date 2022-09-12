@@ -75,19 +75,15 @@ namespace PatcherYRpp
 
         [FieldOffset(844)] public Guid Locomotor;
 
-        [FieldOffset(896)]
-        public double Size;
+        [FieldOffset(896)] public double Size;
 
         [FieldOffset(1460)] public MovementZone MovementZone;
 
-        [FieldOffset(1516)]
-        public int Speed;
+        [FieldOffset(1516)] public int Speed;
 
-        [FieldOffset(1552)]
-        public int Cost;
 
-        [FieldOffset(1556)]
-        public int Soylent;
+        [FieldOffset(1552)] public int Cost;
+        [FieldOffset(1556)] public int Soylent;
 
         [FieldOffset(1660)] public SpeedType SpeedType;
 
@@ -102,8 +98,8 @@ namespace PatcherYRpp
         [FieldOffset(1808)] public Pointer<SHPStruct> AltCameo;
         [FieldOffset(1812)] public Bool AltCameoAllocated;
 
-        [FieldOffset(1820)]
-        public int ROT;
+
+        [FieldOffset(1820)] public int ROT;
 
         [FieldOffset(2200)] public WeaponStruct Weapon_first;
         public Pointer<WeaponStruct> Weapon => Pointer<WeaponStruct>.AsPointer(ref Weapon_first);

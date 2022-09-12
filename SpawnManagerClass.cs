@@ -24,14 +24,11 @@ namespace PatcherYRpp
         public Pointer<TechnoClass> Owner { get => owner; set => owner = value; }
 
         [FieldOffset(44)] public int SpawnCount;
-
         [FieldOffset(48)] public int RegenRate;
-
         [FieldOffset(52)] public int ReloadRate;
       
         [FieldOffset(104)] public IntPtr destination;
         public Pointer<AbstractClass> Destination { get => destination; set => destination = value; }
-
         [FieldOffset(108)] public IntPtr target;
         public Pointer<AbstractClass> Target { get => target; set => target = value; }
 

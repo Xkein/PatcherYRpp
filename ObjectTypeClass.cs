@@ -24,9 +24,7 @@ namespace PatcherYRpp
         [FieldOffset(0)] public AbstractTypeClass Base;
 
         [FieldOffset(156)] public Armor Armor;
-
         [FieldOffset(160)] public int Strength;
-
 
         [FieldOffset(504)] public byte ImageFile_first;
         public AnsiStringPointer ImageFile => Pointer<byte>.AsPointer(ref ImageFile_first);
