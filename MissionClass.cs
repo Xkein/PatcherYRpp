@@ -211,10 +211,8 @@ namespace PatcherYRpp
         [FieldOffset(172)] public Mission CurrentMission;
         [FieldOffset(176)] public Mission unknown_mission_B0;
         [FieldOffset(180)] public Mission QueuedMission;
-
         [FieldOffset(188)] public int MissionStatus;
         [FieldOffset(192)] public int CurrentMissionStartTime;    //in frames
-
         [FieldOffset(200)] public TimerStruct UpdateTimer;
     }
 }

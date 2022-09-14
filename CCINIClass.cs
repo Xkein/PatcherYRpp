@@ -75,9 +75,7 @@ namespace PatcherYRpp
         }
 
         [FieldOffset(0)] public INIClass Base;
-
         [FieldOffset(12)] public YRList<INIClass.INISection> Sections;
-
         [FieldOffset(64)] public Bool Digested;
     }
 }

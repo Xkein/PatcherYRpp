@@ -20,7 +20,6 @@ namespace PatcherYRpp
         [FieldOffset(44)] public AnsiStringPointer INIFilename;
         [FieldOffset(48)] public AnsiStringPointer MapFilter;
         [FieldOffset(52)] public Bool AIAllowed;
-
         [FieldOffset(56)] public Pointer<CCINIClass> INI;
         [FieldOffset(60)] public Bool AlliesAllowed;
         [FieldOffset(61)] public Bool wolTourney;

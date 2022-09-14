@@ -87,13 +87,11 @@ namespace PatcherYRpp
 
         public int NumControlNodes => ControlNodes.Count;
 
-
         [FieldOffset(0)] public AbstractClass Base;
         [FieldOffset(36)] public DynamicVectorClass<Pointer<ControlNode>> ControlNodes;
         [FieldOffset(60)] public int MaxControlNodes;
         [FieldOffset(64)] public Bool InfiniteMindControl;
         [FieldOffset(65)] public Bool OverloadDeathSoundPlayed; // Has the mind control death sound played already?
-
         [FieldOffset(68)] public int OverloadPipState; // Used to create the red overloading pip by returning true in IsOverloading's wasDamageApplied for 10 frames.
         [FieldOffset(72)] public Pointer<TechnoClass> Owner;
         [FieldOffset(76)] public int OverloadDamageDelay; // Decremented every frame. If it reaches zero, OverloadDamage is applied.
