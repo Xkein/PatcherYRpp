@@ -10,9 +10,9 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 888)]
     public struct AnimTypeClass
     {
-        static public readonly IntPtr ArrayPointer = new IntPtr(0x8B4150);
+        public static readonly IntPtr ArrayPointer = new IntPtr(0x8B4150);
 
-        static public YRPP.GLOBAL_DVC_ARRAY<AnimTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<AnimTypeClass>(ArrayPointer);
+        public static YRPP.GLOBAL_DVC_ARRAY<AnimTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<AnimTypeClass>(ArrayPointer);
 
         [FieldOffset(0)] public ObjectTypeClass Base;
 
@@ -21,7 +21,6 @@ namespace PatcherYRpp
         [FieldOffset(668)] public int MiddleFrameWidth;
         [FieldOffset(672)] public int MiddleFrameHeight;
         [FieldOffset(676)] public byte unknown_2A4;
-
         [FieldOffset(680)] public double Damage;
         [FieldOffset(688)] public int Rate;
         [FieldOffset(692)] public int Start;
@@ -65,34 +64,34 @@ namespace PatcherYRpp
         [FieldOffset(840)] public int ZAdjust;
         [FieldOffset(844)] public int MakeInfantry;
         [FieldOffset(848)] public int RunningFrames;
-        [FieldOffset(852)] public bool IsFlamingGuy;
-        [FieldOffset(853)] public bool IsVeins;
-        [FieldOffset(854)] public bool IsMeteor;
-        [FieldOffset(855)] public bool TiberiumChainReaction;
-        [FieldOffset(856)] public bool IsTiberium;
-        [FieldOffset(857)] public bool HideIfNoOre;
-        [FieldOffset(858)] public bool Bouncer;
-        [FieldOffset(859)] public bool Tiled;
-        [FieldOffset(860)] public bool ShouldUseCellDrawer;
-        [FieldOffset(861)] public bool UseNormalLight;
-        [FieldOffset(862)] public bool DemandLoad; // not loaded from ini anymore
-        [FieldOffset(863)] public bool FreeLoad;  // not loaded from ini anymore
-        [FieldOffset(864)] public bool IsAnimatedTiberium;
-        [FieldOffset(865)] public bool AltPalette;
-        [FieldOffset(866)] public bool Normalized;
+        [FieldOffset(852)] public Bool IsFlamingGuy;
+        [FieldOffset(853)] public Bool IsVeins;
+        [FieldOffset(854)] public Bool IsMeteor;
+        [FieldOffset(855)] public Bool TiberiumChainReaction;
+        [FieldOffset(856)] public Bool IsTiberium;
+        [FieldOffset(857)] public Bool HideIfNoOre;
+        [FieldOffset(858)] public Bool Bouncer;
+        [FieldOffset(859)] public Bool Tiled;
+        [FieldOffset(860)] public Bool ShouldUseCellDrawer;
+        [FieldOffset(861)] public Bool UseNormalLight;
+        [FieldOffset(862)] public Bool DemandLoad; // not loaded from ini anymore
+        [FieldOffset(863)] public Bool FreeLoad;  // not loaded from ini anymore
+        [FieldOffset(864)] public Bool IsAnimatedTiberium;
+        [FieldOffset(865)] public Bool AltPalette;
+        [FieldOffset(866)] public Bool Normalized;
         [FieldOffset(868)] public Layer Layer;
-        [FieldOffset(872)] public bool DoubleThick;
-        [FieldOffset(873)] public bool Flat;
-        [FieldOffset(874)] public bool Translucent;
-        [FieldOffset(875)] public bool Scorch;
-        [FieldOffset(876)] public bool Flamer;
-        [FieldOffset(877)] public bool Crater;
-        [FieldOffset(878)] public bool ForceBigCraters;
-        [FieldOffset(879)] public bool Sticky;
-        [FieldOffset(880)] public bool PingPong;
-        [FieldOffset(881)] public bool Reverse;
-        [FieldOffset(882)] public bool Shadow;
-        [FieldOffset(883)] public bool PsiWarning;
-        [FieldOffset(884)] public bool ShouldFogRemove;
+        [FieldOffset(872)] public Bool DoubleThick;
+        [FieldOffset(873)] public Bool Flat;
+        [FieldOffset(874)] public Bool Translucent;
+        [FieldOffset(875)] public Bool Scorch;
+        [FieldOffset(876)] public Bool Flamer;
+        [FieldOffset(877)] public Bool Crater;
+        [FieldOffset(878)] public Bool ForceBigCraters;
+        [FieldOffset(879)] public Bool Sticky;
+        [FieldOffset(880)] public Bool PingPong;
+        [FieldOffset(881)] public Bool Reverse;
+        [FieldOffset(882)] public Bool Shadow;
+        [FieldOffset(883)] public Bool PsiWarning;
+        [FieldOffset(884)] public Bool ShouldFogRemove;
     }
 }
