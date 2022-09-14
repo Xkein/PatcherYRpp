@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using PatcherYRpp.FileFormats;
 
 namespace PatcherYRpp
 {
@@ -25,8 +26,32 @@ namespace PatcherYRpp
 
         public unsafe bool ChronoWarpTo(CoordStruct where)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref FootClass, IntPtr, bool>)this.GetVirtualFunctionPointer(322);
-            return func(ref this, Pointer<CoordStruct>.AsPointer(ref where));
+            var func = (delegate* unmanaged[Thiscall]<ref FootClass, CoordStruct, bool>)this.GetVirtualFunctionPointer(322);
+            return func(ref this, where);
+        }
+
+        public unsafe void Draw_A_SHP(Pointer<SHPStruct> SHP, int idxFacing, Pointer<Point2D> coords, Pointer<RectangleStruct> rectangle,
+            int dwUnk5, int dwUnk6, int dwUnk7, ZGradient ZGradient,
+            int dwUnk9, int extraLight, int dwUnk11, int dwUnk12,
+            int dwUnk13, int dwUnk14, int dwUnk15, int dwUnk16)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref FootClass, IntPtr, int, IntPtr, IntPtr,
+                int, int, int, ZGradient,
+                int, int, int, int,
+                int, int, int, int,
+                void>)this.GetVirtualFunctionPointer(323);
+            func(ref this, SHP, idxFacing, coords, rectangle,
+                dwUnk5, dwUnk6, dwUnk7, ZGradient,
+                dwUnk9, extraLight, dwUnk11, dwUnk12,
+                dwUnk13, dwUnk14, dwUnk15, dwUnk16);
+        }
+
+        public unsafe void Draw_A_VXL(Pointer<VoxelStruct> VXL, int HVAFrameIndex, int flags, Pointer<SomeVoxelCache> cache, Pointer<RectangleStruct> rectangle,
+            Pointer<Point2D> centerPoint, Pointer<Matrix3DStruct> matrix, int bright, int tint, int dwUnk10)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref FootClass, IntPtr, int, int, IntPtr, IntPtr,
+                IntPtr, IntPtr, int, int, int, void>)this.GetVirtualFunctionPointer(324);
+            func(ref this, VXL, HVAFrameIndex, flags, cache, rectangle, centerPoint, matrix, bright, tint, dwUnk10);
         }
 
         public unsafe void Panic()
@@ -51,6 +76,12 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref FootClass, bool>)this.GetVirtualFunctionPointer(338);
             return func(ref this);
+        }
+
+        public unsafe int Inf_PlayAnim(SequenceAnimType sequenceAnimType)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref FootClass, SequenceAnimType, int, int, int>)this.GetVirtualFunctionPointer(342);
+            return func(ref this, sequenceAnimType, 0, 0);
         }
 
         public unsafe void AbortMotion()
@@ -89,11 +120,7 @@ namespace PatcherYRpp
         [FieldOffset(1616)] public TimerStruct BaseAttackTimer;
         [FieldOffset(1628)] public TimerStruct SightTimer;
         [FieldOffset(1640)] public TimerStruct BlockagePathTimer;
-
-
-
         [FieldOffset(1652)] public COMPtr<ILocomotion> locomotor;
-
         public ILocomotion Locomotor
         {
             get => locomotor.Object;
@@ -103,5 +130,9 @@ namespace PatcherYRpp
                 locomotor.Object = value;
             }
         }
+        [FieldOffset(1684)] public IntPtr parasiteEatingMe;
+        public Pointer<FootClass> ParasiteEatingMe => parasiteEatingMe;
+        [FieldOffset(1711)] public Bool FacingChanging;
+        [FieldOffset(1718)] public Bool FrozenStill;
     }
 }
