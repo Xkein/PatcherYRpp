@@ -22,6 +22,12 @@ namespace PatcherYRpp
         }
 
         public static void Constructor(Pointer<LaserDrawClass> pThis, CoordStruct source, CoordStruct target, ColorStruct innerColor,
+            ColorStruct outerColor, ColorStruct outerSpread, int duration, bool blinks = false)
+        {
+            Constructor(pThis, source, target, 0, 1, innerColor, outerColor, outerSpread, duration, blinks);
+        }
+
+        public static void Constructor(Pointer<LaserDrawClass> pThis, CoordStruct source, CoordStruct target, ColorStruct innerColor,
             ColorStruct outerColor, ColorStruct outerSpread, int duration)
         {
             Constructor(pThis, source, target, 0, 1, innerColor, outerColor, outerSpread, duration);
@@ -40,5 +46,9 @@ namespace PatcherYRpp
         [FieldOffset(65)] public ColorStruct InnerColor;
         [FieldOffset(68)] public ColorStruct OuterColor;
         [FieldOffset(71)] public ColorStruct OuterSpread;
+        [FieldOffset(76)] public int Duration;
+        [FieldOffset(80)] public Bool Blinks;
+        [FieldOffset(81)] public byte BlinkState;
+        [FieldOffset(82)] public Bool Fades;
     }
 }
