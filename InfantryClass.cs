@@ -33,9 +33,6 @@ namespace PatcherYRpp
         [FieldOffset(0)] public AbstractClass BaseAbstract;
 
         [FieldOffset(1728)] public Pointer<InfantryTypeClass> Type;
-
-       
-
         [FieldOffset(1748)] public int PanicDurationLeft;
 
         [FieldOffset(1752)] public Bool PermanentBerzerk;
@@ -47,6 +44,5 @@ namespace PatcherYRpp
         [FieldOffset(1755)] public Bool Crawling;
 
         [FieldOffset(1756)] public Bool ZoneCheat;
-
     }
 }

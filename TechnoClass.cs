@@ -345,6 +345,20 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, IntPtr>)this.GetVirtualFunctionPointer(243);
             return func(ref this, pTarget, nWeaponIndex);
         }
+
+        /// <summary>
+        /// Fire Directly not use virtual function   by ststl
+        /// </summary>
+        /// <param name="pTarget"></param>
+        /// <param name="idxWeapon"></param>
+        /// <returns></returns>
+        public unsafe Pointer<BulletClass> Fire_NotVirtual(Pointer<AbstractClass> pTarget, int idxWeapon)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, IntPtr>)0x6FDD50;
+            return func(ref this, pTarget, idxWeapon);
+        }
+
+
         public unsafe void Guard()
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)this.GetVirtualFunctionPointer(244);
@@ -451,6 +465,12 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)0x5F6360;
             return func(ref this, pTarget);
+        }
+
+        public unsafe void EnteredOpenTopped(Pointer<TechnoClass> pWho)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)0x710470;
+            func(ref this, pWho);
         }
 
 
@@ -592,7 +612,7 @@ namespace PatcherYRpp
         [FieldOffset(540)] private IntPtr owner;
         public Pointer<HouseClass> Owner { get => owner; set => owner = value; }
 
-        //[FieldOffset(544)] public CloakStates CloakStates;
+        [FieldOffset(544)] public CloakState CloakState;
 
         [FieldOffset(548)] public ProgressTimer CloakProgress; // phase from [opaque] -> [fading] -> [transparent] , [General]CloakingStages= long
 
@@ -633,30 +653,32 @@ namespace PatcherYRpp
         [FieldOffset(692)] public Pointer<AbstractClass> Target;
 
         [FieldOffset(696)] public Pointer<AbstractClass> LastTarget;
-        [FieldOffset(700)] public IntPtr captureManager;
+
+        [FieldOffset(700)] private IntPtr captureManager;
         public Pointer<CaptureManagerClass> CaptureManager { get => captureManager; set => captureManager = value; }
-        [FieldOffset(704)] public IntPtr mindControlledBy;
+
+        [FieldOffset(704)] private IntPtr mindControlledBy;
         public Pointer<TechnoClass> MindControlledBy { get => mindControlledBy; set => mindControlledBy = value; }
+
         [FieldOffset(708)] public Bool MindControlledByAUnit;
 
-        [FieldOffset(712)] public IntPtr mindControlRingAnim;
+        [FieldOffset(712)] private IntPtr mindControlRingAnim;
         public Pointer<AnimClass> MindControlRingAnim { get => mindControlRingAnim; set => mindControlRingAnim = value; }
-        [FieldOffset(716)] public IntPtr mindControlledByHouse;
+
+        [FieldOffset(716)] private IntPtr mindControlledByHouse;
         public Pointer<AnimClass> MindControlledByHouse { get => mindControlledByHouse; set => mindControlledByHouse = value; }
 
-        [FieldOffset(720)] public IntPtr spawnManager;
+        [FieldOffset(720)] private IntPtr spawnManager;
         public Pointer<SpawnManagerClass> SpawnManager { get => spawnManager; set => spawnManager = value; }
 
-        [FieldOffset(724)] public IntPtr spawnOwner;
+        [FieldOffset(724)] private IntPtr spawnOwner;
         public Pointer<TechnoClass> SpawnOwner { get => spawnOwner; set => spawnOwner = value; }
 
-        [FieldOffset(728)] public IntPtr slaveManager;
+        [FieldOffset(728)] private IntPtr slaveManager;
         public Pointer<SlaveManagerClass> SlaveManager { get => slaveManager; set => slaveManager = value; }
 
-
-        [FieldOffset(732)] public IntPtr slaveOwner;
+        [FieldOffset(732)] private IntPtr slaveOwner;
         public Pointer<TechnoClass> SlaveOwner { get => slaveOwner; set => slaveOwner = value; }
-
 
         [FieldOffset(744)] public float PitchAngle; // not exactly, and it doesn't affect the drawing, only internal state of a dropship
 
@@ -763,7 +785,7 @@ namespace PatcherYRpp
         [FieldOffset(0x8C)] public int unknown8c;
         [FieldOffset(0x90)] public int ClosedLoopNodeCount;
         [FieldOffset(0x94)] public int StepsToClosedLoop;
-        public bool IsClosedLoop => StepsToClosedLoop >= 0;
+        public bool IsClosed => StepsToClosedLoop >= 0;
     }
 
     [StructLayout(LayoutKind.Explicit,Size =0x18)]

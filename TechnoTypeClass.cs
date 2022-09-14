@@ -27,7 +27,6 @@ namespace PatcherYRpp
 
         static public YRPP.GLOBAL_DVC_ARRAY<TechnoTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<TechnoTypeClass>(ArrayPointer);
 
-
         public unsafe bool CanAttackMove()
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoTypeClass, Bool>)this.GetVirtualFunctionPointer(41);
@@ -73,23 +72,6 @@ namespace PatcherYRpp
         [FieldOffset(0)] public ObjectTypeClass Base;
         [FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
-        [FieldOffset(1750)] public byte CameoFile_first;
-        public AnsiStringPointer CameoFile => Pointer<byte>.AsPointer(ref CameoFile_first);
-
-        [FieldOffset(1776)] public Pointer<SHPStruct> Cameo;
-        [FieldOffset(1780)] public Bool CameoAllocated;
-        [FieldOffset(1801)] public byte AltCameoFile_first;
-        public AnsiStringPointer AltCameoFile => Pointer<byte>.AsPointer(ref AltCameoFile_first);
-
-        [FieldOffset(1808)] public Pointer<SHPStruct> AltCameo;
-        [FieldOffset(1812)] public Bool AltCameoAllocated;
-
-        [FieldOffset(2200)] public WeaponStruct Weapon_first;
-        public Pointer<WeaponStruct> Weapon => Pointer<WeaponStruct>.AsPointer(ref Weapon_first);
-        [FieldOffset(2704)] public Bool ClearAllWeapons;
-        [FieldOffset(2708)] public WeaponStruct EliteWeapon_first;
-        public Pointer<WeaponStruct> EliteWeapon => Pointer<WeaponStruct>.AsPointer(ref EliteWeapon_first);
-
 
 
         [FieldOffset(668)] public AbilitiesStruct VeteranAbilities;
@@ -100,7 +82,15 @@ namespace PatcherYRpp
 
         [FieldOffset(844)] public Guid Locomotor;
 
+        [FieldOffset(896)] public double Size;
+
+        [FieldOffset(904)] public double SizeLimit;
+
+        [FieldOffset(912)] public Bool HoverAttack;
+
         [FieldOffset(944)] public float PitchAngle;
+
+        [FieldOffset(952)] public int BuildLimit;
 
         [FieldOffset(988)] public int LeptonMindControlOffset;
 
@@ -110,13 +100,15 @@ namespace PatcherYRpp
 
         [FieldOffset(1464)] public int GuardRange;
 
-        [FieldOffset(1496)] public int Passengers;
+        [FieldOffset(1504)] public int Passengers;
 
-        [FieldOffset(1500)] public Bool OpenTopped;
+        [FieldOffset(1508)] public Bool OpenTopped;
 
         [FieldOffset(1512)] public int Sight;
 
         [FieldOffset(1552)] public int Cost;
+
+        [FieldOffset(1556)] public int Soylent;
 
         [FieldOffset(1560)] public int FlightLevel;
 
@@ -161,6 +153,19 @@ namespace PatcherYRpp
         [FieldOffset(1736)] public Bool PreventAttackMove;
 
         [FieldOffset(1749)] public Bool AllowedToStartInMultiplayer;
+        [FieldOffset(1750)] public byte CameoFile_first;
+        public AnsiStringPointer CameoFile => Pointer<byte>.AsPointer(ref CameoFile_first);
+
+        [FieldOffset(1776)] public Pointer<SHPStruct> Cameo;
+
+        [FieldOffset(1780)] public Bool CameoAllocated;
+
+        [FieldOffset(1801)] public byte AltCameoFile_first;
+        public AnsiStringPointer AltCameoFile => Pointer<byte>.AsPointer(ref AltCameoFile_first);
+
+        [FieldOffset(1808)] public Pointer<SHPStruct> AltCameo;
+
+        [FieldOffset(1812)] public Bool AltCameoAllocated;
 
         [FieldOffset(1820)] public int ROT;
 
@@ -170,11 +175,17 @@ namespace PatcherYRpp
 
         [FieldOffset(1864)] public DynamicVectorClass<Pointer<AnimTypeClass>> DestroyAnim;
 
+
         [FieldOffset(2060)] public int WeaponCount;
 
         [FieldOffset(2068)] public CoordStruct turretWeaponFLH_first; // index 6 - 10 is AlternateFLH0 - AlternateFLH4, if no data use Weapon1FLH's data.
         public Pointer<CoordStruct> TurretWeaponFLH => Pointer<CoordStruct>.AsPointer(ref turretWeaponFLH_first);
 
+        [FieldOffset(2200)] public WeaponStruct Weapon_first;
+        public Pointer<WeaponStruct> Weapon => Pointer<WeaponStruct>.AsPointer(ref Weapon_first);
+        [FieldOffset(2704)] public Bool ClearAllWeapons;
+        [FieldOffset(2708)] public WeaponStruct EliteWeapon_first;
+        public Pointer<WeaponStruct> EliteWeapon => Pointer<WeaponStruct>.AsPointer(ref EliteWeapon_first);
 
         [FieldOffset(3212)] public Bool TypeImmune;
 

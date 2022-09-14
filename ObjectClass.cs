@@ -184,16 +184,39 @@ namespace PatcherYRpp
             return func(ref this, idxWeapon);
         }
 
+
+        public unsafe Mission GetCurrentMission()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, Mission>)
+                Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 97);
+            return func(ref this);
+        }
+
+        public unsafe void RestoreMission(Mission mission)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, Mission, void>)
+                Helpers.GetVirtualFunctionPointer(Pointer<ObjectClass>.AsPointer(ref this), 98);
+            func(ref this, mission);
+        }
+
+
+        //from kratos
+        public unsafe DamageState TakeDamage(int damage, Pointer<WarheadTypeClass> pWH, bool crewed)
+        {
+            return TakeDamage(damage, pWH, IntPtr.Zero, IntPtr.Zero, crewed);
+        }
+
+        public unsafe DamageState TakeDamage(int damage, Pointer<WarheadTypeClass> pWH, Pointer<ObjectClass> pAttacker, Pointer<HouseClass> pAttackingHouse, bool crewed)
+        {
+            return ReceiveDamage(Pointer<int>.AsPointer(ref damage), 0, pWH, pAttacker, true, !crewed, pAttackingHouse);
+        }
+
+
         public unsafe DamageState ReceiveDamage(Pointer<int> pDamage, int DistanceFromEpicenter, Pointer<WarheadTypeClass> pWH,
             Pointer<ObjectClass> pAttacker, bool IgnoreDefenses, bool PreventPassengerEscape, Pointer<HouseClass> pAttackingHouse)
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr, int, IntPtr, IntPtr, Bool, Bool, IntPtr, DamageState>)this.GetVirtualFunctionPointer(91);
             return func(ref this, pDamage, DistanceFromEpicenter, pWH, pAttacker, IgnoreDefenses, PreventPassengerEscape, pAttackingHouse);
-        }
-
-        public unsafe DamageState TakeDamage(int damage, Pointer<WarheadTypeClass> pWH, bool crewed)
-        {
-            return ReceiveDamage(Pointer<int>.AsPointer(ref damage),0, pWH, Pointer<ObjectClass>.Zero,true,!crewed, Pointer<HouseClass>.Zero);
         }
 
         public unsafe void Scatter(CoordStruct crd, bool ignoreMission, bool ignoreDestination)

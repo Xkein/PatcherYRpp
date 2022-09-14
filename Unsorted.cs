@@ -9,7 +9,7 @@ namespace PatcherYRpp
     public static class Game
     {
         public static int CurrentFrame => pCurrentFrame.Convert<int>().Data;
-        private static IntPtr pCurrentFrame = new IntPtr(0xA8ED84); // you should not change it
+        public static IntPtr pCurrentFrame = new IntPtr(0xA8ED84); // you should not change it
 
         // The height in the middle of a cell with a slope of 30 degrees
         public const int LevelHeight = 104;//89DE70 //0xAC13C8

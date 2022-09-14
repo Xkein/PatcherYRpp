@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +16,10 @@ namespace PatcherYRpp
 
         [FieldOffset(0)] public GameMode GameMode;
         [FieldOffset(4)] public Pointer<MPGameModeClass> MPGameMode;
+
+        public static bool IsCampaign => Instance.GameMode == GameMode.Campaign;
+
+        public static bool IsSinglePayer => Instance.GameMode == GameMode.Campaign || Instance.GameMode == GameMode.Skirmish;
+
     }
 }

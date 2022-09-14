@@ -64,6 +64,22 @@ namespace PatcherYRpp
             return func(GetThis(), pAbstract);
         }
 
+        public unsafe bool ControlledByHuman()
+        {
+            bool result = CurrentPlayer;
+            if (SessionClass.IsCampaign)
+                result = result || PlayerControl;
+            return result;
+        }
+
+        public unsafe bool ControlledByPlayer()
+        {
+            if (!SessionClass.IsCampaign)
+                return GetThis() == Player;
+            return CurrentPlayer || PlayerControl;
+        }
+
+
         public unsafe void TakeMoney(int amount)
         {
             var func = (delegate* unmanaged[Thiscall]<IntPtr, int, void>)0x4F9790;
@@ -164,11 +180,7 @@ namespace PatcherYRpp
             return FindBySideName("Civilian");
         }
 
-        public unsafe bool ControlledByHuman()
-        {
-            var func = (delegate* unmanaged[Thiscall]<IntPtr, Bool>)0x50B730;
-            return func(GetThis());
-        }
+      
 
         // Target ought to be Object, I imagine, but cell doesn't work then
         public unsafe void SendSpyPlanes(int AircraftTypeIdx, int AircraftAmount, Mission SetMission, Pointer<AbstractClass> Target, Pointer<ObjectClass> Destination)
@@ -243,27 +255,16 @@ namespace PatcherYRpp
         [FieldOffset(464)] public int IQLevel;
         [FieldOffset(468)] public int TechLevel;
         [FieldOffset(480)] public Edge StartingEdge;
-
         [FieldOffset(492)] public Bool CurrentPlayer;
-
         [FieldOffset(493)] public Bool PlayerControl;
-
         [FieldOffset(501)] public Bool Defeated;
-
         [FieldOffset(502)] public Bool IsGameOver;
-
         [FieldOffset(503)] public Bool IsWinner;
-
         [FieldOffset(504)] public Bool IsLoser;
-
         [FieldOffset(505)] public Bool CiviliansEvacuated;
-
         [FieldOffset(506)] public Bool FirestormActive;
-
         [FieldOffset(507)] public Bool HasThreatNode;
-
         [FieldOffset(508)] public Bool RecheckTechTree;
-
         [FieldOffset(596)] public DynamicVectorClass<Pointer<SuperClass>> Supers;
 
         [FieldOffset(724)] public int AirportDocks;
@@ -413,6 +414,11 @@ namespace PatcherYRpp
 
         [FieldOffset(22394)] public Bool SpySatActive;
 
+        [FieldOffset(21556)]public int TotalKilledUnits;
+
+        [FieldOffset(21640)] public int TotalKilledBuildings;
+
+        [FieldOffset(21736)] public int SiloMoney;
         [FieldOffset(22396)] public Edge Edge;
 
 

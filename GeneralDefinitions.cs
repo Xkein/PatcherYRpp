@@ -194,6 +194,14 @@ namespace PatcherYRpp
         AddContent = 3
     };
 
+    public enum CloakState : int
+    {
+        Uncloaked = 0,
+        Cloaking = 1,
+        Cloaked = 2,
+        Uncloaking = 3
+    };
+
     public enum ChargeDrainState
     {
         None = -1,

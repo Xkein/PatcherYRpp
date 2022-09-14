@@ -21,14 +21,6 @@ namespace PatcherYRpp
             return func(ref this, pOwner);
         }
 
-        [FieldOffset(0)] public AbstractTypeClass Base;
-
-        [FieldOffset(504)] public byte ImageFile_first;
-        public AnsiStringPointer ImageFile => Pointer<byte>.AsPointer(ref ImageFile_first);
-        [FieldOffset(531)] public byte AlphaImageFile_first;
-        public AnsiStringPointer AlphaImageFile => Pointer<byte>.AsPointer(ref AlphaImageFile_first);
-
-
         public unsafe void Dimension2(Pointer<CoordStruct> pDest)
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectTypeClass, IntPtr, void>)
@@ -51,23 +43,25 @@ namespace PatcherYRpp
                 this.GetVirtualFunctionPointer(33);
             return func(ref this, pOwner);
         }
-        
 
+        [FieldOffset(0)] public AbstractTypeClass Base;
 
         [FieldOffset(156)] public Armor Armor;
-
         [FieldOffset(160)] public int Strength;
-
         [FieldOffset(168)] public Bool ImageAllocated;
 
         [FieldOffset(488)] public Bool NoSpawnAlt;
+
+        [FieldOffset(504)] public byte ImageFile_first;
+        public AnsiStringPointer ImageFile => Pointer<byte>.AsPointer(ref ImageFile_first);
+        [FieldOffset(531)] public byte AlphaImageFile_first;
+        public AnsiStringPointer AlphaImageFile => Pointer<byte>.AsPointer(ref AlphaImageFile_first);
 
         [FieldOffset(560)] public Bool Selectable;
 
         [FieldOffset(562)] public Bool Insignificant;
 
         [FieldOffset(563)] public Bool Immune;
-
 
     }
 }
