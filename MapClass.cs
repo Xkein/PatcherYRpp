@@ -13,7 +13,7 @@ namespace PatcherYRpp
     public struct MapClass
     {
         private static IntPtr instance = new IntPtr(0x87F7E8);
-        static public ref MapClass Instance { get => ref instance.Convert<MapClass>().Ref; }
+        public static ref MapClass Instance { get => ref instance.Convert<MapClass>().Ref; }
 
         public const int MaxCells = 0x40000;
 
@@ -34,9 +34,30 @@ namespace PatcherYRpp
             CellStruct cell = CellClass.Coord2Cell(Crd);
             return this.TryGetCellAt(cell, out pCell);
         }
+
+        public unsafe Pointer<CellClass> GetCellAt(CoordStruct pCoords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, ref CoordStruct, IntPtr>)0x565730;
+            return func(ref this, ref pCoords);
+        }
+
         public static int GetCellIndex(CellStruct MapCoords)
         {
             return (MapCoords.Y << 9) + MapCoords.X;
+        }
+
+        // gets a coordinate in a random direction a fixed distance in leptons away from coords
+        public static unsafe Pointer<CoordStruct> GetRandomCoordsNear(ref CoordStruct outBuffer, CoordStruct coords, int distance, bool center)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, ref CoordStruct, ref CoordStruct, int, Bool, IntPtr>)ASM.FastCallTransferStation;
+            return func(0x49F420, ref outBuffer, ref coords, distance, center);
+        }
+        // gets a coordinate in a random direction a fixed distance in leptons away from coords
+        public static unsafe CoordStruct GetRandomCoordsNear(ref CoordStruct coords, int distance, bool center)
+        {
+            CoordStruct outBuffer = default;
+            GetRandomCoordsNear(ref outBuffer, coords, distance, center);
+            return outBuffer;
         }
 
         // no fast call. unmanaged call will lead to StackOverflowException.
@@ -64,6 +85,7 @@ namespace PatcherYRpp
         //    func(Damage, WH, CLDisableFlags, Force, coords);
         //}
 
+        // get the damage a warhead causes to specific armor
         public static unsafe int GetTotalDamage(int Damage, Pointer<WarheadTypeClass> WH, Armor armor, int distance)
         {
             var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, Armor, int, int>)ASM.FastCallTransferStation;
@@ -77,10 +99,33 @@ namespace PatcherYRpp
             return func(0x489280, in Coords, Damage, SourceObject, WH, AffectsTiberium, SourceHouse);
         }
 
+        /*
+         * Picks the appropriate anim from WH's AnimList= based on damage dealt and land type (Conventional= )
+         * so after DamageArea:
+         * if(AnimTypeClass *damageAnimType = SelectDamageAnimation(...)) {
+         * 	GameCreate<AnimClass>(damageAnimType, location);
+         * }
+         */
+        public static unsafe Pointer<AnimTypeClass> SelectDamageAnimation(int Damage, Pointer<WarheadTypeClass> WH, LandType LandType, CoordStruct coords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, LandType, in CoordStruct, IntPtr>)ASM.FastCallTransferStation;
+            return func(0x48A4F0, Damage, WH, LandType, in coords);
+        }
+
         public static unsafe void FlashbangWarheadAt(int Damage, Pointer<WarheadTypeClass> WH, CoordStruct coords, bool Force = false, SpotlightFlags CLDisableFlags = SpotlightFlags.None)
         {
             var func = (delegate* unmanaged[Thiscall]<int, int, IntPtr, CoordStruct, Bool, SpotlightFlags, void>)ASM.FastCallTransferStation;
             func(0x48A620, Damage, WH, coords, Force, CLDisableFlags);
+        }
+
+        public static CoordStruct Cell2Coord(CellStruct cell, int z = 0)
+        {
+            return new CoordStruct(cell.X * 256 + 128, cell.Y * 256 + 128, z);
+        }
+
+        public static CellStruct Coord2Cell(CoordStruct crd)
+        {
+            return new CellStruct(crd.X / 256, crd.Y / 256);
         }
 
         public unsafe CellStruct PickCellOnEdge(Edge Edge, CellStruct CurrentLocation, CellStruct Fallback,
@@ -91,17 +136,25 @@ namespace PatcherYRpp
             return tmp;
         }
 
-        public unsafe CellStruct Pathfinding_Find(CellStruct position, SpeedType SpeedType, int a5,
-            MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY,
-            bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge,
-            CellStruct closeTo, bool a15, bool buildable)
+        // Find nearest spot
+        public unsafe Pointer<CellStruct> Pathfinding_Find(ref CellStruct outBuffer, ref CellStruct position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, ref CellStruct closeTo, bool a15, bool buildable)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref MapClass, out CellStruct, ref CellStruct, SpeedType, int, MovementZone, Bool, int, int, Bool, Bool, Bool, Bool, ref CellStruct, Bool, Bool, IntPtr>)0x56DC20;
-            func(ref this, out CellStruct outBuffer, ref position, SpeedType, a5, MovementZone, alt, SpaceSizeX, SpaceSizeY, disallowOverlay, a11, requireBurrowable, allowBridge, ref closeTo, a15, buildable);
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, ref CellStruct, ref CellStruct, SpeedType, int, MovementZone, Bool, int, int, Bool, Bool, Bool, Bool, ref CellStruct, Bool, Bool, IntPtr>)0x56DC20;
+            return func(ref this, ref outBuffer, ref position, SpeedType, a5, MovementZone, alt, SpaceSizeX, SpaceSizeY, disallowOverlay, a11, requireBurrowable, allowBridge, ref closeTo, a15, buildable);
+        }
+
+        public unsafe CellStruct Pathfinding_Find(CellStruct position, SpeedType SpeedType, int a5, MovementZone MovementZone, bool alt, int SpaceSizeX, int SpaceSizeY, bool disallowOverlay, bool a11, bool requireBurrowable, bool allowBridge, CellStruct closeTo, bool a15, bool buildable)
+        {
+            CellStruct outBuffer = default;
+            Pathfinding_Find(ref outBuffer, ref position, SpeedType, a5, MovementZone, alt, SpaceSizeX, SpaceSizeY, disallowOverlay, a11, requireBurrowable, allowBridge, ref closeTo, a15, buildable);
             return outBuffer;
         }
 
-
+        public unsafe CellStruct Pathfinding_Find(ref CellStruct postion, SpeedType speedType, MovementZone movementZone, int extentX, int extentY, bool buildable)
+        {
+            int a5 = -1; // usually MapClass::CanLocationBeReached call. see how far we can get without it
+            return Pathfinding_Find(postion, speedType, a5, movementZone, false, extentX, extentY, true, false, false, false, CellStruct.Empty, false, buildable);
+        }
 
         [FieldOffset(312)] public DynamicVectorClass<Pointer<CellClass>> Cells;
 

@@ -10,10 +10,12 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 12508)]
     public struct SessionClass
     {
+
         private static IntPtr instance = new IntPtr(0xA8B238);
-        static public ref SessionClass Instance => ref instance.Convert<SessionClass>().Ref;
+        public static ref SessionClass Instance { get => ref instance.Convert<SessionClass>().Ref; }
 
         [FieldOffset(0)] public GameMode GameMode;
         [FieldOffset(4)] public Pointer<MPGameModeClass> MPGameMode;
+
     }
 }

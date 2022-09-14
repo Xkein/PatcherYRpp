@@ -159,7 +159,6 @@ namespace PatcherYRpp
 
         [FieldOffset(104)] private IntPtr animation;                // 0x68
         public Pointer<AnimClass> Animation { get => animation; set => animation = value; }
-
         [FieldOffset(108)] public Bool AnimationGotInvalid;
         [FieldOffset(109)] public Bool Granted;
         [FieldOffset(110)] public Bool OneTime; // remove this SW when it has been fired once

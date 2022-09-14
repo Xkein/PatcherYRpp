@@ -11,8 +11,15 @@ namespace PatcherYRpp
     [DebuggerDisplay("RGB={R}, {G}, {B}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct ColorStruct
+    public struct ColorStruct : IEquatable<ColorStruct>
     {
+        public static ColorStruct Empty = default;
+        public static ColorStruct Red = new ColorStruct(252, 0, 0);
+        public static ColorStruct Green = new ColorStruct(0, 252, 0);
+        public static ColorStruct Blue = new ColorStruct(0, 0, 252);
+        public static ColorStruct White = new ColorStruct(252, 252, 252);
+        public static ColorStruct Black = new ColorStruct(3, 3, 3);
+
         public ColorStruct(int r, int g, int b)
         {
             R = (byte)r;
@@ -23,18 +30,66 @@ namespace PatcherYRpp
         public byte R;
         public byte G;
         public byte B;
+
+        public static bool operator ==(ColorStruct a, ColorStruct b)
+        {
+            return Equals(a, b);
+        }
+
+        public static bool operator !=(ColorStruct a, ColorStruct b) => !(a == b);
+
+        public bool Equals(ColorStruct other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return this.R == other.R && this.G == other.G && this.B == other.B;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((ColorStruct)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{{\"R\":{0}, \"G\":{1}, \"B\":{2}}}", R, G, B);
+        }
     }
 
     [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct CoordStruct
+    public struct CoordStruct : IEquatable<CoordStruct>
     {
+        public static CoordStruct Empty = default;
+
         public CoordStruct(int x, int y, int z)
         {
             X = x;
             Y = y;
             Z = z;
+        }
+
+        public CoordStruct(float x, float y, float z)
+        {
+            X = (int)x;
+            Y = (int)y;
+            Z = (int)z;
+        }
+
+        public CoordStruct(double x, double y, double z)
+        {
+            X = (int)x;
+            Y = (int)y;
+            Z = (int)z;
         }
 
         public static CoordStruct operator -(CoordStruct a)
@@ -86,18 +141,34 @@ namespace PatcherYRpp
             return (other - this).Magnitude();
         }
 
+
+        public bool Equals(CoordStruct other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return this.X == other.X && this.Y == other.Y && this.Z == other.Z;
+        }
+
+
         public static bool operator ==(CoordStruct a, CoordStruct b)
         {
-            return a.X == b.X && a.Y == b.Y && a.Z == b.Z;
+            return Equals(a, b);
         }
         public static bool operator !=(CoordStruct a, CoordStruct b) => !(a == b);
 
-        public override bool Equals(object obj) => obj is CoordStruct other && this == other;
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((CoordStruct)obj);
+        }
+
         public override int GetHashCode() => base.GetHashCode();
 
         public override string ToString()
         {
-            return $"({X}, {Y}, {Z})";
+            return string.Format("{{\"X\":{0}, \"Y\":{1}, \"Z\":{2}}}", X, Y, Z);
         }
 
         public int X;
@@ -108,8 +179,10 @@ namespace PatcherYRpp
     [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct BulletVelocity
+    public struct BulletVelocity : IEquatable<BulletVelocity>
     {
+        public static BulletVelocity Empty = default;
+
         public BulletVelocity(double x, double y, double z)
         {
             X = x;
@@ -166,14 +239,33 @@ namespace PatcherYRpp
             return (other - this).Magnitude();
         }
 
+        public bool Equals(BulletVelocity other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return this.X == other.X && this.Y == other.Y && this.Z == other.Z;
+        }
+
         public static bool operator ==(BulletVelocity a, BulletVelocity b)
         {
-            return a.X == b.X && a.Y == b.Y && a.Z == b.Z;
+            return Equals(a, b);
         }
         public static bool operator !=(BulletVelocity a, BulletVelocity b) => !(a == b);
 
-        public override bool Equals(object obj) => obj is BulletVelocity other && this == other;
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((BulletVelocity)obj);
+        }
+
         public override int GetHashCode() => base.GetHashCode();
+
+        public override string ToString()
+        {
+            return string.Format("{{\"X\":{0}, \"Y\":{1}, \"Z\":{2}}}", X, Y, Z);
+        }
 
         public double X;
         public double Y;
@@ -183,8 +275,10 @@ namespace PatcherYRpp
     [DebuggerDisplay("XY={X}, {Y}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct CellStruct
+    public struct CellStruct : IEquatable<CellStruct>
     {
+        public static CellStruct Empty = default;
+
         public CellStruct(int x, int y)
         {
             X = (short)x;
@@ -236,20 +330,41 @@ namespace PatcherYRpp
             return (other - this).Magnitude();
         }
 
+        public bool Equals(CellStruct other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return this.X == other.X && this.Y == other.Y;
+        }
+
         public static bool operator ==(CellStruct a, CellStruct b)
         {
-            return a.X == b.X && a.Y == b.Y;
+            return Equals(a, b);
         }
         public static bool operator !=(CellStruct a, CellStruct b) => !(a == b);
 
-        public override bool Equals(object obj) => obj is CellStruct other && this == other;
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((CellStruct)obj);
+        }
+
         public override int GetHashCode() => base.GetHashCode();
+
+        public override string ToString()
+        {
+            return string.Format("{{\"X\":{0}, \"Y\":{1}}}", X, Y);
+        }
+
 
         public short X;
         public short Y;
     }
 
     //Random number range
+    [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct RandomStruct
@@ -258,7 +373,6 @@ namespace PatcherYRpp
     };
 
 
-    [DebuggerDisplay("XYZ={X}, {Y}, {Z}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     public struct SingleVector3D
@@ -330,8 +444,13 @@ namespace PatcherYRpp
         }
         public static bool operator !=(SingleVector3D a, SingleVector3D b) => !(a == b);
 
-        public override bool Equals(object obj) => obj is SingleVector3D other && this == other;
+        public override bool Equals(object obj) => this == (SingleVector3D)obj;
         public override int GetHashCode() => base.GetHashCode();
+
+        public override string ToString()
+        {
+            return string.Format("{{\"X\":{0}, \"Y\": {1}, \"Z\": {2}}}", X, Y, Z);
+        }
 
         public float X;
         public float Y;
@@ -350,9 +469,6 @@ namespace PatcherYRpp
             W = w;
         }
 
-        public static implicit operator System.Numerics.Quaternion(Quaternion_ q) => new System.Numerics.Quaternion(q.X,q.Y,q.Z,q.W);
-        public static implicit operator Quaternion_(System.Numerics.Quaternion q) => new Quaternion_(q.X, q.Y, q.Z, q.W);
-
         public float X;
         public float Y;
         public float Z;
@@ -362,7 +478,7 @@ namespace PatcherYRpp
     [DebuggerDisplay("XY={X}, {Y}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
-    public struct Point2D
+    public struct Point2D : IEquatable<Point2D>
     {
         public Point2D(int x, int y)
         {
@@ -407,7 +523,6 @@ namespace PatcherYRpp
         public double MagnitudeSquared()
         {
             return this * this;
-
         }
 
         public double DistanceFrom(Point2D other)
@@ -415,125 +530,37 @@ namespace PatcherYRpp
             return (other - this).Magnitude();
         }
 
+        public bool Equals(Point2D other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return this.X == other.X && this.Y == other.Y;
+        }
+
         public static bool operator ==(Point2D a, Point2D b)
         {
-            return a.X == b.X && a.Y == b.Y;
+            return Equals(a, b);
         }
         public static bool operator !=(Point2D a, Point2D b) => !(a == b);
 
-        public override bool Equals(object obj) => obj is Point2D other && this == other;
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Point2D)obj);
+        }
+
         public override int GetHashCode() => base.GetHashCode();
+
+        public override string ToString()
+        {
+            return string.Format("{{\"X\":{0}, \"Y\":{1}}}", X, Y);
+        }
 
         public int X;
         public int Y;
     }
 
-    [DebuggerDisplay("XYZW={X}, {Y}, {Width}, {Height}")]
-    [StructLayout(LayoutKind.Sequential)]
-    [Serializable]
-    public struct RectangleStruct
-    {
-        public RectangleStruct(int x, int y, int z, int w)
-        {
-            X = x;
-            Y = y;
-            Width = z;
-            Height = w;
-        }
-
-        public static RectangleStruct operator -(RectangleStruct a)
-        {
-            return new RectangleStruct(-a.X, -a.Y, -a.Width, -a.Height);
-        }
-        public static RectangleStruct operator +(RectangleStruct a, RectangleStruct b)
-        {
-            return new RectangleStruct(
-                 a.X + b.X,
-                 a.Y + b.Y,
-                 a.Width + b.Width,
-                 a.Height + b.Height);
-        }
-        public static RectangleStruct operator -(RectangleStruct a, RectangleStruct b)
-        {
-            return new RectangleStruct(
-                 a.X - b.X,
-                 a.Y - b.Y,
-                 a.Width - b.Width,
-                 a.Height - b.Height);
-        }
-        public static RectangleStruct operator *(RectangleStruct a, double r)
-        {
-            return new RectangleStruct(
-                 (int)(a.X * r),
-                 (int)(a.Y * r),
-                 (int)(a.Width * r),
-                 (int)(a.Height * r));
-        }
-        public static RectangleStruct operator /(RectangleStruct a, double r)
-        {
-            return new RectangleStruct(
-                 (int)(a.X / r),
-                 (int)(a.Y / r),
-                 (int)(a.Width / r),
-                 (int)(a.Height / r));
-        }
-
-        public static double operator *(RectangleStruct a, RectangleStruct b)
-        {
-            return a.X * b.X
-                 + a.Y * b.Y
-                 + a.Width * b.Width
-                 + a.Height * b.Height;
-        }
-        public static bool operator ==(RectangleStruct a, RectangleStruct b)
-        {
-            return a.X == b.X && a.Y == b.Y && a.Width == b.Width && a.Height == b.Height;
-        }
-        public static bool operator !=(RectangleStruct a, RectangleStruct b) => !(a == b);
-
-        public override bool Equals(object obj) => obj is RectangleStruct other && this == other;
-        public override int GetHashCode() => base.GetHashCode();
-
-        public int X;
-        public int Y;
-        public int Width;
-        public int Height;
-    }
-
-    [StructLayout(LayoutKind.Explicit, Size = 828)]
-    public struct BytePalette
-    {
-        public const int EntriesCount = 256;
-        [FieldOffset(0)] public ColorStruct Entries_first;
-        public Pointer<ColorStruct> Entries => Pointer<ColorStruct>.AsPointer(ref Entries_first);
-    }
-
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct TintStruct
-    {
-        public int Red;
-        public int Green;
-        public int Blue;
-    };
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct Matrix3D
-    {
-
-
-        public float _00;
-        public float _01;
-        public float _02;
-        public float _03;
-        public float _10;
-        public float _11;
-        public float _12;
-        public float _13;
-        public float _20;
-        public float _21;
-        public float _22;
-        public float _23;
-    }
 }
 
