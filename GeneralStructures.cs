@@ -312,7 +312,7 @@ namespace PatcherYRpp
     [Serializable]
     public struct FacingStruct
     {
-        FacingStruct(short rot) : this()
+        public FacingStruct(short rot) : this()
         {
             Timer = new TimerStruct(0);
             this.turn_rate(rot);
