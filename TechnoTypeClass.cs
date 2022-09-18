@@ -75,6 +75,10 @@ namespace PatcherYRpp
         [FieldOffset(992)] public int PixelSelectionBracketDelta;
         [FieldOffset(1460)] public MovementZone MovementZone;
         [FieldOffset(1464)] public int GuardRange;
+        [FieldOffset(1468)] public int MinDebris;
+        [FieldOffset(1472)] public int MaxDebris;
+        [FieldOffset(1504)] public int Passengers;
+        [FieldOffset(1508)] public Bool OpenTopped;
         [FieldOffset(1512)] public int Sight;
         [FieldOffset(1516)] public Bool ResourceGatherer;
         [FieldOffset(1517)] public Bool ResourceDestination;
