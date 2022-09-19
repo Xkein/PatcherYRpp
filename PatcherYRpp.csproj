@@ -135,6 +135,7 @@
     <Compile Include="LaserDrawClass.cs" />
     <Compile Include="LocomotionClass.cs" />
     <Compile Include="MapClass.cs" />
+    <Compile Include="Matrix3D.cs" />
     <Compile Include="MechLocomotionClass.cs" />
     <Compile Include="MessageListClass.cs" />
     <Compile Include="MissionClass.cs" />
