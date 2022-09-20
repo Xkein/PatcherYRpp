@@ -441,7 +441,7 @@ namespace PatcherYRpp
 
         public int num_steps()
         {
-            return Math.Abs(this.difference()) / this.turn_rate();
+            return Math.Abs((int)this.difference()) / this.turn_rate();
         }
 
         public override string ToString()
