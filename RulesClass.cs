@@ -289,6 +289,8 @@ namespace PatcherYRpp
             return Instance.Ref;
         }
 
+        [FieldOffset(68)] public int PoseDir;
+        [FieldOffset(72)] public int DeployDir;
         [FieldOffset(1640)] public double VeteranRatio;
         [FieldOffset(1648)] public double VeteranCombat;
         [FieldOffset(1656)] public double VeteranSpeed;
