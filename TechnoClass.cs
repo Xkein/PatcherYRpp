@@ -429,6 +429,18 @@ namespace PatcherYRpp
             return func(ref this, bright);
         }
 
+        public unsafe void Reactivate()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)0x70FBE0;
+            func(ref this);
+        }
+
+        public unsafe void Deactivate()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)0x70FC90;
+            func(ref this);
+        }
+
         [FieldOffset(0)] public RadioClass BaseRadio;
         [FieldOffset(0)] public MissionClass BaseMission;
         [FieldOffset(0)] public ObjectClass Base;
