@@ -134,6 +134,36 @@ namespace PatcherYRpp
             return func(ref this);
         }
 
+        public unsafe bool IsUnderEMP() // CanMove
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(223);
+            return func(ref this);
+        }
+
+        public unsafe bool IsParalyzed()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(224);
+            return func(ref this);
+        }
+
+        public unsafe bool CanCheer() // IsIdel
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(225);
+            return func(ref this);
+        }
+
+        public unsafe void Cheer(bool force)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool, void>)this.GetVirtualFunctionPointer(226);
+            func(ref this, force);
+        }
+
+        public unsafe int GetDefaultSpeed() // MaxSpeed
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int>)this.GetVirtualFunctionPointer(227);
+            return func(ref this);
+        }
+
         public unsafe void DecreaseAmmo()
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)this.GetVirtualFunctionPointer(228);
@@ -144,6 +174,12 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, void>)this.GetVirtualFunctionPointer(229);
             func(ref this, pPassenger);
+        }
+
+        public unsafe bool CanDisguiseAs(Pointer<ObjectClass> pTarget)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool>)this.GetVirtualFunctionPointer(230);
+            return func(ref this, pTarget);
         }
 
         public unsafe bool IsCloseEnough(Pointer<AbstractClass> pTarget, int weaponIdx)

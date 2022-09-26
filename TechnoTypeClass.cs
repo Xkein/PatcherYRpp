@@ -73,6 +73,13 @@ namespace PatcherYRpp
         [FieldOffset(944)] public float PitchAngle;
         [FieldOffset(988)] public int LeptonMindControlOffset;
         [FieldOffset(992)] public int PixelSelectionBracketDelta;
+        [FieldOffset(1028)] public IntPtr deploysInto;
+        public Pointer<BuildingTypeClass> DeploysInto => deploysInto;
+        [FieldOffset(1032)] public IntPtr undeploysInto;
+        public Pointer<UnitTypeClass> UndeploysInto => undeploysInto;
+        [FieldOffset(1036)] public IntPtr powersUnit;
+        public Pointer<UnitTypeClass> PowersUnit => powersUnit;
+        [FieldOffset(1040)] public Bool PoweredUnit;
         [FieldOffset(1460)] public MovementZone MovementZone;
         [FieldOffset(1464)] public int GuardRange;
         [FieldOffset(1468)] public int MinDebris;
