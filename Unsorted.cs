@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DynamicPatcher;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,23 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Stdcall]<Bool>)0x53BAE0;
             return func();
+        }
+
+        public static unsafe SingleVector3D MatrixMultiply(ref SingleVector3D ret, Matrix3DStruct matrix3DStruct, SingleVector3D vec)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, IntPtr, IntPtr, IntPtr>)ASM.FastCallTransferStation;
+            func(0x5AFB80,
+                Pointer<SingleVector3D>.AsPointer(ref ret),
+                Pointer<Matrix3DStruct>.AsPointer(ref matrix3DStruct),
+                Pointer<SingleVector3D>.AsPointer(ref vec));
+            return ret;
+        }
+
+        public static unsafe SingleVector3D MatrixMultiply(Matrix3DStruct mtx, SingleVector3D vec = default)
+        {
+            SingleVector3D ret = default;
+            MatrixMultiply(ref ret, mtx, vec);
+            return ret;
         }
     }
 }

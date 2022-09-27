@@ -152,6 +152,7 @@
     <Compile Include="Unsorted.cs" />
     <Compile Include="WarheadTypeClass.cs" />
     <Compile Include="WeaponTypeClass.cs" />
+    <Compile Include="YRMathVector.cs" />
     <Compile Include="YRMemory.cs" />
     <Compile Include="YRMemory.Instantiator.g.cs">
       <AutoGen>True</AutoGen>

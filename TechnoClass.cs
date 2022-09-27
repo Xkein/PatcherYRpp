@@ -10,17 +10,17 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Sequential)]
     public struct VeterancyStruct
     {
-        VeterancyStruct(double value) : this()
+        public VeterancyStruct(double value) : this()
         {
             this.Add(value);
         }
 
-        void Add(int ownerCost, int victimCost)
+        public void Add(int ownerCost, int victimCost)
         {
             this.Add(victimCost / (ownerCost * RulesClass.Instance.Ref.VeteranRatio));
         }
 
-        void Add(double value)
+        public void Add(double value)
         {
             var val = this.Veterancy + value;
 
@@ -32,7 +32,7 @@ namespace PatcherYRpp
             this.Veterancy = (float)val;
         }
 
-        Rank GetRemainingLevel()
+        public Rank GetRemainingLevel()
         {
             if (this.Veterancy >= 2.0f)
             {

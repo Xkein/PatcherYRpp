@@ -101,6 +101,8 @@ namespace PatcherYRpp
 
         [FieldOffset(1820)] public int ROT;
 
+        [FieldOffset(1824)] public int TurretOffset;
+
         [FieldOffset(2200)] public WeaponStruct Weapon_first;
         public Pointer<WeaponStruct> Weapon => Pointer<WeaponStruct>.AsPointer(ref Weapon_first);
         [FieldOffset(2704)] public Bool ClearAllWeapons;
