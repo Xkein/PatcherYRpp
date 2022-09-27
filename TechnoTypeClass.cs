@@ -182,9 +182,17 @@ namespace PatcherYRpp
         [FieldOffset(3412)] public int SpawnRegenRate;
         [FieldOffset(3412)] public int SpawnReloadRate;
         [FieldOffset(3432)] public Bool MissileSpawn;
+        [FieldOffset(3433)] public Bool Underwater;
         [FieldOffset(3434)] public Bool BalloonHover;
         [FieldOffset(3476)] public Bool JumpJet;
+        [FieldOffset(3477)] public Bool Crashable;
+        [FieldOffset(3478)] public Bool ConsideredAircraft;
+        [FieldOffset(3479)] public Bool Organic;
+        [FieldOffset(3480)] public Bool NoShadow;
+        [FieldOffset(3481)] public Bool CanPassiveAquire;
+        [FieldOffset(3482)] public Bool CanRetaliate;
         [FieldOffset(3516)] public Bool IsSelectableCombatant;
+        [FieldOffset(3517)] public Bool Accelerates;
         [FieldOffset(3518)] public Bool DisableVoxelCache;
         [FieldOffset(3519)] public Bool DisableShadowCache;
 
