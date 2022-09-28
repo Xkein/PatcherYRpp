@@ -90,6 +90,7 @@ namespace PatcherYRpp
             func(ref this);
         }
 
+        // IsJumpjet() { return pCell.Ref.Jumpjet == pThis }
         public unsafe bool Jumpjet_LocationClear()
         {
             var func = (delegate* unmanaged[Thiscall]<ref FootClass, Bool>)0x4135A0;

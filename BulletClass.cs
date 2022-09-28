@@ -79,6 +79,7 @@ namespace PatcherYRpp
 
         [FieldOffset(172)] public Pointer<BulletTypeClass> Type;
         [FieldOffset(176)] public Pointer<TechnoClass> Owner;
+        [FieldOffset(180)] public Bool IsInaccurate;
         [FieldOffset(184)] public BulletData Data;
         [FieldOffset(224)] public byte Bright;
         [FieldOffset(232)] public BulletVelocity Velocity;
@@ -86,6 +87,7 @@ namespace PatcherYRpp
         [FieldOffset(264)] public int CourseLockedDuration;
         [FieldOffset(268)] public Pointer<AbstractClass> Target;
         [FieldOffset(272)] public int Speed;
+        [FieldOffset(272)] public int RemapColor;
         [FieldOffset(296)] public Pointer<WarheadTypeClass> WH;
         [FieldOffset(304)] public Pointer<WeaponTypeClass> WeaponType;
         [FieldOffset(308)] public CoordStruct SourceCoords;
