@@ -184,6 +184,16 @@ namespace PatcherYRpp
         [FieldOffset(3432)] public Bool MissileSpawn;
         [FieldOffset(3433)] public Bool Underwater;
         [FieldOffset(3434)] public Bool BalloonHover;
+        [FieldOffset(3436)] public int SuppressionThreshold;
+        [FieldOffset(3440)] public int JumpjetTurnRate;
+        [FieldOffset(3444)] public int JumpjetSpeed;
+        [FieldOffset(3448)] public float JumpjetClimb;
+        [FieldOffset(3452)] public float JumpjetCrash;
+        [FieldOffset(3456)] public int JumpjetHeight;
+        [FieldOffset(3460)] public float JumpjetAccel;
+        [FieldOffset(3464)] public float JumpjetWobbles;
+        [FieldOffset(3468)] public Bool JumpjetNoWobbles;
+        [FieldOffset(3472)] public int JumpjetDeviation;
         [FieldOffset(3476)] public Bool JumpJet;
         [FieldOffset(3477)] public Bool Crashable;
         [FieldOffset(3478)] public Bool ConsideredAircraft;
