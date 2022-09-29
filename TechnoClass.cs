@@ -182,6 +182,12 @@ namespace PatcherYRpp
             return func(ref this, pTarget);
         }
 
+        public unsafe void Stun()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)this.GetVirtualFunctionPointer(232);
+            func(ref this);
+        }
+
         public unsafe bool IsCloseEnough(Pointer<AbstractClass> pTarget, int weaponIdx)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, Bool>)this.GetVirtualFunctionPointer(234);
@@ -475,6 +481,18 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)0x70FC90;
             func(ref this);
+        }
+
+        public unsafe void Start_inflicting_loco(Pointer<FootClass> pTarget, Guid newLoco)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Guid, void>)0x710000;
+            func(ref this, pTarget, newLoco);
+        }
+
+        public unsafe void Stop_inflicting_loco(bool clearTarget)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool, void>)0x70FEE0;
+            func(ref this, clearTarget);
         }
 
         [FieldOffset(0)] public RadioClass BaseRadio;
