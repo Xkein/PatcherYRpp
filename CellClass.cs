@@ -42,6 +42,17 @@ namespace PatcherYRpp
             return func(ref this, pObject, pOwner);
         }
 
+        public unsafe bool IsClearToMove(SpeedType speedType, bool ignoreInfantry, bool ignoreVehicles, ZoneType zone, MovementZone movementZone, int level, bool isBridge)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, SpeedType, Bool, Bool, ZoneType, MovementZone, int, Bool, Bool>)0x4834A0;
+            return func(ref this, speedType, ignoreInfantry, ignoreVehicles, zone, movementZone, level, isBridge);
+        }
+
+        public unsafe bool IsClearToMove(SpeedType speedType, MovementZone movementZone, bool ignoreInfantry = false, bool ignoreVehicles = false, int level = -1)
+        {
+            return IsClearToMove(speedType, ignoreInfantry, ignoreInfantry, ZoneType.NONE, movementZone, level, ContainsBridge());
+        }
+
         public unsafe bool CanPutTiberium()
         {
             var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, Bool>)0x4838E0;

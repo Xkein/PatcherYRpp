@@ -608,6 +608,16 @@ namespace PatcherYRpp
         FloatBeach = 7
     }
 
+    public enum ZoneType
+    {
+        CORE = 0,
+        NORTH = 1,
+        EAST = 2,
+        SOUTH = 3,
+        WEST = 4,
+        NONE = -1
+    }
+
     public enum MovementZone
     {
         None = -1,
@@ -678,7 +688,7 @@ namespace PatcherYRpp
         Occupiable = 10,
         TechBuildings = 11
     }
-    
+
     [Flags]
     public enum TargetFlags
     {
