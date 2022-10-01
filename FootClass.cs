@@ -133,7 +133,16 @@ namespace PatcherYRpp
         }
         [FieldOffset(1684)] public IntPtr parasiteEatingMe;
         public Pointer<FootClass> ParasiteEatingMe => parasiteEatingMe;
-        [FieldOffset(1711)] public Bool FacingChanging;
+        [FieldOffset(1709)] public Bool IsAttackedByLocomotor;
+        [FieldOffset(1710)] public Bool IsLetGoByLocomotor;
+        [FieldOffset(1711)] public Bool FacingChanging; // is rotating
+        [FieldOffset(1712)] public Bool IsUnloading; // 6B0
+        [FieldOffset(1713)] public Bool IsNavQueueLoop; // 6B1
+        [FieldOffset(1714)] public Bool IsScattering; // 6B2
+        [FieldOffset(1715)] public Bool IsIdle; // 6B3
+        [FieldOffset(1716)] public Bool Height_SubTract; // 6B4
+        [FieldOffset(1717)] public Bool IsCrusher; // 6B5
         [FieldOffset(1718)] public Bool FrozenStill;
+        [FieldOffset(1718)] public Bool Removed; //6B8
     }
 }

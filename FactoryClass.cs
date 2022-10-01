@@ -10,6 +10,9 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 116)]
     public struct FactoryClass
     {
+        private static readonly IntPtr arrayPointer = new IntPtr(0xA83E30);
+        public static ref DynamicVectorClass<Pointer<FactoryClass>> Array { get => ref DynamicVectorClass<Pointer<FactoryClass>>.GetDynamicVector(arrayPointer); }
+
         [FieldOffset(92)] public byte OnHold;
         [FieldOffset(93)] public byte IsDifferent;
         [FieldOffset(96)] public int Balance;

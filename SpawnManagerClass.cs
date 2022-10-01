@@ -19,6 +19,12 @@ namespace PatcherYRpp
             func(ref this, target);
         }
 
+        public unsafe void Recalc()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref SpawnManagerClass, IntPtr, void>)0x6B7100;
+            func(ref this, target);
+        }
+
 
         [FieldOffset(36)] public IntPtr owner;
         public Pointer<TechnoClass> Owner { get => owner; set => owner = value; }
