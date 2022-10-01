@@ -23,6 +23,13 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 88)]
     public struct CCINIClass
     {
+        private static IntPtr ini_Rules_FileName = new IntPtr(0x826260); // rulesmd.ini
+        public static AnsiStringPointer INI_Ruels_FileName => ini_Rules_FileName;
+
+        private static IntPtr ini_Art_FileName = new IntPtr(0x826254); // artmd.ini
+        public static AnsiStringPointer INI_Art_FileName => ini_Art_FileName;
+
+
         private static IntPtr ppINI_Rules = new IntPtr(0x887048);
         private static IntPtr pINI_AI = new IntPtr(0x887128);
         private static IntPtr pINI_Art = new IntPtr(0x887180);
