@@ -98,6 +98,7 @@
     <Compile Include="Drawing.cs" />
     <Compile Include="DriveLocomotionClass.cs" />
     <Compile Include="EBolt.cs" />
+    <Compile Include="EventClass.cs" />
     <Compile Include="FactoryClass.cs" />
     <Compile Include="FileFormats\HVA.cs" />
     <Compile Include="FileFormats\SHPStruct.cs" />

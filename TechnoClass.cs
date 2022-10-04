@@ -134,6 +134,12 @@ namespace PatcherYRpp
             return func(ref this);
         }
 
+        public unsafe void ClickedEvent(EventType eventType)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, EventType, void>)this.GetVirtualFunctionPointer(221);
+            func(ref this, eventType);
+        }
+
         public unsafe bool IsUnderEMP() // CanMove
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(223);
