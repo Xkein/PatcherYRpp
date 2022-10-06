@@ -27,10 +27,15 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 6336)]
     public struct RulesClass
     {
+        public const string SectionGeneral = "General";
+        public const string SectionCombatDamage = "CombatDamage";
+        public const string SectionAudioVisual = "AudioVisual";
+
+
         private static IntPtr ppInstance = new IntPtr(0x8871E0);
 
         public static ref Pointer<RulesClass> Instance => ref ppInstance.Convert<Pointer<RulesClass>>().Ref;
-        
+
 
         // call this instead of Init for the later files (gamemode, map)
         // reads the generic/list sections like [VehicleTypes] from pINI
@@ -82,7 +87,7 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref RulesClass, IntPtr, void>)0x66D1F0;
             func(ref this, pINI);
         }
-        
+
         public unsafe void Read_Difficulty(Pointer<CCINIClass> pINI, ref DifficultyStruct difficultyStruct, AnsiString difficulty)
         {
             var func = (delegate* unmanaged[Thiscall]<ref RulesClass, IntPtr, ref DifficultyStruct, IntPtr, void>)0x66D270;
