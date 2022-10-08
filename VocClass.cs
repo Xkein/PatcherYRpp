@@ -17,8 +17,45 @@ namespace PatcherYRpp
 
         public static unsafe int FindIndex(string soundName)
         {
+            for (int i = 0; i < Array.Count; i++)
+            {
+                Pointer<VocClass> pVoc = Array[i];
+                if (pVoc.Ref.GetName() == soundName)
+                {
+                    return i;
+                }
+
+            }
+            return -1;
+        }
+
+        /** doesn't work
+        public static unsafe int FindIndex(string soundName)
+        {
             var func = (delegate* unmanaged[Thiscall]<int, string, int>)ASM.FastCallTransferStation;
             return func(0x7514D0, soundName);
+        }
+        */
+
+        public static unsafe string GetSpeakName(int soundIndex)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, int, string>)ASM.FastCallTransferStation;
+            return func(0x753330, soundIndex);
+        }
+
+        /* Play a Eva's sound.
+           n = Index of VocClass in Array to be played */
+        public static unsafe void Speak(int soundIndex, VoxType voxType = VoxType.INVALID, VoxPriorityType voxPriorityType = VoxPriorityType.INVALID)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, int, VoxType, VoxPriorityType, void>)ASM.FastCallTransferStation;
+            func(0x752480, soundIndex, voxType, voxPriorityType);
+        }
+
+        /* Play a Eva's sound. */
+        public static unsafe void Speak(string name, VoxType voxType = VoxType.INVALID, VoxPriorityType voxPriorityType = VoxPriorityType.INVALID)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, string, VoxType, VoxPriorityType, void>)ASM.FastCallTransferStation;
+            func(0x752700, name, voxType, voxPriorityType);
         }
 
         /* Play a sound independant of the position.
@@ -54,8 +91,31 @@ namespace PatcherYRpp
             func(0x752A40, soundIndex);
         }
 
-        [FieldOffset(0)] public VocClassHeader Header;
-        [FieldOffset(108)] public string Name;
+        public unsafe string GetName()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref VocClass, string>)0x751600;
+            return func(ref this);
+        }
 
+        [FieldOffset(0)] public VocClassHeader Header;
+
+    }
+
+    public enum VoxType
+    {
+        STANDARD = 0,
+        QUEUE = 1,
+        INTERRUPT = 2,
+        QUEUED_INTERRUPT = 3,
+        INVALID = -1
+    }
+
+    public enum VoxPriorityType
+    {
+        LOW = 0,
+        NORMAL = 1,
+        IMPORTANT = 2,
+        CRITICAL = 3,
+        INVALID = -1
     }
 }
