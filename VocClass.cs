@@ -47,6 +47,13 @@ namespace PatcherYRpp
             func(0x750E20, soundIndex, ref location, a3);
         }
 
+        // no idea what this does, but Super::Launch uses it on "SW Ready" events right after firing said SW
+        public static unsafe void SilenceIndex(int soundIndex)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, int, void>)ASM.FastCallTransferStation;
+            func(0x752A40, soundIndex);
+        }
+
         [FieldOffset(0)] public VocClassHeader Header;
         [FieldOffset(108)] public string Name;
 
