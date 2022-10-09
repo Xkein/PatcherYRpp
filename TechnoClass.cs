@@ -558,7 +558,10 @@ namespace PatcherYRpp
         [FieldOffset(636)] public Bool IsImmobilized; // by chrono aftereffects
         [FieldOffset(644)] public int ChronoLockRemaining; // countdown after chronosphere warps things around
         [FieldOffset(648)] public CoordStruct ChronoDestCoords; // teleport loco and chsphere set this
+        [FieldOffset(660)] public Pointer<AirstrikeClass> Airstrike;
         [FieldOffset(664)] public Bool Berzerk;
+        [FieldOffset(668)] public int BerzerkDurationLeft;
+        [FieldOffset(676)] public Bool Uncrushable;
         [FieldOffset(680)] public IntPtr directRockerLinkedUnit;
         public Pointer<FootClass> DirectRockerLinkedUnit { get => directRockerLinkedUnit; set => directRockerLinkedUnit = value; }
         [FieldOffset(684)] public IntPtr locomotorTarget; // mag->LocoTarget = victim

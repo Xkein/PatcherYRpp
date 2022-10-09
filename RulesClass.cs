@@ -364,6 +364,7 @@ namespace PatcherYRpp
         [FieldOffset(5816)] public int Gravity;
         [FieldOffset(5832)] public int MaxDamage;
         [FieldOffset(5940)] public int BallisticScatter; // value in *256
+        [FieldOffset(6132)] public Pointer<AnimTypeClass> EMPulseSparkles;
         [FieldOffset(6148)] public int RadDurationMultiple;
         [FieldOffset(6152)] public int RadApplicationDelay;
         [FieldOffset(6156)] public int RadLevelMax;
