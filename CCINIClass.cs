@@ -29,6 +29,9 @@ namespace PatcherYRpp
         private static IntPtr ini_Art_FileName = new IntPtr(0x826254); // artmd.ini
         public static AnsiStringPointer INI_Art_FileName => ini_Art_FileName;
 
+        private static IntPtr ini_AI_FileName = new IntPtr(0x82621C); // aimd.ini
+        public static AnsiStringPointer INI_AI_FileName => ini_AI_FileName;
+
 
         private static IntPtr ppINI_Rules = new IntPtr(0x887048);
         private static IntPtr pINI_AI = new IntPtr(0x887128);
