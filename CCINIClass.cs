@@ -24,13 +24,46 @@ namespace PatcherYRpp
     public struct CCINIClass
     {
         private static IntPtr ini_Rules_FileName = new IntPtr(0x826260); // rulesmd.ini
-        public static AnsiStringPointer INI_Ruels_FileName => ini_Rules_FileName;
+        private static string ruels_FileName = null;
+        public static string INI_Ruels_FileName
+        {
+            get
+            {
+                if (null == ruels_FileName)
+                {
+                    ruels_FileName = (AnsiStringPointer)ini_Rules_FileName;
+                }
+                return ruels_FileName;
+            }
+        }
 
         private static IntPtr ini_Art_FileName = new IntPtr(0x826254); // artmd.ini
-        public static AnsiStringPointer INI_Art_FileName => ini_Art_FileName;
+        private static string art_fileName = null;
+        public static string INI_Art_FileName
+        {
+            get
+            {
+                if (null == art_fileName)
+                {
+                    art_fileName = (AnsiStringPointer)ini_Art_FileName;
+                }
+                return art_fileName;
+            }
+        }
 
         private static IntPtr ini_AI_FileName = new IntPtr(0x82621C); // aimd.ini
-        public static AnsiStringPointer INI_AI_FileName => ini_AI_FileName;
+        private static string ai_FileName = null;
+        public static string INI_AI_FileName
+        {
+            get
+            {
+                if (null == ai_FileName)
+                {
+                    ai_FileName = (AnsiStringPointer)ini_AI_FileName;
+                }
+                return ai_FileName;
+            }
+        }
 
 
         private static IntPtr ppINI_Rules = new IntPtr(0x887048);
