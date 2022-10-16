@@ -441,6 +441,17 @@ namespace PatcherYRpp
             return func(ref this, pTarget, pWeapon, ref sourceCoord);
         }
 
+        /// <summary>
+        /// GetWeaponDamage
+        /// </summary>
+        /// <param name="weaponIndex"></param>
+        /// <returns></returns>
+        public unsafe int Combat_Damage(int weaponIndex)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, int>)0x6F3970;
+            return func(ref this, weaponIndex);
+        }
+
         /*
          *  Cell->AddThreat(this->Owner, -this->ThreatPosed);
          *  this->ThreatPosed = 0;
