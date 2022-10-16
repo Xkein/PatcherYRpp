@@ -32,6 +32,37 @@ namespace PatcherYRpp
             func(ref this, command);
         }
 
+        // 是否绑定在机场
+        // 飞机调用
+        public unsafe bool IsInRadioContact()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref RadioClass, Bool>)0x65AE30;
+            return func(ref this);
+        }
+
+        // 绑定在哪个机场
+        // 飞机调用
+        public unsafe Pointer<BuildingClass> ContactWithWhom(int index = 0)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref RadioClass, int, IntPtr>)0x65AD40;
+            return func(ref this, index);
+        }
+
+        // 绑定在几号停机位
+        // 建筑调用
+        public unsafe int GetContactIndex(Pointer<RadioClass> pAircraft)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref RadioClass, IntPtr, int>)0x65AD90;
+            return func(ref this, pAircraft);
+        }
+
+        // 有没有空位
+        // 建筑调用
+        public unsafe bool HasFreeIndexes()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref RadioClass, Bool>)0x65ADC0;
+            return func(ref this);
+        }
 
         [FieldOffset(0)] public MissionClass Base;
         [FieldOffset(0)] public ObjectClass BaseObject;
