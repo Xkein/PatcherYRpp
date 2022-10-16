@@ -293,6 +293,7 @@ namespace PatcherYRpp
         [FieldOffset(21556)]public int TotalKilledUnits;
         [FieldOffset(21640)] public int TotalKilledBuildings;
         [FieldOffset(21736)] public int SiloMoney;
+        [FieldOffset(22016)] public int EnemyHouseIndex;
         [FieldOffset(22265)] public ColorStruct Color;
         [FieldOffset(22268)] public ColorStruct LaserColor;
         [FieldOffset(22392)] public Bool RecheckPower;
