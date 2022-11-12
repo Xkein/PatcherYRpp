@@ -343,6 +343,10 @@ namespace PatcherYRpp
         [FieldOffset(548)] public int SpySatDeactivationSound;
         [FieldOffset(552)] public int UpgradeVeteranSound;
         [FieldOffset(556)] public int UpgradeEliteSound;
+        [FieldOffset(824)] public Pointer<AnimTypeClass> WarpIn;
+        [FieldOffset(828)] public Pointer<AnimTypeClass> WarpOut;
+        [FieldOffset(832)] public Pointer<AnimTypeClass> WarpAway;
+        [FieldOffset(836)] public Pointer<AnimTypeClass> ChronoSparkle1;
         [FieldOffset(1640)] public double VeteranRatio;
         [FieldOffset(1648)] public double VeteranCombat;
         [FieldOffset(1656)] public double VeteranSpeed;
@@ -351,6 +355,13 @@ namespace PatcherYRpp
         [FieldOffset(1680)] public double VeteranROF;
         [FieldOffset(1688)] public double VeteranCap;
         [FieldOffset(3008)] public DynamicVectorClass<AnimTypeClass> SplashList;
+        [FieldOffset(3048)] public int EliteFlashTimer;
+        [FieldOffset(3052)] public int ChronoDelay;
+        [FieldOffset(3056)] public int ChronoReinfDelay;
+        [FieldOffset(3060)] public int ChronoDistanceFactor;
+        [FieldOffset(3064)] public Bool ChronoTrigger;
+        [FieldOffset(3068)] public int ChronoMinimumDelay;
+        [FieldOffset(3072)] public int ChronoRangeMinimum;
         [FieldOffset(3972)] public Pointer<WarheadTypeClass> FlameDamage;
         [FieldOffset(3976)] public Pointer<WarheadTypeClass> FlameDamage2;
         [FieldOffset(3980)] public Pointer<WarheadTypeClass> NukeWarhead;

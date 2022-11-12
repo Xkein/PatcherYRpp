@@ -349,6 +349,18 @@ namespace PatcherYRpp
             SetDestination(pCell.Convert<AbstractClass>(), unknow);
         }
 
+        public unsafe void EnterIdleMode(bool initial, bool unknow = true)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool, Bool, void>)this.GetVirtualFunctionPointer(289);
+            func(ref this, initial, unknow);
+        }
+
+        public unsafe void UpdateSight(bool incremental = false, bool a6 = false, bool a7 = false, Pointer<HouseClass> pHouse = default, int sightRange = 0)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool, Bool, Bool, IntPtr, int, void>)this.GetVirtualFunctionPointer(290);
+            func(ref this, incremental, a6, a7, pHouse, sightRange);
+        }
+
         public unsafe bool CanAttackOnTheMove()
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, Bool>)this.GetVirtualFunctionPointer(304);
@@ -560,6 +572,12 @@ namespace PatcherYRpp
         [FieldOffset(548)] public ProgressTimer CloakProgress; // phase from [opaque] -> [fading] -> [transparent] , [General]CloakingStages= long
         [FieldOffset(576)] public TimerStruct CloakDelayTimer; // delay before cloaking again
         [FieldOffset(588)] public float WarpFactor; // don't ask! set to 0 in CTOR, never modified, only used as ((this->Fetch_ID) + this->WarpFactor) % 400 for something in cloak ripple
+        [FieldOffset(596)] public CoordStruct LastSightCoords;
+        [FieldOffset(608)] public int LastSightRange;
+        [FieldOffset(612)] public int LastSightHeight;
+        [FieldOffset(616)] public Bool GapSuperCharged;
+        [FieldOffset(617)] public Bool GeneratingGap;
+        [FieldOffset(620)] public int GapRadius;
         [FieldOffset(624)] public Bool BeingWarpedOut; // is being warped by CLEG
         [FieldOffset(625)] public Bool WarpingOut; // phasing in after chrono-jump
         [FieldOffset(628)] public IntPtr temporalImUsing; // CLEG attacking Power Plant : CLEG's this

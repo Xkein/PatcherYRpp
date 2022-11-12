@@ -35,10 +35,68 @@ namespace PatcherYRpp
             return this.TryGetCellAt(cell, out pCell);
         }
 
-        public unsafe Pointer<CellClass> GetCellAt(CoordStruct pCoords)
+        public unsafe Pointer<CellClass> GetCellAt(CoordStruct coords)
         {
             var func = (delegate* unmanaged[Thiscall]<ref MapClass, ref CoordStruct, IntPtr>)0x565730;
-            return func(ref this, ref pCoords);
+            return func(ref this, ref coords);
+        }
+
+        /*
+         * TechnoClass::Fire uses this for RevealOnFire on player's own units (radius = 3)
+         * TechnoClass::See uses this on all (singleCampaign || !MultiplayPassive) units
+         * TalkBubble uses this to display the unit to the player
+         */
+        public unsafe void RevealArea1(CoordStruct coords, int radius, Pointer<HouseClass> pHouse, bool incremental, bool a6, bool a7, bool revealByHeight, int level)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, IntPtr, int, IntPtr, Bool, Bool, Bool, Bool, int, void>)0x5673A0;
+            func(ref this, coords.GetThisPointer(), radius, pHouse, incremental, a6, a7, revealByHeight, level);
+        }
+
+        /*
+         * these come in pairs - first the last argument is 0 and then 1
+
+         * AircraftClass::Fire - reveal the target area to the owner (0,0,0,1,x)
+         * AircraftClass::See - reveal shroud when on the ground (arg,arg,0,1,x), and fog always (0,0,1,(height < flightlevel/2),x)
+         * AnimClass::AnimClass - reveal area to player if anim->Type = [General]DropZoneAnim= (radius = Rules->DropZoneRadius /256) (0,0,0,1,x)
+         * BuildingClass::Place - reveal (r = 1) to player if this is ToTile and owned by player (0,0,0,1,x)
+         * BuildingClass::Unlimbo - reveal (radius = this->Type->Sight ) to owner (0,0,0,1,x)
+         * PsychicReveal launch - reveal to user (0,0,0,0,x)
+         * ActionClass::RevealWaypoint - reveal RevealTriggerRadius= to player (0,0,0,1,x)
+         * ActionClass::RevealZoneOfWaypoint - reveal (r = 2) to player (0,0,0,1,x)
+         */
+        public unsafe void RevealArea2(CoordStruct coords, int radius, Pointer<HouseClass> pHouse, bool incremental, bool a6, bool a7, bool revealByHeight, int level)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, IntPtr, int, IntPtr, Bool, Bool, Bool, Bool, int, void>)0x5678E0;
+            func(ref this, coords.GetThisPointer(), radius, pHouse, incremental, a6, a7, revealByHeight, level);
+        }
+
+        /*
+         * AircraftClass::SpyPlaneApproach
+         * AircraftClass::SpyPlaneOverfly
+         * AircraftClass::Carryall_Unload
+         * BuildingClass::Place - RevealToAll
+         * Foot/Infantry Class::Update/UpdatePosition
+         * MapClass::RevealArea0 calls this to do the work
+         * ParasiteClass::Infect/PointerGotInvalid
+         * TechnoClass::Unlimbo
+         * TechnoClass::Fire uses this (r = 4) right after using RevealArea0, wtfcock
+         */
+        public unsafe void RevealArea3(CoordStruct coords, int height, int radius, bool skipReveal)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, ref CoordStruct, int, int, Bool, void>)0x567DA0;
+            func(ref this, ref coords, height, radius, skipReveal);
+        }
+
+        public unsafe void Reveal(Pointer<HouseClass> pHouse)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, IntPtr, void>)0x577D90;
+            func(ref this, pHouse);
+        }
+
+        public unsafe void Reshroud(Pointer<HouseClass> pHouse)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref MapClass, IntPtr, void>)0x577AB0;
+            func(ref this, pHouse);
         }
 
         public static int GetCellIndex(CellStruct MapCoords)

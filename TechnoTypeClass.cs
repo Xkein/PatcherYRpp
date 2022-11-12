@@ -91,6 +91,13 @@ namespace PatcherYRpp
         [FieldOffset(1036)] public IntPtr powersUnit;
         public Pointer<UnitTypeClass> PowersUnit => powersUnit;
         [FieldOffset(1040)] public Bool PoweredUnit;
+        [FieldOffset(1376)] public int TurretRotateSound;
+        [FieldOffset(1380)] public int EnterTransportSound;
+        [FieldOffset(1384)] public int LeaveTransportSound;
+        [FieldOffset(1388)] public int DeploySound;
+        [FieldOffset(1392)] public int UndeploySound;
+        [FieldOffset(1396)] public int ChronoInSound;
+        [FieldOffset(1400)] public int ChronoOutSound;
         [FieldOffset(1460)] public MovementZone MovementZone;
         [FieldOffset(1464)] public int GuardRange;
         [FieldOffset(1468)] public int MinDebris;
