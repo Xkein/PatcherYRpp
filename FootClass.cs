@@ -109,10 +109,13 @@ namespace PatcherYRpp
         [FieldOffset(0)] public ObjectClass BaseObject;
         [FieldOffset(0)] public AbstractClass BaseAbstract;
 
-        [FieldOffset(1368)] public CellStruct CurrentMapCoords;
+        [FieldOffset(1336)] public int WalkedFramesSoFar_idle;
+        [FieldOffset(1340)] public int PlayingMovingSound;
+        [FieldOffset(1344)] public int MovingSoundDelay;
         [FieldOffset(1372)] public CellStruct LastMapCoords;
         [FieldOffset(1376)] public CellStruct LastJumpjetMapCoords;
         [FieldOffset(1384)] public CellStruct CurrentJumpjetMapCoords;
+        [FieldOffset(1400)] public double SpeedPercentage;
         [FieldOffset(1408)] public double SpeedMultiplier;
         [FieldOffset(1444)] public Pointer<AbstractClass> Destination;
         [FieldOffset(1448)] public Pointer<AbstractClass> LastDestination;
