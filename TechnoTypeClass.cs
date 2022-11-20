@@ -65,6 +65,8 @@ namespace PatcherYRpp
         [FieldOffset(0)] public ObjectTypeClass Base;
         [FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
+        [FieldOffset(660)] public int WalkRate;
+        [FieldOffset(664)] public int IdleRate;
         [FieldOffset(668)] public AbilitiesStruct VeteranAbilities;
         [FieldOffset(686)] public AbilitiesStruct EliteAbilities;
         [FieldOffset(760)] public int SlowdownDistance;
