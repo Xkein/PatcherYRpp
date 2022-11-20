@@ -13,16 +13,22 @@ namespace PatcherYRpp
     public struct SpawnManagerClass
     {
 
+        public unsafe void Recalc()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref SpawnManagerClass, IntPtr, void>)0x6B7100;
+            func(ref this, target);
+        }
+
         public unsafe void SetTarget(Pointer<AbstractClass> target)
         {
             var func = (delegate* unmanaged[Thiscall]<ref SpawnManagerClass, IntPtr, void>)0x6B7B90;
             func(ref this, target);
         }
 
-        public unsafe void Recalc()
+        public unsafe int DrawState()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref SpawnManagerClass, IntPtr, void>)0x6B7100;
-            func(ref this, target);
+            var func = (delegate* unmanaged[Thiscall]<ref SpawnManagerClass, int>)0x6B7D50;
+            return func(ref this);
         }
 
 
