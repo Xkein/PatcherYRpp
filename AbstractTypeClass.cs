@@ -19,9 +19,9 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 152, Pack = 1)]
     public struct AbstractTypeClass
     {
-        static public readonly IntPtr ArrayPointer = new IntPtr(0xA8E968);
+        public static readonly IntPtr ArrayPointer = new IntPtr(0xA8E968);
 
-        static public YRPP.GLOBAL_DVC_ARRAY<AbstractTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<AbstractTypeClass>(ArrayPointer);
+        public static YRPP.GLOBAL_DVC_ARRAY<AbstractTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<AbstractTypeClass>(ArrayPointer);
 
         public unsafe bool LoadFromINI(Pointer<CCINIClass> pINI)
         {

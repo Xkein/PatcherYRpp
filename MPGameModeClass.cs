@@ -11,7 +11,7 @@ namespace PatcherYRpp
     public struct MPGameModeClass
     {
         private static IntPtr instance = new IntPtr(0xA8B23C);
-        static public ref MPGameModeClass Instance { get => ref instance.Convert<Pointer<MPGameModeClass>>().Ref.Ref; }
+        public static ref MPGameModeClass Instance { get => ref instance.Convert<Pointer<MPGameModeClass>>().Ref.Ref; }
 
         [FieldOffset(8)] public DynamicVectorClass<Pointer<MPTeam>> MPTeams;
         [FieldOffset(32)] public UniStringPointer CSFTitle;
