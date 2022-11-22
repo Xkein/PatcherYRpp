@@ -816,6 +816,18 @@ namespace PatcherYRpp
         Damage = 4 // wait until rocking stops; deliver damage
     }
 
+    [Flags]
+    public enum WWKey
+    {
+        Shift = 0x100,
+        Ctrl = 0x200,
+        Alt = 0x400,
+        Release = 0x800,
+        VirtualKey = 0x1000,
+        DoubleClick = 0x2000,
+        Button = 0x8000
+    }
+
     // 步兵播放动画的类型
     public enum SequenceAnimType
     {

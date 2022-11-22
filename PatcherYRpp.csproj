@@ -91,6 +91,7 @@
     <Compile Include="CellClass.cs" />
     <Compile Include="Checksummer.cs" />
     <Compile Include="ColorScheme.cs" />
+    <Compile Include="CommandClass.cs" />
     <Compile Include="ConvertClass.cs" />
     <Compile Include="DamageGroup.cs" />
     <Compile Include="Dependencies\DirectDraw.cs" />
