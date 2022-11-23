@@ -153,9 +153,17 @@ namespace PatcherYRpp
         [FieldOffset(1812)] public Bool AltCameoAllocated;
         [FieldOffset(1820)] public int ROT;
         [FieldOffset(1824)] public int TurretOffset;
+        [FieldOffset(1828)] public Bool CanBeHidden;
         [FieldOffset(1836)] public DynamicVectorClass<Pointer<AnimTypeClass>> Explosion;
         [FieldOffset(1864)] public DynamicVectorClass<Pointer<AnimTypeClass>> DestroyAnim;
+        [FieldOffset(2044)] public int ShadowIndex;
+        [FieldOffset(2048)] public int Storage;
+        [FieldOffset(2052)] public Bool TurretNotExportedOnGround;
+        [FieldOffset(2053)] public Bool Gunner;
+        [FieldOffset(2054)] public Bool HasTurretTooltips;
+        [FieldOffset(2056)] public int TurretCount;
         [FieldOffset(2060)] public int WeaponCount;
+        [FieldOffset(2064)] public Bool IsChargeTurret;
         [FieldOffset(2068)] public CoordStruct turretWeaponFLH_first; // index 6 - 10 is AlternateFLH0 - AlternateFLH4, if no data use Weapon1FLH's data.
         public Pointer<CoordStruct> TurretWeaponFLH => Pointer<CoordStruct>.AsPointer(ref turretWeaponFLH_first);
         [FieldOffset(2200)] public WeaponStruct weapon_first;
