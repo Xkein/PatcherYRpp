@@ -28,6 +28,12 @@ namespace PatcherYRpp
             return func(ref this, animNumber, bUnk, dwUnk);
         }
 
+        public unsafe void FiringUpdate()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref InfantryClass, void>)0x5206B0;
+            func(ref this);
+        }
+
         [FieldOffset(0)] public FootClass Base;
         [FieldOffset(0)] public TechnoClass BaseTechno;
         [FieldOffset(0)] public RadioClass BaseRadio;
@@ -36,6 +42,7 @@ namespace PatcherYRpp
         [FieldOffset(0)] public AbstractClass BaseAbstract;
         [FieldOffset(1728)] public Pointer<InfantryTypeClass> Type;
         [FieldOffset(1732)] public SequenceAnimType SequenceAnim;
+        [FieldOffset(1736)] public TimerStruct Comment;
         [FieldOffset(1748)] public int PanicDurationLeft;
         [FieldOffset(1752)] public Bool PermanentBerzerk;
         [FieldOffset(1753)] public Bool Technician;

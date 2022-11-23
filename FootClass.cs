@@ -134,8 +134,22 @@ namespace PatcherYRpp
                 locomotor.Object = value;
             }
         }
+        [FieldOffset(1671)] public Bool IsToScatter;
+        [FieldOffset(1672)] public Bool TargetAcquired;
+        [FieldOffset(1673)] public Bool IsTeamLeader;
+        [FieldOffset(1674)] public Bool ShouldScanForTarget;
+        [FieldOffset(1675)] public Bool IsPlanningToLook;
+        [FieldOffset(1676)] public Bool IsDeploying;
+        [FieldOffset(1677)] public Bool IsFiring;
+        [FieldOffset(1679)] public Bool ShouldEnterAbsorber; // mission_guard
+        [FieldOffset(1680)] public Bool ShouldEnterOccupiable; // mission_guard
+        [FieldOffset(1681)] public Bool ShouldGarrisonStructure; // mission_guard
         [FieldOffset(1684)] public IntPtr parasiteEatingMe;
-        public Pointer<FootClass> ParasiteEatingMe => parasiteEatingMe;
+        public Pointer<FootClass> ParasiteEatingMe {get => parasiteEatingMe; set => parasiteEatingMe = value; }
+        [FieldOffset(1688)] public int ParalysisEndFrame;
+        [FieldOffset(1692)] public IntPtr parasiteImUsing;
+        public Pointer<ParasiteClass> ParasiteImUsing {get => parasiteImUsing; set => parasiteImUsing = value; }
+        [FieldOffset(1696)] public TimerStruct ParalysisTimer;
         [FieldOffset(1709)] public Bool IsAttackedByLocomotor;
         [FieldOffset(1710)] public Bool IsLetGoByLocomotor;
         [FieldOffset(1711)] public Bool FacingChanging; // is rotating

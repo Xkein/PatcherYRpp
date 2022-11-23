@@ -50,18 +50,6 @@ namespace PatcherYRpp
             return func(ref this, ref destCoords);
         }
 
-        public unsafe Pointer<FacingStruct> GetRealFacing(ref FacingStruct facing)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref FacingStruct, IntPtr>)this.GetVirtualFunctionPointer(194);
-            return func(ref this, ref facing);
-        }
-
-        public unsafe int GetROF(int weaponIndex)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, int>)this.GetVirtualFunctionPointer(198);
-            return func(ref this, weaponIndex);
-        }
-
         public unsafe int SelectWeapon(Pointer<AbstractClass> pTarget)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)this.GetVirtualFunctionPointer(185);
@@ -84,6 +72,18 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int>)this.GetVirtualFunctionPointer(188);
             return func(ref this);
+        }
+
+        public unsafe Pointer<FacingStruct> GetRealFacing(ref FacingStruct facing)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, ref FacingStruct, IntPtr>)this.GetVirtualFunctionPointer(194);
+            return func(ref this, ref facing);
+        }
+
+        public unsafe int GetROF(int weaponIndex)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, int, int>)this.GetVirtualFunctionPointer(198);
+            return func(ref this, weaponIndex);
         }
 
         public unsafe int GetGuardRange(int dwUnk)
@@ -617,6 +617,7 @@ namespace PatcherYRpp
         [FieldOffset(732)] public IntPtr slaveOwner;
         public Pointer<TechnoClass> SlaveOwner { get => slaveOwner; set => slaveOwner = value; }
         [FieldOffset(744)] public float PitchAngle; // not exactly, and it doesn't affect the drawing, only internal state of a dropship
+        [FieldOffset(748)] public TimerStruct ROFTimer;
         [FieldOffset(764)] public int Ammo;
         // rocking effect
         [FieldOffset(808)] public float AngleRotatedSideways; // in this frame, in radians - if abs() exceeds pi/2, it dies

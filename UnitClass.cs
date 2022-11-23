@@ -16,6 +16,12 @@ namespace PatcherYRpp
         Pointer<UnitTypeClass> IOwnAbstractType<UnitTypeClass>.OwnType => Type;
         Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
 
+        public unsafe void FiringUpdate()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref UnitClass, void>)0x736DF0;
+            func(ref this);
+        }
+
         public unsafe void DrawIt(Point2D point, RectangleStruct bound)
         {
             var func = (delegate* unmanaged[Thiscall]<ref UnitClass, ref Point2D, ref RectangleStruct, void>)0x73CEC0;
