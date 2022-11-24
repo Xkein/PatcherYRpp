@@ -223,10 +223,10 @@ namespace PatcherYRpp
             return func(ref this, pTarget, weaponIndex);
         }
 
-        public unsafe FireError GetFireError(Pointer<AbstractClass> pTarget, int weaponIndex, bool ignoreRange)
+        public unsafe FireError GetFireError(Pointer<AbstractClass> pTarget, int weaponIndex, bool checkRange)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int, Bool, FireError>)this.GetVirtualFunctionPointer(240);
-            return func(ref this, pTarget, weaponIndex, ignoreRange);
+            return func(ref this, pTarget, weaponIndex, checkRange);
         }
 
         public unsafe Pointer<TechnoClass> SelectAutoTarget(TargetFlags TargetFlags, CoordStruct TargetCoord, bool OnlyTargetHouseEnemy)
