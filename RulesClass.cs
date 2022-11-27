@@ -354,6 +354,7 @@ namespace PatcherYRpp
         [FieldOffset(1672)] public double VeteranArmor;
         [FieldOffset(1680)] public double VeteranROF;
         [FieldOffset(1688)] public double VeteranCap;
+        [FieldOffset(1972)] public int FlightLevel;
         [FieldOffset(3008)] public DynamicVectorClass<AnimTypeClass> SplashList;
         [FieldOffset(3048)] public int EliteFlashTimer;
         [FieldOffset(3052)] public int ChronoDelay;

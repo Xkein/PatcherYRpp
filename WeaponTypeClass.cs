@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using DynamicPatcher;
 
 namespace PatcherYRpp
 {
@@ -23,6 +24,12 @@ namespace PatcherYRpp
         public unsafe int GetSpeed(CoordStruct sourcePos, CoordStruct targetPos)
         {
             return GetSpeed((int)sourcePos.DistanceFrom(targetPos));
+        }
+
+        public unsafe static double GetSpeed(double range, int gravity)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, double, int, double>)ASM.FastCallTransferStation;
+            return func(0x48AB90, range, gravity);
         }
 
         [FieldOffset(0)] public AbstractTypeClass Base;
