@@ -79,6 +79,8 @@
     <Compile Include="ArrayClass.cs" />
     <Compile Include="Audio.cs" />
     <Compile Include="BasicStructures.cs" />
+    <Compile Include="BaseClass.cs" />
+    <Compile Include="BaseNodeClass.cs" />
     <Compile Include="Blitters.cs" />
     <Compile Include="BounceClass.cs" />
     <Compile Include="BuildingClass.cs" />

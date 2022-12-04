@@ -302,6 +302,7 @@ namespace PatcherYRpp
         [FieldOffset(22396)] public Edge Edge;
         [FieldOffset(21412)] public int PowerOutput;
         [FieldOffset(21416)] public int PowerDrain;
+        [FieldOffset(22272)] public BaseClass Base;
         [FieldOffset(90196)] public int ColorSchemeIndex;
 
         public double PowerPercent => PowerOutput != 0 ? (double)PowerDrain / (double)PowerOutput : 1;
