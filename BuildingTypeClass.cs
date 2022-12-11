@@ -32,6 +32,15 @@ namespace PatcherYRpp
         [FieldOffset(3828)] public int Height;
         [FieldOffset(3832)] public int OccupyHeight;
         [FieldOffset(5408)] public int NormalZAdjust;
+        [FieldOffset(5450)] public Bool TogglePower;
+        [FieldOffset(5451)] public Bool HasSpotlight;
+        [FieldOffset(5452)] public Bool IsTemple;
+        [FieldOffset(5453)] public Bool IsPlug;
+        [FieldOffset(5454)] public Bool HoverPad;
+        [FieldOffset(5455)] public Bool BaseNormal;
+        [FieldOffset(5456)] public Bool EligibileForAllyBuilding;
+        [FieldOffset(5457)] public Bool EligibleForDelayKill;
+        [FieldOffset(5458)] public Bool NeedsEngineer;
         [FieldOffset(5490)] public Bool Capturable;
         [FieldOffset(5495)] public Bool CanC4;
         [FieldOffset(5825)] public Bool Hospital;

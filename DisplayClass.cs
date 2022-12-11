@@ -11,6 +11,32 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 4584)]
     public struct DisplayClass
     {
+        public static IntPtr display_ZoneCell = new IntPtr(0x88095C);
+        public static CellStruct Display_ZoneCell => ((Pointer<CellStruct>)display_ZoneCell).Ref;
+
+        public static IntPtr display_ZoneOffset = new IntPtr(0x880960);
+        public static CellStruct Display_ZoneOffset => ((Pointer<CellStruct>)display_ZoneOffset).Ref;
+
+        public static IntPtr display_CurrentFoundation_Data = new IntPtr(0x880964);
+        public static Pointer<CellStruct> Display_CurrentFoundation_Data => ((Pointer<Pointer<CellStruct>>)display_CurrentFoundation_Data).Ref;
+
+        public static IntPtr display_PassedProximityCheck = new IntPtr(0x880968);
+        public static Bool Display_PassedProximityCheck { get => ((Pointer<Bool>)display_PassedProximityCheck).Ref; set => ((Pointer<Bool>)display_PassedProximityCheck).Ref = value; }
+
+        public static IntPtr display_PendingObject = new IntPtr(0x880990);
+        public static Pointer<BuildingTypeClass> Display_PendingObject => ((Pointer<Pointer<BuildingTypeClass>>)display_PendingObject).Ref;
+
+        public static IntPtr display_PendingHouse = new IntPtr(0x880994);
+        public static int Display_PendingHouse => ((Pointer<int>)display_PendingHouse).Ref;
+
+
+        private static IntPtr ppInstance = new IntPtr(0x87F7E8);
+        public static ref Pointer<DisplayClass> Instance => ref ppInstance.Convert<Pointer<DisplayClass>>().Ref;
+
+        public static DisplayClass Global()
+        {
+            return Instance.Ref;
+        }
 
         //Decides which mouse pointer to set and then does it.
         //Mouse is over cell pMapCoords which is bShrouded and holds pObject.
@@ -43,6 +69,17 @@ namespace PatcherYRpp
             func(ref this, dwUnk);
         }
 
+        public unsafe bool Passes_Proximity_Check()
+        {
+            return Passes_Proximity_Check(Display_PendingObject, Display_PendingHouse, Display_CurrentFoundation_Data, Display_ZoneCell + Display_ZoneOffset);
+        }
+
+        public unsafe bool Passes_Proximity_Check(Pointer<BuildingTypeClass> pPendingObject, int houseIndex, Pointer<CellStruct> foundation, CellStruct center)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref DisplayClass, IntPtr, int, IntPtr, IntPtr, Bool>)0x4A8EB0;
+            return func(ref this, pPendingObject, houseIndex, foundation, center.GetThisPointer());
+        }
+
         public unsafe void LMBUp(Pointer<CoordStruct> xyz, Pointer<CellStruct> pMapCoords, Pointer<ObjectClass> pObject, Action action, int dwUnk2 = 0)
         {
             var func = (delegate* unmanaged[Thiscall]<ref DisplayClass, IntPtr, IntPtr, IntPtr, Action, int, void>)0x4AB9B0;
@@ -60,6 +97,18 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref DisplayClass, IntPtr, IntPtr, int, Action>)0x692610;
             return func(ref this, pMapCoords, pObject, dwUnk);
         }
+
+        [FieldOffset(4476)] public Pointer<CellStruct> CurrentFoundation_Data;
+        [FieldOffset(4480)] public Bool PassedProximityCheck;
+        [FieldOffset(4481)] public Bool PassedProximityShroudCheck;
+        [FieldOffset(4520)] public Pointer<BuildingTypeClass> PendingObject;
+        [FieldOffset(4524)] public int PendingHouse;
+        [FieldOffset(4528)] public Bool RepairMode;
+        [FieldOffset(4529)] public Bool SellMode;
+        [FieldOffset(4530)] public Bool PowerToggleMode;
+        [FieldOffset(4531)] public Bool PlanningMode;
+        [FieldOffset(4532)] public Bool PlaceBeaconMode;
+        [FieldOffset(4536)] public int CurrentSWTypeIndex;
 
     }
 }
