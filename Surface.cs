@@ -171,6 +171,12 @@ namespace PatcherYRpp
             DrawSHP(pPalette, pSHP, frameIdx, pos, Pointer<RectangleStruct>.AsPointer(ref bound));
         }
 
+        public unsafe void DrawSHP(Pointer<ConvertClass> pPalette, Pointer<SHPStruct> pSHP, int frameIdx, Point2D pos, BlitterFlags flags)
+        {
+            RectangleStruct bound = this.GetRect();
+            DrawSHP(pPalette, pSHP, frameIdx, pos, Pointer<RectangleStruct>.AsPointer(ref bound), flags);
+        }
+
         public unsafe void DrawSHP(Pointer<ConvertClass> pPalette, Pointer<SHPStruct> pSHP, int frameIdx, Point2D pos, RectangleStruct bound)
         {
             DrawSHP(pPalette, pSHP, frameIdx, pos, Pointer<RectangleStruct>.AsPointer(ref bound));
