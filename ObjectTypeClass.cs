@@ -68,5 +68,6 @@ namespace PatcherYRpp
         [FieldOffset(560)] public Bool Selectable;
         [FieldOffset(562)] public Bool Insignificant;
         [FieldOffset(563)] public Bool Immune;
+        [FieldOffset(566)] public Bool Voxel;
     }
 }

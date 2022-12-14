@@ -338,6 +338,24 @@ namespace PatcherYRpp
             return tmp;
         }
 
+        public unsafe bool IsClearlyVisibleTo(Pointer<HouseClass> pHouse)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool>)this.GetVirtualFunctionPointer(272);
+            return func(ref this, pHouse);
+        }
+
+        public unsafe int DisguiseAs(Pointer<TechnoClass> pTarget)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, int>)this.GetVirtualFunctionPointer(283);
+            return func(ref this, pTarget);
+        }
+
+        public unsafe void ClearDisguise()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)this.GetVirtualFunctionPointer(284);
+            func(ref this);
+        }
+
         public unsafe void SetDestination(Pointer<AbstractClass> pDest, bool unknow = true)
         {
             var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, IntPtr, Bool, void>)this.GetVirtualFunctionPointer(288);
@@ -560,6 +578,7 @@ namespace PatcherYRpp
         public Pointer<TechnoClass> DrainingMe { get => drainingMe; set => drainingMe = value; }
         [FieldOffset(468)] public IntPtr drainAnim;
         public Pointer<AnimClass> DrainAnim { get => drainAnim; set => drainAnim = value; }
+        [FieldOffset(476)] public int DisguiseCreationFrame;
         [FieldOffset(480)] public TimerStruct InfantryBlinkTimer; // Rules->InfantryBlinkDisguiseTime , detects mirage firing per description
         [FieldOffset(492)] public TimerStruct DisguiseBlinkTimer; // disguise disruption timer
         [FieldOffset(508)] public TimerStruct ReloadTimer;
