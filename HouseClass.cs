@@ -266,6 +266,7 @@ namespace PatcherYRpp
         [FieldOffset(432)] public double CostMultiplier;
         [FieldOffset(440)] public double BuildTimeMultiplier;
         [FieldOffset(480)] public Edge StartingEdge;
+        [FieldOffset(488)] public int SideIndex;
         [FieldOffset(492)] public Bool CurrentPlayer;
         [FieldOffset(493)] public Bool PlayerControl;
         [FieldOffset(501)] public Bool Defeated;
