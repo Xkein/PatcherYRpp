@@ -50,6 +50,7 @@ namespace PatcherYRpp
         [FieldOffset(3660)] public int BurstDelay1;
         [FieldOffset(3664)] public int BurstDelay2;
         [FieldOffset(3668)] public int BurstDelay3;
-
+        [FieldOffset(3676)] public int WalkFrames; // this is not the walkframes
+        [FieldOffset(3677)] public int FiringFrames;
     }
 }
