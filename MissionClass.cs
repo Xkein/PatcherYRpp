@@ -205,6 +205,11 @@ namespace PatcherYRpp
             return func(ref this);
         }
 
+        public unsafe Pointer<MissionControlClass> GetCurrentMissionConrtol() {
+            var func = (delegate* unmanaged[Thiscall]<ref MissionClass, IntPtr>)0x5B3A00;
+            return func(ref this);
+        }
+
         [FieldOffset(0)] public ObjectClass Base;
         [FieldOffset(0)] public AbstractClass BaseAbstract;
 
