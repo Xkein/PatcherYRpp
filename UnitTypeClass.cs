@@ -24,7 +24,7 @@ namespace PatcherYRpp
         [FieldOffset(3598)] public Bool Harvester;
         [FieldOffset(3599)] public Bool Weeder;
         [FieldOffset(3600)] public Bool unknown_E10;
-        [FieldOffset(3601)] public Bool HasTurret;
+        [FieldOffset(3601)] public Bool IsLockTurret;
         [FieldOffset(3602)] public Bool DeployToFire;
         [FieldOffset(3603)] public Bool IsSimpleDeployer;
         [FieldOffset(3604)] public Bool IsTilter;
