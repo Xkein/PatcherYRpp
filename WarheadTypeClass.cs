@@ -16,6 +16,8 @@ namespace PatcherYRpp
 
         [FieldOffset(0)] public AbstractTypeClass Base;
         [FieldOffset(152)] public float Deform;
+        [FieldOffset(160)] public float versus_first;
+        public Pointer<float> Versus => Pointer<float>.AsPointer(ref versus_first);
 
         [FieldOffset(292)] public float CellSpread;
         [FieldOffset(296)] public float CellInset;
