@@ -475,6 +475,14 @@ namespace PatcherYRpp
             return func(ref this);
         }
 
+        public unsafe DirStruct Direction(Pointer<AbstractClass> pTarget)
+        {
+            DirStruct dir = default;
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr, IntPtr, IntPtr>)0x5F3DB0;
+            func(ref this, dir.GetThisPointer(), pTarget);
+            return dir;
+        }
+
         public unsafe int Distance(Pointer<ObjectClass> that)
         {
             var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr, int>)0x5F6360;
