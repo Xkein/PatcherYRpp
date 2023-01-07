@@ -15,9 +15,9 @@ namespace PatcherYRpp
         public static YRPP.GLOBAL_DVC_ARRAY<WarheadTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<WarheadTypeClass>(ArrayPointer);
 
         [FieldOffset(0)] public AbstractTypeClass Base;
-        [FieldOffset(152)] public float Deform;
-        [FieldOffset(160)] public float versus_first;
-        public Pointer<float> Versus => Pointer<float>.AsPointer(ref versus_first);
+        [FieldOffset(152)] public double Deform;
+        [FieldOffset(160)] public double versus_first;
+        public Pointer<double> Versus => Pointer<double>.AsPointer(ref versus_first);
 
         [FieldOffset(292)] public float CellSpread;
         [FieldOffset(296)] public float CellInset;
