@@ -475,6 +475,84 @@ namespace PatcherYRpp
         public float W;
     };
 
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
+    public struct SingleVector2D
+    {
+        public SingleVector2D(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        public SingleVector2D(double x, double y)
+        {
+            X = (float)x;
+            Y = (float)y;
+        }
+
+        public static SingleVector2D operator -(SingleVector2D a)
+        {
+            return new SingleVector2D(-a.X, -a.Y);
+        }
+        public static SingleVector2D operator +(SingleVector2D a, SingleVector2D b)
+        {
+            return new SingleVector2D(
+                 a.X + b.X,
+                 a.Y + b.Y);
+        }
+        public static SingleVector2D operator -(SingleVector2D a, SingleVector2D b)
+        {
+            return new SingleVector2D(
+                 a.X - b.X,
+                 a.Y - b.Y);
+        }
+        public static SingleVector2D operator *(SingleVector2D a, double r)
+        {
+            return new SingleVector2D(
+                 (float)(a.X * r),
+                 (float)(a.Y * r));
+        }
+
+        public static double operator *(SingleVector2D a, SingleVector2D b)
+        {
+            return a.X * b.X
+                 + a.Y * b.Y;
+        }
+        //magnitude
+        public double Magnitude()
+        {
+            return Math.Sqrt(MagnitudeSquared());
+        }
+        //magnitude squared
+        public double MagnitudeSquared()
+        {
+            return this * this;
+        }
+
+        public double DistanceFrom(SingleVector2D other)
+        {
+            return (other - this).Magnitude();
+        }
+
+        public static bool operator ==(SingleVector2D a, SingleVector2D b)
+        {
+            return a.X == b.X && a.Y == b.Y;
+        }
+        public static bool operator !=(SingleVector2D a, SingleVector2D b) => !(a == b);
+
+        public override bool Equals(object obj) => this == (SingleVector2D)obj;
+        public override int GetHashCode() => base.GetHashCode();
+
+        public override string ToString()
+        {
+            return string.Format("{{\"X\":{0}, \"Y\":{1}}}", X, Y);
+        }
+
+        public float X;
+        public float Y;
+    }
+
     [DebuggerDisplay("XY={X}, {Y}")]
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
