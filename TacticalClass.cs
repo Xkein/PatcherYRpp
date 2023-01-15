@@ -78,6 +78,19 @@ namespace PatcherYRpp
             func(ref this, pCell);
         }
 
+        public unsafe void DrawLineAtCoords(CoordStruct start, CoordStruct end, int color)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, IntPtr, int, void>)ASM.FastCallTransferStation;
+            func(0x6F6030, start.GetThisPointer(), end.GetThisPointer(), color);
+
+        }
+
+        public unsafe void DrawLineOnTactical(CoordStruct start, CoordStruct end, int color)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, IntPtr, int, void>)ASM.FastCallTransferStation;
+            func(0x6F5EF0, start.GetThisPointer(), end.GetThisPointer(), color);
+
+        }
 
         [FieldOffset(176)] public Point2D TacticalPos;
         [FieldOffset(184)] public Point2D LastTacticalPos;

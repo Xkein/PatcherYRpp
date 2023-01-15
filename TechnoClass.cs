@@ -471,6 +471,12 @@ namespace PatcherYRpp
             return func(ref this, pTarget, pWeapon, ref sourceCoord);
         }
 
+        public unsafe void Draw_TargetLaser()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TechnoClass, void>)0x6FF960;
+            func(ref this);
+        }
+
         /// <summary>
         /// GetWeaponDamage
         /// </summary>
