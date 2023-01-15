@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Drawing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -30,6 +31,8 @@ namespace PatcherYRpp
 
         private static IntPtr pViewBound = new IntPtr(0x886FA0);
         public static ref RectangleStruct ViewBound => ref pViewBound.Convert<RectangleStruct>().Ref;
+
+        private static IntPtr pPattern = new IntPtr(0x84310C);
 
         public unsafe bool BlitWhole(Pointer<Surface> pSrc, bool unk1, bool unk2)
         {
@@ -95,6 +98,22 @@ namespace PatcherYRpp
             return func(ref this, ref clipRect, ref srcPoint, ref destPoint, ref color, intensity, srcZAdjust, destZAdjust);
         }
 
+        public unsafe bool DrawDashedLine(Point2D point1, Point2D point2, int dwColor, int offset)
+        {
+            return DrawDashedLine(point1, point2, dwColor, pPattern, offset);
+        }
+
+        public unsafe bool DrawDashedLine(Point2D point1, Point2D point2, int dwColor, IntPtr pattern, int offset)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref Surface, ref Point2D, ref Point2D, int, IntPtr, int, Bool>)this.GetVirtualFunctionPointer(18);
+            return func(ref this, ref point1, ref point2, dwColor, pattern, offset);
+        }
+
+        public unsafe bool DrawDashedLine_A(Point2D point1, Point2D point2, int dwColor, IntPtr pattern, int offset, bool unknow)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref Surface, ref Point2D, ref Point2D, int, IntPtr, int, Bool, Bool>)this.GetVirtualFunctionPointer(19);
+            return func(ref this, ref point1, ref point2, dwColor, pattern, offset, unknow);
+        }
 
         public unsafe bool DrawRectEx(RectangleStruct clipRect, RectangleStruct drawRect, int dwColor)
         {
@@ -259,6 +278,12 @@ namespace PatcherYRpp
         {
             var func = (delegate* unmanaged[Cdecl]<IntPtr, IntPtr, IntPtr, IntPtr, IntPtr, int, int, TextPrintType, int, IntPtr>)0x4A60E0;
             return func(RetVal, pText, pSurface, pBound, pLocation, foreColor, backColor, flags, 0);
+        }
+
+        public static unsafe bool ClipLine(ref Point2D point1, ref Point2D point2, RectangleStruct bound)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, ref Point2D, ref Point2D, ref RectangleStruct, Bool>)ASM.FastCallTransferStation;
+            return func(0x7BC2B0, ref point1, ref point2, ref bound);
         }
 
         [FieldOffset(0)] public int Vfptr;

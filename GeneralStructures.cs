@@ -184,7 +184,7 @@ namespace PatcherYRpp
 
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    public struct RectangleStruct
+    public struct RectangleStruct : IEquatable<RectangleStruct>
     {
         public int X, Y, Width, Height;
 
@@ -195,6 +195,30 @@ namespace PatcherYRpp
             this.Width = width;
             this.Height = height;
         }
+
+        public bool Equals(RectangleStruct other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return this.X == other.X && this.Y == other.Y && this.Width == other.Width && this.Height == other.Height;
+        }
+
+
+        public static bool operator ==(RectangleStruct a, RectangleStruct b)
+        {
+            return Equals(a, b);
+        }
+        public static bool operator !=(RectangleStruct a, RectangleStruct b) => !(a == b);
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((RectangleStruct)obj);
+        }
+
+        public override int GetHashCode() => base.GetHashCode();
 
         public override string ToString()
         {
