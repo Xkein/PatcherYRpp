@@ -29,6 +29,7 @@ namespace PatcherYRpp
         [FieldOffset(0)] public ObjectTypeClass BaseObjectType;
         [FieldOffset(0)] public AbstractTypeClass BaseAbstractType;
 
+        [FieldOffset(3576)] public int ArrayIndex;
         [FieldOffset(3764)] public int Adjacent;
         [FieldOffset(3828)] public int Height;
         [FieldOffset(3832)] public int OccupyHeight;
