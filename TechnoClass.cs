@@ -681,6 +681,7 @@ namespace PatcherYRpp
         [FieldOffset(1068)] public IntPtr chronoWarpedByHouse;
         public Pointer<HouseClass> ChronoWarpedByHouse { get => chronoWarpedByHouse; set => chronoWarpedByHouse = value; }
         [FieldOffset(1073)] public Bool IsMouseHovering;
+        [FieldOffset(1074)] public Bool WasSelected;
         [FieldOffset(1088)] public DynamicVectorClass<int> CurrentTargetThreatValues;
         [FieldOffset(1112)] public DynamicVectorClass<Pointer<AbstractClass>> CurrentTargets;
         // if DistributedFire=yes, this is used to determine which possible targets should be ignored in the latest threat scan
