@@ -41,6 +41,8 @@ namespace PatcherYRpp
         [FieldOffset(52)] public int ReloadRate;
         [FieldOffset(56)] public byte spawnedNodes;
         public ref DynamicVectorClass<Pointer<SpawnNode>> SpawnedNodes => ref Pointer<byte>.AsPointer(ref spawnedNodes).Convert<DynamicVectorClass<Pointer<SpawnNode>>>().Ref;
+        [FieldOffset(80)] public TimerStruct UpdateTimer;
+        [FieldOffset(92)] public TimerStruct SpawnTimer;
         [FieldOffset(104)] public IntPtr destination;
         public Pointer<AbstractClass> Destination { get => destination; set => destination = value; }
         [FieldOffset(108)] public IntPtr target;
