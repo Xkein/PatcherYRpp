@@ -296,6 +296,7 @@ namespace PatcherYRpp
 
         [FieldOffset(68)] public int PoseDir;
         [FieldOffset(72)] public int DeployDir;
+        [FieldOffset(316)] public DynamicVectorClass<Pointer<AnimTypeClass>> MetallicDebris;
         [FieldOffset(372)] public int DigSound;
         [FieldOffset(376)] public int CreateUnitSound;
         [FieldOffset(380)] public int CreateInfantrySound;
@@ -355,7 +356,7 @@ namespace PatcherYRpp
         [FieldOffset(1680)] public double VeteranROF;
         [FieldOffset(1688)] public double VeteranCap;
         [FieldOffset(1972)] public int FlightLevel;
-        [FieldOffset(3008)] public DynamicVectorClass<AnimTypeClass> SplashList;
+        [FieldOffset(3008)] public DynamicVectorClass<Pointer<AnimTypeClass>> SplashList;
         [FieldOffset(3048)] public int EliteFlashTimer;
         [FieldOffset(3052)] public int ChronoDelay;
         [FieldOffset(3056)] public int ChronoReinfDelay;

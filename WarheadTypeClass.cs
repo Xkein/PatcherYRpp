@@ -64,7 +64,7 @@ namespace PatcherYRpp
         [FieldOffset(384)] public int ShakeXhi;
         [FieldOffset(388)] public int ShakeYlo;
         [FieldOffset(392)] public int ShakeYhi;
-
+        [FieldOffset(396)] public DynamicVectorClass<Pointer<VoxelAnimTypeClass>> DebrisTypes;
         [FieldOffset(424)] public DynamicVectorClass<int> DebrisMaximums;
         [FieldOffset(452)] public int MaxDebris;
         [FieldOffset(456)] public int MinDebris;

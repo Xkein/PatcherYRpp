@@ -185,6 +185,8 @@
     <Compile Include="Unsorted.cs" />
     <Compile Include="VocClass.cs" />
     <Compile Include="VocClassHeader.cs" />
+    <Compile Include="VoxelAnimClass.cs" />
+    <Compile Include="VoxelAnimTypeClass.cs" />
     <Compile Include="WalkLocomotionClass.cs" />
     <Compile Include="WarheadTypeClass.cs" />
     <Compile Include="WeaponTypeClass.cs" />

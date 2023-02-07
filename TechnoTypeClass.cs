@@ -71,6 +71,8 @@ namespace PatcherYRpp
         [FieldOffset(686)] public AbilitiesStruct EliteAbilities;
         [FieldOffset(760)] public int SlowdownDistance;
         [FieldOffset(784)] public int CloakingSpeed;
+        [FieldOffset(788)] public DynamicVectorClass<Pointer<VoxelAnimTypeClass>> DebrisTypes;
+        [FieldOffset(816)] public DynamicVectorClass<int> DebrisMaximums;
         [FieldOffset(844)] public Guid Locomotor;
         [FieldOffset(880)] public double Weight;
         [FieldOffset(888)] public double PhysicalSize;
