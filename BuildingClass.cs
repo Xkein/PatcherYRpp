@@ -24,6 +24,8 @@ namespace PatcherYRpp
 
         [FieldOffset(1312)] public Pointer<BuildingTypeClass> Type;
         [FieldOffset(1316)] public Pointer<FactoryClass> Factory;
+        [FieldOffset(1332)] public BStateType BState;
+        [FieldOffset(1336)] public BStateType QueueBState;
         [FieldOffset(1632)] public Bool HasPower;
         [FieldOffset(1633)] public Bool IsOverpowered;
         [FieldOffset(1757)] public Bool unknown_bool_6DD;

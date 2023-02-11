@@ -595,6 +595,37 @@ namespace PatcherYRpp
         Rookie = 2
     }
 
+    public enum BStateType
+    {
+        CONSTRUCTION = 0,
+        IDLE = 1,
+        ACTIVE = 2,
+        FULL = 3,
+        AUX1 = 4,
+        AUX2 = 5,
+        COUNT = 6,
+        NONE = -1
+    }
+
+    public enum NavalTargetingType
+    {
+        UNDERWATER_NEVER = 0,
+        UNDERWATER_SECONDARY = 1,
+        UNDERWATER_ONLY = 2,
+        ORGANIC_SECONDARY = 3,
+        SEAL_SPECIAL = 4,
+        NAVAL_ALL = 5,
+        NAVAL_NONE = 6,
+        NAVAL_PRIMARY = 7
+    }
+
+    public enum LandTargetingType
+    {
+        LAND_OKAY = 0,
+        LAND_NOT_OKAY = 1,
+        LAND_SECONDARY = 2
+    }
+
     public enum SpeedType
     {
         None = -1,
