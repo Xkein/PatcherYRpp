@@ -584,6 +584,7 @@ namespace PatcherYRpp
         public Pointer<TechnoClass> DrainingMe { get => drainingMe; set => drainingMe = value; }
         [FieldOffset(468)] public IntPtr drainAnim;
         public Pointer<AnimClass> DrainAnim { get => drainAnim; set => drainAnim = value; }
+        [FieldOffset(472)] public Bool Disguised;
         [FieldOffset(476)] public int DisguiseCreationFrame;
         [FieldOffset(480)] public TimerStruct InfantryBlinkTimer; // Rules->InfantryBlinkDisguiseTime , detects mirage firing per description
         [FieldOffset(492)] public TimerStruct DisguiseBlinkTimer; // disguise disruption timer
