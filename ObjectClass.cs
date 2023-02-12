@@ -108,11 +108,34 @@ namespace PatcherYRpp
             return func(ref this);
         }
 
-        public unsafe Pointer<CoordStruct> GetDockCoords(ref CoordStruct pCrd, int unknown)
+        public unsafe CoordStruct GetTargetCoords()
         {
-            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, ref CoordStruct, int, IntPtr>)
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr, IntPtr>)
+                this.GetVirtualFunctionPointer(41);
+
+            CoordStruct ret = default;
+            func(ref this, Pointer<CoordStruct>.AsPointer(ref ret));
+            return ret;
+        }
+
+        public unsafe CoordStruct GetDockCoords(Pointer<TechnoClass> pTechno)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr, IntPtr, IntPtr>)
                 this.GetVirtualFunctionPointer(42);
-            return func(ref this, ref pCrd, unknown);
+
+            CoordStruct ret = default;
+            func(ref this, Pointer<CoordStruct>.AsPointer(ref ret), pTechno);
+            return ret;
+        }
+
+        public unsafe CoordStruct GetRenderCoords()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref ObjectClass, IntPtr, IntPtr>)
+                this.GetVirtualFunctionPointer(43);
+
+            CoordStruct ret = default;
+            func(ref this, Pointer<CoordStruct>.AsPointer(ref ret));
+            return ret;
         }
 
         public unsafe CoordStruct GetFLH(int idxWeapon, CoordStruct baseCoords)
