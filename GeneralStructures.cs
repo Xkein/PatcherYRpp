@@ -84,6 +84,11 @@ namespace PatcherYRpp
             return this.GetTimeLeft() > 0;
         }
 
+        public override string ToString()
+        {
+            return string.Format("{{\"StartTime\":{0}, \"gap\":{1}, \"TimeLeft\":{2}}}", StartTime, gap, TimeLeft);
+        }
+
         public int StartTime;
         public int gap;
         public int TimeLeft;
@@ -109,6 +114,12 @@ namespace PatcherYRpp
             Base.Start(this.Duration);
         }
 
+        public override string ToString()
+        {
+            return string.Format("{{\"Duration\":{0}, \"Base\":{1}}}",
+                Duration, Base);
+        }
+
         public TimerStruct Base;
         public int Duration;
     }
@@ -122,7 +133,8 @@ namespace PatcherYRpp
         {
             this.Value = 0;
             this.HasChanged = false;
-            this.Step = 1;
+            this.Rate = 1;
+            this.Step = 0;
 
             this.Timer = new RepeatableTimerStruct(duration);
         }
@@ -132,9 +144,9 @@ namespace PatcherYRpp
             this.Timer.Start(duration);
         }
 
-        public void Start(int duration, int step)
+        public void Start(int duration, int rate)
         {
-            this.Step = step;
+            this.Rate = rate;
             this.Start(duration);
         }
 
@@ -149,7 +161,7 @@ namespace PatcherYRpp
             else
             {
                 // timer expired. move one step forward.
-                this.Value += this.Step;
+                this.Value += this.Rate;
                 this.HasChanged = true;
                 this.Timer.Restart();
             }
@@ -157,10 +169,61 @@ namespace PatcherYRpp
             return this.HasChanged;
         }
 
+        public override string ToString()
+        {
+            return string.Format("{{\"Value\":{0}, \"HasChanged\":{1}, \"Timer\":{2}, \"Rate\":{3}, \"Step\":{4}}}",
+                Value, HasChanged, Timer, Rate, Step);
+        }
+
         public int Value; // the current value
         public Bool HasChanged; // if the timer expired this frame and the value changed
         public RepeatableTimerStruct Timer;
-        public int Step; // added to value every time the timer expires
+        public int Rate; // added to value every time the timer expires
+        public int Step;
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RectangleStruct : IEquatable<RectangleStruct>
+    {
+        public int X, Y, Width, Height;
+
+        public RectangleStruct(int x, int y, int width, int height)
+        {
+            this.X = x;
+            this.Y = y;
+            this.Width = width;
+            this.Height = height;
+        }
+
+        public bool Equals(RectangleStruct other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return this.X == other.X && this.Y == other.Y && this.Width == other.Width && this.Height == other.Height;
+        }
+
+
+        public static bool operator ==(RectangleStruct a, RectangleStruct b)
+        {
+            return Equals(a, b);
+        }
+        public static bool operator !=(RectangleStruct a, RectangleStruct b) => !(a == b);
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((RectangleStruct)obj);
+        }
+
+        public override int GetHashCode() => base.GetHashCode();
+
+        public override string ToString()
+        {
+            return string.Format("{{\"X\":{0}, \"Y\":{1}, \"Width\":{2}, \"Height\":{3}}}", X, Y, Width, Height);
+        }
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -402,12 +465,42 @@ namespace PatcherYRpp
 
         public int num_steps()
         {
-            return Math.Abs(this.difference()) / this.turn_rate();
+            return Math.Abs((int)this.difference()) / this.turn_rate();
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{{\"Value\":{0}, \"Initial\":{1}, \"Timer\":{2}, \"ROT\":{3}}}", Value, Initial, Timer, ROT);
         }
 
         public DirStruct Value; // target facing
         public DirStruct Initial; // rotation started here
         public TimerStruct Timer; // counts rotation steps
         public DirStruct ROT; // Rate of Turn. INI Value * 256
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Explicit, Size = 828)]
+    public struct BytePalette
+    {
+        public const int EntriesCount = 256;
+        [FieldOffset(0)] public ColorStruct Entries_first;
+        public Pointer<ColorStruct> Entries => Pointer<ColorStruct>.AsPointer(ref Entries_first);
+    }
+
+    [Serializable]
+    [StructLayout(LayoutKind.Sequential)]
+    public struct TintStruct
+    {
+        public int Red;
+        public int Green;
+        public int Blue;
+    };
+
+    [Serializable]
+    [StructLayout(LayoutKind.Explicit, Size = 20)]
+    public struct SomeVoxelCache
+    {
+
     }
 }

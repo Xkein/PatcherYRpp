@@ -10,12 +10,14 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 464)]
     public struct WarheadTypeClass
     {
-        static public readonly IntPtr ArrayPointer = new IntPtr(0x8874C0);
+        public static readonly IntPtr ArrayPointer = new IntPtr(0x8874C0);
 
-        static public YRPP.GLOBAL_DVC_ARRAY<WarheadTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<WarheadTypeClass>(ArrayPointer);
+        public static YRPP.GLOBAL_DVC_ARRAY<WarheadTypeClass> ABSTRACTTYPE_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<WarheadTypeClass>(ArrayPointer);
 
         [FieldOffset(0)] public AbstractTypeClass Base;
-        [FieldOffset(152)] public float Deform;
+        [FieldOffset(152)] public double Deform;
+        [FieldOffset(160)] public double versus_first;
+        public Pointer<double> Versus => Pointer<double>.AsPointer(ref versus_first);
 
         [FieldOffset(292)] public float CellSpread;
         [FieldOffset(296)] public float CellInset;
@@ -62,7 +64,7 @@ namespace PatcherYRpp
         [FieldOffset(384)] public int ShakeXhi;
         [FieldOffset(388)] public int ShakeYlo;
         [FieldOffset(392)] public int ShakeYhi;
-
+        [FieldOffset(396)] public DynamicVectorClass<Pointer<VoxelAnimTypeClass>> DebrisTypes;
         [FieldOffset(424)] public DynamicVectorClass<int> DebrisMaximums;
         [FieldOffset(452)] public int MaxDebris;
         [FieldOffset(456)] public int MinDebris;

@@ -19,12 +19,14 @@ namespace PatcherYRpp
     public struct ScenarioClass
     {
         private static IntPtr instance = new IntPtr(0xA8B230);
-        static public ref ScenarioClass Instance { get => ref instance.Convert<Pointer<ScenarioClass>>().Ref.Ref; }
+        public static ref ScenarioClass Instance { get => ref instance.Convert<Pointer<ScenarioClass>>().Ref.Ref; }
 
+        private static IntPtr seed = new IntPtr(0xA8ED94);
+        public static int Seed => ((Pointer<int>)seed).Ref;
 
+        [FieldOffset(536) ]public Randomizer Random; //218
         [FieldOffset(4700)] public byte FileName_first;
         public AnsiStringPointer FileName => Pointer<byte>.AsPointer(ref FileName_first);
-
         [FieldOffset(7304)] public Variable GlobalVariables_first;
         public Pointer<Variable> GlobalVariables => Pointer<Variable>.AsPointer(ref GlobalVariables_first);
         [FieldOffset(9354)] public Variable LocalVariables_first;

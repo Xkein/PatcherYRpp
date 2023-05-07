@@ -10,8 +10,8 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 392)]
     public struct ConvertClass
     {
-        static public readonly IntPtr ArrayPointer = new IntPtr(0x89ECF8);
-        static public YRPP.GLOBAL_DVC_ARRAY<ConvertClass> GLOBAL_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<ConvertClass>(ArrayPointer);
+        public static readonly IntPtr ArrayPointer = new IntPtr(0x89ECF8);
+        public static YRPP.GLOBAL_DVC_ARRAY<ConvertClass> GLOBAL_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<ConvertClass>(ArrayPointer);
 
 
         [FieldOffset(0)] public int Vfptr;
@@ -31,8 +31,8 @@ namespace PatcherYRpp
     [StructLayout(LayoutKind.Explicit, Size = 436)]
     public struct LightConvertClass
     {
-        static public readonly IntPtr ArrayPointer = new IntPtr(0x87F698);
-        static public YRPP.GLOBAL_DVC_ARRAY<LightConvertClass> GLOBAL_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<LightConvertClass>(ArrayPointer);
+        public static readonly IntPtr ArrayPointer = new IntPtr(0x87F698);
+        public static YRPP.GLOBAL_DVC_ARRAY<LightConvertClass> GLOBAL_ARRAY = new YRPP.GLOBAL_DVC_ARRAY<LightConvertClass>(ArrayPointer);
 
         [FieldOffset(0)] public ConvertClass Base;
 

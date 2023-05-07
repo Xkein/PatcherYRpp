@@ -7,20 +7,115 @@ using System.Threading.Tasks;
 
 namespace PatcherYRpp
 {
-    [Flags]
-    public enum CellFlags
-    {
-        None = 0,
-        IsWaypoint = 0x4,
-        Explored = 0x8,
-
-        Bridge = 0x100
-    }
     [StructLayout(LayoutKind.Explicit, Size = 328)]
     public struct CellClass
     {
+        public static int BridgeHeight { get => new Pointer<int>(0xB0C07C).Ref; }
+
+        public unsafe void SetupLAT()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, void>)0x47CA80;
+            func(ref this);
+        }
+
+        public unsafe void Setup(int unk)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, void>)0x47D2B0;
+            func(ref this, unk);
+        }
+
+        public unsafe void AddContent(Pointer<ObjectClass> pContent, bool onBridge)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, Bool, void>)0x47E8A0;
+            func(ref this, pContent, onBridge);
+        }
+
+        public unsafe void RemoveContent(Pointer<ObjectClass> pContent, bool onBridge)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, Bool, void>)0x47EA90;
+            func(ref this, pContent, onBridge);
+        }
+
+        public unsafe bool CanThisExistHere(SpeedType speedType, Pointer<BuildingTypeClass> pObject, Pointer<HouseClass> pOwner)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, IntPtr, Bool>)0x47C620;
+            return func(ref this, pObject, pOwner);
+        }
+
+        public unsafe bool IsClearToMove(SpeedType speedType, bool ignoreInfantry, bool ignoreVehicles, ZoneType zone, MovementZone movementZone, int level, bool isBridge)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, SpeedType, Bool, Bool, ZoneType, MovementZone, int, Bool, Bool>)0x4834A0;
+            return func(ref this, speedType, ignoreInfantry, ignoreVehicles, zone, movementZone, level, isBridge);
+        }
+
+        public unsafe bool IsClearToMove(SpeedType speedType, MovementZone movementZone, bool ignoreInfantry = false, bool ignoreVehicles = false, int level = -1)
+        {
+            return IsClearToMove(speedType, ignoreInfantry, ignoreInfantry, ZoneType.NONE, movementZone, level, ContainsBridge());
+        }
+
+        public unsafe bool CanPutTiberium()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, Bool>)0x4838E0;
+            return func(ref this, 0);
+        }
+
+        public unsafe Pointer<CellClass> GetNeighbourCell(uint direction)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, uint, IntPtr>)0x481810;
+            return func(ref this, direction);
+        }
+
+        public unsafe void CollectCrate(Pointer<FootClass> pCollector)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, void>)0x481A00;
+            func(ref this, pCollector);
+        }
+
+        // returns the tiberium's index in OverlayTypes
+        public unsafe int GetContainedTiberiumIndex()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int>)0x485010;
+            return func(ref this);
+        }
+        public unsafe int GetContainedTiberiumValue()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int>)0x485020;
+            return func(ref this);
+        }
+
+        // add or create tiberium of the specified type
+        public unsafe bool IncreaseTiberium(int idxTiberium, int amount)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, int, Bool>)0x487190;
+            return func(ref this, idxTiberium, amount);
+        }
+        public unsafe bool ReduceTiberium(int amount)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, Bool>)0x480A80;
+            return func(ref this, amount);
+        }
+
+        public unsafe void MarkForRedraw()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, void>)0x486E70;
+            func(ref this);
+        }
+
+        public unsafe Pointer<CoordStruct> FindInfantrySubposition(Pointer<CoordStruct> outBuffer, ref CoordStruct coords, bool ignoreContents, bool alt, bool useCellCoords)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, ref CoordStruct, Bool, Bool, Bool, IntPtr>)0x481180;
+            return func(ref this, outBuffer, ref coords, ignoreContents, alt, useCellCoords);
+        }
+
+        public unsafe CoordStruct FindInfantrySubposition(CoordStruct coords, bool ignoreContents, bool alt, bool useCellCoords)
+        {
+            CoordStruct outBuffer = default;
+            FindInfantrySubposition(Pointer<CoordStruct>.AsPointer(ref outBuffer), ref coords, ignoreContents, alt, useCellCoords);
+            return outBuffer;
+        }
+
         // get content objects
-        public unsafe Pointer<TechnoClass> FindTechnoNearestTo(Point2D offsetPixel, bool alt, Pointer<TechnoClass> pExcludeThis)
+        public unsafe Pointer<ObjectClass> FindTechnoNearestTo(Point2D offsetPixel, bool alt, Pointer<ObjectClass> pExcludeThis)
         {
             var func = (delegate* unmanaged[Thiscall]<ref CellClass, ref Point2D, Bool, IntPtr, IntPtr>)0x47C3D0;
             return func(ref this, ref offsetPixel, alt, pExcludeThis);
@@ -72,64 +167,17 @@ namespace PatcherYRpp
             return func(ref this, ref coords, alt);
         }
 
-
-        public unsafe void SetupLAT()
+        // those unks are passed to TechnoClass::Scatter in that same order
+        public unsafe void ScatterContent(CoordStruct coord, bool ignoreMission, bool ignoreDestination, bool alt)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, void>)0x47CA80;
-            func(ref this);
-        }
-        public unsafe void Setup(int unk)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, void>)0x47D2B0;
-            func(ref this, unk);
-        }
-
-        public unsafe bool CanThisExistHere(SpeedType speedType, Pointer<BuildingTypeClass> pObject, Pointer<HouseClass> pOwner)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, IntPtr, Bool>)0x47C620;
-            return func(ref this, pObject, pOwner);
-        }
-
-        public unsafe bool CanPutTiberium()
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, Bool>)0x4838E0;
-            return func(ref this, 0);
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, ref CoordStruct, Bool, Bool, Bool, Bool>)0x481670;
+            func(ref this, ref coord, ignoreMission, ignoreDestination, alt);
         }
 
         public unsafe Pointer<CellClass> GetNeighbourCell(Direction direction)
         {
             var func = (delegate* unmanaged[Thiscall]<ref CellClass, Direction, IntPtr>)0x481810;
             return func(ref this, direction);
-        }
-
-        public unsafe void CollectCrate(Pointer<FootClass> pCollector)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, void>)0x481A00;
-            func(ref this, pCollector);
-        }
-
-        // returns the tiberium's index in OverlayTypes
-        public unsafe int GetContainedTiberiumIndex()
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int>)0x485010;
-            return func(ref this);
-        }
-        public unsafe int GetContainedTiberiumValue()
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int>)0x485020;
-            return func(ref this);
-        }
-
-        // add or create tiberium of the specified type
-        public unsafe bool IncreaseTiberium(int idxTiberium, int amount)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, int, Bool>)0x487190;
-            return func(ref this, idxTiberium, amount);
-        }
-        public unsafe bool ReduceTiberium(int amount)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, int, Bool>)0x480A80;
-            return func(ref this, amount);
         }
 
         public unsafe int GetFloorHeight(Point2D subCoords)
@@ -145,10 +193,15 @@ namespace PatcherYRpp
             return centerCoords;
         }
 
-
         public bool ContainsBridge()
         {
             return this.Flags.HasFlag(CellFlags.Bridge);
+        }
+
+        public unsafe bool CanEnterCell()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref CellClass, Bool>)0x486FF0;
+            return func(ref this);
         }
 
         public Pointer<ObjectClass> GetContent()
@@ -184,83 +237,102 @@ namespace PatcherYRpp
             return this.FixHeight(this.Base.GetCoords());
         }
 
-        public unsafe void MarkForRedraw()
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, void>)0x486E70;
-            func(ref this);
-        }
-        public unsafe CoordStruct FindInfantrySubposition(CoordStruct coords, bool ignoreContents, bool alt, bool useCellCoords)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, out CoordStruct, ref CoordStruct, Bool, Bool, Bool, void>)0x481180;
-            func(ref this, out CoordStruct subPosition, ref coords, ignoreContents, alt, useCellCoords);
-            return subPosition;
-        }
         public unsafe bool TryAssignJumpjet(Pointer<FootClass> pObject)
         {
             var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, Bool>)0x487D70;
             return func(ref this, pObject);
         }
-        public unsafe void AddContent(Pointer<ObjectClass> pContent, bool onBridge)
+
+        public unsafe bool TileIs(TileType tileType)
         {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, Bool, void>)0x47E8A0;
-            func(ref this, pContent, onBridge);
-        }
-        public unsafe void RemoveContent(Pointer<ObjectClass> pContent, bool onBridge)
-        {
-            var func = (delegate* unmanaged[Thiscall]<ref CellClass, IntPtr, Bool, void>)0x47EA90;
-            func(ref this, pContent, onBridge);
+            if (tileType != TileType.Unknown)
+            {
+                var func = (delegate* unmanaged[Thiscall]<ref CellClass, Bool>)(int)tileType;
+                return func(ref this);
+            }
+            return false;
         }
 
-        [FieldOffset(0)]
-        public AbstractClass Base;
+        public unsafe TileType GetTileType()
+        {
+            foreach (TileType type in Enum.GetValues(typeof(TileType)))
+            {
+                if (TileIs(type))
+                {
+                    return type;
+                }
+            }
+            return TileType.Unknown;
+        }
+
+        public unsafe bool TryGetTileType(out TileType tileType)
+        {
+            tileType = GetTileType();
+            if (tileType != TileType.Unknown)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        [FieldOffset(0)] public AbstractClass Base;
 
         [FieldOffset(36)] public CellStruct MapCoords;   //Where on the map does this Cell lie?
-
         [FieldOffset(44)] private IntPtr bridgeOwnerCell;
         public Pointer<CellClass> BridgeOwnerCell { get => bridgeOwnerCell; set => bridgeOwnerCell = value; }
-
         [FieldOffset(56)] public int IsoTileTypeIndex;   //What tile is this Cell?
         [FieldOffset(60)] public Pointer<TagClass> AttachedTag;          // The cell tag
         [FieldOffset(64)] public Pointer<BuildingTypeClass> Rubble;              // The building type that provides the rubble image
         [FieldOffset(68)] public int OverlayTypeIndex;   //What Overlay lies on this Cell?
         [FieldOffset(72)] public int SmudgeTypeIndex;    //What Smudge lies on this Cell?
-
         [FieldOffset(80)] public int WallOwnerIndex; // Which House owns the wall placed in this Cell? // Determined by finding the nearest BuildingType and taking its owner
         [FieldOffset(84)] public int InfantryOwnerIndex;
         [FieldOffset(88)] public int AltInfantryOwnerIndex;
-
         [FieldOffset(120)] public uint CloakedByHouses;
-
-
         [FieldOffset(224)] public Pointer<FootClass> Jumpjet; // a jumpjet occupying this cell atm
         [FieldOffset(228)] public Pointer<ObjectClass> FirstObject;   //The first Object on this Cell. NextObject functions as a linked list.
         [FieldOffset(232)] public Pointer<ObjectClass> AltObject;
         [FieldOffset(236)] public LandType LandType;  //What type of floor is this Cell?
         [FieldOffset(240)] public double RadLevel;  //The level of radiation on this Cell.
-
         [FieldOffset(256)] public int OccupyHeightsCoveringMe;
-
         [FieldOffset(282)] public byte Height;
         [FieldOffset(283)] public byte Level;
         [FieldOffset(284)] public byte SlopeIndex;  // this + 2 == cell's slope shape as reflected by PLACE.SHP
-
         [FieldOffset(286)] public byte Powerup; //The crate type on this cell. Also indicates some other weird properties
-
-
         [FieldOffset(288)] public byte Shroudedness; // trust me, you don't wanna know... if you do, see 0x7F4194 and cry
         [FieldOffset(289)] public byte Foggedness; // same value as above: -2: Occluded completely, -1: Visible, 0...48: frame in fog.shp or shroud.shp
         [FieldOffset(290)] public byte BlockedNeighbours; // number of somehow occupied cells next to this
-
-        [FieldOffset(292)] public uint OccupationFlags; // 0x1F: infantry subpositions: center, TL, TR, BL, BR
-        [FieldOffset(296)] public uint AltOccupationFlags; // 0x20: Units, 0x40: Objects, Aircraft, Overlay, 0x80: Building
-
-        [FieldOffset(300)] public int CopyFlags;    // related to Flags below
-
+        [FieldOffset(292)] public OccupationFlags OccupationFlags; // 0x1F: infantry subpositions: center, TL, TR, BL, BR
+        [FieldOffset(296)] public int AltOccupationFlags; // 0x20: Units, 0x40: Objects, Aircraft, Overlay, 0x80: Building
+        [FieldOffset(300)] public AltCellFlags AltFlags; // related to Flags below
         [FieldOffset(304)] public int ShroudCounter;
         [FieldOffset(308)] public uint GapsCoveringThisCell; // actual count of gapgens in this cell, no idea why they need a second layer
         [FieldOffset(312)] public Bool VisibilityChanged;
-
         [FieldOffset(320)] public CellFlags Flags;
+    }
 
+    public enum TileType
+    {
+        Unknown = 0,
+        Tunnel = 0x484AB0,
+        Water = 0x485060,
+        Blank = 0x486380,
+        Ramp = 0x4863A0,
+        Cliff = 0x4863D0,
+        Shore = 0x4865B0,
+        Wet = 0x4865D0,
+        MiscPave = 0x486650,
+        Pave = 0x486670,
+        DirtRoad = 0x486690,
+        PavedRoad = 0x4866D0,
+        PavedRoadEnd = 0x4866F0,
+        PavedRoadSlope = 0x486710,
+        Median = 0x486730,
+        Bridge = 0x486750,
+        WoodBridge = 0x486770,
+        ClearToSandLAT = 0x486790,
+        Green = 0x4867B0,
+        NotWater = 0x4867E0,
+        DestroyableCliff = 0x486900,
     }
 }

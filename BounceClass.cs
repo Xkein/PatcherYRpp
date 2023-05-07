@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace PatcherYRpp
 {
-    [StructLayout(LayoutKind.Sequential)]
-    [Serializable]
+    [StructLayout(LayoutKind.Explicit, Size=80)]
     public struct BounceClass
     {
         public enum Status
@@ -18,20 +17,20 @@ namespace PatcherYRpp
             Impact = 2
         };
 
-        BounceClass(CoordStruct coords, double elasticity, double gravity,
+        public BounceClass(CoordStruct coords, double elasticity, double gravity,
             double maxVelocity, SingleVector3D velocity, double angularVelocity) : this()
         {
             this.Initialize(coords, elasticity, gravity, maxVelocity, velocity, angularVelocity);
         }
 
-        unsafe void Initialize(CoordStruct coords, double elasticity, double gravity,
+        public unsafe void Initialize(CoordStruct coords, double elasticity, double gravity,
             double maxVelocity, SingleVector3D velocity, double angularVelocity)
         {
             var func = (delegate* unmanaged[Thiscall]<ref BounceClass, ref CoordStruct, double, double, double, ref SingleVector3D, double, void>)0x4397E0;
             func(ref this, ref coords, elasticity, gravity, maxVelocity, ref velocity, angularVelocity);
         }
 
-        unsafe CoordStruct GetCoords()
+        public unsafe CoordStruct GetCoords()
         {
             var func = (delegate* unmanaged[Thiscall]<ref BounceClass, IntPtr, IntPtr>)0x4399A0;
 
@@ -45,18 +44,18 @@ namespace PatcherYRpp
         //    JMP_THIS(0x4399E0);
         //}
 
-        unsafe Status Update()
+        public unsafe Status Update()
         {
             var func = (delegate* unmanaged[Thiscall]<ref BounceClass, Status>)0x439B00;
             return func(ref this);
         }
 
-        public double Elasticity; // speed multiplier when bouncing off the ground
-        public double Gravity; // subtracted from the Z coords every frame
-        public double MaxVelocity; // 0.0 disables check
-        public SingleVector3D Coords; // position with precision
-        public SingleVector3D Velocity; // speed components
-        public Quaternion_ CurrentAngle; // quaternion for drawing
-        public Quaternion_ AngularVelocity; // second quaternion as per-frame delta
+        [FieldOffset(0)] public double Elasticity; // speed multiplier when bouncing off the ground
+        [FieldOffset(8)] public double Gravity; // subtracted from the Z coords every frame
+        [FieldOffset(16)] public double MaxVelocity; // 0.0 disables check
+        [FieldOffset(24)] public SingleVector3D Coords; // position with precision
+        [FieldOffset(36)] public SingleVector3D Velocity; // speed components
+        [FieldOffset(48)] public Quaternion_ CurrentAngle; // quaternion for drawing
+        [FieldOffset(64)] public Quaternion_ AngularVelocity; // second quaternion as per-frame delta
     }
 }

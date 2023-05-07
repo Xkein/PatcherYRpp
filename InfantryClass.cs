@@ -8,17 +8,46 @@ using System.Threading.Tasks;
 namespace PatcherYRpp
 {
     [StructLayout(LayoutKind.Explicit, Size = 1776)]
-    public struct InfantryClass
+    public struct InfantryClass : IOwnAbstractType<InfantryTypeClass>
     {
+        public static readonly IntPtr ArrayPointer = new IntPtr(0xA83DE8);
+        public static ref DynamicVectorClass<Pointer<InfantryClass>> Array { get => ref DynamicVectorClass<Pointer<InfantryClass>>.GetDynamicVector(ArrayPointer); }
+
+        Pointer<InfantryTypeClass> IOwnAbstractType<InfantryTypeClass>.OwnType => Type;
+        Pointer<AbstractTypeClass> IOwnAbstractType.AbstractType => Type.Convert<AbstractTypeClass>();
+
+        public unsafe bool IsDeployed()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref InfantryClass, Bool>)this.GetVirtualFunctionPointer(341);
+            return func(ref this);
+        }
+
+        public unsafe bool PlayAnim(int animNumber, bool bUnk, int dwUnk)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref InfantryClass, int, Bool, int, Bool>)this.GetVirtualFunctionPointer(342);
+            return func(ref this, animNumber, bUnk, dwUnk);
+        }
+
+        public unsafe void FiringUpdate()
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref InfantryClass, void>)0x5206B0;
+            func(ref this);
+        }
+
         [FieldOffset(0)] public FootClass Base;
         [FieldOffset(0)] public TechnoClass BaseTechno;
         [FieldOffset(0)] public RadioClass BaseRadio;
         [FieldOffset(0)] public MissionClass BaseMission;
         [FieldOffset(0)] public ObjectClass BaseObject;
         [FieldOffset(0)] public AbstractClass BaseAbstract;
-
         [FieldOffset(1728)] public Pointer<InfantryTypeClass> Type;
-
-
+        [FieldOffset(1732)] public SequenceAnimType SequenceAnim;
+        [FieldOffset(1736)] public TimerStruct Comment;
+        [FieldOffset(1748)] public int PanicDurationLeft;
+        [FieldOffset(1752)] public Bool PermanentBerzerk;
+        [FieldOffset(1753)] public Bool Technician;
+        [FieldOffset(1754)] public Bool Stoked;
+        [FieldOffset(1755)] public Bool Crawling;
+        [FieldOffset(1756)] public Bool ZoneCheat;
     }
 }

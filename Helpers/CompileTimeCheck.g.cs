@@ -27,6 +27,7 @@ namespace PatcherYRpp
 			Check<CCINIClass>();
 			Check<CellClass>();
 			Check<ConvertClass>();
+			Check<FactoryClass>();
 			Check<FlyLocomotionClass>();
 			Check<FootClass>();
 			Check<GameOptionsClass>();

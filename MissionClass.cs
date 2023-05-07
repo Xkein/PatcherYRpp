@@ -205,16 +205,19 @@ namespace PatcherYRpp
             return func(ref this);
         }
 
+        public unsafe Pointer<MissionControlClass> GetCurrentMissionConrtol() {
+            var func = (delegate* unmanaged[Thiscall]<ref MissionClass, IntPtr>)0x5B3A00;
+            return func(ref this);
+        }
+
         [FieldOffset(0)] public ObjectClass Base;
         [FieldOffset(0)] public AbstractClass BaseAbstract;
 
         [FieldOffset(172)] public Mission CurrentMission;
         [FieldOffset(176)] public Mission unknown_mission_B0;
         [FieldOffset(180)] public Mission QueuedMission;
-
         [FieldOffset(188)] public int MissionStatus;
         [FieldOffset(192)] public int CurrentMissionStartTime;    //in frames
-
         [FieldOffset(200)] public TimerStruct UpdateTimer;
     }
 }

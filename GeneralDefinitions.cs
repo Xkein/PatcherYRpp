@@ -13,7 +13,7 @@ namespace PatcherYRpp
         Techno = 0x1,
         Object = 0x2,
         Foot = 0x4
-    };
+    }
 
     public enum Armor
     {
@@ -28,6 +28,83 @@ namespace PatcherYRpp
         Concrete = 8,
         Special_1 = 9,
         Special_2 = 10
+    }
+
+    [Flags]
+    public enum OccupationFlags
+    {
+        Empty = 0x0,
+        SubCenter = 0x1, // SubOccupations-Center
+        SubTop = 0x2, // SubOccupations-Top (Abandoned)
+        SubRight = 0x4, // SubOccupations-Right
+        SubLeft = 0x8, // SubOccupations-Left // this means no shroud 
+        SubDown = 0x10, // SubOccupations-Down / Terrains
+        Units = 0x20,
+        Aircrafts = 0x40,
+        Buildings = 0x80
+    }
+
+    [Flags]
+    public enum AltOccupationFlags
+    {
+        Empty = 0x0,
+    }
+
+    [Flags]
+    public enum CellFlags
+    {
+        Empty = 0x0,
+        CenterRevealed = 0x1,
+        EdgeRevealed = 0x2,
+        IsWaypoint = 0x4,
+        Explored = 0x8, // this means no shroud
+        FlagPresent = 0x10,
+        FlagToShroud = 0x20,
+        IsPlot = 0x40,
+        Bridge_80 = 0x80,
+        Bridge = 0x100,
+        Unknown_200 = 0x200,
+        Bridge_400 = 0x400,
+        Bridge_800 = 0x800,
+        Unknown_1000 = 0x1000,
+        Unknown_2000 = 0x2000,
+        Unknown_4000 = 0x4000,
+        Unknown_8000 = 0x8000,
+        Unknown_10000 = 0x10000,
+        VeinsPresent = 0x20000,
+        Unknown_40000 = 0x40000,
+        EMPPresent = 0x80000,
+        Unknown_100000 = 0x100000,
+        Unknown_200000 = 0x200000,
+        Fogged = 0x400000,
+
+        Revealed = CenterRevealed | EdgeRevealed
+    }
+
+    [Flags]
+    public enum AltCellFlags
+    {
+        // ContainsBuilding = 0x02,
+        // NoShadow = 0x08 //else tooltip is TXT_SHADOW
+        Unknown_1 = 0x1,
+        ContainsBuilding = 0x2, // IsCursorHere1
+        Unknown_4 = 0x4, // 47EED4 PlaceShape related | IsCursorHere2
+        Mapped = 0x8, //else tooltip is TXT_SHADOW
+        NoFog = 0x10,
+        Unknown_20 = 0x20,
+        Unknown_40 = 0x40,
+        Unknown_80 = 0x80,
+        Unknown_100 = 0x100,
+
+        Clear = Mapped | NoFog
+    }
+
+    public enum CloakStates
+    {
+        UnCloaked = 0x0,
+        Cloaking = 0x1,
+        Cloaked = 0x2,
+        UnCloaking = 0x3
     }
 
     public enum AbstractType
@@ -106,7 +183,143 @@ namespace PatcherYRpp
         Airstrike = 71,
         SlaveManager = 72,
         DiskLaser = 73
-    };
+    }
+
+    public enum Action
+    {
+        None = 0,
+        Move = 1,
+        NoMove = 2,
+        Enter = 3,
+        Self_Deploy = 4,
+        Attack = 5,
+        Harvest = 6,
+        Select = 7,
+        ToggleSelect = 8,
+        Capture = 9,
+        Eaten = 10,
+        Repair = 11,
+        Sell = 12,
+        SellUnit = 13,
+        NoSell = 14,
+        NoRepair = 15,
+        Sabotage = 16,
+        Tote = 17,
+        DontUse2 = 18,
+        DontUse3 = 19,
+        Nuke = 20,
+        DontUse4 = 21,
+        DontUse5 = 22,
+        DontUse6 = 23,
+        DontUse7 = 24,
+        DontUse8 = 25,
+        GuardArea = 26,
+        Heal = 27,
+        Damage = 28,
+        GRepair = 29,
+        NoDeploy = 30,
+        NoEnter = 31,
+        NoGRepair = 32,
+        TogglePower = 33,
+        NoTogglePower = 34,
+        EnterTunnel = 35,
+        NoEnterTunnel = 36,
+        IronCurtain = 37,
+        LightningStorm = 38,
+        ChronoSphere = 39,
+        ChronoWarp = 40,
+        ParaDrop = 41,
+        PlaceWaypoint = 42,
+        TibSunBug = 43,
+        EnterWaypointMode = 44,
+        FollowWaypoint = 45,
+        SelectWaypoint = 46,
+        LoopWaypointPath = 47,
+        DragWaypoint = 48,
+        AttackWaypoint = 49,
+        EnterWaypoint = 50,
+        PatrolWaypoint = 51,
+        AreaAttack = 52,
+        IvanBomb = 53,
+        NoIvanBomb = 54,
+        Detonate = 55,
+        DetonateAll = 56,
+        DisarmBomb = 57,
+        SelectNode = 58,
+        AttackSupport = 59,
+        PlaceBeacon = 60,
+        SelectBeacon = 61,
+        AttackMoveNav = 62,
+        AttackMoveTar = 63,
+        Demolish = 64,
+        AmerParaDrop = 65,
+        PsychicDominator = 66,
+        SpyPlane = 67,
+        GeneticConverter = 68,
+        ForceShield = 69,
+        NoForceShield = 70,
+        Airstrike = 71,
+        PsychicReveal = 72
+    }
+
+    public enum Ability
+    {
+        Faster = 0,
+        Stronger = 1,
+        Firepower = 2,
+        Scatter = 3,
+        ROF = 4,
+        Sight = 5,
+        Cloak = 6,
+        TiberiumProof = 7,
+        VeinProof = 8,
+        SelfHeal = 9,
+        Explodes = 10,
+        RadarInvisible = 11,
+        Sensors = 12,
+        Fearless = 13,
+        C4 = 14,
+        TiberiumHeal = 15,
+        GuardArea = 16,
+        Crusher = 17
+    }
+
+    [Flags]
+    public enum TextPrintType
+    {
+        LASTPOINT = 0, //*
+        LASTSHADOW = 0, //*
+        Point6 = 0x1, //*
+        Point8 = 0x2,
+        Point3 = 0x3, //*
+        Led = 0x4, //*
+        Vcr = 0x5, //*
+        Point6Grad = 0x6,
+        Map = 0x7, //*
+        Metal12 = 0x8,
+        Efnt = 0x9, //*
+        Type = 0xA, //*
+        Score = 0xB, //*
+        Fonts = 0xF, //*
+        NoShadow = 0x10,
+        DropShadow = 0x20,
+        FullShadow = 0x40,
+        LightShadow = 0x80,
+        Center = 0x100,
+        Right = 0x200,
+        MediumColor = 0x1000,
+        BrightColor = 0x2000,
+        UseGradPal = 0x4000,
+        UnknownColor = 0x8000,
+        GradAll = 0xF000,
+    }
+
+    public enum DamageAreaResult
+    {
+        Hit = 0,
+        Missed = 1,
+        Nullified = 2
+    }
 
     public enum DamageState
     {
@@ -116,21 +329,14 @@ namespace PatcherYRpp
         NowRed = 3,
         NowDead = 4,
         PostMortem = 5
-    };
-
-    public enum DamageAreaResult
-    {
-        Hit = 0,
-        Missed = 1,
-        Nullified = 2
-    };
+    }
 
     public enum KickOutResult
     {
         Failed = 0,
         Busy = 1,
         Succeeded = 2
-    };
+    }
 
     public enum Direction
     {
@@ -150,8 +356,56 @@ namespace PatcherYRpp
         West = 0x6,
         NW = 0x7,
         NorthWest = 0x7,
-    };
+    }
 
+    public enum DirType
+    {
+        MIN = 0,
+        N = 0,
+        North = 0,
+        NE = 32,
+        NorthEast = 32,
+        E = 64,
+        East = 64,
+        SE = 96,
+        SouthEast = 96,
+        S = 128,
+        South = 128,
+        SW = 160,
+        SouthWest = 160,
+        W = 192,
+        West = 192,
+        NW = 224,
+        NorthWest = 224,
+        MAX = 255
+    }
+
+    // this is how game's enums are to be defined from now on
+    public enum FireError
+    {
+        NONE = -1,
+        OK = 0, // no problem, can fire
+        AMMO = 1, // no ammo
+        FACING = 2, // bad facing
+        REARM = 3, // still reloading
+        ROTATING = 4, // busy rotating
+        ILLEGAL = 5, // can't fire
+        CANT = 6, // I'm sorry Dave, I can't do that
+        MOVING = 7, // moving, can't fire
+        RANGE = 8, // out of range
+        CLOAKED = 9, // need to decloak
+        BUSY = 10, // busy, please hold
+        MUST_DEPLOY = 11 // deploy first!
+    }
+
+    public enum HealthState
+    {
+        Red = 0,
+        Yellow = 1,
+        Green = 2
+    }
+
+    [Flags]
     public enum SpotlightFlags
     {
         None = 0x0,
@@ -159,7 +413,33 @@ namespace PatcherYRpp
         NoRed = 0x2,
         NoGreen = 0x4,
         NoBlue = 0x8
-    };
+    }
+
+    public enum GameMode
+    {
+        Campaign = 0x0,
+        Modem = 0x1,		// modem game
+        NullModem = 0x2,	// NULL-modem
+        LAN = 0x3,
+        Internet = 0x4,
+        Skirmish = 0x5,
+    }
+
+    public enum InfDeath
+    {
+        None = 0,
+        Die1 = 1,
+        Die2 = 2,
+        Explode = 3,
+        Flames = 4,
+        Electro = 5,
+        HeadPop = 6,
+        Nuked = 7,
+        Virus = 8,
+        Mutate = 9,
+        Brute = 10
+    }
+
     public enum LandType
     {
         Clear = 0,
@@ -174,8 +454,32 @@ namespace PatcherYRpp
         Railroad = 9,
         Tunnel = 10,
         Weeds = 11
-    };
+    }
 
+    /*
+     *
+     * Some helpers
+     *  let W = a result of creepy maths = 104 (leptons)
+     *  let GH = this->GetHeight()
+     *
+     *  ObjectClass::InWhichLayer, used by practically all ObjectClass derivates except Foot, returns
+     *   Ground if GH < 2*W leptons
+     *   Air if it returns < Rules->CruiseHeight leptons
+     *   Top otherwise
+     *
+     * FootClass::InWhichLayer, used by Infantry, Unit and Aircraft, returns results depending on the locomotor
+     *  Drive         : Ground
+     *  DropPod       : Air
+     *  Fly           : Ground if GH <= 0, Top otherwise
+     *  Hover         : Ground
+     *  Jumpjet       : Ground if GH <= 2*W, Air if it's not at the height of its flight (rising/landing), Top otherwise
+     *  Mech          : Ground
+     *  Rocket        : Air
+     *  Ship          : Ground
+     *  Subterrannean : Underground if really underground, Ground if on ground, diving or elevating
+     *  Walk          : Ground
+     *
+     */
     public enum Layer
     {
         None = -1,
@@ -184,7 +488,7 @@ namespace PatcherYRpp
         Ground = 2,
         Air = 3,
         Top = 4
-    };
+    }
 
     public enum PlacementType
     {
@@ -192,7 +496,7 @@ namespace PatcherYRpp
         Put = 1,
         Redraw = 2,
         AddContent = 3
-    };
+    }
 
     public enum ChargeDrainState
     {
@@ -200,7 +504,7 @@ namespace PatcherYRpp
         Charging = 0,
         Ready = 1,
         Draining = 2
-    };
+    }
 
     public enum SuperWeaponType
     {
@@ -217,7 +521,7 @@ namespace PatcherYRpp
         GeneticMutator = 9,
         ForceShield = 10,
         PsychicReveal = 11
-    };
+    }
 
     [Flags]
     public enum BlitterFlags
@@ -243,7 +547,7 @@ namespace PatcherYRpp
         bf_8000 = 0x8000,
         Zero = 0x10000,
         Nonzero = 0x20000
-    };
+    }
 
     public enum VisualType
     {
@@ -253,7 +557,7 @@ namespace PatcherYRpp
         Shadowy = 3,
         Ripple = 4,
         Hidden = 5
-    };
+    }
 
     public enum Move
     {
@@ -265,7 +569,7 @@ namespace PatcherYRpp
         Destroyable = 5,
         Temp = 6,
         No = 7
-    };
+    }
 
     public enum ZGradient
     {
@@ -274,32 +578,53 @@ namespace PatcherYRpp
         Deg45 = 1,
         Deg90 = 2,
         Deg135 = 3
-    };
+    }
 
-    // this is how game's enums are to be defined from now on
-    public enum FireError
+    public enum RadBeamType
     {
-        NONE = -1, // no valid value
-        OK = 0, // no problem, can fire
-        AMMO = 1, // no ammo
-        FACING = 2, // bad facing
-        REARM = 3, // still reloading
-        ROTATING = 4, // busy rotating
-        ILLEGAL = 5, // can't fire
-        CANT = 6, // I'm sorry Dave, I can't do that
-        MOVING = 7, // moving, can't fire
-        RANGE = 8, // out of range
-        CLOAKED = 9, // need to decloak
-        BUSY = 10, // busy, please hold
-        MUST_DEPLOY = 11 // deploy first!
-    };
+        Temporal = 0x0,
+        RadBeam = 0x1,
+        Eruption = 0x2 // this sets the beam color to MagnaBeamColor! There probably was no reason for that whatsoever.
+    }
+
     public enum Rank
     {
         Invalid = -1,
         Elite = 0,
         Veteran = 1,
         Rookie = 2
-    };
+    }
+
+    public enum BStateType
+    {
+        CONSTRUCTION = 0,
+        IDLE = 1,
+        ACTIVE = 2,
+        FULL = 3,
+        AUX1 = 4,
+        AUX2 = 5,
+        COUNT = 6,
+        NONE = -1
+    }
+
+    public enum NavalTargetingType
+    {
+        UNDERWATER_NEVER = 0,
+        UNDERWATER_SECONDARY = 1,
+        UNDERWATER_ONLY = 2,
+        ORGANIC_SECONDARY = 3,
+        SEAL_SPECIAL = 4,
+        NAVAL_ALL = 5,
+        NAVAL_NONE = 6,
+        NAVAL_PRIMARY = 7
+    }
+
+    public enum LandTargetingType
+    {
+        LAND_OKAY = 0,
+        LAND_NOT_OKAY = 1,
+        LAND_SECONDARY = 2
+    }
 
     public enum SpeedType
     {
@@ -312,7 +637,17 @@ namespace PatcherYRpp
         Float = 5,
         Amphibious = 6,
         FloatBeach = 7
-    };
+    }
+
+    public enum ZoneType
+    {
+        CORE = 0,
+        NORTH = 1,
+        EAST = 2,
+        SOUTH = 3,
+        WEST = 4,
+        NONE = -1
+    }
 
     public enum MovementZone
     {
@@ -330,7 +665,7 @@ namespace PatcherYRpp
         Water = 10,
         WaterBeach = 11,
         CrusherAll = 12
-    };
+    }
 
     public enum Mission
     {
@@ -367,7 +702,23 @@ namespace PatcherYRpp
         AttackMove = 29,
         SpyplaneApproach = 30,
         SpyplaneOverfly = 31
-    };
+    }
+
+    public enum TargetType
+    {
+        None = 0,
+        Anything = 1,
+        Buildings = 2,
+        Harvesters = 3,
+        Infantry = 4,
+        Vehicles = 5,
+        Factories = 6,
+        BaseDefenses = 7,
+        // unknown = 8,
+        Power = 9,
+        Occupiable = 10,
+        TechBuildings = 11
+    }
 
     [Flags]
     public enum TargetFlags
@@ -390,7 +741,7 @@ namespace PatcherYRpp
         Friendlies = 0x4000,
         Occupiable = 0x8000,
         TechCapture = 0x10000
-    };
+    }
 
     public enum RadioCommand
     {
@@ -434,7 +785,7 @@ namespace PatcherYRpp
         QueryNeedRepair = 34, // Do you need service depot work?
         QueryOnBuilding = 35, // Are you located on top of me?
         QueryCanTote = 36, // Want ride
-    };
+    }
 
     public enum NetworkEvents
     {
@@ -485,7 +836,86 @@ namespace PatcherYRpp
         PlanNodeDelete = 0x2C,
         AllCheer = 0x2D,
         AbandonAll = 0x2E
-    };
+    }
+
+    public enum ParasiteState
+    {
+        Start = 0, // creates grab animation
+        Grab = 1, // wait for the grab anim
+        PushLeft = 2, // push the victim, variant A
+        PushRight = 3, // push the victim, variant B
+        Damage = 4 // wait until rocking stops; deliver damage
+    }
+
+    [Flags]
+    public enum WWKey
+    {
+        Shift = 0x100,
+        Ctrl = 0x200,
+        Alt = 0x400,
+        Release = 0x800,
+        VirtualKey = 0x1000,
+        DoubleClick = 0x2000,
+        Button = 0x8000
+    }
+
+    // 步兵播放动画的类型
+    public enum SequenceAnimType
+    {
+        STAND_READY = 0,
+        STAND_GUARD = 1,
+        PRONE = 2,
+        WALK = 3,
+        FIRE_WEAPON = 4,
+        LIE_DOWN = 5,
+        CRAWL = 6,
+        GET_UP = 7,
+        FIRE_PRONE = 8,
+        IDLE1 = 9,
+        IDLE2 = 10,
+        GUN_DEATH = 11,
+        EXPLOSION_DEATH = 12,
+        EXPLOSION2_DEATH = 13,
+        GRENADE_DEATH = 14,
+        FIRE_DEATH = 15,
+        TREAD = 16,
+        SWIM = 17,
+        WetIdle1 = 18,
+        WetIdle2 = 19,
+        WetDie1 = 20,
+        WetDie2 = 21,
+        WetAttack = 22,
+        Hover = 23,
+        Fly = 24,
+        Tumble = 25,
+        FireFly = 26,
+        Deploy = 27,
+        Deployed = 28,
+        DeployedFire = 29,
+        DeployedIdle = 30,
+        Undeploy = 31,
+        Cheer = 32,
+        Paradrop = 33,
+        AirDeathStart = 34,
+        AirDeathFalling = 35,
+        AirDeathFinish = 36,
+        Panic = 37,
+        Shovel = 38,
+        Carry = 39,
+        SecondaryFire = 40,
+        SecondaryProne = 41,
+        NOTHING = -1
+    }
+
+    public enum MarkType
+    {
+        UP = 0,
+        DOWN = 1,
+        CHANGE = 2,
+        CHANGE_REDRAW = 3,
+        OVERLAP_DOWN = 4,
+        OVERLAP_UP = 5
+    }
 
     public enum Edge
     {
@@ -495,15 +925,6 @@ namespace PatcherYRpp
         South = 2,
         West = 3,
         Air = 4
-    };
+    }
 
-    public enum GameMode
-    {
-        Campaign = 0x0,
-        Modem = 0x1,		// modem game
-        NullModem = 0x2,	// NULL-modem
-        LAN = 0x3,
-        Internet = 0x4,
-        Skirmish = 0x5,
-    };
 }

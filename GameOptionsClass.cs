@@ -65,17 +65,14 @@ namespace PatcherYRpp
         [FieldOffset(140)] public int unknown_int_8C;
         [FieldOffset(144)] public int unknown_int_90;
         [FieldOffset(148)] public int unknown_int_94;
-
         // virtual key constants, each of them doubled
         // defaulting to VK_MENU, VK_CONTROL and VK_SHIFT
-
         [FieldOffset(152)] public int KeyForceMove1;
         [FieldOffset(156)] public int KeyForceMove2;
         [FieldOffset(160)] public int KeyForceFire1;
         [FieldOffset(164)] public int KeyForceFire2;
         [FieldOffset(168)] public int KeyForceSelect1;
         [FieldOffset(172)] public int KeyForceSelect2;
-
         [FieldOffset(176)] public int unknown_int_B0;
         [FieldOffset(180)] public int unknown_int_B4;
 	}

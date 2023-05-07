@@ -15,6 +15,19 @@ namespace PatcherYRpp
 
         public static Pointer<TacticalClass> Instance { get => ((Pointer<Pointer<TacticalClass>>)ppInstance).Data; set => ((Pointer<Pointer<TacticalClass>>)ppInstance).Ref = value; }
 
+        public static TacticalClass Global()
+        {
+            return Instance.Ref;
+        }
+
+        public unsafe Point2D CoordsToScreen(CoordStruct coords)
+        {
+            Point2D ret = default;
+            var func = (delegate* unmanaged[Thiscall]<ref TacticalClass, ref Point2D, ref CoordStruct, IntPtr>)0x6D1F10;
+            func(ref this, ref ret, ref coords);
+            return ret;
+        }
+
         public unsafe Point2D CoordsToClient(CoordStruct coords)
         {
             Point2D ret = default;
@@ -30,12 +43,19 @@ namespace PatcherYRpp
             func(ref this, ref ret, ref client);
             return ret;
         }
+
         public unsafe Point2D AdjustForZShapeMove(Point2D client)
         {
             Point2D ret = default;
             var func = (delegate* unmanaged[Thiscall]<ref TacticalClass, ref Point2D, ref Point2D, IntPtr>)0x6D1FE0;
             func(ref this, ref ret, ref client);
             return ret;
+        }
+
+        public unsafe void DrawLine(CoordStruct pos1, CoordStruct pos2, uint color, bool unk = false)
+        {
+            var func = (delegate* unmanaged[Thiscall]<ref TacticalClass, ref CoordStruct, ref CoordStruct, uint, Bool, void>)0x6DBB60;
+            func(ref this, ref pos1, ref pos2, color, unk);
         }
 
         public unsafe int AdjustForZ(int height)
@@ -57,5 +77,22 @@ namespace PatcherYRpp
             var func = (delegate* unmanaged[Thiscall]<ref TacticalClass, IntPtr, void>)0x6D2790;
             func(ref this, pCell);
         }
+
+        public unsafe void DrawLineAtCoords(CoordStruct start, CoordStruct end, int color)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, IntPtr, int, void>)ASM.FastCallTransferStation;
+            func(0x6F6030, start.GetThisPointer(), end.GetThisPointer(), color);
+
+        }
+
+        public unsafe void DrawLineOnTactical(CoordStruct start, CoordStruct end, int color)
+        {
+            var func = (delegate* unmanaged[Thiscall]<int, IntPtr, IntPtr, int, void>)ASM.FastCallTransferStation;
+            func(0x6F5EF0, start.GetThisPointer(), end.GetThisPointer(), color);
+
+        }
+
+        [FieldOffset(176)] public Point2D TacticalPos;
+        [FieldOffset(184)] public Point2D LastTacticalPos;
     }
 }
